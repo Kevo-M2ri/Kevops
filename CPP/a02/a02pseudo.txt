@@ -1,0 +1,40 @@
+/*----------------------------------------------------
+ * Author:      Kelvin Muturi
+ * Assignment:  a02 (CS161A)
+ * Date:        October 6, 2024
+ * Description: 
+ * This program calculates and outputs weekly payroll.
+ * It utilizes the iomanip library in addition to the
+ * iostream library to manipulate input and output's 
+ * decimal places.
+ * --------------------------------------------------- 
+*/
+
+DECLARE integer idNum
+DECLARE integer numHrsWorked
+DECLARE double hourlyRate
+DECLARE double fedWholdRate = 0.15 
+DECLARE const double FICADEDUCT = 0.0765
+DECLARE double grossPay
+DECLARE double ficaDedux
+DECLARE double fedTaxWhold
+DECLARE double totalDedux
+DECLARE double netPay
+
+INPUT idNum
+INPUT numHrsWorked
+INPUT hourlyRate
+
+SET grossPay = numHrsWorked * hourlyRate
+SET ficaDedux = FICADEDUCT * grossPay
+SET fedTaxWhold = fedWholdRate * grossPay
+SET totalDedux = ficaDedux + fedTaxWhold
+SET netPay = grossPay - totalDedux
+
+OUTPUT fixed, setPrecision(2), grossPay
+OUTPUT ficaDedux
+OUTPUT fedTaxWhold
+OUTPUT totalDedux
+OUTPUT netPay
+
+RETURN 0
