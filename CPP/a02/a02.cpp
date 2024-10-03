@@ -5,7 +5,7 @@ using namespace std;
 // function main
 int main() {
     // variables' declarations
-    int idNum = 0;
+    int empIdNum = 0;
     int numHrsWorked = 0;
     double hourlyRate = 0;
     double fedWholdRate = 0.15;
@@ -18,7 +18,7 @@ int main() {
 
     // inputs
     cout << "Enter the employee ID number: ";
-    cin >> idNum;
+    cin >> empIdNum;
     cout << "Enter the number of hours worked: ";
     cin >> numHrsWorked;
     cout << "Enter the hourly rate: ";
@@ -32,8 +32,8 @@ int main() {
     netPay = grossPay - totalDedux;
 
     // outputs to the user
-    cout << "Your payroll summary is:" << endl;
-    cout << "Gross amount payed is: " << fixed << setprecision(2) << grossPay << endl; // setting output to 2 decimal places
+    cout << "Your payroll summary:" << endl;
+    cout << "Gross amount paid is: " << fixed << setprecision(2) << grossPay << endl; // setting output to 2 decimal places
     cout << "FICA deduction is: " << ficaDedux << endl;
     cout << "Federal Tax Withholding is: " << fedTaxWhold << endl;
     cout << "Total deductions: " << totalDedux << endl;

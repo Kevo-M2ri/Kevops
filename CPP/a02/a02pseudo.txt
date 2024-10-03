@@ -10,7 +10,7 @@
  * --------------------------------------------------- 
 */
 
-DECLARE integer idNum
+DECLARE integer empIdNum
 DECLARE integer numHrsWorked
 DECLARE double hourlyRate
 DECLARE double fedWholdRate = 0.15 
@@ -21,8 +21,11 @@ DECLARE double fedTaxWhold
 DECLARE double totalDedux
 DECLARE double netPay
 
-INPUT idNum
+OUTPUT "Enter the employee ID number: "
+INPUT empIdNum
+OUTPUT "Enter the number of hours worked: "
 INPUT numHrsWorked
+OUTPUT "Enter the hourly rate: "
 INPUT hourlyRate
 
 SET grossPay = numHrsWorked * hourlyRate
@@ -31,10 +34,11 @@ SET fedTaxWhold = fedWholdRate * grossPay
 SET totalDedux = ficaDedux + fedTaxWhold
 SET netPay = grossPay - totalDedux
 
-OUTPUT fixed, setPrecision(2), grossPay
-OUTPUT ficaDedux
-OUTPUT fedTaxWhold
-OUTPUT totalDedux
-OUTPUT netPay
+OUTPUT "Your payroll summary: "
+OUTPUT "Gross amount paid is: " grossPay (formatted to 2 decimal places)
+OUTPUT "FICA deduction is: " ficaDedux
+OUTPUT "Federal Tax Withholding is: " fedTaxWhold
+OUTPUT "Total deductions: " totalDedux
+OUTPUT "Net pay is: " netPay
 
 RETURN 0
