@@ -1,15 +1,15 @@
 #include <iostream>
-#include <iomanip>
+#include <iomanip> //input and output manipulation library
 
 using namespace std;
-
+// function main
 int main() {
     // variables' declarations
     int idNum = 0;
     int numHrsWorked = 0;
     double hourlyRate = 0;
     double fedWholdRate = 0.15;
-    const double FICADEDUCT = 0.0765;
+    const double FICADEDUCT = 0.0765; //constant declaration
     double grossPay = 0;
     double ficaDedux = 0;
     double fedTaxWhold = 0;
@@ -32,11 +32,12 @@ int main() {
     netPay = grossPay - totalDedux;
 
     // outputs to the user
-    cout << fixed << setprecision(2) << grossPay << endl;
-    cout << ficaDedux << endl;
-    cout << fedTaxWhold << endl;
-    cout << totalDedux << endl;
-    cout << netPay << endl;
+    cout << "Your payroll summary is:" << endl;
+    cout << "Gross amount payed is: " << fixed << setprecision(2) << grossPay << endl; // setting output to 2 decimal places
+    cout << "FICA deduction is: " << ficaDedux << endl;
+    cout << "Federal Tax Withholding is: " << fedTaxWhold << endl;
+    cout << "Total deductions: " << totalDedux << endl;
+    cout << "Net Pay is: " << netPay << endl;
 
     return 0;
 }
