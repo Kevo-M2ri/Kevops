@@ -2,10 +2,9 @@
  * Author:      Kelvin Muturi
  * Assignment:  a02 (CS161A)
  * Date:        October 6, 2024
- * Description: 
- * This program calculates and outputs weekly payroll.
- * It utilizes the iomanip library in addition to the
- * iostream library to manipulate input and output's 
+ * Description: This program calculates and outputs weekly payroll.
+ *              It utilizes the iomanip library in addition to the
+ *              iostream library to manipulate input and output's 
  * decimal places.
  * --------------------------------------------------- 
 */

@@ -1,3 +1,15 @@
+/**----------------------------------------------------------------------------
+   Author:        Kelvin Muturi
+   Date:        Octiber 6, 2024
+   Assignment:  CS161A Assignment a02
+   Description: This program reads the federal Withholding rate, FICA deduction
+                percentage
+   Inputs:      Employee ID number(integer), Number of hours worked(integer),
+                and hourly rate(double)
+   Outputs:     gross pay, FICA deduction, federal tax withholding, total
+                deduction, and net pay (all as doubles)
+   -----------------------------------------------------------------------****/
+
 #include <iostream>
 #include <iomanip> //input and output manipulation library
 
