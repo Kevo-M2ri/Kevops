@@ -1,30 +1,14 @@
-/*----------------------------------------------------
- * Author:      Kelvin Muturi
- * Assignment:  a02 (CS161A)
- * Date:        October 6, 2024
- * Description: This program calculates and outputs weekly payroll.
- *              It utilizes the iomanip library in addition to the
- *              iostream library to manipulate input and output's 
- * decimal places.
- * --------------------------------------------------- 
-*/
+DISPLAY "Welcome to my salary Calculator!"
 
-DECLARE integer empIdNum
-DECLARE integer numHrsWorked
-DECLARE double hourlyRate
-DECLARE double fedWholdRate = 0.15 
+DECLARE as integers empIdNum, numHrsWorked
+DECLARE as doubles hourlyRate, grossPay, ficaDedux, fedTaxWhold, totalDedux, netPay, fedWholdRate 
 DECLARE const double FICADEDUCT = 0.0765
-DECLARE double grossPay
-DECLARE double ficaDedux
-DECLARE double fedTaxWhold
-DECLARE double totalDedux
-DECLARE double netPay
 
-OUTPUT "Enter the employee ID number: "
+DISPLAY "Enter the employee ID number: "
 INPUT empIdNum
-OUTPUT "Enter the number of hours worked: "
+DISPLAY "Enter the number of hours worked: "
 INPUT numHrsWorked
-OUTPUT "Enter the hourly rate: "
+DISPLAY "Enter the hourly rate: "
 INPUT hourlyRate
 
 SET grossPay = numHrsWorked * hourlyRate
@@ -33,11 +17,11 @@ SET fedTaxWhold = fedWholdRate * grossPay
 SET totalDedux = ficaDedux + fedTaxWhold
 SET netPay = grossPay - totalDedux
 
-OUTPUT "Your payroll summary: "
-OUTPUT "Gross amount paid is: " grossPay (formatted to 2 decimal places)
-OUTPUT "FICA deduction is: " ficaDedux
-OUTPUT "Federal Tax Withholding is: " fedTaxWhold
-OUTPUT "Total deductions: " totalDedux
-OUTPUT "Net pay is: " netPay
+DISPLAY "Your payroll summary: " (formatted to 2 decimal places)
+DISPLAY "Gross amount paid is: " grossPay
+DISPLAY "FICA deduction is: " ficaDedux
+DISPLAY "Federal Tax Withholding is: " fedTaxWhold
+DISPLAY "Total deductions: " totalDedux
+DISPLAY "Net pay is: " netPay
 
 RETURN 0
