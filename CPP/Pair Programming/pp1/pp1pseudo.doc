@@ -1,0 +1,25 @@
+DISPLAY ""Welcome to my gas price calculator!"
+
+DECLARE carMpg, gasUsed, gasPriceGallon, and totalGasCost as doubles
+
+DISPLAY "Enter your car\'s miles per gallon (MPG): "
+INPUT carMpg
+DISPLAY "Enter current gas price per gallon: $"
+INPUT gasPricePGallon
+
+
+SET gasUsed = 20 / carMpg
+SET totalGasCost = gasUsed * gasPricePGallon
+DISPLAY "The gas cost for driving 20 miles is: $" totalGasCost (formatted into 2 decimal places)
+
+SET gasUsed = 75 / carMpg
+SET totalGasCost = gasUsed * gasPricePGallon
+DISPLAY "The gas cost for driving 75 miles is: $" totalGasCost (formatted into 2 decimal places)
+
+SET gasUsed = 500 / carMpg
+SET totalGasCost = gasUsed * gasPricePGallon
+DISPLAY "The gas cost for driving 500 miles is: $" totalGasCost (formatted into 2 decimal places)
+
+DISPLAY "Thank you. Goodbye!"
+
+RETURN 0;
