@@ -1,27 +1,35 @@
-DISPLAY "Welcome to my salary Calculator!"
-
-DECLARE as integers empIdNum, numHrsWorked
-DECLARE as doubles hourlyRate, grossPay, ficaDedux, fedTaxWhold, totalDedux, netPay, fedWholdRate 
 DECLARE const double FICADEDUCT = 0.0765
 
-DISPLAY "Enter the employee ID number: "
-INPUT empIdNum
-DISPLAY "Enter the number of hours worked: "
-INPUT numHrsWorked
-DISPLAY "Enter the hourly rate: "
-INPUT hourlyRate
+FUNCTION int main()
+    DISPLAY "Welcome to my salary Calculator!"
 
-SET grossPay = numHrsWorked * hourlyRate
-SET ficaDedux = FICADEDUCT * grossPay
-SET fedTaxWhold = fedWholdRate * grossPay
-SET totalDedux = ficaDedux + fedTaxWhold
-SET netPay = grossPay - totalDedux
+    DECLARE as integers empIdNum, numHrsWorked
+    DECLARE as doubles hourlyRate, grossPay, ficaDedux, fedTaxWhold, totalDedux, netPay, and fedWholdRate 
 
-DISPLAY "Your payroll summary: " (formatted to 2 decimal places)
-DISPLAY "Gross amount paid is: " grossPay
-DISPLAY "FICA deduction is: " ficaDedux
-DISPLAY "Federal Tax Withholding is: " fedTaxWhold
-DISPLAY "Total deductions: " totalDedux
-DISPLAY "Net pay is: " netPay
+    DISPLAY "Enter the employee ID number: "
+    INPUT empIdNum
+    DISPLAY "Enter the number of hours worked: "
+    INPUT numHrsWorked
+    DISPLAY "Enter the hourly rate: $"
+    INPUT hourlyRate
+    DISPLAY "Enter the federal Tax withhold rate (enter percentage as decimal, for example: 17% = 0.17): "
+    INPUT fedWholdRate
 
-RETURN 0
+    SET grossPay = numHrsWorked * hourlyRate
+    SET ficaDedux = FICADEDUCT * grossPay
+    SET fedTaxWhold = fedWholdRate * grossPay
+    SET totalDedux = ficaDedux + fedTaxWhold
+    SET netPay = grossPay - totalDedux
+
+    DISPLAY "Your payroll summary: $" (formatted to 2 decimal places)
+    DISPLAY "Gross amount paid is: $" grossPay
+    DISPLAY "FICA deduction is: $" ficaDedux
+    DISPLAY "Federal Tax Withholding is: $" fedTaxWhold
+    DISPLAY "Total deductions: $" totalDedux
+    DISPLAY "Net pay is: $" netPay
+
+    DISPLAY “Thank you. Goodbye!”
+
+    RETURN 0
+
+END FUNCTION
