@@ -1,13 +1,12 @@
-/**----------------------------------------------------------------------------
+/****--------------------------------------------------------------------------
    Author:      Kelvin Muturi
    Date:        October 9, 2024
    Assignment:  CS-161A Assignment a03
-   Description: This program calculates and outputs the weekly gross salary,
-                total deductions and the net salary.
-   Inputs:      Employee ID number(integer), Number of hours worked(integer),
-                and hourly rate(double).
-   Outputs:     gross pay, FICA deduction, federal tax withholding, total
-                deduction, and net pay (all as doubles).
+   Description: This program calculates and outputs the number of servings for
+                cookies eaten and the total calories taken in rounded to one
+                decimal place.
+   Inputs:      Number of cookies eaten as an integer
+   Outputs:     Number of servings and the total calories taken in as doubles
    -----------------------------------------------------------------------****/
 
 #include <iostream>
@@ -21,7 +20,8 @@ const int CALORIES_P_SERVING = 160;
 
 int main(){
     // welcome message
-    cout << "Welcome to our calories' calculator!" << endl;
+    cout << "Welcome to our calories' calculator!\n";
+    cout << "Note one serving is 5 cookies. One serving has 160 calories." << endl;
 
     // variable declarations
     int numCookiesEaten;
