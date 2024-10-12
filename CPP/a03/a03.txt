@@ -1,5 +1,5 @@
-DECLARE a constant integer numCookiesPServing = 5
-DECLARE a constant integer caloriesPServing = 160
+DECLARE a constant integer NUM_COOKIES_P_SERVING = 5
+DECLARE a constant integer CALORIES_P_SERVING = 160
 
 FUNCTION main()
     DISPLAY "Welcome to our calories' calculator!"
@@ -10,12 +10,12 @@ FUNCTION main()
     DISPLAY "Input the number of cookies you have eaten: "
     INPUT numCookiesEaten
 
-    format to doubles
-    SET numServings = numCookiesEaten / numCookiesPServing
-    SET totalCalories = numServings * caloriesPServing
+    format to floating point and calculate
+    SET numServings = numCookiesEaten / NUM_COOKIES_P_SERVING
+    SET totalCalories = numServings * CALORIES_P_SERVING
 
     (format to one decimal place)
-    DISPLAY numCookiesEaten " are equal to: " numServings " sevings."
+    DISPLAY numCookiesEaten " are equal to: " numServings " servings."
     DISPLAY "You have taken in: " totalCalories " calories."
 
     RETURN 0

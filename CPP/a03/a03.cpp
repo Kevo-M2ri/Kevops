@@ -36,8 +36,10 @@ int main(){
     numServings = static_cast<double>(numCookiesEaten) / static_cast<double>(NUM_COOKIES_P_SERVING);
     totalCalories = static_cast<double>(CALORIES_P_SERVING) * numServings;
 
+    //output formating
+    cout << fixed << showpoint << setprecision(1)<< endl;
     // output
-    cout << "\n" << numCookiesEaten << " cookies are equal to: " << fixed << setprecision(1) << numServings << " servings." << endl;
+    cout << "\n" << numCookiesEaten << " cookies are equal to: " << numServings << " servings." << endl;
     cout << "You have taken in: " << totalCalories << " calories." << endl;
 
     // goodbye message
