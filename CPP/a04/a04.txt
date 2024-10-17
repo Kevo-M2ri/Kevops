@@ -1,0 +1,30 @@
+DECLARE VEHICLECHARGE = 57.90
+DECLARE ADULTCHARGE = 14.95
+DECLARE SENIORCHARGE = 7.40
+DECLARE YOUTHCHARGE = 5.55
+DECLARE BIKESURCHARGE = 4.00
+
+DISPLAY "Welcome message"
+
+DECLARE boolean vehicle = y
+DECLARE numBikes
+DECLARE numAdults
+DECLARE numSeniors
+DECLARE numYouths
+
+DISPLAY "Menu"
+set fare desciption aligned left and ticket price aligned right
+
+DISPLAY Are you riding a vehicle on the fery(Y/n)
+IF vehicle == 'y' vehicle == 'Y')
+    SET numBikes = 0
+ELSE 
+
+DISPLAY "How many adults?"
+DISPLAY "How many seniors?"
+DISPLAY "How many youths?"
+
+
+DISPLAY "Your total charge is: "
+
+DECLARE  
