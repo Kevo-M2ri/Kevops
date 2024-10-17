@@ -41,49 +41,50 @@ int main () {
     int numYouths = 0;
     int allPeople = 0;
     double totalCharge = 0.0;
-    
+
 
     cout << "Are you riding a vehicle on the Ferry (Y/N)? ";
     cin >> response;
 
-    cout << "\nHow many adults? ";
-    cin >> numAdults;
-    cout << "How many seniors? ";
-    cin >> numSeniors;
-    cout << "How many youths? ";
-    cin >> numYouths;
+    if (response == 'Y' || response == 'y' || response == 'N' || response == 'n') {
+        cout << "\nHow many adults? ";
+        cin >> numAdults;
+        cout << "How many seniors? ";
+        cin >> numSeniors;
+        cout << "How many youths? ";
+        cin >> numYouths;
 
-    allPeople = numAdults + numSeniors + numYouths;
+        allPeople = numAdults + numSeniors + numYouths;
 
-    if (allPeople > 20){
-        cout << "\nToo many people! Split into groups of at most 20 people and try again!"<< endl;
-    }
-    else {        
-        if (numAdults < 0 || numSeniors < 0 || numYouths < 0) {
-            cout << "ERROR! Only positive numbers allowed. Try again later!" << endl;
+        if (allPeople > 20) {
+            cout << "\nUh oh!! Too many people in your group. Split into groups of at most 20 people and try again!"<< endl;
         }
         else {
-            if (response == 'Y' || response == 'y') {
-                numBikes = 0;
-            }
-            else if (response == 'N' || response == 'n'){
-                cout << "How many bikes?";
-                cin >> numBikes;
+            if (numAdults < 0 || numSeniors < 0 || numYouths < 0){
+                cout << "ERROR! Only positive numbers are allowed. Try again later!" << endl;
             }
             else {
-                cout << "ERROR! You can only key in y/n!" << endl << endl;
-            }
-            
-            totalCharge = VEHICLE_CHARGE + (ADULT_CHARGE * numAdults) + (SENIOR_CHARGE * numSeniors) + (YOUTH_CHARGE * numYouths) + (numBikes * BIKE_SURCHARGE);
-            cout << "\nYour total charge is: $" << totalCharge << endl << endl;
-            
-            if (totalCharge >= 100){
-                cout << "Congratulations! You have obtained a free adult ticket for your next trip."<< endl;
-            }
-            else{
-                cout << "Spend " << 100 - totalCharge << " more and get a FREE adult ticket for your next trip." << endl;
+                if (response == 'Y' || response == 'y') {
+                    numBikes = 0;
+                }
+                else if (response == 'N' || response == 'n') {
+                    cout << "How many bikes? ";
+                    cin >> numBikes;
+                }
+
+                totalCharge = VEHICLE_CHARGE + (ADULT_CHARGE * numAdults) + (SENIOR_CHARGE * numSeniors) + (YOUTH_CHARGE * numYouths) + (numBikes * BIKE_SURCHARGE);
+                cout << "\nYour total charge is: $" << totalCharge << endl << endl;
+                if (totalCharge >= 100) {
+                    cout << "Congratulations! You have obtained a free adult ticket for your next trip."<< endl;
+                }
+                else {
+                    cout << "Spend $" << 100 - totalCharge << " more and get a FREE adult ticket for your next trip." << endl;
+                }
             }
         }
+    }
+    else {
+        cout << "\nError!! Invalid answer!! You can only key in (y/n)!! Please try again later!!!" << endl;
     }
 
     cout << "\nThank you. Goodbye!" << endl;
