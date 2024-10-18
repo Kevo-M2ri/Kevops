@@ -8,9 +8,9 @@
                 for one adult if the price payed is $100 or more and offers
                 the remaining balance from obtaining a free ticket if bill is
                 less than 100.
-   Inputs:      response as a character, numBikes, numAdults, numSeniors,
-                numYouths
-   Outputs:     
+   Inputs:      response as a character. numBikes, numAdults, numSeniors,
+                numYouths as integers
+   Outputs:     menu as a string, totalCharge as a double
    -----------------------------------------------------------------------****/
 
 #include <iostream>
@@ -88,7 +88,7 @@ int main () {
                 cout << "ERROR! Only positive numbers are allowed. Try again later!" << endl;
             }
             else {
-                // if branch_4
+                // if branch_4.1
                 if (response == 'Y' || response == 'y') {
                     numBikes = 0;
                 }
@@ -100,7 +100,7 @@ int main () {
                 totalCharge = VEHICLE_CHARGE + (ADULT_CHARGE * numAdults) + (SENIOR_CHARGE * numSeniors) + (YOUTH_CHARGE * numYouths) + (numBikes * BIKE_SURCHARGE);
                 cout << "\nYour total charge is: $" << totalCharge << endl << endl;
 
-                //if branch_4.1
+                //if branch_4.2
                 if (totalCharge >= 100) {
                     cout << "Congratulations! You have obtained a free adult ticket for your next trip."<< endl;
                 }
@@ -114,6 +114,7 @@ int main () {
         cout << "\nError!! Invalid answer!! You can only key in (y/n)!! Please try again later!!!" << endl;
     }
 
+    // goodbye message
     cout << "\nThank you. Goodbye!" << endl;
 
     return 0;
