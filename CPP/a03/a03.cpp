@@ -19,27 +19,27 @@ const int NUM_COOKIES_P_SERVING = 5;
 const int CALORIES_P_SERVING = 160;
 
 int main(){
-    // welcome message
-    cout << "Welcome to our calories' calculator!\n";
-    cout << "Note one serving is 5 cookies. One serving has 160 calories." << endl;
-
-    // variable declarations
+    // variables declaration
     int numCookiesEaten;
     double numServings;
     double totalCalories;
+
+    // welcome message
+    cout << "Welcome to our calories' calculator!\n";
+    cout << "Note one serving is 5 cookies. One serving has 160 calories." << endl;
 
     // user input
     cout << "\nInput the number of cookies you have eaten: ";
     cin >> numCookiesEaten;
 
     // calculations
-    numServings = static_cast<double>(numCookiesEaten) / static_cast<double>(NUM_COOKIES_P_SERVING);
-    totalCalories = static_cast<double>(CALORIES_P_SERVING) * numServings;
+    numServings = static_cast<double>(numCookiesEaten) / NUM_COOKIES_P_SERVING;
+    totalCalories = CALORIES_P_SERVING * numServings;
 
     //output formating
     cout << fixed << showpoint << setprecision(1)<< endl;
     // output
-    cout << "\n" << numCookiesEaten << " cookies are equal to: " << numServings << " servings." << endl;
+    cout << numCookiesEaten << " cookies are equal to: " << numServings << " servings." << endl;
     cout << "You have taken in: " << totalCalories << " calories." << endl;
 
     // goodbye message
