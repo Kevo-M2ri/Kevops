@@ -1,0 +1,67 @@
+DECLARE totalChange as an integer
+DECLARE dollar as an integer
+DECLARE quarter as an integer
+DECLARE dime as an integer
+DECLARE nickel as an integer
+DECLARE penny as an integer
+
+DISPLAY "Enter your total change: "
+INPUT totalChange
+
+IF (totalChange == 0) THEN
+    DISPLAY "No Change."
+ELSE
+    IF (totalChange >= 100) THEN
+        SET numDollars = totalChange / 100
+        SET totalChange = totalChange % 100
+
+        IF (numDollars == 1) THEN
+            DISPLAY numDollars " Dollar"
+        ELSE IF (numDollars > 1) THEN
+            DISPLAY numDollars " Dollars"
+        END IF
+    END IF
+    
+    IF ((totalChange >= 25) AND (totalChange < 100)) THEN
+        SET numQuarters = totalChange / 25
+        SET totalChange = totalChange % 25
+
+        IF (numQuarters == 1) THEN
+            DISPLAY numQuarters "Quarter"
+        ELSE IF (numQuarters > 1) THEN
+            DISPLAY numQuarters "Quarters"
+        END IF
+    END IF
+
+    IF ((totalChange >= 10) AND (totalChange < 25)) THEN
+        SET numDimes = totalChange / 10
+        SET totalChange = totalChange % 10
+
+        IF (numDimes == 1) THEN
+            DISPLAY numDimes "Dime"
+        ELSE IF (numDimes > 1) THEN
+            DISPLAY numDimes "Dimes"
+        END IF
+    END IF
+
+    IF ((totalChange >= 5) AND (totalChange < 10)) THEN
+        SET numNickels = totalChange / 5
+        SET totalChange = totalChange % 5
+
+        IF (numNickels == 1) THEN
+            DISPLAY numNickels "Nickel"
+        ELSE IF (numNickels > 1) THEN
+            DISPLAY numNickels "Nickels"
+        END IF
+    END IF
+
+    IF ((totalChange >=1) AND (totalChange < 5)) THEN
+        SET numPennies = totalChange;
+
+        IF (numPennies == 1) THEN
+            DISPLAY numPennies "Penny"
+        ELSE IF (numPennies > 1) THEN
+            DISPLAY numPennies "Pennies"
+        END IF
+    END IF
+END IF
