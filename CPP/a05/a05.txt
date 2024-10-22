@@ -1,0 +1,13 @@
+DECLARE phrase1 as a string
+DECLARE phrase2 as a string
+
+DISPLAY "Hello! Welcome to our search engine."
+
+DISPLAY "Input your first phrase: "
+INPUT phrase1
+DISPLAY "Input your second phrase: "
+INPUT phrase2
+
+IF (phrase 1 is in phrase 2) THEN
+    DISPLAY "phrase1 is found within phrase2"
+    
