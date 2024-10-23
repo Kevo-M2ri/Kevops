@@ -13,6 +13,7 @@ FUNCTION integer Main ()
     DECLARE an integer allPeople
     DECLARE a double totalCharge
     DECLARE a double discount
+    DECLARE an integer numVehicles
 
     DISPLAY "Welcome to Washington State Ferries."
     DISPLAY "Here is our Ferries' fare MENU"
@@ -49,14 +50,16 @@ FUNCTION integer Main ()
             
             ELSE
                 IF (response == 'Y' || response == 'y') THEN
+                    SET numVehicles = 1
                     SET numBikes = 0
 
                 ELSE IF (response = 'N' || response == 'n') THEN
+                    SET numVehicles = 0
                     DISPLAY "How many bikes? "
                     INPUT numBikes
                 END IF
                 
-                SET totalCharge = VEHICLE_CHARGE + (ADULT_CHARGE * numAdults) + (SENIOR_CHARGE * numSeniors) + (YOUTH_CHARGE * numYouths) + (numBikes * BIKE_SURCHARGE)
+                SET totalCharge = (numVehicles * VEHICLE_CHARGE) + (ADULT_CHARGE * numAdults) + (SENIOR_CHARGE * numSeniors) + (YOUTH_CHARGE * numYouths) + (numBikes * BIKE_SURCHARGE)
                 DISPLAY "Your total charge is: $" totalCharge
 
                 IF (totalCharge >= 100) THEN
