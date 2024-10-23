@@ -35,6 +35,7 @@ int main () {
     int allPeople = 0;
     double totalCharge = 0.0;
     double discount = 0.0;
+    int numVehicles = 0;
 
     // Welcome message
     cout << "Welcome to Washington State Ferries." << endl;
@@ -92,14 +93,16 @@ int main () {
             else {
                 // if branch_4.1
                 if (response == 'Y' || response == 'y') {
-                    numBikes = 0;
+                    numVehicles = 1;
+                    numBikes;
                 }
                 else if (response == 'N' || response == 'n') {
+                    numVehicles = 0;
                     cout << "How many bikes? ";
                     cin >> numBikes;
                 }
 
-                totalCharge = VEHICLE_CHARGE + (ADULT_CHARGE * numAdults) + (SENIOR_CHARGE * numSeniors) + (YOUTH_CHARGE * numYouths) + (numBikes * BIKE_SURCHARGE);
+                totalCharge = (numVehicles * VEHICLE_CHARGE) + (ADULT_CHARGE * numAdults) + (SENIOR_CHARGE * numSeniors) + (YOUTH_CHARGE * numYouths) + (numBikes * BIKE_SURCHARGE);
                 cout << "\nYour total charge is: $" << totalCharge << endl << endl;
 
                 //if branch_4.2
