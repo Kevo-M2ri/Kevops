@@ -1,14 +1,32 @@
 DECLARE phrase1 as a string
 DECLARE phrase2 as a string
 
-DISPLAY "Hello! Welcome to our search engine."
+DISPLAY "Hello! Welcome to search, find and output!!"
 
 DISPLAY "Input your first phrase: "
 INPUT phrase1
+DISPLAY "You have entered: " phrase1
 DISPLAY "Input your second phrase: "
 INPUT phrase2
+DISPLAY "You have entered: " phrase2
 
-IF (phrase 1 is in phrase 2) THEN
-    DISPLAY "phrase1 is found within phrase2"
-ELSE
+IF phrase1 != phrase2 THEN
+    IF phrase1.find(phrase2) != string::npos THEN
+        SET size_t pos = phrase1.find(phrase2)
+        DISPLAY phrase2 " is found in " phrase1
+        DISPLAY phrase1.substr(pos)
     
+    ELSE IF phrase2.find(phrase1) != string::npos THEN
+        SET size_t pos = phrase2.find(phrase1);
+        DISPLAY phrase1 " is found in " << phrase2
+        DISPLAY phrase2.substr(pos)
+        
+    ELSE
+        DISPLAY "No match."
+    END IF
+
+ELSE
+    DISPLAY "Both phrases match."
+END IF
+
+DISPLAY "Thank you!! Goodbye!"
