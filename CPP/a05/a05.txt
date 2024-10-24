@@ -10,4 +10,5 @@ INPUT phrase2
 
 IF (phrase 1 is in phrase 2) THEN
     DISPLAY "phrase1 is found within phrase2"
+ELSE
     
