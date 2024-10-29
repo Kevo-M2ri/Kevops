@@ -1,0 +1,30 @@
+DECLARE contestant1 as a string
+DECLARE contestant2 as a string
+DECLARE contestant3 as a string
+DECLARE numRocks1 as an integer
+DECLARE numRocks2 as an integer
+DECLARE numRocks3 as an integer
+DECLARE contestant as a string
+DECLARE numRocks as an integer
+
+DISPLAY "Input the first contestant's name: "
+INPUT contestant1
+DISPLAY "Input the second contestant's name: "
+INPUT contestant2
+DISPLAY "Input the third contestant's name: "
+INPUT contestant3
+
+DISPLAY "Input what " contestant1 "has: "
+INPUT numRocks1
+DISPLAY "Input what " contestant2 "has: "
+INPUT numRocks2
+DISPLAY "Input what " contestant3 "has: "
+INPUT numRocks3
+
+IF (numRocks == numRocks1 || numRocks == numRocks2 || numRocks == numRocks3) THEN
+    IF (numRocks < 0) THEN
+        DISPLAY "Error!! Number of Rocks cannot be negative!!"
+        numRocks = 0;
+    
+    ELSE
+        IF (numRocks1 > numRocks2)
