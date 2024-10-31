@@ -9,6 +9,10 @@ FUNCTION int main()
     DECLARE numRocks3 as an integer
     DECLARE contestant as a string
     DECLARE numRocks as an integer
+    DECLARE first as a string
+    DECLARE second as a string
+    DECLARE third as a string
+    
 
     DISPLAY "Hello!! Welcome to the winners program!!"
     
@@ -32,4 +36,20 @@ FUNCTION int main()
             numRocks = 0;
     
     ELSE
-        
+        IF (numRocks1 >= numRocks2) THEN
+            IF ((numRocks1 > numRocks2) AND (numRocks2 > numRocks3)) THEN
+                SET first = contestant1
+                SET second = contestant2
+                SET thrid = contestant3
+            
+            ELSE IF ((numRocks1 == numRocks2) AND (numRocks2 > 3)) THEN
+                SET first = contestant1 + contestant2
+                SET third = contestant3
+            END IF
+        ELSE IF (numRocks2 >= numRocks3) THEN
+            IF ((numRocks2 > numRocks1) AND (numRocks2 > numRocks3)) THEN
+                SET first = contestant2
+                SET second = contestant1
+                SET third = contestant3
+            ELSE IF ((numRocks2 > numRocks1) AND (numRocks2 == numRocks3)) THEN
+                SET 
