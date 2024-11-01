@@ -33,14 +33,14 @@ FUNCTION int main()
     IF (numRocks == numRocks1 || numRocks == numRocks2 || numRocks == numRocks3) THEN
         IF (numRocks < 0) THEN
             DISPLAY "Error!! Number of Rocks cannot be negative!!"
-            numRocks = 0;
+            numRocks = 0
     
     ELSE
         IF (numRocks1 >= numRocks2) THEN
             IF ((numRocks1 > numRocks2) AND (numRocks2 > numRocks3)) THEN
                 SET first = contestant1
                 SET second = contestant2
-                SET thrid = contestant3
+                SET third = contestant3
             
             ELSE IF ((numRocks1 == numRocks2) AND (numRocks2 > 3)) THEN
                 SET first = contestant1 + contestant2
