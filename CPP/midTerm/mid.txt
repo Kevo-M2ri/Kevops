@@ -136,7 +136,13 @@ FUNCTION int main()
                 END IF
             END IF
         END IF
+
+        SET average = as a double(numRocks1 + numRocks2 + numRocks3) / NUM_PLAYERS
+
+        DISPLAY "The average number of rocks collected is: " average(set into 2 decimal places)
     END IF
+
+    DISPLAY "Thank you! Have a good one!"
 
     RETURN O
 END MAIN
