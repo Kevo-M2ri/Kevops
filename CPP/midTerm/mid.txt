@@ -4,16 +4,15 @@ FUNCTION int main()
     DECLARE contestant1 as a string
     DECLARE contestant2 as a string
     DECLARE contestant3 as a string
+    DECLARE numRocks as an integer
     DECLARE numRocks1 as an integer
     DECLARE numRocks2 as an integer
     DECLARE numRocks3 as an integer
-    DECLARE contestant as a string
-    DECLARE numRocks as an integer
     DECLARE first as a string
     DECLARE second as a string
     DECLARE third as a string
+    DECLARE average as a double
     
-
     DISPLAY "Hello!! Welcome to the winners program!!"
     
     DISPLAY "Input the first contestant's name: "
@@ -30,26 +29,114 @@ FUNCTION int main()
     DISPLAY "Input what " contestant3 "has: "
     INPUT numRocks3
     
-    IF (numRocks == numRocks1 || numRocks == numRocks2 || numRocks == numRocks3) THEN
-        IF (numRocks < 0) THEN
+    IF ((numRocks1 < 0) OR (numRocks2 < 0) OR (numRocks3 < 0)) THEN
+        IF ((numRocks = numRocks1) OR (numRocks = numRocks2) OR (numRocks = numRocks3)) THEN
             DISPLAY "Error!! Number of Rocks cannot be negative!!"
             numRocks = 0
+        END IF
     
     ELSE
-        IF (numRocks1 >= numRocks2) THEN
-            IF ((numRocks1 > numRocks2) AND (numRocks2 > numRocks3)) THEN
-                SET first = contestant1
-                SET second = contestant2
-                SET third = contestant3
-            
-            ELSE IF ((numRocks1 == numRocks2) AND (numRocks2 > 3)) THEN
-                SET first = contestant1 + contestant2
-                SET third = contestant3
+        IF ((numRocks1 == numRocks2) AND (numRocks2 == numRocks3)) THEN
+            SET first = contestant1 + ", " + contestant2 + ", and " + contestant3
+        
+        ELSE 
+            IF ((numRocks1 != numRocks2) AND (numRocks2 != numRocks3)) THEN
+                IF ((numRocks1 > numRocks2) AND (numRocks1 > numRocks3)) THEN
+                    SET first = contestant1
+                    IF (numRocks2 > numRocks3) THEN
+                        SET second = contestant2
+                        SET third = contestant3
+                    ELSE
+                        SET second = contestant3
+                        SET third = contestant2
+                    END IF
+
+                ELSE IF ((numRocks2 > numRocks1) AND (numRocks2 > numRocks3)) THEN
+                    first = contestant2
+                    IF (numRocks1 > numRocks) THEN
+                        SET second = contestant1
+                        SET third =  contestant3
+                    ELSE
+                        SET second = contestant3
+                        SET third = contestant1
+                    END IF
+                
+                ELSE IF ((numRocks3 > numRocks1) && (numRocks3 > numRocks2)) THEN
+                    SET first = contestant3
+                    IF (numRocks1 > numRocks2) THEN
+                        SET second = contestant1
+                        SET third = contestant2
+                    ELSE
+                        second = contestant2
+                        third = contestant1
+                    END IF
+                END IF
+
+            ELSE IF (numRocks1 == numRocks2) THEN
+                IF (numRocks1 > numRocks3) THEN
+                    SET first = contestant1 + ", and " + contestant2
+                    SET third = contestant3
+                ELSE
+                    SET first = contestant3
+                    SET second = contestant1 + ", and " + contestant2
+                END IF
+
+            ELSE IF (numRocks1 == numRocks3) THEN
+                IF (numRocks1 > numRocks2) THEN
+                    SET first = contestant1 + ", and " + contestant3
+                    SET third = contestant2
+                ELSE
+                    SET first = contestant2
+                    SET second =contestant1 + ", and " + contestant3
+                END IF
+            ELSE IF (numRocks2 = numRocks3) THEN
+                IF (numRocks2 > numRocks1) THEN
+                    SET first = contestant2 + ", and " + contestant3
+                    SET third = contestant1
+                ELSE
+                    SET first = contestant1
+                    SET second = contestant2 + ", and " + contestant3
+                END IF
             END IF
-        ELSE IF (numRocks2 >= numRocks3) THEN
-            IF ((numRocks2 > numRocks1) AND (numRocks2 > numRocks3)) THEN
-                SET first = contestant2
-                SET second = contestant1
-                SET third = contestant3
-            ELSE IF ((numRocks2 > numRocks1) AND (numRocks2 == numRocks3)) THEN
-                SET 
+        END IF
+
+        IF ((numRocks1 != numRocks2) && (numRocks1 != numRocks3) && (numRocks2 != numRocks3)) THEN
+            DISPLAY "The first winner is: " first
+            DISPLAY "The second winner is: " second
+            DISPLAY "The third winner is: " third
+
+        ELSE
+            IF ((numRocks1 == numRocks2) && (numRocks2 == numRocks3)) THEN
+                DISPLAY "It's a tie! All are winners!"
+                DISPLAY "The names are: " first
+
+            ELSE IF ((numRocks1 == numRocks2) && (numRocks1 != numRocks3) && (numRocks2 != numRocks3)) THEN
+                IF (numRocks2 > numRocks3) THEN
+                    DISPLAY "It's a tie!! The first winners are: " first
+                    DISPLAY "The third winner is: " third
+                ELSE
+                    DISPLAY "The first winner is: " first
+                    DISPLAY "We have a tie! The second winners are: " second
+                END IF
+            ELSE IF ((numRocks1 == numRocks3) && (numRocks1 != numRocks2) && (numRocks3 != numRocks2)) THEN
+                IF (numRocks3 > numRocks2) THEN
+                    DISPLAY "It's a tie!! The first winners are: " first
+                    DISPLAY "The third winner is: " third
+                ELSE
+                    DISPLAY "The first winner is: " first
+                    DISPLAY "We have a tie! The second winners are: " second
+                END IF
+            ELSE IF ((numRocks2 == numRocks3) && (numRocks2 != numRocks1) && (numRocks3 != numRocks1)) THEN
+                IF (numRocks3 > numRocks1) THEN
+                    DISPLAY "It's a tie!! The first winners are: " first
+                    DISPLAY "The third winner is: " third
+                ELSE
+                    DISPLAY "The first winner is: " first
+                    DISPLAY "We have a tie! The second winners are: " second
+                END IF
+            END IF
+        END IF
+    END IF
+
+    RETURN O
+END MAIN
