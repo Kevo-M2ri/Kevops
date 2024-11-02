@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <string>
+#
 
 using namespace std;
 
@@ -38,75 +39,54 @@ int main () {
     cout << "Input the third contestant's name: ";
     getline (cin, contestant3);
 
-    cout << "Input what " << contestant1 << "has: ";
+    cout << "Input what " << contestant1 << " has: ";
     cin >> numRocks1;
-    cout <<"Input what " << contestant2 << "has: ";
+    cout <<"Input what " << contestant2 << " has: ";
     cin >> numRocks2;
-    cout << "Input what " << contestant3 << "has: ";
+    cout << "Input what " << contestant3 << " has: ";
     cin >> numRocks3;
 
-    if (numRocks == numRocks1 || numRocks == numRocks2 || numRocks == numRocks3) {
-        if (numRocks < 0) {
-            cout << "Error!! Number of Rocks cannot be negative!!";
-            numRocks = 0;
+    if ((numRocks1 < 0) || (numRocks2 < 0) || (numRocks3 < 0)) {
+        cout << "Error!! Number of Rocks cannot be negative!!";
+        numRocks = 0;
+    }
+    else {
+        if ((numRocks1 == numRocks2) && (numRocks2 == numRocks3)) {
+            first = contestant1.append(", ").append(contestant2).append(", and ").append(contestant3);
         }
         else {
-            if ((numRocks1 >= numRocks2) && (numRocks1 >= numRocks3)) {
+            if ((numRocks1 != numRocks2) && (numRocks2 != numRocks3)) {
                 if ((numRocks1 > numRocks2) && (numRocks2 > numRocks3)) {
                     first = contestant1;
                     second = contestant2;
                     third = contestant3;
                 }
-
-                else if ((numRocks1 == numRocks2) && (numRocks2 > numRocks3)) {
-                    first = contestant1 + contestant2;
-                    third = contestant3;
-                }
-
-                else if ((numRocks1 > numRocks2) && (numRocks2 == numRocks3)) {
-                    first = contestant1;
-                    second = contestant2 + contestant3;
-                }
-                else {
-                    first = contestant1 + contestant2 + contestant3;
-                }
-
-                cout << "The first winner is: " << first << endl;
-                if (first == contestant1) {
-                    cout << "The second winner is: " << second << endl;
-                    if (second == contestant2) {
-                        cout << "The third winner is: " << third << endl;
-                }
-                else if (first == contestant1 + contestant2) {
-                    cout << "The third winner is " << third;
-                }
-            }
-            else if ((numRocks2 > numRocks3) && (numRocks2 > numRocks1)) {
-                first = contestant2;
-                if (numRocks1 > numRocks3) {
+                else if ((numRocks2 > numRocks1) && (numRocks1 > numRocks3)) {
+                    first = contestant2;
                     second = contestant1;
                     third = contestant3;
                 }
-                else {
+                else if ((numRocks1 > numRocks3) && (numRocks3 > numRocks2)) {
+                    first = contestant1;
                     second = contestant3;
-                    third = contestant1;
-                }
-            }
-            else if ((numRocks3 > numRocks1) && (numRocks3 > numRocks2)) {
-                first = numRocks3;
-                if (numRocks1 > numRocks2) {
-                    second = numRocks1;
-                    third = numRocks2;
-                }
-                else {
-                    second = numRocks2;
-                    third = numRocks1;
+                    third = contestant2;
                 }
             }
         }
+    }
 
+    if ((numRocks1 != numRocks2) && (numRocks1 != numRocks3) && (numRocks2 != numRocks3)) {
+        cout << "The first winner is: " << first << endl;
+        cout << "The second winner is: " << second << endl;
+        cout << "The third winner is: " << third << endl;
     }
+    else {
+        if ((numRocks1 == numRocks2) && (numRocks2 == numRocks3)) {
+            cout << "It\'s a tie! All are winners!" << endl;
+            cout << "The names are: " << first << endl;
+        }
     }
+        
 
     return 0;
 }
