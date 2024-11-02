@@ -1,4 +1,4 @@
-/****--------------------------------------------------------------------------
+/****---------------------------------------------------------------------------
    Author:      Kelvin Muturi
    Date:        November 2, 2024
    Assignment:  CS-161A Midterm
@@ -13,7 +13,7 @@
    Outputs:     contestant1, contestant2, and contestant3 in order of one with
                 the most rocks to the one with the least, as strings, and
                 average number of rocks collected as a double
-   -----------------------------------------------------------------------****/
+   ------------------------------------------------------------------------****/
 
 #include <iostream>
 #include <string>
