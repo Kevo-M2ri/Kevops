@@ -1,0 +1,19 @@
+DISPLAY Welcome to my pizza party Calculator!
+
+DECLARE integer numPeople
+DECLARE integer pizzas
+DECLARE integer slicesPerPizza = 12
+DECLARE integer slicesPerPerson = 2
+DECLARE floating point price = 14.95
+DECLARE floating point cost
+
+DISPLAY Enter the number of people attending: 
+INPUT numPeople
+
+SET pizzas = numPeople / (slicesPerPizza / slicesPerPerson)
+SET cost = price * pizzas
+
+DISPLAY You will need: AND pizzas AND Pizzas.
+DISPLAY The total cost is: $ AND cost
+
+RETURN 0
