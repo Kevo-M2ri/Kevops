@@ -1,0 +1,8 @@
+DECLARE as an integer numInput
+DECLARE as a character quit
+
+DISPLAY "Input all numbers you want separated by spaces. Enter 'q' to quit!"
+WHILE (numInput >= 0)
+    cin >> numInput
+    
+    END WHILE
