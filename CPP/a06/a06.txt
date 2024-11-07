@@ -1,0 +1,68 @@
+DECLARE a constant integer SLICES_PER_PIZZA = 8
+DECLARE a constant double SALES_TAX_PORTION = 0.07
+DECLARE a constant double DELIVERY_PORTION = 0.20
+
+FUNCTION integer main ()
+    DECLARE numAttendees as an integer
+    DECLARE slicesPerPerson as an double
+    DECLARE costOfPizza as a double
+    DECLARE choice as a character
+    DECLARE numPizzas as an integer
+    DECLARE purchaseCost as a double
+    DECLARE salesTax as a double
+    DECLARE deliveryFee as a double
+    DECLARE totalCost as a double
+    DECLARE count as an integer
+    DECLARE allPizzas as an integer
+    DECLARE averAllPizzas as a double
+    DECLARE maxNumPeople as an integer
+    DECLARE maxCost as a double
+    
+    DISPLAY "Hello there!! Welcome to Pizza Parties Analysis!!"
+    
+    DO
+        DISPLAY "Enter the number of people in attendance, the average number of slices one person eats, and the cost of one pizza: "
+        INPUT numAttendees slicesPerPerson costOfPizza
+
+        SET numPizzas = ceil(numAttendees * slicesPerPerson / SLICES_PER_PIZZA)
+        SET purchaseCost = costOfPizza * numPizzas
+        SET salesTax = purchaseCost * SALES_TAX_PORTION
+        SET deliveryFee = (purchaseCost + salesTax) * DELIVERY_PORTION
+        SET totalCost = purchaseCost + salesTax + deliveryFee
+
+        SET all double outputs to 2 decimal places
+        DISPLAY "Number of Pizzas needed: "numPizzas
+        DISPLAY "Cost of all Pizzas:     $"purchaseCost
+        DISPLAY "Tax:                    $"salesTax
+        DISPLAY "Delivery Fee:           $"deliveryFee
+        DISPLAY "Total cost:             $"totalCost
+        
+        SET ++count
+        SET allPizzas += numPizzas
+        SET averAllPizzas = allPizzas / count
+        IF (numAttendees > maxNumPeople) THEN
+            SET maxNumPeople = numAttendees
+        END IF
+        IF (totalCost > maxCost) THEN
+            SET maxCost = totalCost
+        END IF
+
+        DISPLAY "Do you want to enter more (y/n): "
+        INPUT choice
+
+    WHILE ((choice == 'y') || (choice == 'Y'));
+
+    IF ((choice == 'n') || (choice == 'N')) THEN
+        DISPLAY "Number of parties: " count 
+        DISPLAY "Total Number of Pizzas: " allPizzas
+        DISPLAY "Average number of pizzas: " averAllPizzas to one decimal place
+        DISPLAY "Maximum number of people: " maxNumPeople
+        DISPLAY "Maximum cost of pizzas: $" maxCost to 2 decimal places
+    ELSE
+        DISPLAY "Error!!! Unknown input!! Try again later!"
+    END IF
+
+    DISPLAY "Thank you for using my Calculator!! Goodbye!"
+    
+    RETURN 0
+END main
