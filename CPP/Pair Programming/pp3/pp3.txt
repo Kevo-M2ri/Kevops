@@ -1,8 +1,27 @@
-DECLARE as an integer numInput
-DECLARE as a character quit
+DECLARE nums as an integer
+DECLARE quit as a character
+DECLARE count as an integer
+DECLARE sum as an integer
+DECLARE average as a double
+DECLARE maxNum as an integer
+DECLARE minNum as an integer
 
-DISPLAY "Input all numbers you want separated by spaces. Enter 'q' to quit!"
-WHILE (numInput >= 0)
-    cin >> numInput
+WHILE (true)
+    DISPLAY "Input all numbers you want separated by spaces. (Enter 'q' to quit!)"
+    cin >> nums
+
+    IF (quit == q) THEN
+        break;
+    END IF
+
+    SET ++count
+    SET sum += nums
+    SET average = sum / average
+    IF (nums > maxNum) THEN
+        SET maxNum = nums
+    END IF
+    IF (nums < minNum) THEN
+        SET minNum = nums
+    END IF
     
-    END WHILE
+END WHILE
