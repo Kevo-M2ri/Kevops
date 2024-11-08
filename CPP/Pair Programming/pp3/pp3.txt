@@ -6,8 +6,10 @@ DECLARE average as a double
 DECLARE maxNum as an integer
 DECLARE minNum as an integer
 
+DISPLAY "Hello there!! Welcome to our simple statistics analysis  program!"
+
 WHILE (true)
-    DISPLAY "Input all numbers you want separated by spaces. (Enter 'q' to quit!)"
+    DISPLAY "Enter a number. (Enter -1 to quit!): "
     cin >> nums
 
     IF (quit == q) THEN
@@ -22,6 +24,13 @@ WHILE (true)
     END IF
     IF (nums < minNum) THEN
         SET minNum = nums
-    END IF
-    
+    END IF 
 END WHILE
+
+DISPLAY "You entered: " count " digit
+DISPLAY "The sum of the numbers is: " sum
+DISPLAY "The average is: " average
+DISPLAY "The largest number is: " maxNum
+DISPLAY "The smallest number is: " minNum
+
+DISPLAY "Goodbye!! Thank you for using our program!!"
