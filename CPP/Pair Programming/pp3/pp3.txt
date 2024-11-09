@@ -5,14 +5,16 @@ DECLARE sum as an integer
 DECLARE average as a double
 DECLARE maxNum as an integer
 DECLARE minNum as an integer
+DECLARE variance as a double
+DECLARE standardDeviation as a double
 
 DISPLAY "Hello there!! Welcome to our simple statistics analysis  program!"
 
 WHILE (true)
-    DISPLAY "Enter a number. (Enter -1 to quit!): "
+    DISPLAY "Enter a number. (Enter a negative number to quit!): "
     cin >> nums
 
-    IF (quit == q) THEN
+    IF (nums < -1) THEN
         break;
     END IF
 
@@ -25,6 +27,8 @@ WHILE (true)
     IF (nums < minNum) THEN
         SET minNum = nums
     END IF 
+    SET variance += (nums - average) * (nums - average) / count
+    SET standardDeviation = sqrt(variance / count)
 END WHILE
 
 DISPLAY "You entered: " count " digit
@@ -32,5 +36,6 @@ DISPLAY "The sum of the numbers is: " sum
 DISPLAY "The average is: " average
 DISPLAY "The largest number is: " maxNum
 DISPLAY "The smallest number is: " minNum
+DISPLAY "The standard deviation is: " standardDeviation
 
 DISPLAY "Goodbye!! Thank you for using our program!!"
