@@ -2,18 +2,19 @@
    Author:      Kelvin Muturi
    Date:        November 7, 2024
    Assignment:  CS-161A Assignment a06
-   Description: This program asks the user to input number of attendees,
+   Description: This program asks the user to input the number of attendees,
                 average number of slices per person and the cost of a pizza. It
                 then calculates and outputs the number of pizzas needed, sales
                 tax, delivery fee and the total cost of pizzas. The program
-                loops over until the user inputs the quit clause at which it
-                outputs the number of parties, total pizzas required for all
-                parties, average number of pizzas per party, maximum number of
-                people per party, and the maximum cost of the parties
+                loops over until the user inputs any other letter (except y/Y)
+                at which it outputs the number of parties, total pizzas
+                required for all parties, average number of pizzas per party,
+                maximum number of people per party, and the maximum cost of the
+                parties
    Inputs:      number of attendees, average number of slices per person as
                 integers, and cost of a pizza as a double
    Outputs:     number of Pizzas, number of parties, number of Pizzas for
-                all the parties, and maximun number of people of the parties as
+                all the parties, and maximum number of people of the parties as
                 integers. Cost of purchasing pizzas in the given party, sales
                 tax, delivery fee, total cost of the given party, average
                 pizzas per party, maximum cost from the parties as doubles
@@ -91,24 +92,18 @@ int main () {
         }
 
         // loop prompt
-        cout << "\nDo you want to enter more (y/n): ";
+        cout << "\nDo you want to enter more (Input y to continue. any other input to quit): ";
         cin >> choice;
 
     }
     while ((choice == 'y') || (choice == 'Y')); // while condition
 
-    // correct quitting condition
-    if ((choice == 'n') || (choice == 'N')) {
-        cout << "\nNumber of parties: " << count << endl;
-        cout << "Total Number of Pizzas: " << allPizzas << endl;
-        cout << fixed << setprecision(1) << "Average number of pizzas: " << averAllPizzas << endl;
-        cout << "Maximum number of people: " << maxNumPeople << endl;
-        cout << fixed << setprecision(2) << "Maximum cost of pizzas: $" << maxCost << endl;
-    }
-    // any other loop input error condition
-    else {
-        cout << "\nError!!! Unknown input!! Try again later!" << endl;
-    }
+    // outputs
+    cout << "\nNumber of parties: " << count << endl;
+    cout << "Total Number of Pizzas: " << allPizzas << endl;
+    cout << fixed << setprecision(1) << "Average number of pizzas: " << averAllPizzas << endl;
+    cout << "Maximum number of people: " << maxNumPeople << endl;
+    cout << fixed << setprecision(2) << "Maximum cost of pizzas: $" << maxCost << endl;
 
     // termination message
     cout << "\nThank you for using my Calculator!! Goodbye!" << endl;

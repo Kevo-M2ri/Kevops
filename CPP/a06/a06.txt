@@ -47,20 +47,16 @@ FUNCTION integer main ()
             SET maxCost = totalCost
         END IF
 
-        DISPLAY "Do you want to enter more (y/n): "
+        DISPLAY "Do you want to enter more (Input y to continue. any other input to quit): "
         INPUT choice
 
     WHILE ((choice == 'y') || (choice == 'Y'));
 
-    IF ((choice == 'n') || (choice == 'N')) THEN
-        DISPLAY "Number of parties: " count 
-        DISPLAY "Total Number of Pizzas: " allPizzas
-        DISPLAY "Average number of pizzas: " averAllPizzas to one decimal place
-        DISPLAY "Maximum number of people: " maxNumPeople
-        DISPLAY "Maximum cost of pizzas: $" maxCost to 2 decimal places
-    ELSE
-        DISPLAY "Error!!! Unknown input!! Try again later!"
-    END IF
+    DISPLAY "Number of parties: " count 
+    DISPLAY "Total Number of Pizzas: " allPizzas
+    DISPLAY "Average number of pizzas: " averAllPizzas to one decimal place
+    DISPLAY "Maximum number of people: " maxNumPeople
+    DISPLAY "Maximum cost of pizzas: $" maxCost to 2 decimal places
 
     DISPLAY "Thank you for using my Calculator!! Goodbye!"
     

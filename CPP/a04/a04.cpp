@@ -94,7 +94,6 @@ int main () {
                 // if branch_4.1
                 if (response == 'Y' || response == 'y') {
                     numVehicles = 1;
-                    numBikes;
                 }
                 else if (response == 'N' || response == 'n') {
                     numVehicles = 0;

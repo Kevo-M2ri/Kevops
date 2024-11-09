@@ -2,9 +2,11 @@
    Author:      Kelvin Muturi
    Date:        November 10, 2024
    Assignment:  CS-161A Discussion 6
-   Description: This program asks the user for 
-   Inputs:      
-   Outputs:     
+   Description: This program asks the user to input numbers with repeatedly.
+                The programs outputs simple statistics done on the numbers when
+                the user enters -1.
+   Inputs:      user's integers
+   Outputs:     sum, average, the number of digits entered, maximum, minimum
    -----------------------------------------------------------------------****/
 
 #include <iostream>
