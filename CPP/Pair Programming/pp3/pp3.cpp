@@ -30,13 +30,17 @@ int main () {
     // Welcome message
     cout << "Hello there!! Welcome to our simple statistics analysis  program!\n" << endl;
 
+    cout << "Enter a number. (Enter any non-integer to quit): " << endl; // user input prompt
+    cout << "-------------------------------------------------" << endl;
     // while
     while (true){
-        cout << "Enter a number. (Enter a negative number to quit!): "; // user input prompt
+        cout << count + 1 << ").    ";
         cin >> nums;
 
         // condition to quit
-        if (nums < 0) {
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore();
             break;
         }
 
@@ -53,6 +57,7 @@ int main () {
         variance += (nums - average) * (nums - average) / count;
         standardDeviation = sqrt(variance / count);
     }
+    cout << "-------------------------------------------------" << endl;
 
     // output messages
     cout << fixed << setprecision(2); // set doubles to 2 decimal places
