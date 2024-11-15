@@ -10,12 +10,18 @@ DECLARE standardDeviation as a double
 
 DISPLAY "Hello there!! Welcome to our simple statistics analysis  program!"
 
-WHILE (true)
-    DISPLAY "Enter a number. (Enter a negative number to quit!): "
-    cin >> nums
+DISPLAY "Enter a number. (Enter a negative number to quit!): "
+DISPLAY "Enter a number. (Enter any non-integer to quit): "
+DISPLAY "-------------------------------------------------"
 
-    IF (nums < -1) THEN
-        break;
+WHILE (true)
+    DISPLAY count + 1 ").    "
+    INPUT nums
+
+    IF (cin.fail()) THEN
+        cin.clear()
+        cin.ignore()
+        BREAK
     END IF
 
     SET ++count
@@ -30,6 +36,8 @@ WHILE (true)
     SET variance += (nums - average) * (nums - average) / count
     SET standardDeviation = sqrt(variance / count)
 END WHILE
+
+DISPLAY "-------------------------------------------------"
 
 DISPLAY "You entered: " count " digit
 DISPLAY "The sum of the numbers is: " sum
