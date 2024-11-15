@@ -1,0 +1,47 @@
+DECLARE a constant double BEVERAGE_COST = 0.25
+
+
+FUNCTION integer main()
+    DECLARE coinVal as an integer
+    DECLARE allCoinsVal as an integer
+    DECLARE amountInDollars as a double
+    DECLARE as a character choice
+    DECLARE numCups as an integer
+
+    DISPLAY "Hello! Welcome to our coffee and tea dispenser!!"
+
+    DO
+        DISPLAY "Please input your coins - 5, 10, or 25 (0 to exit): "
+        INPUT coinVal
+        WHILE ((coinVal == 5) OR (coinVal == 10) OR (coinVal == 25))
+            CONTINUE
+        END WHILE
+
+        SET allCoinsVal += coinVal
+    WHILE (coinVal != 0)
+
+    SET amountInDollars = SET static_cast<double>(allCoinsVal) / 100 
+    DISPLAY "The amount you entered is: $" amountInDollars
+
+    DISPLAY "Choose your beverage ($"BEVERAGE_COST " each: )"
+    DISPLAY     "C/c: Coffee"
+    DISPLAY     "T/t: Tea"
+    DISPLAY     "Q/q: Quit"
+    WHILE ((choice != 'q') OR (choice != 'Q'))
+        INPUT choice
+        IF ((choice == 'C') OR (choice == 'c') OR (choice = 't') OR (choice == 'T')) THEN
+            DISPLAY "How many cups would like? "
+            INPUT numCups
+            IF (cin.fail()) THEN
+                cin.clear()
+                cin.ignore()
+                DISPLAY "Invalid option!!"
+                CONTINUE
+            END IF
+        ELSE
+            DISPLAY "Invalid choice! Please try again!"
+            CONTINUE
+        END IF
+    END WHILE
+
+    DISPLAY 
