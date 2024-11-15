@@ -2,14 +2,19 @@
 using namespace std;
 
 int main() {
-    int num;
-    cin >> num;
+   int inputValue;
+   int i;
+   int j;
 
-    while (num > 0) {
-        cout << num % 2;
-        num = num / 2;
-    }
-    cout << endl;
+   cin >> inputValue;
+   
+   char quiz = '?';
+   for (i = 1; i <= inputValue; ++i) {
+      for (j = 1; j <= i; ++j) {
+         cout << quiz;
+      }
+      cout << i << endl;
+   }
 
-    return 0;
+   return 0;
 }
