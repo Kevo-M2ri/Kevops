@@ -31,44 +31,12 @@ int main () {
     do {
         cout << "Please input your coins - 5, 10, or 25 (0 to exit): ";
         cin >> coinVal;
-        // inacceptable coins continuous skip condition
-        while ((coinVal != 5) || (coinVal != 10) || (coinVal != 25))
-        {
-            continue;
-        }
+
+        if (coin)
+
         allCoinsVal += coinVal; // test me
     }
-    while (coinVal != 0); // condition to loop again
-
-    amountInDollars = static_cast<double>(allCoinsVal) / 100; // amount in dollars
-    cout << fixed << setprecision(2) << endl; // two decimal places condition
-    cout << "\nThe amount you entered is: $" << amountInDollars << endl;
-
-    // menu
-    cout << "\nChoose your beverage ($" << BEVERAGE_COST << " each: )" << endl;
-    cout << setw(5) << right << "C/c: Coffee" << endl;
-    cout << setw(5) << right << "T/t: Tea" << endl;
-    cout << setw(5) << right << "Q/q: Quit" << endl;
-
-    // customer choices
-    while ((choice != 'q') || (choice != 'Q')) {
-        cin >> choice;
-        if ((choice == 'C') || (choice == 'c') || (choice = 't') || (choice == 'T')) {
-            cout <<  "How many cups would like? " << endl;
-            cin >> numCups;
-            if (cin.fail()) {
-                cin.clear();
-                cin.ignore();
-                cout << "Invalid option!!" << endl;
-                continue;
-           }
-        }
-        else {
-            cout << "Invalid choice! Please try again!" << endl;
-            continue;
-        }
-    }
+    while (true); // condition to loop again
     
-
     return 0;
 }
