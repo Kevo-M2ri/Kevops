@@ -1,12 +1,15 @@
 DECLARE a constant double BEVERAGE_COST = 0.25
 
-
 FUNCTION integer main()
     DECLARE coinVal as an integer
     DECLARE allCoinsVal as an integer
     DECLARE amountInDollars as a double
     DECLARE as a character choice
     DECLARE numCups as an integer
+    DECLARE totalCost as a double
+    DECLARE validChoice as a boolean
+    DECLARE quitProgram as a boolean
+    DECLARE balance as a double
 
     DISPLAY "Hello! Welcome to our coffee and tea dispenser!!"
 
@@ -14,5 +17,61 @@ FUNCTION integer main()
         DISPLAY "Please input your coins - 5, 10, or 25 (0 to exit): "
         INPUT coinVal
 
+        WHILE (cin.fail() || (coinVal != 0 && coinVal != 5 && coinVal != 10 && coinVal != 25))
+            SET cin.clear()
+            SET cin.ignore(numeric_limits<streamsize>::max())
+            DISPLAY "Invalid coin! Please enter 5, 10, or 25 only (Enter 0 to finish): "
+            INPUT coinVal
+        END WHILE
+
         SET allCoinsVal += coinVal
-    WHILE ((coinVal == 5) OR (coinVal == 10) OR (coinVal == 25))
+    WHILE (coinVal != 0)
+
+    WHILE (!quitProgram)
+        DO
+            SET amountInDollars = static_cast<double>(allCoinsVal) / 100
+            SET all doubles output to 2 decimal places
+            DISPLAY "The amount you entered is: $" amountInDollars
+
+            DISPLAY "Here is our menu. Choose your beverage ($" BEVERAGE_COST " each.): "
+            DISPLAY "C/c: Coffee"
+            DISPLAY "T/t: Tea"
+            DISPLAY "Q/q: Quit"
+
+            DISPLAY "Ready to make an order? Input here: "
+            INPUT choice
+            SET validChoice = (tolower(choice) == 'c' || tolower(choice) == 't' || tolower(choice) == 'q')
+            IF (!validChoice) THEN
+                DISPLAY "Invalid Option! Please choose a valid option!"
+            END IF
+        WHILE (!validChoice)
+
+        IF (tolower(choice) == 'q') THEN
+            DISPLAY "Your total is: $0" 
+            DISPLAY "Your balance is: " amountInDollars
+            DISPLAY "Thank you for using my Vending Machine Program!"
+            SET quitProgram = true
+            CONINUE
+        ELSE
+            DISPLAY "Insufficient balance! Your total is $" totalCost ", but you have entered is $" amountInDollars
+            DISPLAY "Please add more coins."
+
+            DO
+                DISPLAY "Please input your coins - 5, 10, or 25 (0 to exit): "
+                INPUT coinVal
+
+                WHILE (cin.fail() || (coinVal != 0 && coinVal != 5 && coinVal != 10 && coinVal != 25))
+                    SET cin.clear()
+                    SET cin.ignore(numeric_limits<streamsize>::max())
+                    DISPLAY "Invalid coin! Please enter 5, 10, or 25 only (Enter 0 to finish): "
+                    INPUT coinVal
+                END WHILE
+
+                SET allCoinsVal += coinVal
+            WHILE (coinVal != 0)
+        END IF
+    END WHILE
+    SET quitProgram = true
+
+    RETURN 0
+END MAIN

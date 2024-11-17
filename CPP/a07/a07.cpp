@@ -1,11 +1,18 @@
-/****--------------------------------------------------------------------------
+/****----------------------------------------------------------------------------
    Author:      Kelvin Muturi
    Date:        November 17, 2024
-   Assignment:  CS-161A Assignment a06
-   Description: This program asks the user to input the number of 
-   Inputs:      
-   Outputs:     
-   -----------------------------------------------------------------------****/
+   Assignment:  CS-161A Assignment a07
+   Description: This program asks the user to input nickles, dimes, and quarters.
+                Te program checks for the validity of the coins inserted,
+                proceeds to calculates the total amount entered in dollars given
+                the user does not enter 0. It then displays the menu and asks the
+                user to choose a beverage and how many. It then calculates the
+                total cost. If the amount the user entered is insufficient, it
+                asks the user to add more coins and repeat the process. Otherwise,
+                it calculates and outputs the cost and the balance.
+   Inputs:      coinVal, and numCups as integers, and choice as a character
+   Outputs:     totalCost, and balance as doubles.
+   -------------------------------------------------------------------------****/
 
 #include <iostream>
 #include <iomanip>
@@ -49,20 +56,21 @@ int main () {
         allCoinsVal += coinVal; // test me
     } while (coinVal != 0); // condition to loop again
 
-    amountInDollars = static_cast<double>(allCoinsVal) / 100; // amount in dollars
-    cout << fixed << setprecision(2) << endl; // two decimal places condition
-    cout << "\nThe amount you entered is: $" << amountInDollars << endl;
-
-    // menu
-    cout << "\nHere is our menu. Choose your beverage ($" << BEVERAGE_COST << " each.): " << endl;
-    cout << "C/c: Coffee" << endl;
-    cout << "T/t: Tea" << endl;
-    cout << "Q/q: Quit" << endl;
-
     // customer choices
     while (!quitProgram) {
         do {
-            cout << "Ready to make an order? Input here: " << endl;
+            amountInDollars = static_cast<double>(allCoinsVal) / 100; // amount in dollars
+            cout << fixed << setprecision(2) << endl; // two decimal places condition
+            cout << "\nThe amount you entered is: $" << amountInDollars << endl;
+
+            // menu
+            cout << "\nHere is our menu. Choose your beverage ($" << BEVERAGE_COST << " each.): " << endl;
+            cout << "C/c: Coffee" << endl;
+            cout << "T/t: Tea" << endl;
+            cout << "Q/q: Quit" << endl;
+
+            // input
+            cout << "Ready to make an order? Input here: " << endl; // user prompt
             cin >> choice;
             validChoice = (tolower(choice) == 'c' || tolower(choice) == 't' || tolower(choice) == 'q');
                 if (!validChoice) {
@@ -71,12 +79,14 @@ int main () {
         } while (!validChoice);
 
         if (tolower(choice) == 'q') {
-            cout << "\nYour balance: $" << amountInDollars << endl;
+            cout << "\nYour total is: $0" << endl;
+            cout << "Your balance is: " << amountInDollars << endl; 
             cout << "\nThank you for using my Vending Machine Program!\n";
             quitProgram = true;
             continue; // Avoid further processing after quit
         }
 
+        // beverage choice
         do {
             cout << "How many would you like?\n>> ";
             cin >> numCups;
@@ -89,8 +99,10 @@ int main () {
             }
         } while (numCups <= 0);
 
+        //calculations
         totalCost = BEVERAGE_COST * numCups;
 
+        // balance suffiency condtion
         if (amountInDollars >= totalCost) {
             balance = amountInDollars - totalCost;
             cout << "\nYour total: $" << totalCost << "\nYour balance: $" << balance << "\n" << endl;
@@ -98,10 +110,10 @@ int main () {
             quitProgram = true;
         }
         else {
-            cout << "\nInsufficient balance! Your total is $" << totalCost
-                 << ", but you have entered is $" << amountInDollars << ".\n";
+            cout << "\nInsufficient balance! Your total is $" << totalCost << ", but you have entered is $" << amountInDollars << ".\n";
             cout << "Please add more coins.\n" << endl;
 
+            // additional coins
             do {
                 cout << "Please input additional coins - 5, 10, or 25 (0 to exit): ";
                 cin >> coinVal;
@@ -118,6 +130,7 @@ int main () {
             while (coinVal != 0); // condition to loop again
         }
     }
+    quitProgram = true; // quit whole program
         
     return 0;
 }
