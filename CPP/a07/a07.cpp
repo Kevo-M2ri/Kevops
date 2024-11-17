@@ -37,6 +37,7 @@ int main () {
     do {
         cout << "Please input your coins - 5, 10, or 25 (0 to exit): ";
         cin >> coinVal;
+<<<<<<< HEAD
         // inacceptable coins continuous skip condition
         while (cin.fail() || (coinVal != 0 && coinVal != 5 && coinVal != 10 && coinVal != 25)) {
             cin.clear();
@@ -69,5 +70,14 @@ int main () {
         } while (!validChoice);
     }
         
+=======
+
+        if (coin)
+
+        allCoinsVal += coinVal; // test me
+    }
+    while (true); // condition to loop again
+    
+>>>>>>> cf4e1a49f861ef7c2e5629ddd7dcfeea0018f2bc
     return 0;
 }
