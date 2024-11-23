@@ -1,0 +1,22 @@
+DEFINE FUNCTION void Welcome()
+DEFINE FUNCTION integer ReadInt(string prompt)
+DEFINE FUNCTION double ReadScore(string prompt)
+
+FUNCTION integer main()
+    CALL Welcome()
+
+    RETURN 0
+END FUNCTION
+
+FUNCTION void Welcome()
+    DISPLAY "Hello!! Welcome to the grade calculator!"
+END FUNCTION
+
+FUNCTION integer ReadInt(string prompt)
+    INPUT assignments
+
+    RETURN assignments
+END FUNCTION
+
+FUNCTION double ReadScore(string prompt)
+    
