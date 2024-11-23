@@ -1,6 +1,9 @@
 DEFINE FUNCTION void Welcome()
 DEFINE FUNCTION integer ReadInt(string prompt)
 DEFINE FUNCTION double ReadScore(string prompt)
+DEFINE FUNCTION double AssignAverage(int numAssigns)
+DEFINE FUNCTION double CalcFinalScore(double assignAvg, double midterm, double final)
+DEFINE FUNCTION char CalcLetterGrade(double finalScore)
 
 FUNCTION integer main()
     CALL Welcome()
@@ -19,4 +22,18 @@ FUNCTION integer ReadInt(string prompt)
 END FUNCTION
 
 FUNCTION double ReadScore(string prompt)
-    
+
+
+END FUNCTION
+
+FUNCTION double AssignAverage(int numAssigns)
+
+END FUNCTION
+
+FUNCTION double CalcFinalScore(double assignAvg, double midterm, double final)
+
+END FUNCTION
+
+FUNCTION char CalcLetterGrade(double finalScore)
+
+END FUNCTION
