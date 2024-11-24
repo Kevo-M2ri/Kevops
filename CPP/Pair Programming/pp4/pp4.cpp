@@ -27,27 +27,50 @@ const double ADULT_FEE = 40.0;
 const double CHILD_FEE = 20.0;
 const double SENIOR_FEE = 30.0;
 
+
+// function prototypes
 void Menu();
-int ReadValidatChoice(string prompt);
-double MonthlyCharge(double charge);
+int ReadValidateChoice(string prompt);
+int ReadValidateMonths(string prompt);
+double CalcCharges(int userChoice, int months);
 
 int main() {
     int option;
+    int numMonths;
     double costOfMembership;
+    double totalCostForMembers = 0.0;
+
+    // welcome message
     cout << "Hello!!\n";
     cout << "Welcome to the Health Club information.\n";
     cout << "Select a class from here below. (4 to quit)" << endl;
+
+    cout << fixed << setprecision(2); // set output doubles to 2 dp
+
     do {
         Menu();
-        double CalcCharges(costOfMembership);
+        option = ReadValidateChoice("\nEnter your choice (1-4): ");
+
+        if (option != QUIT_CHOICE) { // If user didn't choose to quit
+            numMonths = ReadValidateMonths("For how many months (1-60)? ");
+            costOfMembership = CalcCharges(option, numMonths); // Calculate charges
+            cout << "The mbership cost is: $" << costOfMembership << endl;
+
+            totalCostForMembers += costOfMembership;
+        }
     }
-    while(option != QUIT_CHOICE);
+    while(option != QUIT_CHOICE); // repeat until user chooses to quit
+    cout << "\nThe total cost of all members for the months entered is: $" << totalCostForMembers << endl;
+
+    cout << "\nThank you for using the Health Club Membership Program! >>>> Goodbye!" << endl;
 
     return 0;
 }
 
+//menu function
 void Menu() {
     cout << "\nHEALTH CLUB MEMBERSHIP.\n";
+    cout << "----------------------------\n";
     cout << "1. Standard Adult Membership.\n";
     cout << "2. Child Membership\n";
     cout << "3. Senior Citizen Membership\n";
@@ -68,44 +91,46 @@ int ReadValidateChoice(string prompt) {
         else {
             dataValidity = true;
         }
-    }
-    while (!dataValidity);
+    } while (!dataValidity);
 
     return choice;
 }
 
-double  CalcCharges(double totalCharges) {
+int ReadValidateMonths(string prompt) {
     int months;
-    int userChoice;
     bool monthsValidity = false;
-    userChoice = ReadValidateChoice("Enter your choice (1-4:): ");
-    if (userChoice != QUIT_CHOICE) {
-        do {
-            cout << "For how many months? (1-60)";
-            cin >> months;
-            if (cin.fail() || months <= 0 || months > 60) {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                cout << "Error!! Membership can only be between 1 to 60 months inclusive\n";
-                cout << "Please enter between 1 and 60: ";
-            }
-            else {
-                monthsValidity = true;
-            }
 
-            switch (userChoice) {
-                case ADULT_CHOICE:
-                    totalCharges = months * ADULT_FEE;
-                    break;
-                case CHILD_CHOICE:
-                    totalCharges = months * CHILD_FEE;
-                    break;
-                case SENIOR_CHOICE:
-                    totalCharges =months * SENIOR_FEE;
-                    break;
-            }
+    do {
+        cout << prompt;
+        cin >> months;
+
+        if (cin.fail() || months <= 0 || months > 60) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Error!! Membership can only be between 1 to 60 months inclusive\n";
+            cout << "Please enter between 1 and 60: ";
         }
-        while (!monthsValidity);
+        else {
+            monthsValidity = true;
+        }
+    } while (!monthsValidity);
+
+    return months;
+}
+
+double  CalcCharges(int userChoice, int months) {
+    double totalCharges = 0.0;
+
+    switch (userChoice) {
+        case ADULT_CHOICE:
+            totalCharges = months * ADULT_FEE;
+            break;
+        case CHILD_CHOICE:
+            totalCharges = months * CHILD_FEE;
+            break;
+        case SENIOR_CHOICE:
+            totalCharges = months * SENIOR_FEE;
+            break;
     }
 
     return totalCharges;
