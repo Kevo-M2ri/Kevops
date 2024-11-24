@@ -6,7 +6,7 @@
 #                   selection. A do-while loop repeats the program until the
 #                   user selects item 4 from the menu.
 # Input:            integer membership category, integer months
-# Output:           float membership costs
+# Output:           double membership costs, total cost for all entered members
 # Sources:          None
 #******************************************************************************/
 #include <iostream>
@@ -56,7 +56,7 @@ int main() {
             costOfMembership = CalcCharges(option, numMonths); // Calculate charges
             cout << "The mbership cost is: $" << costOfMembership << endl;
 
-            totalCostForMembers += costOfMembership;
+            totalCostForMembers += costOfMembership; // total cost for all members
         }
     }
     while(option != QUIT_CHOICE); // repeat until user chooses to quit
@@ -76,7 +76,7 @@ void Menu() {
     cout << "3. Senior Citizen Membership\n";
     cout << "4. Quit the Program" << endl;
 }
-
+// user choice function
 int ReadValidateChoice(string prompt) {
     int choice;
     bool dataValidity = false;
@@ -96,6 +96,7 @@ int ReadValidateChoice(string prompt) {
     return choice;
 }
 
+// months of membership function
 int ReadValidateMonths(string prompt) {
     int months;
     bool monthsValidity = false;
@@ -117,7 +118,8 @@ int ReadValidateMonths(string prompt) {
 
     return months;
 }
-
+ 
+// charges calculations function
 double  CalcCharges(int userChoice, int months) {
     double totalCharges = 0.0;
 
