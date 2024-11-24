@@ -5,9 +5,9 @@ DEFINE FUNCTION double AssignAverage(int numAssigns)
 DEFINE FUNCTION double CalcFinalScore(double assignAvg, double midterm, double final)
 DEFINE FUNCTION char CalcLetterGrade(double finalScore)
 
-DECLARE a cosntant double ASSIGNMENT_WEIGHT
-DECLARE a cosntant double MIDTERM_WEIGHT
-DECLARE a cosntant double FINAL_WEIGHT
+SET a constant double ASSIGNMENT_WEIGHT = 0.6
+SET a constant double MIDTERM_WEIGHT = 0.2
+SET a constant double FINAL_WEIGHT = 0.2
 
 FUNCTION integer main()
     DECLARE an integer numAssignments
@@ -15,7 +15,7 @@ FUNCTION integer main()
     DECLARE a double midTermScore
     DECLARE a double finalScore
     DECLARE a double allTermScore
-    DECLARE a chaacter termGrade
+    DECLARE a character termGrade
 
     CALL Welcome()
     SET numAssignments = CALL ReadInt("Input the number of assignments completed (0-10): ")
@@ -96,7 +96,7 @@ FUNCTION double AssignAverage(int numAssigns)
         SET prompt = "Enter score for assignment " + to_string(i) + ": "
         SET total += CALL ReadScore(prompt)
     END FOR
-    set average = total / numAssignments
+    SET average = total / numAssignments
 
     RETURN average
 END FUNCTION
