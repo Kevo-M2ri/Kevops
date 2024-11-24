@@ -5,35 +5,120 @@ DEFINE FUNCTION double AssignAverage(int numAssigns)
 DEFINE FUNCTION double CalcFinalScore(double assignAvg, double midterm, double final)
 DEFINE FUNCTION char CalcLetterGrade(double finalScore)
 
+DECLARE a cosntant double ASSIGNMENT_WEIGHT
+DECLARE a cosntant double MIDTERM_WEIGHT
+DECLARE a cosntant double FINAL_WEIGHT
+
 FUNCTION integer main()
+    DECLARE an integer numAssignments
+    DECLARE a double assignmentAverage
+    DECLARE a double midTermScore
+    DECLARE a double finalScore
+    DECLARE a double allTermScore
+    DECLARE a chaacter termGrade
+
     CALL Welcome()
+    SET numAssignments = CALL ReadInt("Input the number of assignments completed (0-10): ")
+    SET AssignAverage = CALL AssignAverage(numAssignments)
+    SET midTermScore = CALL ReadScore("Enter the midterm exam score: ")
+    SET finalScore = CALL  ReadScore("Enter the final exam score: ")
+    SET allTermScore = CALL CalcFinalScore(assignmentAverage, midTermScore, finalsScore)
+    SET termGrade = CALL CalcLetterGrade(allTermScore)
+
+    SET output for doubles to one decimal place
+    DISPLAY "The score for the whole term is: " allTermScore
+    DISPLAY "Your grade for the term is: " termGrade
+
+    DISPLAY "Thank you for using the calculator >>>> Goodbye!!"
 
     RETURN 0
 END FUNCTION
 
 FUNCTION void Welcome()
     DISPLAY "Hello!! Welcome to the grade calculator!"
+    DISPLAY "You will enter the number of assignments taken throughout the term."
+    DISPLAY "I will validate the data keyed in and output the final score and grade if data is valid."
+    DISPLAY "Let's begin!!"
 END FUNCTION
 
 FUNCTION integer ReadInt(string prompt)
-    INPUT assignments
+    DECLARE as an integer assignments
+    DEFINE as a boolean validInput = FALSE
+
+    DO
+        DISPLAY prompt
+        INPUT assignments
+
+        IF (cin.fail() OR assignments < 0 OR assignments > 10) THEN
+            SET cin.clear()
+            SET cin.ignore(numeric_limits<streamsize>::max())
+            DISPLAY "Error!! Invalid input. Please enter a number btween 0 and 10"
+        ELSE
+            SET validInput = TRUE
+        END IF
+    WHILE(NOT validInput)
 
     RETURN assignments
 END FUNCTION
 
 FUNCTION double ReadScore(string prompt)
+    DECLARE as a double score
+    DEFINE as a boolean validInput = FALSE
 
+    DO
+        DISPLAY prompt
+        INPUT score
 
+        IF (cin.fail() OR assignments < 0 OR assignments > 10) THEN
+            SET cin.clear()
+            SET cin.ignore(numeric_limits<streamsize>::max())
+            DISPLAY "Not a valid input! Score can only be between 0 and 4.0!!"
+        ELSE
+            validInput = TRUE
+        END IF
+    WHILE (NOT validInput)
+
+    RETURN score
 END FUNCTION
 
 FUNCTION double AssignAverage(int numAssigns)
+    DECLARE as a double average
+    DECLARE as a double total
+    DECLARE as a double score
+    DECLARE as an integer i
+    DECLARE as a string prompt
 
+    IF (numAssignments == 0) THEN
+        RETURN 0.0
+    END IF
+
+    FOR (i = 1; i <= numAssignments; ++i)
+        SET prompt = "Enter score for assignment " + to_string(i) + ": "
+        SET total += CALL ReadScore(prompt)
+    END FOR
+    set average = total / numAssignments
+
+    RETURN average
 END FUNCTION
 
 FUNCTION double CalcFinalScore(double assignAvg, double midterm, double final)
+    DECLARE finalScore as a double
 
+    SET finalScore = (assignAvg * ASSIGNMENT_WEIGHT) + (midterm * MIDTERM_WEIGHT) + (final * FINAL_WEIGHT)
+
+    RETURN finalScore
 END FUNCTION
 
 FUNCTION char CalcLetterGrade(double finalScore)
-
+    IF (finalScore >= 3.3) THEN
+        RETURN 'A'
+    ELSE IF (finalScore >= 2.8) THEN
+        RETURN 'B'
+    ELSE IF (finalScore >= 2.0) THEN
+        RETURN 'C'
+    ELSE IF (finalScore >= 1.2) THEN
+        RETURN 'D'
+    ELSE
+        RETURN 'F'
+    END IF
 END FUNCTION
