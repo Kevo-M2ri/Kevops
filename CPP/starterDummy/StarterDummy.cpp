@@ -1,90 +1,114 @@
-/******************************************************************************
-# Author:           Kelvin Muturi
-# Lab:              Discussion #8
-# Date:             November 24, 2024
-# Description:      This program displays a menu and asks the user to make a
-#                   selection. A do-while loop repeats the program until the
-#                   user selects item 4 from the menu.
-# Input:            integer membership category, integer months
-# Output:           float membership costs
-# Sources:          None
-#******************************************************************************/
 #include <iostream>
 #include <iomanip>
+#include <cmath>
+#include <limits>
+
 using namespace std;
 
-// Constants for menu choices
-const int ADULT_CHOICE = 1,
-            CHILD_CHOICE = 2,
-            SENIOR_CHOICE = 3,
-            QUIT_CHOICE = 4;
+const int SQUARE_FEET_PER_GALLON = 110;
+const double LABOR_HOURS_PER_GALLON = 8.0;
+const double LABOR_COST_PER_HOUR = 35.0;
 
-// Constants for membership rates
-const double ADULT = 40.0,
-            CHILD = 20.0,
-            SENIOR = 30.0;
 
-// Add function prototypes here
+double GetPaintPrice();
+void GetWallDimensions(double& length, double& width, double& height);
+double CalcWallSquareFeet(double length, double width, double height);
+void NumberOfGallons(double squareFeet, int& gallons);
+void LaborHours(double squareFeet, int& hours);
+void DisplayCost(int gallons, double paintCostPerGallon, int hours);
 
-int main()
-{  
-   // Variables
-   int choice = 0;         // Menu choice
-   int months = 0;         // Number of months
-   double charges = 0.0;   // Monthly charges
+int main() {
 
-   cout << fixed << showpoint << setprecision(2);
-   
-   do
-   {
-      // Display the menu.
-      cout << "\n\t\tHealth Club Membership Menu\n\n"
-           << "1. Standard Adult Membership\n"
-           << "2. Child Membership\n"
-           << "3. Senior Citizen Membership\n"
-           << "4. Quit the Program\n\n"
-           << "Enter your choice: ";
-      cin >> choice;
-      
-      // Validate the menu selection.
-      while (choice < ADULT_CHOICE || choice > QUIT_CHOICE)
-      {
-         cout << "Please enter a valid menu choice: ";
-         cin >> choice;
-      }
-
-      // Validate and process the user's choice.
-      if (choice != QUIT_CHOICE)
-      {
-         // Get the number of months.
-         cout << "For how many months? ";
-         cin >> months;
-
-         // Validate the number of months.
-         while (months < 0 || months > 60)
-         {
-             cout << "Please enter months between 0 and 60: ";
-             cin >> months;
-         }
-         
-         // Respond to the user's menu selection.
-         switch (choice)
-         {
-            case ADULT_CHOICE:
-                charges = months * ADULT;
-                break;
-            case CHILD_CHOICE:
-                charges = months * CHILD;
-                break;
-            case SENIOR_CHOICE:
-                charges = months * SENIOR;
-         }
-         
-         // Display the monthly charges.
-         cout << "The total charges are $"
-              << charges << endl;
-      }
-   } while (choice != QUIT_CHOICE);
+  double length;
+  double width;
+  double height;
+  double paintPricePerGallon;
+  double wallSquareFeet;
+  int gallonsRequired;
+  int laborHoursRequired;
+  
+  GetWallDimensions(length, width, height);
+  paintPricePerGallon = GetPaintPrice();
+  wallSquareFeet = CalcWallSquareFeet(length, width, height);
+  NumberOfGallons(wallSquareFeet, gallonsRequired);
+  LaborHours(wallSquareFeet, laborHoursRequired);
+  DisplayCost(gallonsRequired, paintPricePerGallon, laborHoursRequired);
 
    return 0;
+}
+
+double GetPaintPrice() {
+   double price;
+   bool validInput = false;
+   
+   do {
+      cin >> price;
+      
+      if (cin.fail() || price < 10.00) {
+         cin.clear();
+         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+         cout << "ERROR: Paint price must be 10.00 or greater.\n";
+      }
+      else {
+         validInput = true;
+      }
+   }while (!validInput);
+   
+   return price;
+}
+
+void GetWallDimensions(double& length, double& width, double& height) {
+   bool validInput = false;
+   
+   do {
+      cin >> length >> width >> height;
+      
+      if (cin.fail() || length < 5.0 || width < 5.0 || height < 5.0) {
+         cin.clear();
+         cin.ignore(numeric_limits<streamsize>::max(), '\n');
+         if (length < 5.0) cout << "ERROR: Cannot be less than 5 feet.\n";
+         if (width < 5.0) cout << "ERROR: Cannot be less than 5 feet.\n";
+         if (height < 5.0) cout << "ERROR: Cannot be less than 5 feet.\n";
+      }
+      else {
+         validInput = true;
+      }
+   } while (!validInput);
+}
+
+double CalcWallSquareFeet(double length, double width, double height) {
+   return 2 * (length * height + width * height);
+}
+
+void NumberOfGallons(double squareFeet, int& gallons) {
+   gallons = ceil(squareFeet / SQUARE_FEET_PER_GALLON);
+}
+
+void LaborHours(double squareFeet, int& hours) {
+   int gallons;
+   
+   gallons = ceil(squareFeet / SQUARE_FEET_PER_GALLON);
+   hours = ceil(gallons * LABOR_HOURS_PER_GALLON);
+}
+
+void DisplayCost(int gallons, double paintCostPerGallon, int hours) {
+   double paintCost;
+   double laborCost;
+   double totalCost;
+   
+   paintCost = gallons * paintCostPerGallon;
+   laborCost = hours * LABOR_COST_PER_HOUR;
+   totalCost = paintCost + laborCost;
+   
+   cout << fixed << setprecision(2);
+   cout << "\nGallons of paint:";
+   cout << setw(3) << right << gallons << endl;
+   cout << "Paint Cost:";
+   cout << setw(8) << right << "$" << paintCost << endl;
+   cout << "Hours of labor:";
+   cout << setw(6) << right << hours << endl;
+   cout << "Labor cost:";
+   cout << setw(8) << right << "$" << laborCost << endl;
+   cout << "Total charges:";
+   cout << setw(5) << right << "$" << totalCost << endl;
 }
