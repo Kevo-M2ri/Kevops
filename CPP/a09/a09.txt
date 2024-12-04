@@ -4,7 +4,7 @@ DECLARE a void FUNCTION ReadScore(string prompt, double& num)
 DECLARE a double FUNCTION AssignAverage(int numAssigns)
 DECLARE a void FUNCTION GetInput(double& midtermScore, double& finalExamScore)
 DECLARE a double FUNCTION CalcFinalScore(double assignAvg, double midterm, double final)
-DECLARE a char FUNCTION CalcLetterGrade(double finalScore, char& letter)
+DECLARE a void FUNCTION CalcLetterGrade(double finalScore, char& letter)
 
 SET a constant double ASSIGNMENT_WEIGHT = 0.6
 SET a constant double MIDTERM_WEIGHT = 0.2
@@ -26,7 +26,8 @@ FUNCTION integer main()
 
     SET output for doubles to one decimal place
     DISPLAY "The score for the whole term is: " allTermScore
-    DISPLAY "Your grade for the term is: " CALL CalcLetterGrade(allTermScore)
+    DISPLAY "Your grade for the term is: "
+    CALL CalcLetterGrade(allTermScore)
 
     DISPLAY "Thank you for using the calculator >>>> Goodbye!!"
 
@@ -115,16 +116,14 @@ END FUNCTION
 
 FUNCTION char CalcLetterGrade(double finalScore, char& letter)
     IF (finalScore >= 3.3) THEN
-        RETURN 'A'
+        DISPLAY 'A'
     ELSE IF (finalScore >= 2.8) THEN
-        RETURN 'B'
+        DISPLAY 'B'
     ELSE IF (finalScore >= 2.0) THEN
-        RETURN 'C'
+        DISPLAY 'C'
     ELSE IF (finalScore >= 1.2) THEN
-        RETURN 'D'
+        DISPLAY 'D'
     ELSE
-        RETURN 'F'
+         DISPLAY 'F'
     END IF
-
-    RETURN letter
 END FUNCTION

@@ -7,7 +7,7 @@
                 midterm and the finals and validates the input data. It then
                 calculates and outputs the final score for the student and
                 the grade of the student.
-   Inputs:      assignments as an iteger, score as a double
+   Inputs:      assignments as an integer, score as a double
    Outputs:     final score as a double, and final grade as a character
    -----------------------------------------------------------------------****/
 
@@ -25,7 +25,7 @@ void ReadScore(string prompt, double& num);
 double AssignAverage(int numAssigns);
 void GetInput(double& midtermScore, double& finalExamScore);
 double CalcFinalScore(double assignAvg, double midtermScore, double final);
-char CalcLetterGrade(double finalScore, char& letter);
+void CalcLetterGrade(double finalScore, char& letter);
 
 // constants definitions
 const double ASSIGNMENT_WEIGHT = 0.6;
@@ -51,11 +51,13 @@ int main () {
     assignmentAverage = AssignAverage(numAssignments);
     GetInput(midtermScore, finalsScore);
     allTermScore = CalcFinalScore(assignmentAverage, midtermScore, finalsScore);
+    CalcLetterGrade(allTermScore, termGrade);
 
     // program outputs
     cout << fixed << setprecision(1);
     cout << "\nThe score for the whole term is: " << allTermScore << endl;
-    cout << "Your grade for the term is: " << CalcLetterGrade(allTermScore, termGrade) << endl;
+    cout << "Your grade for the term is: ";
+    CalcLetterGrade(allTermScore, termGrade);
 
     cout << "\nThank you for using the calculator >>>> Goodbye!!" << endl;
 
@@ -151,22 +153,20 @@ double CalcFinalScore(double assignAvg, double midterm, double final) {
 
 
 // grade assigning function
-char CalcLetterGrade(double finalScore, char& letter) {
+void CalcLetterGrade(double finalScore, char& letter) {
     if (finalScore >= 3.3) {
-        return 'A';
+        cout << 'A' << endl;
     }
     else if (finalScore >= 2.8) {
-        return 'B';
+        cout << 'B' << endl;
     }
     else if (finalScore >= 2.0) {
-        return 'C';
+        cout << 'C' << endl;
     }
     else if (finalScore >= 1.2) {
-        return 'D';
+        cout << 'D' << endl;
     }
     else {
-        return 'F';
+        cout << 'F' << endl;
     }
-
-    return letter;
 }
