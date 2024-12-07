@@ -1,0 +1,84 @@
+DECLARE a void FUNCTION Welcome()
+DECLARE a void FUNCTION GetInput(int& goal)
+DECLARE an integer FUNCTION CalcTotal()
+DECLARE a void FUNCTION Goodbye
+
+FUNCTION integer main ()
+    DECLARE milesOfExercise as an integer
+    DECLARE totalMiles as an integer
+
+    CALL Welcome()
+
+    CALL GetInput(milesOfExercise)
+    IF (milesOfExercise <= 0) THEN
+        DISPLAY "No miles tracked this week"
+    ELSE
+        SET totalMiles = CALL CalcTotal()
+        IF  (totalMiles > milesOfExercise) THEN
+            DISPLAY "Made of Steel!! You exceeded your goal by " SET (totalMiles - milesOfExercise) " miles."
+        ELSE IF (totalMiles == milesOfExercise) THEN
+            DISPLAY "Congratulations! You reached your goal!
+        ELSE
+            DISPLAY "You tried this time. You had a deficit of " SET (milesOfExercise - totalMiles) " miles from your goal."
+        END IF
+    END IF
+
+    RETURN 0
+END MAIN
+
+FUNCTION void Welcome()
+    DISPLAY "Hello! Welcome to the MILES OF EXERCISE GOAL calculator!!"
+    DISPLAY "You will enter the miles you want to exercise as your GOAL."
+    DISPLAY "Let's get started!"
+END FUNCTION
+
+FUNCTION void GetInput(int& goal)
+    DISPLAY "How many miles do you want to walk? "
+    INPUT goal
+END FUNCTION
+
+FUNCTION integer CalcTotal()
+    DECLARE miles as an integer
+    DECLARE an integer totalMiles = 0
+    DECLARE weekDay as a string
+    DECLARE day as an integer
+    DECLARE a boolean validInput = false
+
+    FOR (day = 0; day < 7; day++)
+        SELECT (day)
+            CASE 0:
+                weekDay = "Sunday"
+            CASE 1:
+                weekDay = "Monday"
+            CASE 2:
+                weekDay = "Tuesday"
+            CASE 3:
+                weekDay = "Wednesday"
+            CASE 4:
+                weekDay = "Thursday"
+            CASE 5:
+                weekDay = "Friday"
+            CASE 6:
+                weekDay = "Saturday"
+        END SELECT
+
+        DO
+            DISPLAY "Enter the number of miles walked on " weekDay ": "
+            INPUT miles
+
+            IF (miles < 0) THEN
+                DISPLAY "Error!! You cannot walk negative miles! Please try again."
+            ELSE
+                SET validInput = TRUE
+                SET totalMiles += miles
+            END IF
+        WHILE (!validInput)
+    END FOR
+
+    RETURN totalMiles
+END FUNCTION
+
+FUNCTION void Goodbye()
+    DISPLAY "Thank you for using our program!"
+    DISPLAY "Enjoy your time, and see you later!"
+END FUNCTION
