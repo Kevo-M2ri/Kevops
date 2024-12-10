@@ -19,7 +19,7 @@ int main() {
     cout << "Enter the number of people attending: ";
     cin >> numPeople;
 
-    pizzas = numPeople / (slicesPerPizza / slicesPerPerson);
+    pizzas = ((numPeople * slicesPerPerson) / slicesPerPizza);
     cost = price * pizzas;
 
     cout << "You will need: " << pizzas << " Pizzas." << endl;

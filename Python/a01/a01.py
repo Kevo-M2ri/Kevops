@@ -7,20 +7,17 @@
 # Inputs:      number of people as an integer
 # Outputs:     number of Pizzas as an integer and their total cost as a double
 #  -----------------------------------------------------------------------****/
+import math
 
-numPeople = int()
-pizzas = int()
-slicesPerPizza = int(12)
-slicesPerPerson = int(2)
-price = float(14.95)
-cost = float()
+slicesPerPizza = 12
+slicesPerPerson = 2
+price = 14.95
 
-print("Welcome to my pizza party Calculator!")
+print("Welcome to my pizza party Calculator!\n")
 
-print("Enter the number of people attending: ")
-input(numPeople)
+numPeople= int(input("Enter the number of people attending:"))
 
-pizzas = numPeople * slicesPerPerson / slicesPerPizza
+pizzas = math.ceil(numPeople * slicesPerPerson / slicesPerPizza)
 cost = price * pizzas
 
 print("You will need: ", pizzas)
