@@ -17,25 +17,25 @@
 using namespace std;
 
 // function prototypes
-void Welcome();
-void GetInput(int& goal);
-int CalcTotal();
-void Goodbye();
+void welcome();
+void getInput(int& goal);
+int calcTotal();
+void goodbye();
 
 // main function
 int main () {
     int milesOfExercise;
     int totalMiles;
 
-    Welcome(); // welcome message function
+    welcome(); // welcome message function
 
     // Goal input
-    GetInput(milesOfExercise); // Goal set
+    getInput(milesOfExercise); // Goal set
     if (milesOfExercise <= 0) {
         cout << "\nNo miles tracked this week!" << endl;
     } // not exercised
     else {
-        totalMiles = CalcTotal();
+        totalMiles = calcTotal();
 
         cout << "\nYou clocked in " << totalMiles << " miles this week!" << endl;
         if (totalMiles > milesOfExercise) {
@@ -48,12 +48,12 @@ int main () {
             cout << "You tried this time. You had a deficit of " << (milesOfExercise - totalMiles) << " miles from your goal." << endl;
         } // not reached the set goal
     }
-    Goodbye(); // goodbye message
+    goodbye(); // goodbye message
 
     return 0;
 }
 // welcome function
-void Welcome() {
+void welcome() {
     cout << "Hello! Welcome to MILES OF EXERCISE GOAL calculator!!" << endl;
     cout << "You will enter the miles you want to exercise as your GOAL." << endl;
     cout << "Let's get started!" << endl;
@@ -61,14 +61,14 @@ void Welcome() {
 
 
 // input function
-void GetInput(int& goal) {
+void getInput(int& goal) {
     cout << "\nHow many miles do you want to walk? ";
     cin >> goal;
     cout << endl;
 }
 
 // total miles walked calculations function
-int CalcTotal() {
+int calcTotal() {
     // local variables declaration
     int miles;
     int totalMiles = 0;
@@ -82,31 +82,31 @@ int CalcTotal() {
         switch (day) {
             case 0:
                 weekDay = "Sunday";
-            break;
+                break;
 
             case 1:
                 weekDay= "Monday";
-            break;
+                break;
 
             case 2:
                 weekDay = "Tuesday";
-            break;
+                break;
 
             case 3:
                 weekDay = "Wednesday";
-            break;
+                break;
 
             case 4:
                 weekDay = "Thursday";
-            break;
+                break;
 
             case 5:
                 weekDay = "Friday";
-            break;
+                break;
 
             case 6:
                 weekDay = "Saturday";
-            break;
+                break;
         }
 
         // miles exercised that day and validity check
@@ -128,7 +128,7 @@ int CalcTotal() {
 }
 
 // Goodbye function
-void Goodbye() {
+void goodbye() {
     cout << "\nThank you for using our program!" << endl;
     cout << "Enjoy your time, and see you later!" << endl;
 }

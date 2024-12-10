@@ -1,19 +1,19 @@
-DECLARE a void FUNCTION Welcome()
-DECLARE a void FUNCTION GetInput(int& goal)
-DECLARE an integer FUNCTION CalcTotal()
-DECLARE a void FUNCTION Goodbye
+DECLARE a void FUNCTION welcome()
+DECLARE a void FUNCTION getInput(int& goal)
+DECLARE an integer FUNCTION calcTotal()
+DECLARE a void FUNCTION goodbye
 
 FUNCTION integer main ()
     DECLARE milesOfExercise as an integer
     DECLARE totalMiles as an integer
 
-    CALL Welcome()
+    CALL welcome()
 
-    CALL GetInput(milesOfExercise)
+    CALL getInput(milesOfExercise)
     IF (milesOfExercise <= 0) THEN
         DISPLAY "No miles tracked this week"
     ELSE
-        SET totalMiles = CALL CalcTotal()
+        SET totalMiles = CALL calcTotal()
         IF  (totalMiles > milesOfExercise) THEN
             DISPLAY "Made of Steel!! You exceeded your goal by " SET (totalMiles - milesOfExercise) " miles."
         ELSE IF (totalMiles == milesOfExercise) THEN
@@ -23,21 +23,23 @@ FUNCTION integer main ()
         END IF
     END IF
 
+    CALL goodbye
+
     RETURN 0
 END MAIN
 
-FUNCTION void Welcome()
+FUNCTION void welcome()
     DISPLAY "Hello! Welcome to the MILES OF EXERCISE GOAL calculator!!"
     DISPLAY "You will enter the miles you want to exercise as your GOAL."
     DISPLAY "Let's get started!"
 END FUNCTION
 
-FUNCTION void GetInput(int& goal)
+FUNCTION void getInput(int& goal)
     DISPLAY "How many miles do you want to walk? "
     INPUT goal
 END FUNCTION
 
-FUNCTION integer CalcTotal()
+FUNCTION integer calcTotal()
     DECLARE miles as an integer
     DECLARE an integer totalMiles = 0
     DECLARE weekDay as a string
@@ -78,7 +80,7 @@ FUNCTION integer CalcTotal()
     RETURN totalMiles
 END FUNCTION
 
-FUNCTION void Goodbye()
+FUNCTION void goodbye()
     DISPLAY "Thank you for using our program!"
     DISPLAY "Enjoy your time, and see you later!"
 END FUNCTION
