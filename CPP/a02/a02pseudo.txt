@@ -21,7 +21,7 @@ FUNCTION int main()
     SET totalDedux = ficaDedux + fedTaxWhold
     SET netPay = grossPay - totalDedux
 
-    DISPLAY "Your payroll summary: $" (formatted to 2 decimal places)
+    DISPLAY "Your payroll summary:" (formatted to 2 decimal places)
     DISPLAY "Gross amount paid is: $" grossPay
     DISPLAY "FICA deduction is: $" ficaDedux
     DISPLAY "Federal Tax Withholding is: $" fedTaxWhold
