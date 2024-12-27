@@ -13,8 +13,3 @@ if object_size > 5:
     print('We need to keep an eye on this object')
 else:
     print('Object poses no threat.')
-
-marsTemperature = "The highest temperature on Mars is about 30 C"
-for item in marsTemperature.split():
-    if item.isnumeric():
-        print(item)
