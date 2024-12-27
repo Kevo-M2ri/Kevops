@@ -17,7 +17,7 @@ netPay = grossPay - totalDedux
 
 print(f"""Your payroll summary:
 --------------------------------
-    Gross amount paid is: ${round(grossPay, 2)}
+    Gross amount paid is: ${round(grossPay, 2)} #fixme
     FICA deduction is: ${round(ficaDedux, 2)}
     Federal Tax Withholding is: ${round(fedTaxWhold, 2)}
     Total deductions: ${round(totalDedux, 2)}
