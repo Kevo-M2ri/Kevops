@@ -1,8 +1,5 @@
 import math
 
-<<<<<<< HEAD
-ficaDeduct = 0.0765
-=======
 FICADEDUCT = 0.0765
 
 print("Welcome to my Salary Calculator!")
@@ -26,9 +23,5 @@ print(f"""Your payroll summary:
     Total deductions: ${round(totalDedux, 2)}
     Net pay is: ${round(netPay, 2)}""")
 
-<<<<<<< HEAD
+
 print("Thank you. Goodbye!")
-=======
-print("Thank you. Goodbye!")
->>>>>>> 5d872f1f9201a04ff2d6d9cfbbba359e20a975c6
->>>>>>> 2016e0fa201ea531748fd222a697c734fdaf5c44
