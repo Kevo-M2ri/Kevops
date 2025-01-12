@@ -1,0 +1,139 @@
+DECLARE a void FUNCTION w()
+DECLARE a void FUNCTION displayMenu()
+DECLARE a void FUNCTION readOption(int &option)
+DECLARE a void FUNCTION readInt(string prompt, int &num)
+DECLARE a void FUNCTION readDouble(string prompt, double &num)
+DECLARE a void FUNCTION placeOrder(double &cost)
+DECLARE a void FUNCTION tipDiscount(double &tip, double &discount, double cost)
+DECLARE a void FUNCTION goodbye()
+
+FUNCTION integer main()
+    DECLARE an integr choice
+    DECLARE a double cost
+    DECLARE a double tip
+    DECLARE a double discount
+    DECLARE a double allTotal
+
+    CALL welcome()
+
+    DO
+        CALL displayMenu()
+        CALL readOption(choice)
+
+        IF (choice == 1)
+            CALL placeOrder(cost)
+
+            SET output precision to 2 decimal places
+            DISPLAY "Your total is: $" cost
+
+            SET allTotal = tipDiscount(tip, discount, cost)
+
+            DISPLAY "Your total is: $" cost + tip
+            IF (discount > 0)
+                DISPLAY "You get a discount of: $" discount
+            END IF
+            DISPLAY "Your calculated total cost is: $" allTotal
+        END IF
+    WHILE (choice != 2)
+
+    RETURN 0
+END FUNCTION
+
+FUNCTION void welcome()
+    DISPLAY "Hello!! Welcome to the Food Cart."
+END FUNCTION
+
+FUNCTION void displayMenu()
+    DISPLAY "What would you like for today?"
+    DISPLAY "Choose from the options below:"
+    DISPLAY "1.   Place an order"
+    DISPLAY "2.   Quit"
+END FUNCTION
+
+FUNCTION void readInt(string prompt, int &num)
+    DEFINE a boolean validInts = false
+
+    WHILE (!validInts)
+        DISPLAY prompt
+        INPUT num
+
+        IF (CALL cin.fail() || num <= 0)
+            CALL cin.clear()
+            CALL cin.ignore(numeric_limits<streamsize>::max(), '\n')
+            DISPLAY "Invalid option! Please enter a positive number."
+        ELSE
+            validInts = true
+        END IF
+    END WHILE
+END FUNCTION
+
+FUNCTION void readOption(int &option)
+    DO
+        CALL readInt("Please choose 1 (to Place an order) or 2 (to Quit): ", option)
+        IF (option != 1 AND option != 2)
+            DISPLAY "Invalid Option! Please choose 1 or 2!"
+        END IF
+    WHILE (option != 1 AND option != 2)
+END FUNCTION
+
+FUNCTION void readDouble(string prompt, double &num)
+    DEFINE bool validDouble = false
+    WHILE (!validDOuble)
+        DISPLAY prompt
+        INPUT num
+
+        IF (CALL cin.fail() || num < 0)
+            CALL cin.clear()
+            CALL cin.ignore(numeric_limits<streamsize>::max(), '\n')
+            DISPLAY ""Error on Input. Invalid number entered. Please enter a non negative number."
+        ELSE
+            validDouble = true
+        END IF
+    END WHILE
+END FUNCTION
+
+FUNCTION void placeOrder(double &cost)
+    DECLARE cost as a double
+    DECLARE orderName as a string
+    DECLARE a double itemCost
+    DEFINE a char anotherOrder = 'y'
+
+    WHILE (anotherOrder == 'y' OR anotherOrder = 'Y')
+        DISPLAY "Enter the name of the item you'd like: "
+        CALL cin.ignore()
+        CALL getline(cin , orderName)
+
+        CALL readDouble("Enter the costv of your choice item: $", itemCost)
+        SET cost += itemCost
+
+        SET anotherOrder = ' '
+        WHILE (anotherOrder !='y' AND anotherOrder != 'n' AND anotherOrder != 'Y' AND anotherOrder != 'N')
+            DISPLAY "Do you want another item? (y/n): "
+            INPUT anotherOrder
+
+            IF (anotherOrder != 'y' AND anotherOrder != 'n' AND anotherOrder = 'Y' AND anotherOrder = 'N')
+                DISPLAY "Invalid option. Please choose y/n"
+            END IF
+        END WHILE
+    END WHILE
+END FUNCTION
+
+FUNCTION double tipDiscount(double &tip, double &discount, double cost)
+    double totalWithTip = cost + tip
+    CALL readDouble("Enter the amount of tip you want to add: $", tip)
+    SET totalWithTip = cost + tip
+
+    IF (totalWithTip >= 50)
+        SET discount = totalWithTip * 0.10
+    ELSE IF (totalWithTip >= 35)
+        SET discount  = totalWithTip * 0.05
+    ELSE
+        discount = 0.0
+    END IF
+
+    RETURN totalWithTip -= discount
+END FUNCTION
+
+FUNCTION void goodbye()
+    DISPLAY "Thank you for using our program. Goodbye!"
+END FUNCTION
