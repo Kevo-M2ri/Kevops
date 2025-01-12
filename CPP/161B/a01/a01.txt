@@ -1,4 +1,4 @@
-DECLARE a void FUNCTION w()
+DECLARE a void FUNCTION welcome()
 DECLARE a void FUNCTION displayMenu()
 DECLARE a void FUNCTION readOption(int &option)
 DECLARE a void FUNCTION readInt(string prompt, int &num)
@@ -35,6 +35,8 @@ FUNCTION integer main()
             DISPLAY "Your calculated total cost is: $" allTotal
         END IF
     WHILE (choice != 2)
+
+    CALL goodbye()
 
     RETURN 0
 END FUNCTION
@@ -119,7 +121,7 @@ FUNCTION void placeOrder(double &cost)
 END FUNCTION
 
 FUNCTION double tipDiscount(double &tip, double &discount, double cost)
-    double totalWithTip = cost + tip
+    double totalWithTip
     CALL readDouble("Enter the amount of tip you want to add: $", tip)
     SET totalWithTip = cost + tip
 
@@ -128,7 +130,7 @@ FUNCTION double tipDiscount(double &tip, double &discount, double cost)
     ELSE IF (totalWithTip >= 35)
         SET discount  = totalWithTip * 0.05
     ELSE
-        discount = 0.0
+        SET discount = 0.0
     END IF
 
     RETURN totalWithTip -= discount

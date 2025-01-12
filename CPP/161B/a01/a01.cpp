@@ -6,10 +6,10 @@
                 to pick a choice, then asks them some questions, giving them
                 results whilst checking the validity of their responses. It
                 then calculates the amount they will pay including tips and the
-                disount they are to receive if the meet the discount criteria.
+                discount they are to receive if they meet the discount criteria.
    Inputs:      option as an integer, cost and tip as doubles, anotherOrder as
                 a character
-   Outputs:     alltotal and discount as doubles
+   Outputs:     allTotal and discount as doubles
    -----------------------------------------------------------------------**/
 
 #include <iostream>
@@ -69,6 +69,8 @@ int main() {
         }
     } while (option != 2); //condition for termination
 
+    goodbye();
+
     return 0;
 }
 // end main
@@ -81,7 +83,7 @@ void welcome() {
 
 //menu display function
 void displayMenu() {
-    cout << "What would you like for today?" << endl;
+    cout << "\nWhat would you like for today?" << endl;
     cout << "Choose from the options below:" << endl;
     cout << setw(5) << left << "1.";
     cout << "Place an order" << endl;
@@ -186,5 +188,5 @@ double tipDiscount(double &tip, double &discount, double cost) {
 
 //goodbye function
 void goodbye() {
-    cout << "Thank you for using our program. Goodbye!" << endl;
+    cout << "\nThank you for using our program. Goodbye!" << endl;
 }
