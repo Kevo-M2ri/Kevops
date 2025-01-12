@@ -180,7 +180,7 @@ double tipDiscount(double &tip, double &discount, double cost) {
         discount = 0.0;
     }
 
-    return totalWithTip -= discount;
+    return totalWithTip -= discount; //return message
 }
 
 
