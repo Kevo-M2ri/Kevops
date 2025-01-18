@@ -1,0 +1,98 @@
+DECLARE a void FUNCTION welcome()
+DECLARE a void FUNCTION displayMenu()
+DECLARE a void FUNCTION readOption(int &option)
+DECLARE a void FUNCTION encode(char encodeFileName)
+DECLARE a void FUNCTION readInput(char fName[], char lName[], bool &lateFlag)
+DECLARE a void FUNCTION readInput(char parseID[], char fileName[])
+DECLARE a void FUNCTION readTime(char strTime[])
+DECLARE a void FUNCTION goodbye()
+
+FUNCTION integer main()
+    RETURN 0
+END FUNCTION
+
+FUNCTION void welcome()
+    DISPLAY "Welcome to the encoder..."
+END FUNCTION
+
+FUNCTION void displayMenu()
+    DISPLAY "You can choose to encode or quit."
+    DISPLAY "Choose one fo the choices to continue: "
+    DISPLAY (E)ncode a file name
+    DISPLAY (Q)uit
+
+END FUNCTION
+
+FUNCTION void readOption(char &option)
+    INPUT option
+    IF (option != 'e' || option != 'q' || option != 'E' || option != 'Q') THEN
+        DISPLAY "Invalid option!! Please choose y or n!!"
+        INPUT option
+    END IF
+END FUNCTION
+
+FUNCTION void encode(char encodeFile)
+END FUNCTION
+
+FUNCTION void readInput(char fName[], char lName[], bool &lateFlag)
+    DECLARE a character late
+    DEFINE a boolean valid = false
+    
+    DISPLAY "Enter your first name: "
+    INPUT fName
+    DISPLAY "Enter your last name: "
+    INPUT lName
+
+    WHILE (!valid)
+        DISPLAY "Was your assignment late (y/n)? "
+        INPUT late
+        IF (late == 'y' || late == 'Y') THEN
+            lateFlag = true
+            valid = true
+        ELSE IF (late = 'n' || late == 'N') THEN
+            lateFlag = false
+            valid = true
+        ELSE
+            DISPLAY "Invalid input! Please enter 'y' or 'n'"
+        END IF
+    END WHILE
+END FUNCTION
+
+FUNCTION void readInput(char parsedID[], char fileName[])
+    DECLARE a character array studentID[15]
+    DISPLAY "Enter your student-ID (format 123-45-6789): "
+    INPUT studentID
+
+    strncpy(parsedID, studentID + 7, 4)
+    SET parsedID[4] = '\0'
+
+    DISPLAY "Enter the file name: "
+    INPUT fileName
+END FUNCTION
+
+FUNCTION void readTime(char strTime[])
+    DECLARE an integer hour
+    DECLARE an integer minute
+    DECLARE a character colon
+    DEFINE a boolean valid = false
+
+    WHILE (!valid)
+        DISPLAY "Enter the timne of submission(miltary time i.e. 13:00 for 1:00pm): "
+        INPUT hour
+        INPUT colon
+        INPUT minute
+
+        IF (cin.fail() || colon != ':' || hour < 0 || hour >= 24 || minute < 0 || minute >= 60) THEN
+            cin.clear()
+            cin.ignore(numeric_limits<streamsize>::max(), '\n')
+            DISPLAY "Invalid time format! Please enter time as HH:MM. Ensure valid values."
+        ELSE
+            SET valid = true
+        END IF
+    END WHILE
+
+    sprintf(strTime, "%02d%02d", hour, minute)
+END FUNCTION
+
+FUNCTION void goodbye()
+END FUNCTION
