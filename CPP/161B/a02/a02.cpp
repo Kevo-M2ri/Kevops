@@ -76,18 +76,18 @@ void encode(char encodeFileName[]){
     readTime(strTime);
 
     strcpy(encodeFileName, lName);
-    strcat(encodeFileName, to_string('_'))
+    strcat(encodeFileName, "_");
     strcat(encodeFileName, fName);
-    encodeFileName[strlen(encodeFileName)] = '_';
+    strcat(encodeFileName, "_");
 
     if (lateFlag) {
         strcat(encodeFileName, "LATE_");
     }
 
     strcat(encodeFileName, parseID);
-    encodeFileName[strlen(encodeFileName)] = '_';
+    strcat(encodeFileName, "_");
     strcat(encodeFileName, strTime);
-    encodeFileName[strlen(encodeFileName)] = '_';
+    strcat(encodeFileName, "_");
     strcat(encodeFileName, fileName);  
 }
 
