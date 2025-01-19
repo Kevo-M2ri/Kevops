@@ -74,7 +74,6 @@ void readInput(char fName[], char lName[], bool &lateFlag) {
     cout << "What is your last name? " << endl;
     cin >> lName;
     toLower(lName);
-    
 
 }
 void readInput(char parseID[], char fileName[]) {
@@ -86,7 +85,6 @@ void readTime(char strTime[]) {
 }
 void toLower(char myName[]) {
     int i;
-
     for (i = 0; myName[i] != '\0'; i++) {
         myName[i] = tolower(myName[i]);
     }
