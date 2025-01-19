@@ -10,8 +10,8 @@
                 of submission.
    Inputs:      option, response, and colon as characters, fName, lName, stdID,
                 parseID, and fileName as character arrays, lateFlag as a 
-                boolean, hrs and mins as integers
-   Outputs:     encoded file name as a character array
+                boolean, hrs and mins as integers.
+   Outputs:     encoded file name as a character array.
    -------------------------------------------------------------------------**/
 #include <iostream>
 #include <cstring>
