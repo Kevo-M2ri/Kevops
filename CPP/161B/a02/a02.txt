@@ -1,13 +1,33 @@
 DECLARE a void FUNCTION welcome()
 DECLARE a void FUNCTION displayMenu()
-DECLARE a void FUNCTION readOption(int &option)
+DECLARE a void FUNCTION readOption(char &option)
 DECLARE a void FUNCTION encode(char encodeFileName)
 DECLARE a void FUNCTION readInput(char fName[], char lName[], bool &lateFlag)
 DECLARE a void FUNCTION readInput(char parseID[], char fileName[])
 DECLARE a void FUNCTION readTime(char strTime[])
+DECLARE a void FUNCTION funcToLower(char myName[])
 DECLARE a void FUNCTION goodbye()
 
+DEFINE a constant integer MAXCHAR = 20
+
 FUNCTION integer main()
+    DECLARE a character choice
+    DECLARE a character[] encodedName[MAXCHAR * 5]
+
+    CALL welcome()
+
+    DO
+        CALL displayMenu()
+        CALL readOption()
+
+        IF (tolower(choice) == 'e') THEN
+            CALL encode(encodedName)
+            DISPLAY "Encoded file name: " encodedName
+        END IF
+    WHILE (tolower(choice != 'q'))
+
+    CALL goodbye()
+
     RETURN 0
 END FUNCTION
 
@@ -17,82 +37,119 @@ END FUNCTION
 
 FUNCTION void displayMenu()
     DISPLAY "You can choose to encode or quit."
-    DISPLAY "Choose one fo the choices to continue: "
     DISPLAY (E)ncode a file name
     DISPLAY (Q)uit
-
+    DISPLAY "Choose one fo the choices to continue: "
 END FUNCTION
 
 FUNCTION void readOption(char &option)
-    INPUT option
-    IF (option != 'e' || option != 'q' || option != 'E' || option != 'Q') THEN
-        DISPLAY "Invalid option!! Please choose y or n!!"
+    DEFINE a boolean validEntry = false
+
+    WHILE (!validEntry)
+        DISPLAY ">>> "
         INPUT option
-    END IF
+        IF (tolower(option) != 'e' && tolower(option) != 'q') THEN
+            DISPLAY "Error!! Entry not recognized! Please try again"
+        ELSE
+            validEntry = true
+        END IF
+    END WHILE
 END FUNCTION
 
 FUNCTION void encode(char encodeFile)
+    DECLARE a character[] fName[MAXCHAR]
+    DECLARE a character[] lName[MAXCHAR]
+    DECLARE a boolean lateFlag
+    DECLARE a character[] parsedID[5]
+    DECLARE a character[] fileName[MAXCHAR]
+    DECLARE a character[] strTime[MAXCHAR]
+
+    CALL readInput(fName, lName, lateFlag)
+    CALL readInput(parsedID, fileName)
+    CALL readTime(strTime)
+
+    CALL COPY STRING fName to encodeFileName
+    CALL CONCATENATE STRING "_" to encodeFileName
+    CALL CONCATENATE STRING lName to encodeFileName
+    CALL CONCATENATE STRING "_" to encodeFileName
+
+    IF (lateFlag) THEN
+        CALL CONCATENATE STRING "LATE_" to encodeFileName
+    END IF
+
+    CALL CONCATENATE STRING parsedID to encodeFileName
+    CALL CONCATENATE STRING "_" to encodeFileName
+    CALL CONCATENATE STRING strTime to encodeFileName
+    CALL CONCATENATE STRING "_" to encodeFileName
+    CALL CONCATENATE STRING fileName to encodeFileName
 END FUNCTION
 
 FUNCTION void readInput(char fName[], char lName[], bool &lateFlag)
-    DECLARE a character late
-    DEFINE a boolean valid = false
-    
-    DISPLAY "Enter your first name: "
-    INPUT fName
-    DISPLAY "Enter your last name: "
-    INPUT lName
+    DECLARE a character response
 
-    WHILE (!valid)
-        DISPLAY "Was your assignment late (y/n)? "
-        INPUT late
-        IF (late == 'y' || late == 'Y') THEN
-            lateFlag = true
-            valid = true
-        ELSE IF (late = 'n' || late == 'N') THEN
-            lateFlag = false
-            valid = true
-        ELSE
-            DISPLAY "Invalid input! Please enter 'y' or 'n'"
-        END IF
+    DISPLAY "What is your first name? "
+    INPUT fName
+    CALL funcToLower(fName)
+
+    DISPLAY "What is your last name? "
+    INPUT lName
+    funcToLower(lName)
+
+    DISPLAY "Was your assignement late (y/n)? "
+    INPUT response
+    WHILE (CALL tolower(response) != 'y' AND CALL tolower(response) != 'n')
+        DISPLAY "Invalid input. Please enter 'y' or 'n': "
+        INPUT response
     END WHILE
+
+    SET lateFlag = CALL tolower(response) == 'y'
 END FUNCTION
 
 FUNCTION void readInput(char parsedID[], char fileName[])
-    DECLARE a character array studentID[15]
-    DISPLAY "Enter your student-ID (format 123-45-6789): "
-    INPUT studentID
+    DECLARE a character[] stdID[MAXCHAR]
+    DISPLAY "Enter your student ID (xxx-xx-xxxx): "
+    INPUT stdID
 
-    strncpy(parsedID, studentID + 7, 4)
+    WHILE (LENGTH(stdID) != 11 OR stdID[3] != '_' OR stdID[6] != '_')
+        DISPLAY "Invalid format! Enter student ID in the format xxx-xx-xxx: "
+        INPUT stdID
+    END WHILE
+
+    COPY STRING stdID 4 posts from index 7 to parsedID
     SET parsedID[4] = '\0'
-
-    DISPLAY "Enter the file name: "
-    INPUT fileName
+    DISPLAY "Input file name: "
+    cin.ignore(numeric_limits<streamsize>::max(), '\n')
+    INPUT fileName[MAXCHAR]
 END FUNCTION
 
 FUNCTION void readTime(char strTime[])
-    DECLARE an integer hour
-    DECLARE an integer minute
+    DECLARE an integer hrs
     DECLARE a character colon
-    DEFINE a boolean valid = false
+    DECLARE an integer mins
 
-    WHILE (!valid)
-        DISPLAY "Enter the timne of submission(miltary time i.e. 13:00 for 1:00pm): "
-        INPUT hour
-        INPUT colon
-        INPUT minute
+    DISPLAY "Enter the timne of submission(miltary time i.e. 13:00 for 1:00pm): "
+    INPUT hrs, colon, mins
 
-        IF (cin.fail() || colon != ':' || hour < 0 || hour >= 24 || minute < 0 || minute >= 60) THEN
-            cin.clear()
-            cin.ignore(numeric_limits<streamsize>::max(), '\n')
-            DISPLAY "Invalid time format! Please enter time as HH:MM. Ensure valid values."
-        ELSE
-            SET valid = true
-        END IF
+    WHILE (colon != ':' || hrs < 0 || hrs > 23 || mins < 0 || mins > 59)
+        DISPLAY "Invalid time format. Please enter time in HH:MM fornat: "
+        CALL cin.clear()
+        CALL cin.ignore(numeric_limits<streamsize>::max(), '\n')
+        INPUT hrs, colon, mins
     END WHILE
 
-    sprintf(strTime, "%02d%02d", hour, minute)
+    CALL sprintf(strTime, "%02d%02d", hrs, mins)
+
+    CALL COPY STRING hrs to strTime 10 characters
+    SET strTime[LENGTH(strTime)] = colon
+    CALL COPY STRING mins to strTime
+END FUNCTION
+
+FUNCTION void funcToLower(char myName[])
+    FOR (int i = 0; myName[i] != '\0'; i++)
+        myName[i] = tolower(myName[i])
+    END FOR
 END FUNCTION
 
 FUNCTION void goodbye()
+    DISPLAY "Password Created successfully. Goodbye!"
 END FUNCTION
