@@ -1,41 +1,48 @@
+DECLARE a FUNCTION void welcome()
 DECLARE a FUNCTION void getInput(char name[], char number[], char &symbol)
-DECLARE a FUNCTION void passcode(const char name[], const char number[], const char symbol, char &password[])
+DECLARE a FUNCTION void passcode(char &password[])
+DECLARE a FUNCTION void goodbye()
+DECLARE a FUNCTION void isCharArrayAlpha(char cstring[])
+DECLARE a FUNCTION void isCharArrayDig(char cstring[])
+
+DECLARE a constant integer MAXCHAR = 20;
+DECLARE a constant integer MAXNUMS = 5
 
 FUNCTION int main() {
-    DECLARE a variable char passName
-    DECLARE a variable char passNum
-    DECLARE a variable passSymbol
+    DECLARE a variable char password[27]
 
+    CALL welcome()
     CALL passcode()
+    CALL goodbye()
 
     RETURN 0
 }
-FUNCTION void getInput(char name[], char number[], char &symbol)
-    DEFINE a boolean validity = false
 
-    WHILE (!validity)
-        DISPLAY "Input a name you can easily remember: "
-        INPUT name[]
-        IF (!isalpha(name[])) THEN
-            DISPLAY "Error!! Expected alphabets only! Try again."
-        ELSE
-            DISPLAY "Enter a four digit number: "
-            INPUT number[]
-            IF (cin.fail() OR strlen(number) != 4) THEN
-                cin.clear()
-                cin.ignore(numeric_limits<streamsize::max(), '\n')
-                DISPLAY "Error! Uknown numbers! Try again."
-            ELSE
-                DISPLAY "Enter a keyboard accessible symbol: "
-                INPUT symbol
-                IF (cin.fail())
-                    cin.clear()
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n')
-                    DISPLAY "Error!! You have not entered a symbol. Please try again."
-                ELSE
-                    SET validity = true
-                END IF
-            END IF
-        END IF
+FUNCTION void welcome()
+    DISPLAY "Hello! Follow prompts to create your password!"
+END FUNCTION
+
+FUNCTION void getInput(char name[], char number[], char &symbol)
+    DISPLAY "Input a name you can easily remember: "
+    cin.clear()
+    INPUT name
+
+    WHILE (!isCharArrayAlpha(name))
+        DISPLAY "Error!! Not a name! Try again."
+        INPUT name
     END WHILE
+
+    DISPLAY "Enter a four digit number: "
+    cin.clear()
+    WHILE (!isCharArrayDig(number))
+        "Error!! Expected numbers! Please try again later."
+        INPUT number
+    END WHILE
+
+    DISPLAY "Enter a symbol on your keyboard: "
+    INPUT symbol
+
+    WHILE (cin.fail() || !ispunct(symbol))
+
+
 END FUNCTION
