@@ -4,7 +4,7 @@ using namespace std;
 
 void welcome();
 void readInput(int array[], int numVals, int &pos);
-void checkArray(int Array[]);
+bool checkArray(int Array[]);
 
 const int MAXINPUT = 20;
 
@@ -45,9 +45,10 @@ void readInput(int array[], int numVals, int &pos) {
     } 
 }
 
-void checkArray(int array[]) {
+bool checkArray(int array[]) {
     int numVals;
     int pos;
+    bool isChecking;
     readInput(array, numVals, pos);
 
     for (pos = 0; pos < numVals; pos++) {

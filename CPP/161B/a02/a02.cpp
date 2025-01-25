@@ -175,6 +175,7 @@ void readTime(char strTime[]) {
         cin >> hrs >> colon >> mins;
     } //time format check
 
+    //Fixme
     snprintf(strTime, MAXCHAR, "%02d%02d", hrs, mins); // Format time as HHMM
 
     strncpy(strTime, to_string(hrs).c_str(), 10); // convert hours into string then c_string and assign to strTime
