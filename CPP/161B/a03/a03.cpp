@@ -21,77 +21,79 @@ void readDouble(string prompt, double &num);
 void calcGrade(double scores[], char grade[], int count);
 void printList(double scores[], char grade[], int count);
 void sort(double scores[], char grade[], int count);
-double median(double socres[], int count);
+double median(double scores[], int count);
 void goodbye();
 
-const int MAXINPUT = 3;
-const int MAXCHAR = 5;
+const int MAXINPUT = 20; // constant definition
 
+//function main
 int main() {
+    //variables declaration
     double scores[MAXINPUT];
-    char grade[MAXCHAR];
+    char grade[MAXINPUT];
     int count;
 
-    welcome();
-    readScores(scores, count);
-    printList(scores, grade, count);
+    welcome(); //welcome message call
+    readScores(scores, count); //function to read user inputs call
+    calcGrade(scores, grade, count); //function to calculate grades call
+    printList(scores, grade, count); //function to output scores and calculated grades
+    goodbye(); //goodbye message call
 
     return 0;
 }
 
+// function welcome()
 void welcome() {
-    cout << "Welcome to the grade calculator." << endl;
+    cout << "Welcome to my parallel arrays program." << endl;
+    cout << "Enter your scores here (Enter -1 to exit): " << endl;
+    cout << "\n(Scores must be between 0 and 4 inclusive)!!" << endl;
 }
 
+// function readScores()
 void readScores(double scores[], int &count) {
-    double nums = 0;
-    bool readNext = false;
+    // variables declarations
+    double num = 0;
     count = 0;
+    bool readNext = true;
 
-    do {
-        readDouble("Enter your scores here: (-1 to exit): ", nums);
+    while (count < MAXINPUT) {
+        readDouble(">>>   ", num);
 
-        if (nums == -1) {
-            readNext = false; //exit if -1 is entered
+        if (num == -1) {
+            break; //exit if -1 is entered
         }
-        else if (nums >= 0.0 && nums <= 4.0) {
-            if (count < MAXINPUT) {
-                scores[count] = nums;
-                count ++;
-                readNext = true;
-            }
-            else {
-                cout << "Cannot exceeed maximum number of scores!" << endl;
-                readNext = false; //don't read if array is full
-            }
-        }
+        else if (num >= 0 && num <= 4) {
+            scores[count] = num;
+            count ++;
+        }// enter values between 0 and 4 inclusive
         else {
-            cout << "Error!!! Score must be between 0 and 4!. Please try again." << endl;
-            readNext = true;
-        }
-    } while(readNext);
-}
+            cout << "Error!!! Score must be between 0 and 4! Please try again." << endl;
+        } // error message if scores are not within range
+    }
+} //do not exceed Maximum number of inputs
 
+// readDouble function
 void readDouble(string prompt, double &num) {
-    bool validDouble = false;
+    bool validDouble = false; //boolean for validity of data inputted check
 
     while (!validDouble) {
         cout << prompt;
         cin >> num;
 
-        if (cin.fail() || num < 0.0){
+        if (cin.fail() || num < -1){
             cin.clear(); //clear the error state
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); //skip unwanted input
-            cout << "Error!! Unrecognized scores!! Please input valid scores!" << endl;
-        }
+            cout << "Error!! Unrecognized scores!! Please input valid scores!" << endl; //output error message
+        } //condition if input is invalid
         else {
             validDouble = true; //valid input
-        }
+        } //input is valid
     }
 }
 
+//calculate grade function
 void calcGrade(double scores[], char grade[], int count) {
-    for (int i = 0; i <= count; i++){
+    for (int i = 0; i < count; i++){
         if (scores[i] > 3.3) {
             grade[i] = 'A';
         }
@@ -107,38 +109,58 @@ void calcGrade(double scores[], char grade[], int count) {
         else{
             grade[i] ='F';
         }
-    }
+    }//repetitive check for conditions to assign grades to a score ata given position
 }
+
+//print of outputs function
 void printList(double scores[], char grade[], int count){
-    cout << setw(10) << left << "Your score";
-    cout << setw(5) << right << "Your Grade" << endl;
-    cout << "---------------------------------------" << endl;
-
+    cout << fixed << setprecision(1); //number of decimal places to be output
+    cout << "The list of scores and corresponding grades:" << endl;
+    cout << setw(10) << left << "Your score" << setw(20) << right << "Your Grade" << endl; //improving readability through spacing 
+    cout << setw(10) << left << "-----------" << setw(19) << right << "-----------" << endl;
     for(int i = 0; i < count; i++) {
-        cout << setw(10) << left << scores[i];
-        cout << setw(5) << right << grade[i];
-    }
+        cout << setw(10) << left << scores[i] << setw(15) << right << grade[i] << endl; //
+    } //looping to output all items in the array
+
+    cout << "\nThe sorted list is: " << endl;
+    sort(scores, grade, count); // sort function call
+    cout << "The list of scores and corresponding grades:" << endl;
+    cout << setw(10) << left << "Your score" << setw(20) << right << "Your Grade" << endl;
+    cout << setw(10) << left << "-----------" << setw(19) << right << "-----------" << endl;
+    for (int i = 0; i < count; i++) {
+        cout << setw(10) << left << scores[i] << setw(15) << right << grade[i] << endl;
+    }//loping to output the sorted array
+
+    cout << "\nThe median is: " << median(scores, count) << endl; //median function call and median output
 }
 
+//sorting array elements functions
 void sort(double scores[], char grade[], int count) {
-    int i;
-    int j;
-    double min;
-    for (i = 0; i < count; i ++) {
-        cout << "List: " << scores[i] << endl;
-        cout << "Count: " << endl; //Fixme size of array
-
-        min = scores[0];
-        for (j = i + 1; j< count; j++) {
-            if(scores[j] < min) {
-                min = scores[j];
-            }
-        }
-        if (min != scores[i]) {
-            swap(min, scores[i]);
-        }
-    }
+    for (int i = 0; i < count - 1; i++) {
+        int minIndex = i; //initialize minIndex as i
+        for (int j = i + 1; j < count; j++) {
+            if(scores[j] < scores[minIndex]) {
+                minIndex = j;
+            } 
+        } //minIndex is set to index with minimum array
+        if (minIndex != i) {
+            swap(scores[i], scores[minIndex]);
+            swap(grade[i], grade[minIndex]);
+        } //sorting arrays scores[] and grade[]
+    } // array is sorted in ascending order
 }
 
-double median(double socres[], int count);
-void goodbye();
+//median find function
+double median(double scores[], int count) {
+    if (count % 2 == 0) {
+        return (scores[(count / 2) - 1] + scores[count / 2]) / 2.0;
+    } // median if number of items in scores[] is even
+    else {
+        return scores[count / 2];
+    } //median if number of items in scores[] is odd
+}
+
+//goodbye function
+void goodbye() {
+    cout << "\nThank you for using my parallel array program. Goodbye!" << endl;
+}

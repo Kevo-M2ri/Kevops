@@ -1,0 +1,131 @@
+DECLARE FUNCTION void welcome()
+DECLARE FUNCTION void readScores(double[] scores, integer &count)
+DECLARE FUNCTION void readDouble(string prompt, double &num)
+DECLARE FUNCTION void calcGrade(double[] scores, character[] grade, integr count)
+DECLARE FUNCTION void printList(double[] scores, character[] grade, integer count)
+DECLARE FUNCTION void sort(double[] scores, character[] grade, integer count)
+DECLARE FUNCTION double median(double[] scores, integer count)
+DECLARE FUNCTION void goodbye()
+
+DEFINE constant integer MAXINPUT = 20
+
+FUNCTION integer main()
+    DECLARE double[MAXINPUT] scores
+    DECLARE character[MAXINPUT] grade
+    DECLARE integer count
+
+    CALL welcome()
+    CALL readScores(scores, count)
+    CALL calcGrade(scores, grade, count)
+    CALL printList(scores, grade, count)
+    CALL goodbye()
+
+    RETURN 0
+END FUNCTION main
+
+FUNCTION void welcome()
+    DISPLAY "Welcome to my parallel arrays program."
+    DISPLAY "Enter your scores here (Enter -1 to exit): "
+
+    DISPLAY "(Scores must be between 0 and 4 inclusive)!!"
+END FUNCTION welcome
+
+FUNCTION void readSores(double[] scores, integer &count)
+    DECLARE and SET num = 0
+    SET count = 0
+    DECLARE and SET readNext = true
+
+    WHILE (count < MAXINPUT)
+        CALL readDouble(">>>   >", num)
+
+        IF (NUM == -1) THEN
+            BREAK
+        ELSE IF ( num >= 0 AND num <= 4)
+            SET scores[count] = num
+            SET count++
+        ELSE
+            DISPLAY "Error!!! Score must be between 0 and 4! Please try again."
+        END IF
+    END WHILE
+END FUNCTION readScores
+
+FUNCTION readDouble(string prompt, double &num)
+    DECLARE and SET boolean validDouble = false
+
+    WHILE (!validDouble)
+        DISPLAY prompt
+        INPUT num
+
+        IF (CALL cin.fail() OR num < -1) THEN
+            CALL cin.clear()
+            CALL cin.ignore(numeric_limits<streamsize>max(), '\n)
+            DISPLAY "Error!! Unrecognized scores!! Please input valid scores!"
+        ELSE
+            validDouble = true
+        END IF
+    END WHILE
+END FUNCTION readDouble
+
+FUNCTION void calcGrade(double[] scores, character[] grade, integer count)
+    FOR (integer i = 0; i < count; i++)
+        IF (scores[i] > 3.3) THEN
+            SET grade = 'A'
+        ELSE IF (scores[i] > 2.7 AND scores[i] <= 3.3) THEN
+            SET grade = 'B'
+        ELSE IF (scores[i] > 1.9 AND scores[i] <= 2.7) THEN
+            SET grade = 'C'
+        ELSE IF (scores[i] > 1.1 AND scores[i] <= 1.9) THEN
+            SET grade = 'D'
+        ELSE
+            SET grade = 'F'
+        END IF
+    END FOR
+END FUNCTION calcGrade
+
+FUNCTION void printList(double[] scores, character[] grade, integer count)
+    SET output to 1 decimal place for all scores
+    DISPLAY "The list if scores and corresponding grades:"
+    DISPLAY "Your score"       "Your Grade"
+    DISPLAY "----------"       "----------"
+    FOR (integer i = 0; i < count; i++)
+        DISPLAY scores[i]        grade[i]
+    END FOR
+
+    DISPLAY "The sorted list is: "
+    CALL sort(scores, grade, count)
+    DISPLAY "The list od scores and corresponding grades:"
+    DISPLAY "Your score"       "Your Grade"
+    DISPLAY "----------"       "----------"
+    FOR (integer i = 0; i < count; i++)
+        DISPLAY scores[i]        grade[i]
+    END FOR
+
+    DISPLAY "The median is: " median(scores, count)
+END FUNCTION printList
+
+FUNCTION void sort(double[] scores, character[] grade, integer count)
+    FOR (integer i = 0; i < count - 1; i++)
+        DECLARE integer minIndex = i
+        FOR (integer j = i + 1; j < count; j++)
+            IF (scores[j] < scores[minIndex]) THEN
+                minIndex = j
+            END IF
+        END FOR
+        IF (minIndex != i) THEN
+            CALL swap(scores[i] , scores[minIndex])
+            CALL swap(grade[i], grade[minIndex])
+        END IF
+    END FOR
+END FUNCTION sort
+
+FUNCTION double median(double[] scores, integer count)
+    IF (count % 2 == 0) THEN
+        RETURN (scores[(count / 2) - 1] + scores[count / 2]) / 2.0
+    ELSE
+        RETURN scores[count / 2]
+    END IF
+END FUNCTION median
+
+FUNCTION void goodbye()
+    DISPLAY "Thank you for using my parallel array program. Goodbye!"
+END FUNCTION goodbye
