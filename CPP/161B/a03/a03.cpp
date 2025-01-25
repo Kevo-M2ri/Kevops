@@ -11,6 +11,7 @@
 #include <limits>
 #include <string>
 #include <iomanip>
+#include <utility>
 using namespace std;
 
 // prototypes declaration
@@ -118,20 +119,26 @@ void printList(double scores[], char grade[], int count){
         cout << setw(5) << right << grade[i];
     }
 }
+
 void sort(double scores[], char grade[], int count) {
     int i;
     int j;
+    double min;
     for (i = 0; i < count; i ++) {
         cout << "List: " << scores[i] << endl;
         cout << "Count: " << endl; //Fixme size of array
 
-    double min = scores[0];
-    for (j = i + 1; i < count; i++) {
-        if(scores[j] < min) {
-            min = scores[j];
+        min = scores[0];
+        for (j = i + 1; j< count; j++) {
+            if(scores[j] < min) {
+                min = scores[j];
+            }
+        }
+        if (min != scores[i]) {
+            swap(min, scores[i]);
         }
     }
-    
 }
+
 double median(double socres[], int count);
 void goodbye();
