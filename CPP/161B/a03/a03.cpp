@@ -4,8 +4,9 @@
    Assignment:  CS-161B Assignment a03
    Description: This program stores a list of scores and the corresponding
                 letter grades in two parallel arrays
-   Inputs:      
-   Outputs:     
+   Inputs:      scores as a double array
+   Outputs:     scores and grades, unordered and sorted arrays, median as a
+                double
    -------------------------------------------------------------------------**/
 #include <iostream>
 #include <limits>
