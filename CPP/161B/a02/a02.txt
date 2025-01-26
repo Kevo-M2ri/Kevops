@@ -8,11 +8,11 @@ DECLARE a void FUNCTION readTime(char strTime[])
 DECLARE a void FUNCTION funcToLower(char myName[])
 DECLARE a void FUNCTION goodbye()
 
-DEFINE a constant integer MAXINPUT = 20
+DEFINE a constant integer MAXCHAR = 20
 
 FUNCTION integer main()
     DECLARE a character choice
-    DECLARE a character[] encodedName[MAXINPUT]
+    DECLARE a character[] encodedName[MAXCHAR]
 
     CALL welcome()
 
@@ -39,7 +39,7 @@ FUNCTION void displayMenu()
     DISPLAY "You can choose to encode or quit."
     DISPLAY (E)ncode a file name
     DISPLAY (Q)uit
-    DISPLAY "Choose one of the choices to continue: "
+    DISPLAY "Choose one fo the choices to continue: "
 END FUNCTION
 
 FUNCTION void readOption(char &option)
@@ -57,12 +57,12 @@ FUNCTION void readOption(char &option)
 END FUNCTION
 
 FUNCTION void encode(char encodeFile)
-    DECLARE a character[] fName[MAXINPUT]
-    DECLARE a character[] lName[MAXINPUT]
+    DECLARE a character[] fName[MAXCHAR]
+    DECLARE a character[] lName[MAXCHAR]
     DECLARE a boolean lateFlag
     DECLARE a character[] parsedID[5]
-    DECLARE a character[] fileName[MAXINPUT]
-    DECLARE a character[] strTime[MAXINPUT]
+    DECLARE a character[] fileName[MAXCHAR]
+    DECLARE a character[] strTime[MAXCHAR]
 
     CALL readInput(fName, lName, lateFlag)
     CALL readInput(parsedID, fileName)
@@ -106,7 +106,7 @@ FUNCTION void readInput(char fName[], char lName[], bool &lateFlag)
 END FUNCTION
 
 FUNCTION void readInput(char parsedID[], char fileName[])
-    DECLARE a character[] stdID[MAXINPUT]
+    DECLARE a character[] stdID[MAXCHAR]
     DISPLAY "Enter your student ID (xxx-xx-xxxx): "
     INPUT stdID
 
@@ -119,7 +119,7 @@ FUNCTION void readInput(char parsedID[], char fileName[])
     SET parsedID[4] = '\0'
     DISPLAY "Input file name: "
     cin.ignore(numeric_limits<streamsize>::max(), '\n')
-    INPUT fileName[MAXINPUT]
+    INPUT fileName[MAXCHAR]
 END FUNCTION
 
 FUNCTION void readTime(char strTime[])
@@ -127,11 +127,11 @@ FUNCTION void readTime(char strTime[])
     DECLARE a character colon
     DECLARE an integer mins
 
-    DISPLAY "Enter the time of submission(milItary time i.e. 13:00 for 1:00pm): "
+    DISPLAY "Enter the timne of submission(miltary time i.e. 13:00 for 1:00pm): "
     INPUT hrs, colon, mins
 
     WHILE (colon != ':' || hrs < 0 || hrs > 23 || mins < 0 || mins > 59)
-        DISPLAY "Invalid time format. Please enter time in HH:MM format: "
+        DISPLAY "Invalid time format. Please enter time in HH:MM fornat: "
         CALL cin.clear()
         CALL cin.ignore(numeric_limits<streamsize>::max(), '\n')
         INPUT hrs, colon, mins
