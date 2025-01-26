@@ -175,13 +175,10 @@ void readTime(char strTime[]) {
         cin >> hrs >> colon >> mins;
     } //time format check
 
-    stringstream ss;
-    ss << setfill('0') << setw(2) << hrs << setfill('0') << setw(2) << mins;
-    strcpy(strTime, ss.str().c_str()); // Format time as HHMM
-
-    strncpy(strTime, to_string(hrs).c_str(), 10); // convert hours into string then c_string and assign to strTime
-    strTime[strlen(strTime)] = colon; //add colon into string
-    strcat(strTime, to_string(mins).c_str()); // convert mminutes into string then c_string and assign to strTime
+    stringstream ss; //string stream declaration
+    ss << setfill('0') << setw(2) << hrs << setfill('0') << setw(2) << mins;// Format time as HHMM
+    
+    strcpy(strTime, ss.str().c_str()); //copy formatted time to strTime
 }
 
 //convert to lowercase function

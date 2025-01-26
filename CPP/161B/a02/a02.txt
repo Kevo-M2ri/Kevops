@@ -12,7 +12,7 @@ DEFINE a constant integer MAXCHAR = 20
 
 FUNCTION integer main()
     DECLARE a character choice
-    DECLARE a character[] encodedName[MAXCHAR * 5]
+    DECLARE a character[] encodedName[MAXCHAR]
 
     CALL welcome()
 
@@ -137,11 +137,10 @@ FUNCTION void readTime(char strTime[])
         INPUT hrs, colon, mins
     END WHILE
 
-    CALL sprintf(strTime, "%02d%02d", hrs, mins)
+    DECLARE stringstream ss
+    FORMAT output hrs and mins into stringstream ss
 
-    CALL COPY STRING hrs to strTime 10 characters
-    SET strTime[LENGTH(strTime)] = colon
-    CALL COPY STRING mins to strTime
+    CALL strcpy(strTime, ss.str().c_str())
 END FUNCTION
 
 FUNCTION void funcToLower(char myName[])
