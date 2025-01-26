@@ -3,7 +3,13 @@
    Date:        January 36, 2025
    Assignment:  CS-161B Assignment a03
    Description: This program stores a list of scores and the corresponding
-                letter grades in two parallel arrays
+                letter grades in two parallel arrays. It then sorts the scores
+                in ascending order and outputs the sorted list of scores and
+                grades. It also calculates the median of the scores and outputs
+                it. The program also includes error checking to ensure that the
+                scores entered are between 0 and 4 inclusive. The program
+                continues to prompt the user to enter scores until the user
+                enters -1 to exit.
    Inputs:      scores as a double array
    Outputs:     scores and grades, unordered and sorted arrays, median as a
                 double
