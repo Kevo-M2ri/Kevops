@@ -37,7 +37,7 @@ const int MAXCHAR = 20;
 // main function
 int main() {
     char choice;
-    char encodedName[MAXCHAR * 5];
+    char encodedName[MAXCHAR];
 
     welcome();
 
@@ -50,7 +50,7 @@ int main() {
             cout << "\nEncoded file name: " << encodedName << endl;
         }
     
-    } while (tolower(choice != 'q')); //quit clause
+    } while (tolower(choice) != 'q'); //quit clause
 
     goodbye();
 
@@ -175,8 +175,9 @@ void readTime(char strTime[]) {
         cin >> hrs >> colon >> mins;
     } //time format check
 
-    //Fixme
-    snprintf(strTime, MAXCHAR, "%02d%02d", hrs, mins); // Format time as HHMM
+    stringstream ss;
+    ss << setfill('0') << setw(2) << hrs << setfill('0') << setw(2) << mins;
+    strcpy(strTime, ss.str().c_str()); // Format time as HHMM
 
     strncpy(strTime, to_string(hrs).c_str(), 10); // convert hours into string then c_string and assign to strTime
     strTime[strlen(strTime)] = colon; //add colon into string
