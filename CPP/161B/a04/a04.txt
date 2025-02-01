@@ -1,0 +1,36 @@
+DECLARE a FUNCTION void welcome()
+DECLARE a FUNCTION void readInput(character[][MAXCHAR] courseNums, integer[] students, integer &count)
+DECLARE a FUNCTION void readInt(string prompt, integer &num)
+DECLARE a FUNCTION void printList(character[][MAXCHAR] courseNums, integer[] students, integer &count)
+DECLARE a FUNCTION void cancelCourses(character[][MAXCHAR] courseNums, integer[] students, integer &count)
+DECLARE a FUNCTION void goodbye()
+
+DEFINE a constant integer MAXCHAR = 25
+DEFINE a constant integer MAXINT = 20
+
+FUNCTION integer main()
+    RETURN O
+END FUNCTION main
+
+FUNCTION void welcome()
+    DISPLAY "Welcome to my double parallel array"
+END FUNCTION
+
+FUNCTION void readInput(character[][MAXCHAR] courseNums, integer[] students, integer &count)
+
+END FUNCTION
+
+FUNCTION void readInput(string prompt, integer &num)
+    DEFINE boolean validIntegers = false
+
+    WHILE (!validIntegers)
+        DISPLAY prompt
+        INPUT num
+         IF (CALL cin.fail() OR num < 0) THEN
+            CALL cin.clear()
+            CALL cin.ignore(numeric_limits<streamsize>::max(), '\n')
+            DISPLAY "Error!! Unsupported data entered. Please enter numbers greater than or equal to 0!"
+        END IF
+        SET validIntegers = true
+    END WHILE
+END FUNCTION
