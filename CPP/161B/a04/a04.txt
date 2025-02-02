@@ -1,3 +1,8 @@
+DEFINE a constant integer MINSTUDENTS = 10
+DEFINE a constant integer MAXSTUDENTS = 25
+DEFINE a constant integer MAXCOURSES = 20
+DEFINE a constant integer MAXCHAR = 51
+
 DECLARE a FUNCTION void welcome()
 DECLARE a FUNCTION void readInput(character[][MAXCHAR] courseNums, integer[] students, integer &count)
 DECLARE a FUNCTION void readInt(string prompt, integer &num)
@@ -5,19 +10,65 @@ DECLARE a FUNCTION void printList(character[][MAXCHAR] courseNums, integer[] stu
 DECLARE a FUNCTION void cancelCourses(character[][MAXCHAR] courseNums, integer[] students, integer &count)
 DECLARE a FUNCTION void goodbye()
 
-DEFINE a constant integer MAXCHAR = 25
-DEFINE a constant integer MAXINT = 20
-
 FUNCTION integer main()
+    DECLARE a character[MAXCOURSES][MAXCHAR] courseNums
+    DECLARE an integer[MAXCOURSES] students
+    DEFINE  an integer count = 0
+
+    CALL welcome()
+
+    CALL readInput(courseNums, students, count)
+
+    DISPLAY "Courses before cancelling"
+    DISPLAY "-----------------------------------------"
+    CALL printList(courseNums, students, count)
+
+    CALL cancelCourses(courseNums, students, count)
+
+    DISPLAY "Courses after cancelling some"
+    DISPLAY "-----------------------------------------"
+    CALL printList(courseNums, students, count)
+
     RETURN O
 END FUNCTION main
 
 FUNCTION void welcome()
-    DISPLAY "Welcome to my double parallel array"
+    DISPLAY "Welcome to my Course Enrollment and Cancellation program!!"
+    DISPLAY "You can only enter up to " MAXCOURSES " courses."
+    DISPLAY "Courses that have a student enrollment lower than " MINSTUDENTS " will be dropped!"
 END FUNCTION
 
 FUNCTION void readInput(character[][MAXCHAR] courseNums, integer[] students, integer &count)
+    DECLARE a string courseStr
+    DECLARE an integer studentCount
+    DEFINE an integer pos = 0
+    SET count = 0
 
+    WHILE (count < MAXCOURSES)
+        DISPLAY "Enter course number (or 'quit' to end): "
+        INPUT courseStr
+
+        FOR (character c : courseStr) SET c = CALL tolower(c)
+        
+        IF (courseStr == "quit" OR courseStr = "Quit" OR courseStr = "QUIT") THEN
+            RETURN
+        END IF
+
+        CALL readInt("Enter the number of students(0 - 25): ", studentCount)
+
+        WHILE (pos < count AND CALL strcmp(courseNums[pos], courseStr.c_str()) < 0)
+            SET pos++
+        END WHILE
+
+        FOR (int i = count; i > pos; i--)
+            CALL strcpy(courseNums[i], courseNums[i - 1])
+            SET students[i] = students[i - 1]
+        END FOR
+
+        CALL strcpy(courseNums[pos], courseStr.c_str())
+        SET students[pos] = studentCount
+        SET count++
+    END WHILE
 END FUNCTION
 
 FUNCTION void readInput(string prompt, integer &num)
@@ -34,3 +85,22 @@ FUNCTION void readInput(string prompt, integer &num)
         SET validIntegers = true
     END WHILE
 END FUNCTION
+
+FUNCTION void printList(char courseNums[][MAXCHAR], int students[], int &count)
+    IF (count == 0) THEN
+        DISPLAY "No courses available."
+        RETURN
+    END IF
+
+    DISPLAY "---------------------------------------------"
+    DISPLAY "COURSE NUMBER               STUDENTS ENROLLED"
+    DISPLAY "---------------------------------------------"
+
+    FOR (int i = 0; i < count; i++)
+        DISPLAY courseNums[i]             students[i]
+    END FOR
+
+    DISPLAY "------------------------------------"
+END FUNCTION
+
+FUNCTION void cancelCourses
