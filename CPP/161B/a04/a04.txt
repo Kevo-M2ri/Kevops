@@ -55,6 +55,9 @@ FUNCTION void readInput(character[][MAXCHAR] courseNums, integer[] students, int
         END IF
 
         CALL readInt("Enter the number of students(0 - 25): ", studentCount)
+        WHILE (studentCount < 0 || studentCount > MAXSTUDENTS)
+            CALL readInt("Enter the number of students(0 - 25): ", studentCount)
+        END WHILE
 
         WHILE (pos < count AND CALL strcmp(courseNums[pos], courseStr.c_str()) < 0)
             SET pos++
@@ -77,16 +80,17 @@ FUNCTION void readInput(string prompt, integer &num)
     WHILE (!validIntegers)
         DISPLAY prompt
         INPUT num
-         IF (CALL cin.fail() OR num < 0) THEN
+        IF (CALL cin.fail() OR num < 0) THEN
             CALL cin.clear()
             CALL cin.ignore(numeric_limits<streamsize>::max(), '\n')
             DISPLAY "Error!! Unsupported data entered. Please enter numbers greater than or equal to 0!"
-        END IF
-        SET validIntegers = true
+        ELSE
+            SET validIntegers = true
+        END IF  
     END WHILE
 END FUNCTION
 
-FUNCTION void printList(char courseNums[][MAXCHAR], int students[], int &count)
+FUNCTION void printList(character[][MAXCHAR] courseNums, integer[] students, integer &count)
     IF (count == 0) THEN
         DISPLAY "No courses available."
         RETURN
@@ -103,4 +107,19 @@ FUNCTION void printList(char courseNums[][MAXCHAR], int students[], int &count)
     DISPLAY "------------------------------------"
 END FUNCTION
 
-FUNCTION void cancelCourses
+FUNCTION void cancelCourses(character[][MAXCHAR] courseNums, integer[] students, integer &count)
+    DECLARE integer newCount = 0
+    FOR (integer i = 0; i < count; i++)
+        IF (students[i] >= MINSTUDENTS) THEN
+            CALL strcpy(courseNums[newCount], courseNums[i])
+            SET students[newCount] = students[i]
+            SET newCount++
+        END IF
+    END FOR
+
+    SET count = newCount
+END FUNCTION
+
+FUNCTION void goodbye()
+    DISPLAY "Thank you for using my program! Have a good one!"
+END FUNCTION

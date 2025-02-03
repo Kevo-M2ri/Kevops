@@ -2,9 +2,15 @@
    Author:      Kelvin Muturi
    Date:        February 2, 2025
    Assignment:  CS-161B Assignment a04
-   Description: This program asks the user for input
-   Inputs:      num as an integer, 
-   Outputs:     encoded file name as a character array.
+   Description: This program asks the user to input a list of course numbers and
+                the number of students enrolled in each course. The program then
+                prints the list of courses and the number of students enrolled in
+                each course. It then cancels courses with less than 10 students
+                enrolled and prints the list of courses after cancelling some.
+   Inputs:      num as an integer, courseNums as a character array, students as
+                an integer array, count as an integer.
+   Outputs:     courseNums and students as arrays before and after cancelling
+                courses with less than 10 students, count as an integer.
    -------------------------------------------------------------------------**/
 
 #include <iostream>
@@ -54,7 +60,7 @@ int main() {
 void welcome() {
     cout << "Welcome to my Course Enrollment and Cancellation program!!" << endl;
     cout << "You can only enter up to " << MAXCOURSES << " courses." << endl;
-    cout << "Courses that have a student enrollment lower than " << MINSTUDENTS << " will be dropped!" << endl;
+    cout << "Courses that have a student enrollment lower than " << MINSTUDENTS << " will be dropped!" << endl << endl;
 } // function welcome()
 
 void readInput(char courseNums[][MAXCHAR], int students[], int &count) {
@@ -75,7 +81,10 @@ void readInput(char courseNums[][MAXCHAR], int students[], int &count) {
         } // exit condition
         
         readInt("Enter the number of students(0 - 25):", studentCount); //reading number of students in a course
-
+        while (studentCount < 0 || studentCount > MAXSTUDENTS) {
+            readInt("Enter the number of students(0 - 25):", studentCount);
+        }
+        
         while (pos < count && strcmp(courseNums[pos], courseStr.c_str()) < 0) {
             pos++;
         } // correct position to insert new course into courseNums array found
@@ -99,12 +108,14 @@ void readInt(string prompt, int &num) {
         cout << prompt;
         cin >> num;
 
-        if (cin.fail() || num < 0) {
+        if (cin.fail() || num < 0 || num > MAXSTUDENTS) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Error!! Unsupported data entered. Please enter numbers greater than or equal to 0!" << endl;
         } // error message and failed input condition
-        validIntegers = true;
+        else {
+            validIntegers = true;
+        }
     } // input has been validated
 }
 
