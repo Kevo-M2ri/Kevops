@@ -1,0 +1,63 @@
+DEFINE a constant integer CAP = 10
+DECLARE a FUNCTION integer buildList(integer[], integer size)
+DECLARE a FUNCTION void printList(constant integer[], integer size)
+DECLARE a FUNCTION integer insertNum(integer[] list, integer size)
+DECLARE a FUNCTION oddCount(integer[] array, integer size)
+
+FUNCTION integer main ()
+    DECLARE integer list[CAP]
+    DEFINE size = 0
+    DEFINE count = 0
+    SET size = CALL buildList(list, size)
+    DISPLAY "Original List!"
+    CALL printList(list, size)
+    SET size = CALL insertNum()
+    DISPLAY "List after inserts!"
+    CALL printList(list, size)
+    SET count = oddCount(list, size)
+    DISPLAY "Number of odds = " count
+
+    RETURN 0
+END FUNCTION
+
+FUNCTION integer buildList(integer[] list, integer size)
+    CALL srand(time(NULL))
+    SET size = 10
+    FOR (integer i = 0; i < size; i++)
+        SET list[i] = CALL rand() % 100
+    END FOR
+
+    RETURN size
+END FUNCTION
+
+FUNCTION void printList(constant integer[] list, integer size)
+    FOR (integer i = 0; i < size; i++)
+        DISPLAY list[i]
+    END FOR
+END FUNCTION
+
+FUNCTION integer insertNum(integer[] list, integer size)
+    FOR (integer i = 0; i < size; i++)
+        IF (list[i] % 2 == 0) THEN
+            FOR (integer j = size; j > i; j--)
+                SET list[j] = list[j - 1]
+            END FOR
+            SET list[i] = list[i] - 1
+            SET size++
+            SET i++
+        END IF
+    END FOR
+
+    RETURN size
+END FUNCTION
+
+FUCNTION integer oddCount(integer[] array, integer size)
+    DEFINE integer oddCount = 0
+    FOR (integer i = 0; i < size; i++)
+        IF (array[i] % 2 != 0) THEN
+            SET oddCount++
+        END IF
+    END FOR
+    
+    RETURN oddCount
+END FUNCTION
