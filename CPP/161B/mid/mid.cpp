@@ -1,12 +1,12 @@
 /**----------------------------------------------------------------------------
    Author:      Kelvin Muturi
    Date:        February 9, 2025
-   Assignment:  CS-161B Assignment mid
+   Assignment:  CS-161B Assignment midterm exam
    Description: This program implements a queue using an array. The program
                 allows the user to dequeue an element from the queue, print the
                 queue, and quit the program.
-   Inputs:      N/A
-   Outputs:     queueue, dequeue result, error messages.
+   Inputs:      command as a character, value to dequeue as an integer.
+   Outputs:     queue as an integer, dequeue result as an array, error messages.
    -------------------------------------------------------------------------**/
 #include <iostream>
 

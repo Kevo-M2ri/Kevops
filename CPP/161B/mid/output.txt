@@ -1,35 +1,35 @@
-Enter command; (q to quit) (d to dequeue) (p to print): x
+Enter a command; (q to quit), (d to dequeue), (p to print): x
 Error! Invalid command
-Enter command; (q to quit) (d to dequeue) (p to print): -5
+Enter a command; (q to quit), (d to dequeue), (p to print): -5
 Error! Invalid command
-Enter command; (q to quit) (d to dequeue) (p to print): Error! Invalid command
-Enter command; (q to quit) (d to dequeue) (p to print): -2
+Enter a command; (q to quit), (d to dequeue), (p to print): Error! Invalid command
+Enter a command; (q to quit), (d to dequeue), (p to print): -2
 Error! Invalid command
-Enter command; (q to quit) (d to dequeue) (p to print): Error! Invalid command
-Enter command; (q to quit) (d to dequeue) (p to print): p
+Enter a command; (q to quit), (d to dequeue), (p to print): Error! Invalid command
+Enter a command; (q to quit), (d to dequeue), (p to print): p
 [8, -2, 3]
-Enter command; (q to quit) (d to dequeue) (p to print): d
+Enter a command; (q to quit), (d to dequeue), (p to print): d
 Enter value to dequeue: 3
-Enter command; (q to quit) (d to dequeue) (p to print): p
+Enter a command; (q to quit), (d to dequeue), (p to print): p
 []
-Enter command; (q to quit) (d to dequeue) (p to print): q
+Enter a command; (q to quit), (d to dequeue), (p to print): q
 Quitting...
 
 
-Enter command; (q to quit) (d to dequeue) (p to print): p
+Enter a command; (q to quit), (d to dequeue), (p to print): p
 [8, -2, 3]
-Enter command; (q to quit) (d to dequeue) (p to print): d
+Enter a command; (q to quit), (d to dequeue), (p to print): d
 Enter value to dequeue: 8
-Enter command; (q to quit) (d to dequeue) (p to print): p
+Enter a command; (q to quit), (d to dequeue), (p to print): p
 [-2, 3]
-Enter command; (q to quit) (d to dequeue) (p to print): q
+Enter a command; (q to quit), (d to dequeue), (p to print): q
 Quitting...
 
 
-Enter command; (q to quit) (d to dequeue): d
+Enter a command; (q to quit), (d to dequeue), (p to print): d
 Enter value to dequeue: -2
-Enter command; (q to quit) (d to dequeue): d
+Enter a command; (q to quit), (d to dequeue), (p to print): d
 Enter value to dequeue: 8
 Dequeue failed: value not found
-Enter command; (q to quit) (d to dequeue): q
+Enter a command; (q to quit), (d to dequeue), (p to print): q
 Quitting...

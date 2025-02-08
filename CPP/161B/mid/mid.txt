@@ -14,7 +14,7 @@ FUNCTION int main()
         DISPLAY "Enter a command; (q to quit), (d to dequeue), (p to print): "
         INPUT command
 
-        SWITCH (command)
+        SELECT (command)
             CASE 'd':
                 DISPLAY "Enter the value to dequeue: "
                 INPUT val
@@ -26,16 +26,13 @@ FUNCTION int main()
                 ELSE IF (result == 2)
                     DISPLAY "Dequeue failed: Value cannot be found
                 END IF
-                BREAK
             CASE 'p':
                 CALL printQueue(queue, size)
-                BREAK
             CASE 'q':
                 DISPLAY "Quitting... The end"
-                BREAK
             DEFAULT:
                 DISPLAY "Error! Invalid command"
-        END SWITCH
+        END SELECT
     WHILE (command != 'q')
 
     RETURN 0
