@@ -16,7 +16,7 @@ int main() {
     int result; // result of dequeue operation
     
     do {
-        cout << "Enter command; (q to quit) (d to dequeue): ";
+        cout << "Enter command; (q to quit) (d to dequeue) (p to print): ";
         cin >> command; // read command from input
 
         switch (command) {
