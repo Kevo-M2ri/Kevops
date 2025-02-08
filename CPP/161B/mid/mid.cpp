@@ -1,4 +1,13 @@
-//add header comments here
+/**----------------------------------------------------------------------------
+   Author:      Kelvin Muturi
+   Date:        February 9, 2025
+   Assignment:  CS-161B Assignment mid
+   Description: This program implements a queue using an array. The program
+                allows the user to dequeue an element from the queue, print the
+                queue, and quit the program.
+   Inputs:      N/A
+   Outputs:     queueue, dequeue result, error messages.
+   -------------------------------------------------------------------------**/
 #include <iostream>
 
 using namespace std;
@@ -16,7 +25,7 @@ int main() {
     int result; // result of dequeue operation
     
     do {
-        cout << "Enter command; (q to quit) (d to dequeue) (p to print): ";
+        cout << "Enter a command; (q to quit), (d to dequeue), (p to print): ";
         cin >> command; // read command from input
 
         switch (command) {
@@ -27,10 +36,10 @@ int main() {
                 result = dequeue(queue, size, val); // call dequeue function
 
                 if (result == 1) {
-                    cout << "Dequeue failed: queue is empty" << endl;
+                    cout << "Dequeue failed: Queue is empty" << endl;
                 }
                 else if (result == 2) {
-                    cout << "Dequeue failed: value not found" << endl;
+                    cout << "Dequeue failed: Value cannot found" << endl;
                 }
                 break;
             case 'p': // print queue

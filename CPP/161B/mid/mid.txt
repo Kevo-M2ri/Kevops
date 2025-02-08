@@ -1,0 +1,85 @@
+DECLARE FUNCTION int dequeue(int[] queue, int &size, int &val)
+DECLARE FUNCTION void printQueue(int[] queue, int size)
+
+DEFINE a constant integer MAX = 3
+
+FUNCTION int main()
+    DEFINE int[MAX] queue = {8, -2, 3}
+    DEFINE an int size = 3
+    DECLARE a character command
+    DECLARE an integer val
+    DECLARE an integer result
+
+    DO
+        DISPLAY "Enter a command; (q to quit), (d to dequeue), (p to print): "
+        INPUT command
+
+        SWITCH (command)
+            CASE 'd':
+                DISPLAY "Enter the value to dequeue: "
+                INPUT val
+
+                SET result = CALL dequeue(queue,size, val)
+
+                IF (result == 1) THEN
+                    DISPLAY "Dequeue failed: Queue is empty" 
+                ELSE IF (result == 2)
+                    DISPLAY "Dequeue failed: Value cannot be found
+                END IF
+                BREAK
+            CASE 'p':
+                CALL printQueue(queue, size)
+                BREAK
+            CASE 'q':
+                DISPLAY "Quitting... The end"
+                BREAK
+            DEFAULT:
+                DISPLAY "Error! Invalid command"
+        END SWITCH
+    WHILE (command != 'q')
+
+    RETURN 0
+END main
+
+FUNCTION integer dequeue(int[] queue, int &size, int &val)
+    DECLARE integer index
+    DECLARE integer anotherSize
+
+    IF (size == 0) THEN
+        RETURN 1
+    END IF
+
+    SET index = -1
+
+    FOR (int i = 0; i < size; i++)
+        IF (queue[i] == val) THEN
+            SET index = i
+            BREAK
+        END IF
+    END FOR
+
+    IF (index == -1) THEN
+        RETURN 2
+    END IF
+
+    SET anotherSize = size - index - 1
+    FOR (int i = 0; i < anotherSize; i++)
+        queue[i] = queue[index + 1 + i]
+    END FOR
+
+    SET size = anotherSize
+
+    RETURN 0
+END dequeue
+
+FUNCTION printQueue(int[] queue, int size)
+    DISPLAY "["
+    FOR (int i = 0; i < size; i++)
+        DISPLAY queue[i]
+
+        IF (i != size - 1) THEN
+            DISPLAY ", "
+        END IF
+    END FOR
+    DISPLAY "]"
+END printQueue
