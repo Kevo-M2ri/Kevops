@@ -1,0 +1,35 @@
+Enter a command; (q to quit), (d to dequeue), (p to print): x
+Error! Invalid command
+Enter a command; (q to quit), (d to dequeue), (p to print): -5
+Error! Invalid command
+Enter a command; (q to quit), (d to dequeue), (p to print): Error! Invalid command
+Enter a command; (q to quit), (d to dequeue), (p to print): -2
+Error! Invalid command
+Enter a command; (q to quit), (d to dequeue), (p to print): Error! Invalid command
+Enter a command; (q to quit), (d to dequeue), (p to print): p
+[8, -2, 3]
+Enter a command; (q to quit), (d to dequeue), (p to print): d
+Enter value to dequeue: 3
+Enter a command; (q to quit), (d to dequeue), (p to print): p
+[]
+Enter a command; (q to quit), (d to dequeue), (p to print): q
+Quitting...
+
+
+Enter a command; (q to quit), (d to dequeue), (p to print): p
+[8, -2, 3]
+Enter a command; (q to quit), (d to dequeue), (p to print): d
+Enter value to dequeue: 8
+Enter a command; (q to quit), (d to dequeue), (p to print): p
+[-2, 3]
+Enter a command; (q to quit), (d to dequeue), (p to print): q
+Quitting...
+
+
+Enter a command; (q to quit), (d to dequeue), (p to print): d
+Enter value to dequeue: -2
+Enter a command; (q to quit), (d to dequeue), (p to print): d
+Enter value to dequeue: 8
+Dequeue failed: value not found
+Enter a command; (q to quit), (d to dequeue), (p to print): q
+Quitting...
