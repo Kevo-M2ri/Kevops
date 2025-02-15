@@ -1,0 +1,93 @@
+DECLARE FUNCTION void openFile(ifstream &file, constant string &fileName)
+DECLARE FUNCTION void printLists(constant character[][MAX_CHAR] country, constant integer[] gci, constant integer[] ncsi, integer size)
+DECLARE FUNCTION void doAnalysis(constant integer[] ncsi, constant character[][MAX_CHAR] country, integer size)
+DECLARE FUNCTION void calcAverageGci(constant integer[] gci, integer size)
+
+DEFINE a constant integer MAX_CHAR = 35
+DEFINE a constant integer MAX_SIZE = 15
+DEFINE a constant string fileName = "Cybersecurity.csv"
+
+FUNCTION integer main()
+    DECLARE a character[MAX_NUM][MAX_CHAR] country
+    DECLARE an integer[MAX_NUM] gci
+    DECLARE an integer[MAX_NUM] ncsi
+    DEFINE an integer size = 0
+    DECLARE a string line
+    DECLARE a string countryName
+
+    ifstream inputFile
+    CALL openFile(inputFile, fileName)
+
+    WHILE (getline(inputFile, line) AND size < MAX_NUM)
+        SET size_t pos1 = CALL line.find(';')
+        SET size_t pos2 = CALL line.find(';', pos1 + 1)
+        
+        SET countryName = CALL line.substr(0,p pos1)
+        CALL strncpy(country[size], countryName.c_str(), MAX_CHAR -1)
+        SET country[size][MAX_CHAR - 1] = '\0'
+
+        SET gci[size] = CALL stoi(line.substr(pos1 + 1,  pos2 - pos1 - 1))
+        SET ncsi[size] =CALL stoi(line.substr(pos2 + 1))
+        SET size++
+    END WHILE
+
+    inputFile.close()
+
+    CALL printLists(country, gci, ncsi, size)
+    CALL doAnalysis(ncsi, country, size)
+    CALL calcAverageGci(gci, size)
+
+    RETURN 0
+END FUNCTION
+
+FUNCTION openFile(ifstream &file, constant string &fileName)
+    OPEN fileName FOR READING
+    IF (file is not open) THEN
+        DISPLAY "Error: File could not be opened!"
+        exit(1)
+    END IF
+END FUNCTION
+
+FUNCTION void printLists(constant character[][MAX_CHAR] country, constant integer[] gci, constant integer[] ncsi, integer size)
+    DISPLAY "country" "       " "gci" "         " "ncsi"
+    DISPLAY "------------------------------------------"
+    FOR (integer i; i < size; i++)
+        DISPLAY country[i] "        " gci[i] "      " ncsi[i]
+    END FOR
+END FUNCTION
+
+FUNCTION void doAnalysis(constant integer[] ncsi, constant character[][MAX_CHAR] country, integer size)
+    DEFINE an integer minIndex = 0
+    DEFINE an integer maxIndex = 0
+    DECLARE a character[MAX_CHAR] highestCountry
+    DECLARE a character[MAX_CHAR] lowestCountry
+
+    strncpy(highestCountry, country[0], MAX_CHAR)
+    strncpy(lowestCountry, country[0], MAX_CHAR)
+
+    FOR (integer i = 1; i < size; i++)
+        IF (ncsi[i] > highestNcsi) THEN
+            SET highestNcsi = ncsi[i]
+            strncpy(highestCountry, country[i], MAX_CHAR)
+        END IF
+
+        IF (ncsi < lowestNcsi) THEN
+            SET lowestNcsi = ncsi[i]
+            strncpy(lowestCountry, country[i], MAX_CHAR)
+        END IF
+    END FOR
+
+    DISPLAY "Country with the highest cybersecurity score: " highestCountry " with a score of: " highestNcsi
+    DISPLAY "Country with the lowest cybersecurity score: " lowestCountry " with a score of: " lowestNcsi
+END FUNCTION
+
+FUNCTION void calcAverageGci(constant integer[] gci, integer size)
+    DEFINE an integer totalGci = 0
+    DECLARE a double averageGci
+    FOR (integer i = 0; i < size; i++)
+        SET totalGci += gci[i]
+    END FOR
+
+    averageGci = static_cast<double>(totalGci) / size
+    DISPLAY "Average GCI: " averageGci
+END FUNCTION
