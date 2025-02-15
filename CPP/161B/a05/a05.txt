@@ -1,5 +1,7 @@
-DEFINE a constant integer MAX_CHAR = 150
-DEFINE A constant integer MAX_SIZE = 30
+// constants
+DEFINE MAX_CHAR = 150
+DEFINE MAX_SIZE = 30
+
 
 DECLARE FUNCTION boolean openFile(ifstream &inFile)
 DECLARE FUNCTION integer readData(ifstream &inFile, character[][MAX_CHAR] country, integer[][2] gciNcsiData)
@@ -41,4 +43,56 @@ FUNCTION integer readData(ifstream &inFile, character[][MAX_CHAR] country, integ
     inFile.getline(country[size], MAX_CHAR)
 
     WHILE (NOT inFile.eof())
-        
+        READ gci score INTO gciNcsiData[size][0]
+        SKIP semicolon
+        READ ncsi score INTO gciNcsiData[size][1]
+        SKIP newline
+        INCREMENT size
+        READ next line INTO COUNTRY[size]
+    END WHILE
+
+    RETURN size
+END FUNCTION
+
+FUNCTION void displayData(country, gciNcsiData, size)
+    DISPLAY header row with columns "Country", "gci", "ncsi"
+    DISPLAY separator line
+
+    FOR integer i = 0 TO size - 1
+        DISPLAY country[i] left-aligned
+        DISPLAY gciNcsiData[i][0] right-aligned
+        DISPLAY gciNcsiData[i][1] right-aligned
+        DISPLAY newline
+    END FOR
+
+    DISPLAY separator line
+END FUNCTION
+
+FUNCTION doAnalysis(country, gciNcsiData, size)
+    DECLARE maxGci = 0, minGci = 0
+
+    FOR i = 0 TO size - 1
+        IF gciNcsiData[i][0] > gciNcsiData[maxGci][0] THEN
+            maxGci = i
+            CONVERT country[maxGci] to uppercase
+        END IF
+    
+        IF gciNcsiData[i][0] < gciNcsiData[minGci][0] THEN
+            minGci = i
+            CONVERT country[minGci] to lowercase
+        END IF
+    END FOR
+
+    DISPLAY "Country with the highest GCI: " + country[maxGci] " with GCI: " + gciNcsiData[maxGci][0]
+    DISPLAY "Country with the lowest GCI: " + country[minGci] " with GCI: " + gciNcsiData[minGci][0]
+END FUNCTION
+
+FUNCTION calcAverage(gciNcsiData, count, column)
+    DECLARE sum = 0
+
+    FOR i = 0 TO count - 1
+        ADD gciNcsiData[i][column] TO sum
+    END FOR
+
+    RETURN sum / count
+END FUNCTION
