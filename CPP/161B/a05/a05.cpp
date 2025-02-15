@@ -1,3 +1,16 @@
+/**----------------------------------------------------------------------------
+   Author:      Kelvin Muturi
+   Date:        February 16, 2025
+   Assignment:  CS-161B Assignment a05
+   Description: This program reads data from a file and stores it in a 2D array.
+                It then displays the data in the array and calculates the average
+                of the GCI and NCSI data. It also displays the country with the
+                highest and lowest GCI.
+   Inputs:      country as a 2D character array, gciNcsiData as a 2D integer array,
+                size as an integer.
+   Outputs:     country and gciNcsiData as 2D arrays, size as an integer.
+   -------------------------------------------------------------------------**/
+
 #include <iostream>
 #include <fstream>
 #include <cctype>
@@ -5,91 +18,104 @@
 #include <iomanip>
 using namespace std;
 
-const int MAX_CHAR = 35;
-const int MAX_SIZE = 15;
-const string fileName = "Cybersecurity.csv";
+// constants definition
+const int MAX_CHAR = 150;
+const int MAX_SIZE = 30;
 
-void openFile(ifstream &file, const string &fileName);
-void printLists(const char country[][MAX_CHAR], const int gci[], const int ncsi[], int size);
-void doAnalysis(const int ncsi[], const char[][MAX_CHAR], int size);
-void calcAverage(const int gci[], int size);
+// function prototypes
+bool openFile(ifstream &inFile);
+int readData(ifstream &inFile, char country[][MAX_CHAR], int gciNcsiData[][2]);
+void displayData(char country[][MAX_CHAR], int gciNcsiData[][2], int size);
+void doAnalysis(char country[][MAX_CHAR], int gciNcsiData[][2], int size);
+double calcAverage(int gciNcsiData[][2], int count, int column);
 
+// main function
 int main() {
-    char country[MAX_SIZE][MAX_CHAR];
-    int gci[MAX_SIZE];
-    int ncsi[MAX_SIZE];
+    ifstream inFile; // input file stream
     int size = 0;
-    string line;
-    string countryName;
+    char country[MAX_SIZE][MAX_CHAR]; // 2D array to store country names
+    int gciNcsiData[MAX_SIZE][2] = {0}; // 0: GCI, 1: NCSI
+    double average = 0.0;
 
-    ifstream inputFile;
-    openFile(inputFile, fileName);
-
-    while (getline(inputFile, line)) {
-        size_t pos1 = line.find(','); // Find the first comma
-        size_t pos2 = line.find(',', pos1 + 1); // Find the second comma
-
-        countryName = line.substr(0, pos1); // Extract country name
-        strncpy(country[size], countryName.c_str(), MAX_CHAR - 1); // Copy country name
-        country[size][MAX_CHAR - 1] = '\0'; // Ensure null-termination
-        gci[size] = stoi(line.substr(pos1 + 1, pos2 - pos1 - 1)); // Extract GCI
-        ncsi[size] = stoi(line.substr(pos2 + 1)); // Extract NCSI
-        size++;
-    }   
+    if (!openFile(inFile)) {
+        cout << "Error! File did not open! Program closing!!" << endl;
+        exit(0);
+    }
     
-    inputFile.close();
+    size = readData(inFile, country, gciNcsiData);
+    displayData(country, gciNcsiData, size);
+    cout << endl;
 
-    printLists(country, gci, ncsi, size);
-    cout << endl;
-    doAnalysis(ncsi, country, size);
-    cout << endl;
-    calcAverage(gci, size);
-    cout << endl;
+    doAnalysis(country, gciNcsiData, size);
+    average = calcAverage(gciNcsiData, size, 0);
 
     return 0;
 }
 
-void openFIle(ifstream &file, const string&fileName) {
-    file.open(fileName);
-    if (!file.is_open()) {
-        cout << "Error! File could not be opened." << endl;
-        exit(1);
+// open the file
+bool openFile(ifstream &inFile) {
+    inFile.open("cybersecurity.txt"); // open the file
+    if (!inFile.is_open()) {
+        return false; // return false if the file is not opened
     }
+    return true; // return true if the file is opened
 }
 
-void printLists(const char country[][MAX_CHAR], const int gci[], const int ncsi[], int size) {
-    cout << setw(20) << left << "Country" << setw(15) << right << "GCI" << "NCSI" << endl;
-    cout << "----------------------------------------" << endl;
-    for (int i = 0; i < size; i++) {
-        cout << setw(10) << country[i] << "\t" << gci[i] << "\t" << ncsi[i] << endl;
+// read the data from the file
+int readData(ifstream &inFile, char country[][MAX_CHAR], int gciNcsiData[][2]) {
+    int size = 0;
+    inFile.getline(country[size], MAX_CHAR); // read the first line of the file
+
+    while (!inFile.eof()) {
+        inFile >> gciNcsiData[size][0]; // read the GCI data
+        inFile.ignore(1, ';'); // ignore the semicolon
+        inFile >> gciNcsiData[size][1]; // read the NCSI data
+        inFile.ignore(5, '\n'); // ignore the newline character
+        size++;
+        inFile.getline(country[size], MAX_CHAR); // read the next line of the file
     }
+
+    return size; // return the size of the data
 }
 
-void doAnalysis(const int ncsi[], const char country[][MAX_CHAR], int size) {
-    int minIndex = 0, maxIndex = 0;
-    double total = 0.0, average = 0.0;
-
+void displayData(char country[][MAX_CHAR], int gciNcsiData[][2], int size) {
+    cout << setw(20) << left << "Country" << setw(10) << right << "GCI";
+    cout << setw(10) << right << "NCSI" << endl;
+    cout << "------------------------------------------------" << endl;
     for (int i = 0; i < size; i++) {
-        total += ncsi[i];
-        if (ncsi[i] < ncsi[minIndex]) {
-            minIndex = i;
+        cout << setw(20) << left << country[i];
+        cout << setw(10) << right << gciNcsiData[i][0];
+        cout << setw(10) << right << gciNcsiData[i][1] << endl;
+    }
+    cout << "------------------------------------------------" << endl;
+}
+
+//do summary analysis for max and min GCI
+void doAnalysis(char country[][MAX_CHAR], int gciNcsiData[][2], int size) {
+    int maxGCI = 0, minGCI = 0;
+    for (int i = 0; i < size; i++) {
+        if (gciNcsiData[i][0] > gciNcsiData[maxGCI][0]) {
+            maxGCI = i;
+            country[maxGCI][0] = toupper(country[maxGCI][0]);
         }
-        if (ncsi[i] > ncsi[maxIndex]) {
-            maxIndex = i;
+        if (gciNcsiData[i][0] < gciNcsiData[minGCI][0]) {
+            minGCI = i;
+            country[minGCI][0] = tolower(country[minGCI][0]);
         }
     }
 
-    average = total / size;
-    cout << "The average NCSI is: " << average << endl;
-    cout << "The country with the highest NCSI is: " << country[maxIndex] << endl;
-    cout << "The country with the lowest NCSI is: " << country[minIndex] << endl;
+    //display the country with the highest and lowest GCI
+    cout << "Country with the highest GCI: " << country[maxGCI];
+    cout << " with GCI: " << gciNcsiData[maxGCI][0] << endl;
+    cout << "Country with the lowest GCI: " << country[minGCI];
+    cout << " with GCI: " << gciNcsiData[minGCI][0] << endl;
 }
 
-void calcAverage(const int gci[], int size) {
-    double total = 0.0, average = 0.0;
-    for (int i = 0; i < size; i++) {
-        total += gci[i];
+//calculate average of GCI or NCSI
+double calcAverage(int gciNcsiData[][2], int count, int column) {
+    double sum = 0;
+    for (int i = 0; i < count; i++) {
+        sum += gciNcsiData[i][column];
     }
-    average = total / size;
-    cout << "The average GCI is: " << average << endl;
+    return sum / count;
 }
