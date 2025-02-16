@@ -2,19 +2,24 @@
 DEFINE MAX_CHAR = 150
 DEFINE MAX_SIZE = 30
 
-
-DECLARE FUNCTION boolean openFile(ifstream &inFile)
-DECLARE FUNCTION integer readData(ifstream &inFile, character[][MAX_CHAR] country, integer[][2] gciNcsiData)
-DECLARE FUNCTION void displayData(character[][MAX_CHAR] country, integer[][2] gciNcsiData, integer size)
-DECLARE FUNCTION void doAnalysis(character[][MAX_CHAR] country, integer[][2] gciNcsiData , integer size)
-DECLARE FUNCTION calcAverage(integer[][2], gciNcsiData, integer count, integer column)
+//Function declarations
+FUNCTION void welcome()
+FUNCTION boolean openFile(inFile)
+FUNCTION integer readData(inFile, character[][MAX_CHAR] country, double[][2] gciNcsiData)
+FUNCTION void displayData(character[][MAX_CHAR] country, double[][2] gciNcsiData, integer size)
+FUNCTION void doAnalysis(character[][MAX_CHAR] country, double[][2] gciNcsiData , integer size)
+FUNCTION calcAverage(double[][2], gciNcsiData, integer count, integer column)
+FUNCTION void goodbye()
 
 FUNCTION integer main()
-    ifstream inFile
+    DECLARE inFile
     DECLARE integer size
     DECLARE character[MAX_SIZE][MAX_CHAR] country
-    DECLARE integer[MAX_SIZE][2] gciNcsiData
+    DECLARE double[MAX_SIZE][2] gciNcsiData
     DECLARE double average
+
+    CALL welcome()
+    DISPLAY newline
 
     IF (NOT openFile(inFile)) THEN
         DISPLAY "Error! File did not open! Program closing!!"
@@ -23,38 +28,49 @@ FUNCTION integer main()
 
     SET size = CALL readData(inFile, country, gciNcsiData)
     CALL displayData(country, gciNcsiData, size)
+    DISPLAY newline
 
     CALL doAnalysis(country, gciNcsiData, size)
     SET average = CALL calcAverage(gciNcsiData , size, 0)
 
+    DISPLAY "Average GCI: " average
+    DISPLAY newline, newline
+
+    CALL goodbye()
+
     RETURN 0
 END main
 
-FUNCTION boolean openFile(ifstream &inFile)
-    inFile.open("cybersecurity.txt")
+FUNCTION welcome()
+    DISPLAY "Welcome to the GCI and NCSI data analysis program!"
+    DISPLAY "This program reads data from a file and displays it."
+    DISPLAY "It also calculates the average of the NCSI data."
+    DISPLAY "Enjoy!"
+END FUNCTION
+
+FUNCTION boolean openFile(inFile)
+    open("data2.txt" AS inFile)
     IF (NOT inFile.is_open()) THEN
         RETURN false
     END IF
     RETURN true
 END FUNCTION
 
-FUNCTION integer readData(ifstream &inFile, character[][MAX_CHAR] country, integer[][2] gciNcsiData)
+FUNCTION integer readData(inFile, character[][MAX_CHAR] country, integer[][2] gciNcsiData)
     DECLARE integer size = 0
-    inFile.getline(country[size], MAX_CHAR)
 
-    WHILE (NOT inFile.eof())
+    WHILE (size < MAX_SIZE AND READ_LINE(INFILE, country[size], ';'))
         READ gci score INTO gciNcsiData[size][0]
-        SKIP semicolon
+        SKIP (5, ;)
         READ ncsi score INTO gciNcsiData[size][1]
-        SKIP newline
+        SKIP (100, '\n')
         INCREMENT size
-        READ next line INTO COUNTRY[size]
     END WHILE
 
     RETURN size
 END FUNCTION
 
-FUNCTION void displayData(country, gciNcsiData, size)
+FUNCTION void displayData(character[][MAX_CHAR] country, double[][2] gciNcsiData,integer size)
     DISPLAY header row with columns "Country", "gci", "ncsi"
     DISPLAY separator line
 
@@ -68,7 +84,7 @@ FUNCTION void displayData(country, gciNcsiData, size)
     DISPLAY separator line
 END FUNCTION
 
-FUNCTION doAnalysis(country, gciNcsiData, size)
+FUNCTION doAnalysis(character[][MAX_CHAR] country,double[][2] gciNcsiData,integer size)
     DECLARE maxGci = 0, minGci = 0
 
     FOR i = 0 TO size - 1
@@ -87,7 +103,7 @@ FUNCTION doAnalysis(country, gciNcsiData, size)
     DISPLAY "Country with the lowest GCI: " + country[minGci] " with GCI: " + gciNcsiData[minGci][0]
 END FUNCTION
 
-FUNCTION calcAverage(gciNcsiData, count, column)
+FUNCTION calcAverage(double[][2] gciNcsiData,integer count,integer column)
     DECLARE sum = 0
 
     FOR i = 0 TO count - 1
@@ -95,4 +111,9 @@ FUNCTION calcAverage(gciNcsiData, count, column)
     END FOR
 
     RETURN sum / count
+END FUNCTION
+
+FUNCTION void goodbye()
+    DISPLAY "Thank you for using the GCI and NCSI data analysis program!"
+    DISPLAY "Goodbye"
 END FUNCTION

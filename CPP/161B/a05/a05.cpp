@@ -6,9 +6,10 @@
                 It then displays the data in the array and calculates the average
                 of the NCSI data. It also displays the country with the highest
                 and lowest GCI.
-   Inputs:      country as a 2D character array, gciNcsiData as a 2D integer array,
-                size as an integer.
-   Outputs:     country and gciNcsiData as 2D arrays, size as an integer.
+   Inputs:      file data2.txt containing country names, GCI and NCSI data.
+   Outputs:     country and gciNcsiData as 2D arrays, size as an integer,
+                average as a double, and the country with the highest and
+                lowest GCI.
    -------------------------------------------------------------------------**/
 
 #include <iostream>
