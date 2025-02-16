@@ -4,8 +4,8 @@
    Assignment:  CS-161B Assignment a05
    Description: This program reads data from a file and stores it in a 2D array.
                 It then displays the data in the array and calculates the average
-                of the GCI and NCSI data. It also displays the country with the
-                highest and lowest GCI.
+                of the NCSI data. It also displays the country with the highest
+                and lowest GCI.
    Inputs:      country as a 2D character array, gciNcsiData as a 2D integer array,
                 size as an integer.
    Outputs:     country and gciNcsiData as 2D arrays, size as an integer.
@@ -70,9 +70,8 @@ int readData(ifstream &inFile, char country[][MAX_CHAR], int gciNcsiData[][2]) {
         inFile >> gciNcsiData[size][0]; // read the GCI data
         inFile.ignore(1, ';'); // ignore the semicolon
         inFile >> gciNcsiData[size][1]; // read the NCSI data
-        inFile.ignore(5, '\n'); // ignore the newline character
+        inFile.ignore(100, '\n'); // ignore the newline character
         size++;
-        inFile.getline(country[size], MAX_CHAR); // read the next line of the file
     }
 
     return size; // return the size of the data

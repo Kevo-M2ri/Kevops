@@ -1,0 +1,26 @@
+Country	GCI	NCSI
+Afghanistan	5.2	11.69
+Albania	64.32	62.34
+Algeria	33.95	33.77
+Andorra	26.38	0
+Angola	12.99	9.09
+Antigua	15.62	11.69
+Argentina	50.12	63.64
+Armenia	50.47	35.06
+Australia	97.47	66.23
+Austria	93.89	68.83
+Azerbaijan	89.31	59.74
+Bahamas	13.37	20.78
+Bahrain	77.86	25.97
+Bangladesh	81.27	67.53
+Barbados	16.89	19.48
+Belarus	 50.57	53.25
+Belgium	96.25	94.81
+Belize	10.29	18.18
+Benin	80.06	58.44
+Bhutan	Asia-Pasific		18.34	18.18
+Bolivia	16.14	31.17
+Bosnia	29.44	28.57
+Botswana	53.06	29.87
+Brazil	96.6	51.95
+Brunei  56.07	41.56
