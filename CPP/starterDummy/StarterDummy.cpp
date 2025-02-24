@@ -1,102 +1,99 @@
-//This program reads from item.txt and prints the total calories of each item
-//items.txt has 3 columns of data - itemname that can have spaces, quantity - an int
-//and calories - an int
-//The program will read the data into a 2 dim char array and a 2 dim int array
-//It will calculate the total calories for each item and output to screen
-//
 #include <iostream>
-#include <fstream>
 #include <cstring>
-#include <iomanip>
-
 using namespace std;
 
-//constant for number of items
-const int ITEMS = 10;
-//constant for number of characters
-const int MAXCHAR = 51;
+const int MAX_CHAR = 101;
+const int CAP = 100;
+struct Video {
+	char title[MAX_CHAR];
+	int year;
+};
 
-//function prototypes
-bool openFile(ifstream &inFile);
-int loadData(ifstream &inFile, char items[][MAXCHAR], int otherData[][2]);
-void calcCalories(char items[][MAXCHAR], int otherData[][2], int count);
+void displayMenu();
+char readOption();
+void addVideo(Video list[], int &size);
+void printList(Video list[], int size);
+Video srchByTitle(Video list[], int size);
 
-//main function that will call openFile, loadData and calcCalories
-int main()
-{
-	ifstream inFile;
-	int count = 0;
-	char items[ITEMS][MAXCHAR];
-	int otherData[ITEMS][2] = {0};
-	if(!openFile(inFile))
-	{
-		cout << "File did not open! Program terminating!!" << endl;
-		exit(0);
-	}
-	count = loadData(inFile, items, otherData);
-	calcCalories(items, otherData, count);
-	
+int main() {
+	Video list[CAP];
+	int size = 0;
+	char option;
+	do {
+		displayMenu();
+		option = readOption();
+		switch (option) {
+		case 'A':
+			addVideo(list, size);
+			break;
+		case 'P':
+			printList(list, size);
+			break;
+		case 'S':
+			srchByTitle(list, size);
+			break;
+		case 'Q':
+			cout << "Goodbye!" << endl;
+			break;
+		default:
+			cout << "Invalid option. Please try again." << endl;
+		}
+	} while (option != 'Q');
+
 	return 0;
 }
 
-//Name:		openFile
-//Description:	opens the file and returns true or false
-//input params:	file stream variable
-//ouput:		none
-//return:		true or false
-//
-bool openFile(ifstream &inFile)
-{
-	inFile.open("items.txt");
-	if(!inFile)
-	{
-		return false;
-	}
-	return true;
+void displayMenu() {
+	cout << "(a) - Add a video" << endl;
+	cout << "(p) - Print the list" << endl;
+	cout << "(s) - Search by title" << endl;
+	cout << "(q) - Quit" << endl;
 }
 
-//Name:		loadData
-//Description: 	loads data from file
-//input params:	char array for item names, and int array for other data (2 dim arrays)
-//output:	none
-//return:	count of the number of items.
-//
-int loadData(ifstream &inFile, char items[][MAXCHAR], int otherData[][2])
-{
-	int count = 0;
-	//read the first item name outside to check if the file is empty
-	inFile.getline(items[count], MAXCHAR, ';');
-	while(!inFile.eof())
-	{
-		//read the next 2 int data into the int 2 dim array
-		inFile >> otherData[count][0];
-		inFile.ignore(5, ';');
-		inFile >> otherData[count][1];
-		inFile.ignore(5, '\n');
-		//increment count for next item
-		count++;
-		//read next item name from the next line in the text file
-		inFile.getline(items[count], MAXCHAR, ';');
-	}
-	return count;
+char readOption() {
+	char option;
+	cout << "Enter your option: ";
+	cin >> option;
+	cin.ignore(100, '\n');
+	return toupper(option);
 }
-		
-//Name:		calcCalories
-//Description:	calculates total calories from the 2 arrays and outputs to screen
-//input params:	count, the 2 arrays
-//output:	total calories for each item and other info
-//return:	none
-//
-void calcCalories(char items[][MAXCHAR], int otherData[][2], int count)
-{
-	//tempCalories to calc total calories for each line
-	int tempCalories = 0;
-	for(int i = 0; i < count; i++)
-	{
-		//calculate total calories for each line
-		tempCalories = otherData[i][0] * otherData[i][1];
-		//output each line
-		cout << items[i] << ";" << tempCalories << endl;
+
+void addVideo(Video list[], int &size) {
+	if (size == CAP) {
+		cout << "The list is full." << endl;
+		return;
 	}
-	cout << "Thank you!!" << endl;
+	cout << "Enter the title: ";
+	cin.getline(list[size].title, MAX_CHAR);
+	cout << "Enter the year: ";
+	cin >> list[size].year;
+	cin.ignore(100, '\n');
+	size++;
+}
+
+void printList(Video list[], int size) {
+	if (size == 0) {
+		cout << "The list is empty." << endl;
+		return;
+	}
+	for (int i = 0; i < size; i++) {
+		cout << list[i].title << " (" << list[i].year << ")" << endl;
+	}
+}
+
+Video srchByTitle(Video list[], int size) {
+	char title[MAX_CHAR];
+	Video dummy;
+	strcpy(dummy.title, "");
+	dummy.year = 0;
+	cout << "Enter the title: ";
+	cin.getline(title, MAX_CHAR);
+	for (int i = 0; i < size; i++) {
+		if (strcmp(list[i].title, title) == 0) {
+			cout << list[i].title << " (" << list[i].year << ")" << endl;
+			return list[i];
+		}
+	}
+	cout << "The title is not found." << endl;
+	return dummy;
 }
