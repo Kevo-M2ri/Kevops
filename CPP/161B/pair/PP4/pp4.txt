@@ -1,0 +1,76 @@
+DEFINE a constant integer MAX = 100
+
+//Function Prototypes
+FUNCTION boolean openFile(file stream, fileName[])
+FUNCTION void ratioCalc(input file, output file)
+FUNCTION void calcTotalStudents(input file, output file)
+
+FUNCTION integer main()
+    DECLARE input file stream inFile
+    DECLARE output file stream outFile
+    DECLARE character arrayes fileName[MAX], header[MAX]
+
+    DISPLAY "Enter name of input file:"
+    INPUT fileName
+
+    IF NOT openFile(inFile, fileName) THEN
+        DISPLAY "file did not open. Program terminating!!!"
+        EXIT PROGRAM
+    END IF
+
+    OPEN output file "stemout.txt"
+    IF output file failed to open THEN
+        DISPLAY "output file did not open. Program terminating!!!"
+        CLOSE input file
+        EXIT PROGRAM
+    END IF
+
+    READ header line from input file
+
+    CALL ratioCalc(inFile, outFile)
+
+    RESET file pointer to the beginning
+    READ header liner again
+
+    CALL calcTotalStudents(inFile, outFile)
+
+    CLOSE all files
+END main
+
+FUNCTION openFile(file stream, fileName)
+    OPEN file with fileName
+    IF file opens successfully THEN
+        RETURN true
+    ELSE
+        RETURN false
+    END IF
+END openFile
+
+FUNCTION ratioCalc(input file, output file)
+    DECLARE variables:
+        majorCode, major, majorCategor as character arrays
+        total, men, women, salary as integers
+        menPercentage, womenPercentage as doubles
+    
+    WRITE to output "Gender distribution by major"
+    WRITE separator line
+
+    WHILE reading data from input file
+        READ majorCode, major, majorCategory, total, men, women, salary
+
+        IF total > 0 THEN
+            SET menPercentage = (men / total) * 100
+            SET womenPercentage = (women / total) * 100
+
+            WRITE to output file:
+                major name
+                "Men: " menPercentage "%"
+                "Women: " womenPercentage "%"
+        END IF
+    END WHILE
+
+    IF error in reading file THEN
+        DISPLAY error message
+    END IF
+END ratioCalc
+ 
