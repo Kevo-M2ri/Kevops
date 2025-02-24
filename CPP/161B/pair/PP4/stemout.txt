@@ -1,0 +1,34 @@
+Gender distribution by major
+--------------------------------
+PETROLEUM-ENGINEERING                             Men: 87.94%      Women: 12.06%
+MINING-AND-MINERAL-ENGINEERING                    Men: 89.81%      Women: 10.19%
+METALLURGICAL-ENGINEERING                         Men: 84.70%      Women: 15.30%
+NAVAL-ARCHITECTURE-AND-MARINE-ENGINEERING         Men: 89.27%      Women: 10.73%
+NUCLEAR-ENGINEERING                               Men: 85.50%      Women: 14.50%
+CHEMICAL-ENGINEERING                              Men: 65.84%      Women: 34.16%
+ASTRONOMY-AND-ASTROPHYSICS                        Men: 46.43%      Women: 53.57%
+MECHANICAL-ENGINEERING                            Men: 88.04%      Women: 11.96%
+AEROSPACE-ENGINEERING                             Men: 86.02%      Women: 13.98%
+ELECTRICAL-ENGINEERING                            Men: 80.35%      Women: 19.65%
+GEOLOGICAL-AND-GEOPHYSICAL-ENGINEERING            Men: 67.78%      Women: 32.22%
+ENVIRONMENTAL-ENGINEERING                         Men: 65.78%      Women: 34.22%
+COMPUTER-ENGINEERING                              Men: 80.06%      Women: 19.94%
+MATERIALS-SCIENCE                                 Men: 68.92%      Women: 31.08%
+BIOMEDICAL-ENGINEERING                            Men: 56.22%      Women: 43.78%
+ENGINEERING-MECHANICS-PHYSICS-AND-SCIENCE         Men: 81.60%      Women: 18.40%
+BIOLOGICAL-ENGINEERING                            Men: 67.92%      Women: 32.08%
+INDUSTRIAL-AND-MANUFACTURING-ENGINEERING          Men: 65.65%      Women: 34.35%
+GENERAL-ENGINEERING                               Men: 74.70%      Women: 25.30%
+ARCHITECTURAL-ENGINEERING                         Men: 64.96%      Women: 35.04%
+ECOLOGY                                           Men: 42.36%      Women: 57.64%
+TREATMENT-THERAPY-PROFESSIONS                     Men: 27.81%      Women: 72.19%
+GENERAL-MEDICAL-AND-HEALTH-SERVICES               Men: 22.54%      Women: 77.46%
+ZOOLOGY                                           Men: 36.27%      Women: 63.73%
+
+Total number of students:
+--------------------------------
+Total Students: 491033
+Gender Distribution in general:
+Men: 67.81%
+Women: 32.19%
+Highest paying majorPETROLEUM-ENGINEERING with  $110000 annual salary
