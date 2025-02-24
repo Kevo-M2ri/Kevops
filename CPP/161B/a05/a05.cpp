@@ -4,11 +4,12 @@
    Assignment:  CS-161B Assignment a05
    Description: This program reads data from a file and stores it in a 2D array.
                 It then displays the data in the array and calculates the average
-                of the GCI and NCSI data. It also displays the country with the
-                highest and lowest GCI.
-   Inputs:      country as a 2D character array, gciNcsiData as a 2D integer array,
-                size as an integer.
-   Outputs:     country and gciNcsiData as 2D arrays, size as an integer.
+                of the NCSI data. It also displays the country with the highest
+                and lowest GCI.
+   Inputs:      file data2.txt containing country names, GCI and NCSI data.
+   Outputs:     country and gciNcsiData as 2D arrays, size as an integer,
+                average as a double, and the country with the highest and
+                lowest GCI.
    -------------------------------------------------------------------------**/
 
 #include <iostream>
@@ -23,19 +24,24 @@ const int MAX_CHAR = 150;
 const int MAX_SIZE = 30;
 
 // function prototypes
+void welcome();
 bool openFile(ifstream &inFile);
-int readData(ifstream &inFile, char country[][MAX_CHAR], int gciNcsiData[][2]);
-void displayData(char country[][MAX_CHAR], int gciNcsiData[][2], int size);
-void doAnalysis(char country[][MAX_CHAR], int gciNcsiData[][2], int size);
-double calcAverage(int gciNcsiData[][2], int count, int column);
+int readData(ifstream &inFile, char country[][MAX_CHAR], double gciNcsiData[][2]);
+void displayData(char country[][MAX_CHAR], double gciNcsiData[][2], int size);
+void doAnalysis(char country[][MAX_CHAR], double gciNcsiData[][2], int size);
+double calcAverage(double gciNcsiData[][2], int count, int column);
+void goodbye();
 
 // main function
 int main() {
     ifstream inFile; // input file stream
     int size = 0;
     char country[MAX_SIZE][MAX_CHAR]; // 2D array to store country names
-    int gciNcsiData[MAX_SIZE][2] = {0}; // 0: GCI, 1: NCSI
+    double gciNcsiData[MAX_SIZE][2] = {0}; // 0: GCI, 1: NCSI
     double average = 0.0;
+
+    welcome(); // display welcome message
+    cout << endl;
 
     if (!openFile(inFile)) {
         cout << "Error! File did not open! Program closing!!" << endl;
@@ -49,12 +55,23 @@ int main() {
     doAnalysis(country, gciNcsiData, size);
     average = calcAverage(gciNcsiData, size, 0);
 
+    cout << "Average GCI: " << average << endl << endl;
+
+    goodbye(); // display goodbye message
+
     return 0;
+}
+// function to display welcome message
+void welcome() {
+    cout << "Welcome to the GCI and NCSI data analysis program!" << endl;
+    cout << "This program reads data from a file and displays it." << endl;
+    cout << "It also calculates the average of the NCSI data." << endl;
+    cout << "Enjoy!" << endl;
 }
 
 // open the file
 bool openFile(ifstream &inFile) {
-    inFile.open("cybersecurity.txt"); // open the file
+    inFile.open("data2.txt"); // open the file
     if (!inFile.is_open()) {
         return false; // return false if the file is not opened
     }
@@ -62,23 +79,21 @@ bool openFile(ifstream &inFile) {
 }
 
 // read the data from the file
-int readData(ifstream &inFile, char country[][MAX_CHAR], int gciNcsiData[][2]) {
+int readData(ifstream &inFile, char country[][MAX_CHAR], double gciNcsiData[][2]) {
     int size = 0;
-    inFile.getline(country[size], MAX_CHAR); // read the first line of the file
 
-    while (!inFile.eof()) {
+    while (size < MAX_SIZE && inFile.getline(country[size], MAX_CHAR, ';')) {
         inFile >> gciNcsiData[size][0]; // read the GCI data
-        inFile.ignore(1, ';'); // ignore the semicolon
+        inFile.ignore(5, ';'); // ignore the semicolon
         inFile >> gciNcsiData[size][1]; // read the NCSI data
-        inFile.ignore(5, '\n'); // ignore the newline character
+        inFile.ignore(100, '\n'); // ignore the newline character
         size++;
-        inFile.getline(country[size], MAX_CHAR); // read the next line of the file
     }
 
     return size; // return the size of the data
 }
 
-void displayData(char country[][MAX_CHAR], int gciNcsiData[][2], int size) {
+void displayData(char country[][MAX_CHAR], double gciNcsiData[][2], int size) {
     cout << setw(20) << left << "Country" << setw(10) << right << "GCI";
     cout << setw(10) << right << "NCSI" << endl;
     cout << "------------------------------------------------" << endl;
@@ -91,7 +106,7 @@ void displayData(char country[][MAX_CHAR], int gciNcsiData[][2], int size) {
 }
 
 //do summary analysis for max and min GCI
-void doAnalysis(char country[][MAX_CHAR], int gciNcsiData[][2], int size) {
+void doAnalysis(char country[][MAX_CHAR], double gciNcsiData[][2], int size) {
     int maxGCI = 0, minGCI = 0;
     for (int i = 0; i < size; i++) {
         if (gciNcsiData[i][0] > gciNcsiData[maxGCI][0]) {
@@ -112,10 +127,16 @@ void doAnalysis(char country[][MAX_CHAR], int gciNcsiData[][2], int size) {
 }
 
 //calculate average of GCI or NCSI
-double calcAverage(int gciNcsiData[][2], int count, int column) {
+double calcAverage(double gciNcsiData[][2], int count, int column) {
     double sum = 0;
     for (int i = 0; i < count; i++) {
         sum += gciNcsiData[i][column];
     }
     return sum / count;
+}
+
+// function to display goodbye message
+void goodbye() {
+    cout << "Thank you for using the GCI and NCSI data analysis program!" << endl;
+    cout << "Goodbye!" << endl;
 }
