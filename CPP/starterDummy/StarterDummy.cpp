@@ -1,99 +1,168 @@
+//This program demos structs using InventoryType
+//The text file has a model number and a bin number for an Inventory database
+//Gayathri Iyer
+//March 26, 2022
+//Sources: None
+
 #include <iostream>
+#include <fstream>
+#include <iomanip>
 #include <cstring>
 using namespace std;
 
-const int MAX_CHAR = 101;
-const int CAP = 100;
-struct Video {
-	char title[MAX_CHAR];
-	int year;
+//global constants
+const int CAP = 20;
+const int MAXCHAR = 101;
+
+//define of the struct InventoryType
+
+struct InventoryType
+{
+	char modelNo[MAXCHAR];
+	char binNo[MAXCHAR];
 };
 
+//function prototype
+void openFile(ifstream& inFile);
 void displayMenu();
-char readOption();
-void addVideo(Video list[], int &size);
-void printList(Video list[], int size);
-Video srchByTitle(Video list[], int size);
+char readInput();
+void exeCommand(char option, InventoryType storeroom[], int size);
+int readData(ifstream& inFile, InventoryType storeroom[]);
+void searchModel(InventoryType storeroom[], int size);
+void searchBin(InventoryType storeroom[], int size);
+void outputData(InventoryType storeroom[], int size);
 
-int main() {
-	Video list[CAP];
+//main
+int main()
+{
+	InventoryType storeroom[CAP];
 	int size = 0;
 	char option;
-	do {
+	ifstream inFile;
+	openFile(inFile);
+	size = readData(inFile, storeroom);
+	outputData(storeroom, size);
+	do
+	{
 		displayMenu();
-		option = readOption();
-		switch (option) {
-		case 'A':
-			addVideo(list, size);
-			break;
-		case 'P':
-			printList(list, size);
-			break;
-		case 'S':
-			srchByTitle(list, size);
-			break;
-		case 'Q':
-			cout << "Goodbye!" << endl;
-			break;
-		default:
-			cout << "Invalid option. Please try again." << endl;
-		}
-	} while (option != 'Q');
+		option = readInput();
+		exeCommand(option, storeroom, size);
+	} while (tolower(option) != 'q');
 
 	return 0;
 }
 
-void displayMenu() {
-	cout << "(a) - Add a video" << endl;
-	cout << "(p) - Print the list" << endl;
-	cout << "(s) - Search by title" << endl;
-	cout << "(q) - Quit" << endl;
+//open file
+void openFile(ifstream& inFile)
+{
+	char filename[MAXCHAR];
+	cout << "Enter filename:";
+	cin.get(filename, MAXCHAR);
+	cin.ignore(100, '\n');
+	inFile.open(filename);
+	if (!inFile)
+	{
+		cout << "File did not open! Program terminating!!";
+		exit(0);
+	}
 }
 
-char readOption() {
+//display menu to user
+void displayMenu()
+{
+	cout << "Please pick one of the options:" << endl;
+	cout << "(m) to search by model number:" << endl;
+	cout << "(b) to search by bin number:" << endl;
+	cout << "(q) to quit:" << endl;
+}
+
+//read input from user after displaying the menu
+char readInput()
+{
 	char option;
-	cout << "Enter your option: ";
-	cin >> option;
+	cin.get(option);
 	cin.ignore(100, '\n');
-	return toupper(option);
+	return option;
 }
 
-void addVideo(Video list[], int &size) {
-	if (size == CAP) {
-		cout << "The list is full." << endl;
-		return;
-	}
-	cout << "Enter the title: ";
-	cin.getline(list[size].title, MAX_CHAR);
-	cout << "Enter the year: ";
-	cin >> list[size].year;
-	cin.ignore(100, '\n');
-	size++;
-}
-
-void printList(Video list[], int size) {
-	if (size == 0) {
-		cout << "The list is empty." << endl;
-		return;
-	}
-	for (int i = 0; i < size; i++) {
-		cout << list[i].title << " (" << list[i].year << ")" << endl;
+//execute the command based on user input
+void exeCommand(char option, InventoryType storeroom[], int size)
+{
+	switch (tolower(option))
+	{
+	case 'm':
+		searchModel(storeroom, size);
+		break;
+	case 'b':
+		searchBin(storeroom, size);
+		break;
+	case 'q':
+		break;
+	default:
+		cout << "Illegal input!";
 	}
 }
+//read data from file and 
+int readData(ifstream& inFile, InventoryType storeroom[])
+{
+	int size = 0;
+	while (!inFile.eof())
+	{
+		inFile >> storeroom[size].modelNo >> storeroom[size].binNo;
+		size++;
+	}
+	return size;
+}
 
-Video srchByTitle(Video list[], int size) {
-	char title[MAX_CHAR];
-	Video dummy;
-	strcpy(dummy.title, "");
-	dummy.year = 0;
-	cout << "Enter the title: ";
-	cin.getline(title, MAX_CHAR);
-	for (int i = 0; i < size; i++) {
-		if (strcmp(list[i].title, title) == 0) {
-			cout << list[i].title << " (" << list[i].year << ")" << endl;
-			return list[i];
+//print the contents of the array
+void outputData(InventoryType storeroom[], int size)
+{
+	for (int i = 0; i < size; i++)
+		cout << setw(10) << left << storeroom[i].modelNo
+		<< setw(10) << storeroom[i].binNo << endl;
+}
+
+//search by Model Number
+void searchModel(InventoryType storeroom[], int size)
+{
+	char srchStr[MAXCHAR];
+	bool found = false;
+	cout << "Enter model number to search for:";
+	cin.getline(srchStr, MAXCHAR);
+	for (int i = 0; i < size; i++)
+	{
+		if (strstr(storeroom[i].modelNo, srchStr) != NULL)
+		{
+			cout << setw(10) << left << storeroom[i].modelNo
+				<< setw(10) << storeroom[i].binNo << endl;
+			found = true;
+			//break;
 		}
 	}
-	cout << "The title is not found." << endl;
-	return dummy;
+	if (!found)
+		cout << "Model not found!!" << endl;
+}
+
+//search by Bin Number
+void searchBin(InventoryType storeroom[], int size)
+{
+	char srchStr[MAXCHAR];
+	bool found = false;
+	cout << "Enter bin number to search for:";
+	cin.getline(srchStr, MAXCHAR);
+	for (int i = 0; i < size; i++)
+	{
+		if (strcmp(storeroom[i].binNo, srchStr) == 0)
+		{
+			cout << setw(10) << left << storeroom[i].modelNo
+				<< setw(10) << storeroom[i].binNo << endl;
+			found = true;
+			//break;
+		}
+	}
+	if (!found)
+    {
+        cout << "Bin not found!!" << endl;
+    }
+		
 }
