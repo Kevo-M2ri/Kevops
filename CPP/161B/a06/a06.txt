@@ -1,0 +1,73 @@
+//student.h
+    DEFINE STRUCTURE Student
+        DECLARE character[20] first
+        DECLARE character[20] last
+        DECLARE double gpa
+    END STRUCTURE
+
+    DECLARE FUNCTIONS:
+        Student initStudent(character *first, character *last, double gpa)
+        void getLastName(character *studentName, Student student)
+        double getGPA(student student)
+        void printStd(Student student)
+//student.h file
+
+//student.cpp
+    FUNCTION initStudent(character *first, character *last, double gpa)
+        DECLARE Student student
+        copy first into student.first
+        copy last into student.last
+        SET student.gpa = gpa
+
+        RETURN student
+    END FUNCTION
+
+    FUNCTION void getLastName(char *studentName Student student)
+        copy student.last into studentName
+    END FUNCTION
+
+    FUNCTION double getGPA(Student student)
+        RETURN student.gpa
+    END FUNCTION
+
+    FUNCTION void printStd(Student student)
+        DISPLAY student.first student.last gpa
+// student.cpp file
+
+//course.h
+    DEFINE STRUCTURE Course:
+        DECLARE Student[] roster
+        DECLARE integer numStudents
+    END STRUCTURE
+
+    DECLARE FUNCTIONS:
+        Course initCourse()
+        void readStudent(ifstream &inFile, Course &course)
+        void addStudent(ifstream student, Course &course)
+        void dropStudent(character *lastname, Course &course)
+        Student findStudentHighestGPA(Course course)
+        void printRoster(Course course)
+// course.h file
+
+//course.cpp
+    FUNCTION Course initCourse()
+        Course course
+        SET course.numStudents = 0
+        RETURN course
+    END FUNCTION
+
+    FUNCTION void readStudent(ifstream &inFile, Course &course)
+        DECLARE Student student
+        DECLARE character[20] first
+        DECLARE character[20] last
+        DECLARE double gpa
+
+        WHILE (NOT at end of file)
+            Read line from file parsing to extract first, last and gpa
+            SET student = CALL initStudent(first, last, gpa)
+            CALL addStudent(student, course)
+        END WHILE
+    END FUNCTION
+
+    FUNCTION void addStudent(Student student, Course &course)
+        
