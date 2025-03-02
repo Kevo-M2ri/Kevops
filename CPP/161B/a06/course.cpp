@@ -22,9 +22,20 @@ void readStudent(ifstream &inFile, Course &course) {
     char first[20];
     char last[20];
     double gpa;
+    char line[100];
 
-    while (!inFile.eof()) {
-        inFile >> first >> last >> gpa;
+    while (inFile.getline(line, 100)) {
+        //use strtok to split the line using the delimiter ";"
+        char *token = strtok(line, ";");
+        if (token) strcpy(first, token);
+
+        token = strtok(NULL, ";");
+        if (token) strcpy(last, token);
+
+        token = strtok(NULL, ";");
+        if (token) gpa = atof(token);
+
+        // add student to the course
         student = initStudent(first, last, gpa);
         addStudent(student, course);
     }
@@ -34,11 +45,12 @@ void readStudent(ifstream &inFile, Course &course) {
 //modify this function to add the student sorted by name
 //do not use any sorting functions.
 //See this example in zyBooks Section 14.7 [https://learn.zybooks.com/zybook/PCCCS161BSpring23/chapter/14/section/7]
-void addStudent(Student student, Course &course) {
-	course.roster[course.numStudents].gpa = student.gpa;
-	strcpy(course.roster[course.numStudents].last, student.last);
-	strcpy(course.roster[course.numStudents].first, student.first);
-	course.numStudents++;
+Course addStudent(Student student, Course &course) {
+    course.roster[course.numStudents].gpa = student.gpa;
+    strcpy(course.roster[course.numStudents].last, student.last);
+    strcpy(course.roster[course.numStudents].first, student.first);
+    course.numStudents++;
+    return course;
 }
 
 //prints a whole Course roster calling student print.

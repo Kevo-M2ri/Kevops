@@ -1,6 +1,6 @@
 //The Course struct that uses the Student struct to create a list of students.
-#ifndef COURSE_H_
-#define COURSE_H_
+#ifndef COURSE_H
+#define COURSE_H
 
 #include "student.h"
 #include <fstream>
@@ -13,9 +13,8 @@ struct Course {
 };
 
 Course initCourse();
+Course addStudent(Student student, Course &course);
 void readStudent(ifstream &inFile, Course &course);
-void addStudent(Student student, Course &course);
-
 void dropStudent(char *lastname, Course &course);
 Student findStudentHighestGPA(Course course);
 void printRoster(Course course);
