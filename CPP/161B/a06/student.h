@@ -3,9 +3,9 @@
 #define STUDENT_H_
 
 struct Student {
-	char first[20];
-	char last[20];
-	double gpa;
+  char first[20];
+  char last[20];
+  double gpa;
 };
 
 //Function Prototypes

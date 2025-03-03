@@ -8,8 +8,8 @@
 using namespace std;
 
 struct Course {
-	Student roster[20];
-	int numStudents;
+  Student roster[20];
+  int numStudents;
 };
 
 Course initCourse();

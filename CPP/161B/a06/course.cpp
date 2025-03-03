@@ -11,9 +11,9 @@ using namespace std;
 //initiaizes a course variable and returns it. The array is empty
 //and the number of students is set to 0.
 Course initCourse() {
-	Course course;
-	course.numStudents = 0;
-	return course;
+    Course course;
+    course.numStudents = 0;
+    return course;
 }
 
 //reads a student from the file and calls AddStudent

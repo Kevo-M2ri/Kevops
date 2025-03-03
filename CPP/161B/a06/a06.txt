@@ -1,73 +1,152 @@
-//student.h
-    DEFINE STRUCTURE Student
-        DECLARE character[20] first
-        DECLARE character[20] last
-        DECLARE double gpa
-    END STRUCTURE
-
-    DECLARE FUNCTIONS:
-        Student initStudent(character *first, character *last, double gpa)
-        void getLastName(character *studentName, Student student)
-        double getGPA(student student)
-        void printStd(Student student)
-//student.h file
-
-//student.cpp
-    FUNCTION initStudent(character *first, character *last, double gpa)
-        DECLARE Student student
-        copy first into student.first
-        copy last into student.last
-        SET student.gpa = gpa
-
-        RETURN student
-    END FUNCTION
-
-    FUNCTION void getLastName(char *studentName Student student)
-        copy student.last into studentName
-    END FUNCTION
-
-    FUNCTION double getGPA(Student student)
-        RETURN student.gpa
-    END FUNCTION
-
-    FUNCTION void printStd(Student student)
-        DISPLAY student.first student.last gpa
-// student.cpp file
-
-//course.h
-    DEFINE STRUCTURE Course:
-        DECLARE Student[] roster
-        DECLARE integer numStudents
-    END STRUCTURE
-
-    DECLARE FUNCTIONS:
-        Course initCourse()
-        void readStudent(ifstream &inFile, Course &course)
-        void addStudent(ifstream student, Course &course)
-        void dropStudent(character *lastname, Course &course)
-        Student findStudentHighestGPA(Course course)
-        void printRoster(Course course)
-// course.h file
+//main.cpp
+FUNCTION main():
+    DEFINE Course course = CALL initCourse()
+    
+    DECLARE input file stream inFile
+    DECLARE character array lastname[20]
+    
+    DISPLAY "Welcome to my Course Roster Program"
+    
+    OPEN file "student.txt" using inFile
+    
+    IF file did not open THEN
+        DISPLAY "File did not open! Program Exiting!!"
+        RETURN 0
+    END IF
+    
+    CALL readStudent(inFile, course)
+    
+    CLOSE inFile
+    
+    DISPLAY "Here is the course roster:"
+    CALL printRoster(course)
+    
+    DISPLAY "Please enter the last name of the student you would like to drop:"
+    INPUT lastname
+    
+    CALL dropStudent(lastname, course)
+    
+    DISPLAY "Here is the course roster:"
+    Call printRoster(course)
+    
+    SET student = findStudentHighestGPA(course)
+    DISPLAY "Student with the highest GPA:"
+    CALL printStd(student)
+    
+    DISPLAY "Thank you for using my Student Roster program!!"
+    
+    Return 0
+END main
 
 //course.cpp
-    FUNCTION Course initCourse()
-        Course course
-        SET course.numStudents = 0
-        RETURN course
-    END FUNCTION
+FUNCTION Course initCourse()
+    DECLARE Course course
+    SET course.numStudents = 0
+    RETURN course
+END FUNCTION
 
-    FUNCTION void readStudent(ifstream &inFile, Course &course)
-        DECLARE Student student
-        DECLARE character[20] first
-        DECLARE character[20] last
-        DECLARE double gpa
-
-        WHILE (NOT at end of file)
-            Read line from file parsing to extract first, last and gpa
-            SET student = CALL initStudent(first, last, gpa)
-            CALL addStudent(student, course)
-        END WHILE
-    END FUNCTION
-
-    FUNCTION void addStudent(Student student, Course &course)
+FUNCTION void readStudent(REFERENCE to ifstream inFile, REFERENCE to Course course)
+    DECLARE Student student
+    DECLARE character arrays first[20], last[20], line[100]
+    DECLARE double gpa
+    
+    WHILE (inFile can read a line into line (up to 100 characters))
+        USE strtok to split line using ";" delimiter
+        SET first to the first token if it exists
+        GET next token
+        SET last to the second token if it exists
+        GET next token
+        CONVERT third token to double and store in gpa if it exists
         
+        SET student = CALL initStudent(first, last, gpa)
+        CALL addStudent(student, course)
+    END WHILE
+END FUNCTION
+
+FUNCTION Course addStudent(Student student, REFERENCE to Course course)
+    COPY student's gpa to course.roster[course.numStudents].gpa
+    COPY student's last name to course.roster[course.numStudents].last
+    COPY student's first name to course.roster[course.numStudents].first
+    INCREMENT course.numStudents
+
+    RETURN course
+END FUNCTION
+
+FUNCTION void printRoster(Course course)
+    FOR (i = 0 to course.numStudents - 1)
+        CALL printStd(course.roster[i])
+    END FOR
+END FUNCTION
+
+FUNCTION void dropStudent(character pointer lastname, REFERENCE to Course course)
+    SET i = 0
+    WHILE (i < course.numStudents)
+        IF (lastname matches course.roster[i].last) THEN
+            FOR (j = i to course.numStudents - 2)
+                COPY course.roster[j+1] to course.roster[j]
+            END FOR
+            DECREMENT course.numStudents
+        ELSE
+            INCREMENT i
+        END IF
+    END WHILE
+END FUNCTION
+
+FUNCTION Student findStudentHighestGPA(Course course) RETURNS Student
+    DEFINE Student highest = course.roster[0]
+    FOR (i = 1 to course.numStudents - 1)
+        IF (course.roster[i].gpa > highest.gpa) THEN
+            SET highest = course.roster[i]
+        END IF
+    END FOR
+    RETURN highest
+END FUNCTION
+
+//student.cpp
+FUNCTION Student initStudent(character pointer first, character pointer last, double gpa)
+    DECLARE Student student
+    COPY string from first to student.first
+    COPY string from last to student.last
+    SET student.gpa = gpa
+    RETURN student
+END FUNCTION
+
+FUNCTION void getLastName(character pointer studentName, Student student)
+    COPY string from student.last to studentName
+END FUNCTION
+
+FUNCTION double getGPA(Student student)
+    RETURN student.gpa
+END FUNCTION
+
+FUNCTION printStd(Student student)
+    DISPLAY student.first left-aligned with width 15
+    DISPLAY student.last left-aligned with width 15
+    DISPLAY student.gpa with fixed precision of 1 decimal place
+    DISPLAY newline
+END FUNCTION
+
+//course.h
+STRUCTURE Course
+    DECLARE array of Student: roster[20]
+    DECLARE integer numStudents
+END STRUCTURE
+
+DECLARE FUNCTION Course initCourse()
+DECLARE FUNCTION Course addStudent(Student student, REFERENCE to Course course)
+DECLARE FUNCTION void readStudent(REFERENCE to ifstream inFile, REFERENCE to Course course)
+DECLARE FUNCTION void dropStudent(character pointer lastname, REFERENCE to Course course)
+DECLARE FUNCTION Student findStudentHighestGPA(Course course)
+DECLARE FUNCTION void printRoster(Course course)
+
+//student.h
+STRUCTURE Student
+    DECLARE character ARRAY: first[20]
+    DECLARE character ARRAY: last[20]
+    DECLARE double gpa
+END STRUCTURE
+
+DECLARE FUNCTION Student initStudent(character pointer first, character pointer last, double gpa)
+DECLARE FUNCTION void getLastName(character pointer studentName, Student student)
+DECLARE FUNCTION double getGPA(Student student)
+DECLARE FUNCTION void printStd(Student student)
