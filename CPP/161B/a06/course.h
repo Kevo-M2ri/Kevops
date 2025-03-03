@@ -1,6 +1,6 @@
 //The Course struct that uses the Student struct to create a list of students.
-#ifndef COURSE_H
-#define COURSE_H
+#ifndef COURSE_H_
+#define COURSE_H_
 
 #include "student.h"
 #include <fstream>

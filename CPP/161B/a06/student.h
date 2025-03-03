@@ -1,6 +1,6 @@
 //The student struct
-#ifndef STUDENT_H
-#define STUDENT_H
+#ifndef STUDENT_H_
+#define STUDENT_H_
 
 struct Student {
 	char first[20];
