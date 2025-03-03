@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
-#include "Student.h"
-#include "Course.h"
+#include "student.h"
+#include "course.h"
 
 using namespace std;
 int main() {
@@ -12,7 +12,7 @@ int main() {
 
   	cout << "Welcome to my Course Roster Program\n" << endl;
 
- 	inFile.open("students.txt");
+ 	inFile.open("student.txt");
   	if(!inFile)
   	{
     	cout << "File did not open! Program Exiting!!" << endl;

@@ -3,8 +3,8 @@
 #include <iostream>
 #include <cstring>
 #include <fstream>
-#include "Course.h"
-#include "Student.h"
+#include "course.h"
+#include "student.h"
 
 using namespace std;
 
