@@ -1,0 +1,26 @@
+Organisation;Location;Detail;Price;Mission_Status
+SpaceX;LC-39A, USA;Falcon 9;50;Success
+CASC;Site 9401 (SLS-2), China;Long March 2D;29.75;Success
+SpaceX;Pad A-Boca Chica, USA;Starship Prototype;0;Success
+Roscosmos;Site 200/39, Kazakhstan;Proton-M/Briz-M;65;Success
+ULA;SLC-41, USA;Atlas V 541;145;Success
+CASC;LC-9, China;Long March 4B;64.68;Success
+Roscosmos;Site 31/6, Kazakhstan;Soyuz 2.1a;48.5;Success
+CASC;LC-101, China;Long March 5;0;Success
+SpaceX;SLC-40, USA;Falcon 9;50;Success
+JAXA;LA-Y1, Japan;H-IIA 202;90;Success
+Northrop;LP-0B, USA;Minotaur IV;46;Success
+ExPace;Site 95, China;Kuaizhou 11;28.3;Failure
+CASC;LC-3, China;Long March 3B/E;29.15;Success
+IAI;Pad 1, Israel;Shavit-2;0;Success
+CASC;Site 9401 (SLS-2), China;Long March 2D;29.75;Success
+Rocket Lab;Rocket Lab LC-1A, New Zealand;Electron/Curie;7.5;Failure
+CASC;LC-9, China;Long March 4B;64.68;Success
+SpaceX;SLC-40, USA;Falcon 9;50;Success
+CASC;LC-2, China;Long March 3B/E;29.15;Success
+CASC;Site 9401 (SLS-2), China;Long March 2D;29.75;Success
+SpaceX;SLC-40, USA;Falcon 9;50;Success
+Rocket Lab;Rocket Lab LC-1A, New Zealand;Electron/Curie;7.5;Success
+CASC;LC-9, China;Long March 2C;30.8;Success
+SpaceX;SLC-40, USA;Falcon 9;50;Success
+CASC;Site 9401 (SLS-2), China;Long March 2D;29.75;Success

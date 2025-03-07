@@ -1,0 +1,75 @@
+Script started on 2025-03-05 20:55:23-08:00
+bash: cd: CS161B: No such file or directory
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161Bkelvin.muturi@vmcslinuxprod01:~/CS161B $ mkdit[Kr Lab2
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161Bkelvin.muturi@vmcslinuxprod01:~/CS161B $ cd Lab2
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2 $ cp ~gd.iyer/CS161B/samples/sampe[Kle_ a01.cpp[K[Akelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2 $ cp ~gd.iyer/CS161B/samples/sample_a01.cpp .
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2 $ vi sampe[Kle[Ka[Kle_a01.cpp
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;55r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[55;1H"sample_a01.cpp" 52L, 1182C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m//This program demos loops, conditions and some functions.
+//A program to ask the user for coffee sizes and sell coffee[m
+[35m#include [m[31m<iostream>[m
+[35m#include [m[31m<cmath>[m
+[35m#include [m[31m<iomanip>[m
+
+[33musing[m [32mnamespace[m std;
+
+[34m//constants[m
+[32mconst[m [32mdouble[m SMALL = [31m2.50[m;
+[32mconst[m [32mdouble[m MED = [31m3.25[m;
+[32mconst[m [32mdouble[m LARGE = [31m4.50[m;
+
+[32mint[m main()
+{[16;9H[32mchar[m coffeeSize = [35m'\0'[m;[17;9H[32mint[m quantity = [31m0[m;[18;9H[32mdouble[m price = [31m0[m;[20;9Hcout << [31m"Please enter the size of the coffee:"[m << endl;[21;9Hcout << [31m"(s) Small, (m) Medium, (l) Large :"[m << endl;[22;9Hcout << [31m">>"[m;[23;9Hcin >> coffeeSize;[24;9HcoffeeSize = tolower(coffeeSize);[25;9H[33mwhile[m(coffeeSize != [31m's'[m && coffeeSize != [31m'm'[m && coffeeSize != [31m'l'[m)[26;9H{[27;17Hcout << [31m"Invalid input!! Please try again!"[m << endl;[28;17Hcout << [31m"Please enter the size of the coffee: "[m << endl;[29;17Hcin >> coffeeSize;[30;17HcoffeeSize = tolower(coffeeSize);[31;9H}[32;9Hcout << [31m"Enter quantity of coffee: "[m;[33;9Hcin >> quantity;[34;9H[33mif[m(coffeeSize == [31m's'[m)[35;9H{[36;17Hprice += (quantity * SMALL);[37;9H}[38;9H[33melse[m [33mif[m(coffeeSize == [31m'm'[m)[39;9H{[40;17Hprice += (quantity * MED);[41;9H}[42;9H[33melse[m [33mif[m(coffeeSize == [31m'l'[m)[43;9H{[44;17Hprice += (quantity * LARGE);[45;9H}[47;9H[34m//output the price[m[48;9Hcout << fixed << showpoint << setprecision([31m2[m);[49;9Hcout << [31m"Your total coffee price is $"[m << price << endl;[51;9H[33mreturn[m [31m0[m;
+}
+[1m[34m~                                                                                                                                                                                [54;1H~                                                                                                                                                                                [m[55;160H2,2[11CAll[2;2H[?25h[?25l[55;150Hj[2;2H[55;150H [3;2H[55;160H3[3;2H[?25h[?25l[55;150Hk[3;2H[55;150H [2;2H[55;160H2[2;2H[?25h[?25l[55;150Hk[2;2H[55;150H [1;2H[55;160H1[1;2H[?25h[?25l[55;150Hi[1;2H[55;150H [1;2H[55;1H[1m-- INSERT --[m[55;13H[K[55;160H1,2[11CAll[1;2H[?25h[?25l/T/This program demos loops, conditions [33mand[m some functions.[55;162H3[1;3H[?25h[?25l[34m//This program demos loops, conditions and some functions.[m[1;59H[K[55;162H2[1;2H[?25h[?25l/l/This program demos loops, conditions [33mand[m some functions.[55;162H3[1;3H[?25h[?25l[34m//This program demos loops, conditions and some functions.[m[1;59H[K[55;162H2[1;2H[?25h[55;1H[K[1;1H[?25l[55;150H^[[1;1H[55;150H  [1;2H[55;160H1,1[11CAll[1;1H[?25h[?25l[55;150Hl[1;1H[55;150H [1;2H[55;162H2[1;2H[?25h[?25l[55;150Hl[1;2H[55;150H [1;3H[55;162H3[1;3H[?25h[?25l[55;150Hi[1;3H[55;150H [1;3H[55;1H[1m-- INSERT --[m[55;160H[K[55;160H1,3[11CAll[1;3H[?25h[?25l[34mtThis program demos loops, conditions and some functions.[m[55;162H4[1;4H[?25h[?25l[34mhThis program demos loops, conditions and some functions.[m[55;162H5[1;5H[?25h[?25l[34miThis program demos loops, conditions and some functions.[m[55;162H6[1;6H[?25h[?25l[34msThis program demos loops, conditions and some functions.[m[55;162H7[1;7H[?25h[?25l[34mThis program demos loops, conditions and some functions.[m[1;62H[K[55;162H6[1;6H[?25h[?25l[34mThis program demos loops, conditions and some functions.[m[1;61H[K[55;162H5[1;5H[?25h[?25l[34mThis program demos loops, conditions and some functions.[m[1;60H[K[55;162H4[1;4H[?25h[?25l[34mThis program demos loops, conditions and some functions.[m[1;59H[K[55;162H3[1;3H[?25h[?25l/This program demos loops, conditions [33mand[m some functions.[1;58H[K[55;162H2[1;2H[?25h[?25l[34m//This program demos loops, conditions and some functions.[m[55;162H3[1;3H[?25h[?25l[1C[34mThis program demos loops, conditions and some functions.[m[55;162H4[1;4H[?25h[?25l[34mhThis program demos loops, conditions and some functions.[m[55;162H5[1;5H[?25h[?25l[34miThis program demos loops, conditions and some functions.[m[55;162H6[1;6H[?25h[?25l[34msThis program demos loops, conditions and some functions.[m[55;162H7[1;7H[?25h[?25l[34m This program demos loops, conditions and some functions.[m[55;162H8[1;8H[?25h[?25l[34mfThis program demos loops, conditions and some functions.[m[55;162H9[1;9H[?25h[?25l[34miThis program demos loops, conditions and some functions.[m[55;162H10[1;10H[?25h[?25l[34mlThis program demos loops, conditions and some functions.[m[55;163H1[1;11H[?25h[?25l[34meThis program demos loops, conditions and some functions.[m[55;163H2[1;12H[?25h[?25l[34m This program demos loops, conditions and some functions.[m[55;163H3[1;13H[?25h[?25l[34miThis program demos loops, conditions and some functions.[m[55;163H4[1;14H[?25h[?25l[34msThis program demos loops, conditions and some functions.[m[55;163H5[1;15H[?25h[?25l[34m This program demos loops, conditions and some functions.[m[55;163H6[1;16H[?25h[?25l[34mfThis program demos loops, conditions and some functions.[m[55;163H7[1;17H[?25h[?25l[34moThis program demos loops, conditions and some functions.[m[55;163H8[1;18H[?25h[?25l[34mrThis program demos loops, conditions and some functions.[m[55;163H9[1;19H[?25h[?25l[34m This program demos loops, conditions and some functions.[m[55;162H20[1;20H[?25h[?25l[34mlThis program demos loops, conditions and some functions.[m[55;163H1[1;21H[?25h[?25l[34maThis program demos loops, conditions and some functions.[m[55;163H2[1;22H[?25h[?25l[34mbThis program demos loops, conditions and some functions.[m[55;163H3[1;23H[?25h[?25l[34m2This program demos loops, conditions and some functions.[m[55;163H4[1;24H[?25h[?25l[2;54r[2;1H[L[1;55r[1;24H[K[2;1H[34m//This program demos loops, conditions and some functions.[m[55;160H[K[55;160H2,3[11CAll[2;3H[?25h[55;1H[K[2;2H[?25l[55;150H^[[2;2H[55;150H  [2;3H[55;160H2,2[11CAll[2;2H[?25h[?25l[55;150HZ[2;2H[?25h[?25l[55;151HZ[2;2H[?2004l[55;1H"sample_a01.cpp"[55;150H[K[55;18H53L, 1206C written
+[?2004l[?1l>[?25h[?1049l[23;0;0t]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2 $ vi sample_a01.cpp
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;55r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[55;1H"sample_a01.cpp" 53L, 1206C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m//This file is for lab2
+//This program demos loops, conditions and some functions.
+//A program to ask the user for coffee sizes and sell coffee[m
+[35m#include [m[31m<iostream>[m
+[35m#include [m[31m<cmath>[m
+[35m#include [m[31m<iomanip>[m
+
+[33musing[m [32mnamespace[m std;
+
+[34m//constants[m
+[32mconst[m [32mdouble[m SMALL = [31m2.50[m;
+[32mconst[m [32mdouble[m MED = [31m3.25[m;
+[32mconst[m [32mdouble[m LARGE = [31m4.50[m;
+
+[32mint[m main()
+{[17;9H[32mchar[m coffeeSize = [35m'\0'[m;[18;9H[32mint[m quantity = [31m0[m;[19;9H[32mdouble[m price = [31m0[m;[21;9Hcout << [31m"Please enter the size of the coffee:"[m << endl;[22;9Hcout << [31m"(s) Small, (m) Medium, (l) Large :"[m << endl;[23;9Hcout << [31m">>"[m;[24;9Hcin >> coffeeSize;[25;9HcoffeeSize = tolower(coffeeSize);[26;9H[33mwhile[m(coffeeSize != [31m's'[m && coffeeSize != [31m'm'[m && coffeeSize != [31m'l'[m)[27;9H{[28;17Hcout << [31m"Invalid input!! Please try again!"[m << endl;[29;17Hcout << [31m"Please enter the size of the coffee: "[m << endl;[30;17Hcin >> coffeeSize;[31;17HcoffeeSize = tolower(coffeeSize);[32;9H}[33;9Hcout << [31m"Enter quantity of coffee: "[m;[34;9Hcin >> quantity;[35;9H[33mif[m(coffeeSize == [31m's'[m)[36;9H{[37;17Hprice += (quantity * SMALL);[38;9H}[39;9H[33melse[m [33mif[m(coffeeSize == [31m'm'[m)[40;9H{[41;17Hprice += (quantity * MED);[42;9H}[43;9H[33melse[m [33mif[m(coffeeSize == [31m'l'[m)[44;9H{[45;17Hprice += (quantity * LARGE);[46;9H}[48;9H[34m//output the price[m[49;9Hcout << fixed << showpoint << setprecision([31m2[m);[50;9Hcout << [31m"Your total coffee price is $"[m << price << endl;[52;9H[33mreturn[m [31m0[m;
+}
+[1m[34m~                                                                                                                                                                                [m[55;160H2,2[11CAll[2;2H[?25h[?25l[55;150HG[2;2H[55;150H [53;1H[16;1H[46m{[53;1H}[m[55;160H53,1[53;1H[?25h[?25l[55;150HG[53;1H[55;150H [53;1H[?25h[?25l[55;150Hg[53;1H[?25h[?25l[55;150H [53;1H[55;150Hgg[53;1H[55;150H  [1;1H[16;1H{[53;1H}[55;160H1,1 [1;1H[?25h[?25l[55;150H^D[1;1H[55;150H  [28;17H[55;160H28,3-17[28;17H[?25h[?25l[55;150H^D[28;17H[55;150H  [53;1H[16;1H[46m{[53;1H}[m[55;160H53,1   [53;1H[?25h[?25l[55;150H^B[53;1H[55;150H  [53;1H[?25h[?25l[55;150H^B[53;1H[55;150H  [53;1H[?25h[?25l[55;150H^B[53;1H[55;150H  [53;1H[?25h[?25l[55;150H^B[53;1H[55;150H  [53;1H[?25h[?25l[55;150H^B[53;1H[55;150H  [53;1H[?25h[?25l[55;150H^B[53;1H[55;150H  [53;1H[?25h[?25l[55;150Hg[53;1H[?25h[?25l[55;150H [53;1H[55;150Hgg[53;1H[55;150H  [1;1H[16;1H{[53;1H}[55;160H1,1 [1;1H[?25h[?25l[55;150H:[1;1H[55;1H[K[55;1H:[?2004h[?25h2[?25l[?25h0[?25l[?25h[?25l[20;1H[55;160H20,0-1[8CAll[20;1H[?25h[?25l[55;150H^M[20;1H[55;150H  [21;9H[55;161H1,2-9[21;9H[?25h[?25l[55;150H^M[21;9H[55;150H  [22;9H[55;161H2[22;9H[?25h[?25l[55;150H^M[22;9H[55;150H  [23;9H[55;161H3[23;9H[?25h[?25l[55;150H$[23;9H[55;150H [23;21H[55;163H14-21[23;21H[?25h[?25l[55;150Hi[23;21H[55;150H [23;21H[55;1H[1m-- INSERT --[m[55;160H[K[55;160H23,14-21      All[23;21H[?25h[?25l/;[55;164H5-22[23;22H[?25h[?25l[34m//;[m[55;164H6-23[23;23H[?25h[?25l/;[23;23H[K[55;164H5-22[23;22H[?25h[?25l;[23;22H[K[55;164H4-21[23;21H[?25h[?25la;[55;164H5-22[23;22H[?25h[?25l;[23;22H[K[55;164H4-21[23;21H[?25h[55;1H[K[23;20H[?25l[55;150H^[[23;20H[55;150H  [23;21H[55;160H23,13-20      All[23;20H[?25h[?25l[55;150Ha[23;20H[55;150H [23;21H[55;1H[1m-- INSERT --[m[55;160H[K[55;160H23,14-21      All[23;21H[?25h[?25l/;[55;164H5-22[23;22H[?25h[?25l[34m//;[m[55;164H6-23[23;23H[?25h[?25l/;[23;23H[K[55;164H5-22[23;22H[?25h[?25l;[23;22H[K[55;164H4-21[23;21H[?25h[?25l[55;164H5-22[23;22H[?25h[?25l/[55;164H6-23[23;23H[?25h[?25l[34m//[m[55;164H7-24[23;24H[?25h[?25l[34mo[m[55;164H8-25[23;25H[?25h[?25l[34mu[m[55;164H9-26[23;26H[?25h[?25l[34mt[m[55;163H20-27[23;27H[?25h[?25l[34mp[m[55;164H1-28[23;28H[?25h[?25l[34mu[m[55;164H2-29[23;29H[?25h[?25l[34mt[m[55;164H3-30[23;30H[?25h[?25l[34m [m[55;164H4-31[23;31H[?25h[?25l[34mh[m[55;164H5-32[23;32H[?25h[?25l[34mo[m[55;164H6-33[23;33H[?25h[?25l[34ml[m[55;164H7-34[23;34H[?25h[?25l[34md[m[55;164H8-35[23;35H[?25h[?25l[34me[m[55;164H9-36[23;36H[?25h[?25l[34mr[m[55;163H30-37[23;37H[?25h[?25l[34ms[m[55;164H1-38[23;38H[?25h[?25l[34m:[m[55;164H2-39[23;39H[?25h[?25l[34mq[m[55;164H3-40[23;40H[?25h[?25l[34m![m[55;164H4-41[23;41H[?25h[?25l[24;54r[24;1H[L[1;55r[55;160H[K[55;160H24,2-9[8CAll[24;9H[?25h[?25lu[55;163H3-10[24;10H[?25h[?25lu[55;163H4-11[24;11H[?25h[55;1H[K[24;10H[?25l[55;150H^[[24;10H[55;150H  [24;11H[55;160H24,3-10[7CAll[24;10H[?25h[?25l[55;150Hu[24;10H[55;1H1 line less; before #3  91 seconds ago[55;150H[K[23;21H[23;54r[54;1H
+[1;55r[23;9Hcout << [31m">>"[m;[54;1H[1m[34m~                                                                                                                                                                                [m[55;1H[K[55;160H23,14-21      All[23;21H[?25h[?25l[55;150H:[23;21H[55;150H[K[55;1H:[?2004h[?25hq[?25l[?25h![?25l[?25h[?25l[?2004l[55;1H[K[55;1H[?2004l[?1l>[?25h[?1049l[23;0;0t]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2 $ g++ -Wall -g sample_a01.cpp -o sample_a01
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2 $ ./sample_a01
+Please enter the size of the coffee:
+(s) Small, (m) Medium, (l) Large :
+>>s
+Enter quantity of coffee: 10
+Your total coffee price is $25.00
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2 $ ./sample_a01
+Please enter the size of the coffee:
+(s) Small, (m) Medium, (l) Large :
+>>m
+Enter quantity of coffee: 10
+Your total coffee price is $32.50
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2 $ ./sample_a01
+Please enter the size of the coffee:
+(s) Small, (m) Medium, (l) Large :
+>>l
+Enter quantity of coffee: 10
+Your total coffee price is $45.00
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2 $ ./sample a01
+bash: ./sample: No such file or directory
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2 $ .sample_ao1[K[K10[K[K01
+bash: .sample_a01: command not found
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2 $ ./sample[Ka01[K[K[K.sample_a01[K.sample_a01/sample_a01
+Please enter the size of the coffee:
+(s) Small, (m) Medium, (l) Large :
+>>s
+Enter quantity of coffee: 1
+Your total coffee price is $2.50
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab2 $ exit
+exit
+
+Script done on 2025-03-05 21:08:15-08:00
