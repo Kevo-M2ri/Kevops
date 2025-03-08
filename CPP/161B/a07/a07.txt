@@ -1,0 +1,62 @@
+// FUNCTION PROTOTYPES
+FUNCTION void swapArgs(int *a, int *b)
+FUNCTION void divideArgs(int *a, int *b)
+FUNCTION void powerArgs(int *a, int *b)
+
+FUNCTION integer main()
+    DECLARE integers a, b
+
+    DISPLAY "Welcome to the program!"
+
+    DISPLAY "Input the first number: "
+    INPUT a
+    DISPLAY "Input the second number: "
+    INPUT b
+
+    DISPLAY "Before any manipulation, the numbers are: ", a, " and ", b
+
+    WHILE (b > 0)
+        CALL swapArgs(&a, &b)
+        DISPLAY "After swapping, the numbers are: ", a, " and ", b
+
+        CALL divideArgs(&a, &b)
+        DISPLAY "After dividing, the numbers are: ", a, " and ", b
+
+        CALL powerArgs(&a, &b)
+        DISPLAY "After raising to the power, the numbers are: ", a, " and ", b
+
+        BREAK
+    END WHILE
+
+    DISPLAY "End of program. Goodbye!"
+
+    RETURN 0
+END FUNCTION
+
+FUNCTION void swapArgs(int *a, int *b)
+    DEFINE integer temp = a
+    SET *a = *b
+    SET *b = temp
+END FUNCTION
+
+FUNCTION void divideArgs(int *a, int *b)
+    DECLARE an integer remainder
+    DECLARE an integer quotient
+
+    SET quotient = *a / *b
+    SET remainder = *a % *b
+    SET *a = quotient
+    SET *b = remainder
+END FUNCTION
+
+FUNCTION void powerArgs(int *a, int *b)
+    DECLARE an integer base = *a
+    DECLARE an integer exponent = *b
+    DECLARE an integer result = 1
+
+    FOR (int i = 0; i < exponent; ++i)
+        SET result *= base
+    END FOR
+
+    SET *a = result
+END FUNCTION
