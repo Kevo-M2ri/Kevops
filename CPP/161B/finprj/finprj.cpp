@@ -1,3 +1,14 @@
+/*-----------------------------------------------------------------
+  This project is a simple database for space missions. It allows
+  the user to add, remove, search, and display missions. The data is
+  stored in a file called "missions.txt". The user can save changes
+  to the file before quitting the program. The program uses a struct
+  to store mission data and a few functions to interact with the data.
+  The program also includes a few helper functions to validate user
+  input and clear the input buffer. The program is menu-driven and
+  uses a loop to keep running while the user chooses to remove, add,
+  search or display missions until the user chooses to quit.
+  ------------------------------------------------------------------*/
 #include <iostream>
 #include "mission.h"
 
