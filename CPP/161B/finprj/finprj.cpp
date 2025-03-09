@@ -66,16 +66,7 @@ int main() {
                     }
                     break;
 
-                case 5: // Save changes
-                    if (saveMissions(missions, missionCount)) {
-                        cout << "Database saved successfully!" << endl;
-                        dataChanged = false;
-                    } else {
-                        cout << "Failed to save database. Changes might be lost." << endl;
-                    }
-                    break;
-
-                case 6: // Quit
+                case 5: // Quit
                     if (dataChanged) {
                         char saveChoice;
                         cout << "You have unsaved changes. Would you like to save before quitting? (y/n): ";
