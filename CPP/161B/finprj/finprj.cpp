@@ -1,4 +1,4 @@
-/*-----------------------------------------------------------------
+/*------------------------------------------------------------------
   This project is a simple database for space missions. It allows
   the user to add, remove, search, and display missions. The data is
   stored in a file called "missions.txt". The user can save changes
