@@ -65,21 +65,7 @@ int main() {
                         }
                     }
                     break;
-
-                case 5: // Quit
-                    if (dataChanged) {
-                        char saveChoice;
-                        cout << "You have unsaved changes. Would you like to save before quitting? (y/n): ";
-                        cin >> saveChoice;
-
-                        if (toupper(saveChoice) == 'Y') {
-                            if (saveMissions(missions, missionCount)) {
-                                cout << "Database saved successfully!" << endl;
-                            } else {
-                                cout << "Failed to save database. Changes might be lost." << endl;
-                            }
-                        }
-                    }
+                    
                     cout << "Thank you for using the Space Mission Database. Goodbye!" << endl;
                     break;
             }
