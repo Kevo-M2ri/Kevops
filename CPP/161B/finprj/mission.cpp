@@ -51,32 +51,6 @@ int loadMissions(SpaceMission missions[], int maxSize) {
     return count;
 }
 
-bool saveMissions(const SpaceMission missions[], int count) {
-    ofstream outFile(FILENAME);
-
-    if (!outFile) {
-        return false;
-    }
-
-    // Write header line
-    outFile << "Organisation;Location;Detail;Price;Mission_Status" << endl;
-
-    for (int i = 0; i < count; i++) {
-        outFile << missions[i].name << ";"
-                << missions[i].launchSite << ";"
-                << missions[i].rocketType << ";"
-                << missions[i].cost << ";"
-                << missions[i].status;
-
-        if (i < count - 1) {
-            outFile << endl;
-        }
-    }
-
-    outFile.close();
-    return true;
-}
-
 void displayMenu() {
     cout << endl;
     cout << "--------- SPACE MISSION DATABASE ---------" << endl;
@@ -84,7 +58,6 @@ void displayMenu() {
     cout << "2. Add a new mission" << endl;
     cout << "3. Find a mission" << endl;
     cout << "4. Remove a mission" << endl;
-    cout << "5. Save changes" << endl;
     cout << "6. Quit" << endl;
 }
 
@@ -126,7 +99,7 @@ bool addMission(SpaceMission missions[], int& count, int maxSize) {
     // Clear input buffer
     clearInputBuffer();
 
-    cout << "Enter mission name: ";
+    cout << "Enter mission's company name: ";
     cin.getline(newMission.name, 50);
 
     cout << "Enter launch site: ";

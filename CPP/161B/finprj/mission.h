@@ -19,7 +19,6 @@ struct SpaceMission {
 
 // File operations
 int loadMissions(SpaceMission missions[], int maxSize);
-bool saveMissions(const SpaceMission missions[], int count);
 
 // Display functions
 void displayMenu();
