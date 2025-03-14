@@ -8,21 +8,22 @@ FUNCTION void calcTotalStudents(input file, output file)
 FUNCTION integer main()
     DECLARE input file stream inFile
     DECLARE output file stream outFile
-    DECLARE character arrayes fileName[MAX], header[MAX]
+    DECLARE character arrays fileName[MAX], header[MAX]
 
     DISPLAY "Enter name of input file:"
     INPUT fileName
 
     IF NOT openFile(inFile, fileName) THEN
         DISPLAY "file did not open. Program terminating!!!"
-        EXIT PROGRAM
+        RETURN 0
     END IF
 
     OPEN output file "stemout.txt"
+
     IF output file failed to open THEN
         DISPLAY "output file did not open. Program terminating!!!"
         CLOSE input file
-        EXIT PROGRAM
+        RETURN 0
     END IF
 
     READ header line from input file
@@ -34,10 +35,12 @@ FUNCTION integer main()
 
     CALL calcTotalStudents(inFile, outFile)
 
-    CLOSE all files
+    CLOSE input file
+    CLOSE output file
+    RETURN 0
 END main
 
-FUNCTION openFile(file stream, fileName)
+FUNCTION boolean openFile(input file stream,character[] fileName)
     OPEN file with fileName
     IF file opens successfully THEN
         RETURN true
@@ -46,9 +49,9 @@ FUNCTION openFile(file stream, fileName)
     END IF
 END openFile
 
-FUNCTION ratioCalc(input file, output file)
+FUNCTION ratioCalc(input file stream, output file stream)
     DECLARE variables:
-        majorCode, major, majorCategor as character arrays
+        majorCode, major, majorCategory as character arrays
         total, men, women, salary as integers
         menPercentage, womenPercentage as doubles
     
@@ -74,3 +77,39 @@ FUNCTION ratioCalc(input file, output file)
     END IF
 END ratioCalc
  
+FUNCTION void calcTotalStudents(input file stream, output file stream)
+    DECLARE variables:
+        majorCode, major, majorCategory, highestPayingMajor as character arrays
+        total, men, women, salary, totalMen, totalWomen, totalStudents, largestProgram as integers
+        totalMenPercentage, totalWomenPercentage, highestSalary as doubles
+
+    WHILE (READ majorCode, major, majorCategory, total, men, women, salary)
+        SET totalMen += men
+        SET totalWomen += women
+
+        IF (salary > highestSalary) THEN
+            highestSalary = salary
+            copy major to highestPayingMajor
+        END IF
+    END WHILE
+
+    SET totalStudents = totalMen + totalWomen
+
+    IF (totalStudents > 0) THEN
+        SET totalMenPercentage = (totalMen /totalStudents) / 100
+        SET totalWomenPercentage = (totalWomen / totalStudents) / 100
+    END IF
+
+    WRITE to outFile:
+        "Total number of students:"
+        "-------------------------------"
+        "Total students: " totalStudents
+        "Gender Distribution in general:"
+        "Men: " totalMenPercentage "%"
+        "Women: " totalWomenPercentage "%"
+        "Highest paying major" highestPayingMajor " with $" highestSalary " annual salary"
+
+    IF (NOT(end of input file) AND input file Fails)
+        DISPLAY "Error reading input file!!"
+    END IF
+END FUNCTION

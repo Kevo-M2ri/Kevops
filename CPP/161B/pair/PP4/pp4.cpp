@@ -8,8 +8,8 @@
 #                   number of students in each major, and the highest paying major
 #                   The program then writes the calculated results to an output file.
 #                   results to an output file.
-# Input:            Input file name
-# Output:           
+# Input:            input file name requested from user
+# Output:           writes the results to an output file named "stemout.txt"
 # Sources:       
 #******************************************************************************/
 #include <fstream>
@@ -123,11 +123,10 @@ void calcTotalStudents(ifstream& inFile, ofstream& outFile) {
     int totalMen = 0;
     int totalWomen = 0;
     int totalStudents = 0;
-    int largestProgram = 0;
     char highestPayingMajor[MAX] = " ";
     double totalMenPercentage = 0.0;
     double totalWomenPercentage = 0.0;
-    int highestSalary = 0;
+    double highestSalary = 0;
     
 
     while (inFile >> majorCode >>major >> majorCategory >> total >> men >> women >> salary) { // read input file
@@ -154,7 +153,7 @@ void calcTotalStudents(ifstream& inFile, ofstream& outFile) {
     outFile << "Gender Distribution in general:" << endl; 
     outFile << "Men: " << totalMenPercentage << "%" << endl;
     outFile << "Women: " << totalWomenPercentage << "%" << endl;
-    outFile << "Highest paying major" << highestPayingMajor << " with  $" << highestSalary << " annual salary" << endl;
+    outFile << "Highest paying major is: " << highestPayingMajor << " with  $" << highestSalary << " annual salary" << endl;
 
     if (!inFile.eof() && inFile.fail()) {
         outFile << "Error reading input file!!" << endl;
