@@ -8,9 +8,11 @@
 #                   number of students in each major, and the highest paying major
 #                   The program then writes the calculated results to an output file.
 #                   results to an output file.
-# Input:            input file name requested from user
-# Output:           writes the results to an output file named "stemout.txt"
-# Sources:       
+# Input:            majorCode, major, majorCategory as character arrays, total, men,
+                    women, annualSalary as integers
+# Output:           writes Gender distribution by major and overall, totalStudents,
+                    and highestPayingMajor to an output file named"stemout.txt"
+# Sources:          stem.txt
 #******************************************************************************/
 #include <fstream>
 #include <iomanip>
