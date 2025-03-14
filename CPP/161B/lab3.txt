@@ -1,0 +1,220 @@
+Script started on 2025-03-09 21:47:35-07:00
+bash: cd: CS161B: No such file or directory
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161Bkelvin.muturi@vmcslinuxprod01:~/CS161B $ cd
+]0;kelvin.muturi@vmcslinuxprod01:~kelvin.muturi@vmcslinuxprod01:~ $ ls[K[Kcd CS161B
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161Bkelvin.muturi@vmcslinuxprod01:~/CS161B $ cd
+]0;kelvin.muturi@vmcslinuxprod01:~kelvin.muturi@vmcslinuxprod01:~ $ ls
+[0m[01;34mCS161B[0m  lab1.txt  lab2.txt  lab3.txt  [01;34mpractice[0m
+]0;kelvin.muturi@vmcslinuxprod01:~kelvin.muturi@vmcslinuxprod01:~ $ cd CS161B
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161Bkelvin.muturi@vmcslinuxprod01:~/CS161B $ nkdir Lab3
+bash: nkdir: command not found
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161Bkelvin.muturi@vmcslinuxprod01:~/CS161B $ mkdir Lab3
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161Bkelvin.muturi@vmcslinuxprod01:~/CS161B $ cd LA[Kabn[K 3
+bash: cd: too many arguments
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161Bkelvin.muturi@vmcslinuxprod01:~/CS161B $ cd LAb[K[Kab3
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3 $ pwd
+/home/student/kelvin.muturi/CS161B/Lab3
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3 $ cp ~gd.iyer/CS161B/samples_a06.cpp  .
+cp: cannot stat '/home/inst/gd.iyer/CS161B/samples_a06.cpp': No such file or directory
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3 $ cp ~gd.iyer/CS161B/samples_a06.cpp  .[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C/_a06.cpp .[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cs_a06.cpp .[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ca_a06.c[Cp .[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cm_a06.[1@c[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cp_a06[1@.[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cl_a0[1@6[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ce_a[1@0[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ca_[1@a[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C_a[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ca_[1@a[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C_a[1P[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cs_[1@a[C
+cp: cannot stat '/home/inst/gd.iyer/CS161B/samples/samples_a06.cpp': No such file or directory
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3 $ ls[K[Kcp `[K~gd.iyer/CS161N[KBN[K/samples/sample_ a06.cpp .
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3 $ cp ~gd.iyer/CS161B/samples/items.t xt .
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3 $ vi sample.a06[1Pa06_a06[C[C[C.cpp
+[?2004h[?1049h[22;0;0t[?1h=[?2004h[1;24r[?12h[?12l[27m[23m[29m[m[H[2J[?25l[24;1H"sample_a06.cpp" 101L, 2752C[2;1H▽[6n[2;1H  [1;1H[>c]10;?]11;?[1;1H[34m//This program reads from items.txt and prints the total calories of each item
+//items.txt has [m[31m3[m[34m columns of data - itemname that can have spaces, quantity - ann[3;1H int
+//and calories - an int
+//The program will read the data into a [m[31m2[m[34m dim char array and a [m[31m2[m[34m dim int array
+//It will calculate the total calories for each item and output to screen
+//[m
+[35m#include [m[31m<iostream>[m
+[35m#include [m[31m<fstream>[m
+[35m#include [m[31m<cstring>[m
+
+[33musing[m [32mnamespace[m std;
+
+[34m//constant for number of items[m
+[32mconst[m [32mint[m ITEMS = [31m10[m;
+[34m//constant for number of characters[m
+[32mconst[m [32mint[m MAXCHAR = [31m51[m;
+
+[34m//function prototypes[m
+[32mbool[m openFile(ifstream &inFile);
+[32mint[m loadData(ifstream &inFile, [32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m]);
+[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m size);[24;63H1,1[11CTop[1;1H[?25h[?25l[24;53Hl[1;1H[24;53H [1;2H[24;65H2[1;2H[?25h[?25l[24;53Hk[1;2H[24;53H [1;2H[?25h[?25l[24;53Hj[1;2H[24;53H [2;2H[24;63H2[2;2H[?25h[?25l[24;53Hj[2;2H[24;53H [4;2H[24;63H3[4;2H[?25h[?25l[24;53Hj[4;2H[24;53H [5;2H[24;63H4[5;2H[?25h[?25l[24;53Hj[5;2H[24;53H [6;2H[24;63H5[6;2H[?25h[?25l[24;53Hj[6;2H[24;53H [7;2H[24;63H6[7;2H[?25h[?25l[24;53Hj[7;2H[24;53H [8;2H[24;63H7[8;2H[?25h[?25l[24;53Hj[8;2H[24;53H [9;2H[24;63H8[9;2H[?25h[?25l[24;53Hj[9;2H[24;53H [10;2H[24;63H9[10;2H[?25h[?25l[24;53Hj[10;2H[24;53H [11;1H[24;63H10,0-1[11;1H[?25h[?25l[24;53Hj[11;1H[24;53H [12;2H[24;64H1,2  [12;2H[?25h[?25l[24;53Hj[12;2H[24;53H [13;1H[24;64H2,0-1[13;1H[?25h[?25l[24;53Hj[13;1H[24;53H [14;2H[24;64H3,2  [14;2H[?25h[?25l[24;53Hj[14;2H[24;53H [15;2H[24;64H4[15;2H[?25h[?25l[24;53Hj[15;2H[24;53H [16;2H[24;64H5[16;2H[?25h[?25l[24;53Hj[16;2H[24;53H [17;2H[24;64H6[17;2H[?25h[?25l[24;53Hj[17;2H[24;53H [18;1H[24;64H7,0-1[18;1H[?25h[?25l[24;53Hj[18;1H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;1H[34m//main function that will call openFile, loadData and calcCalories[m[24;1H[K[24;63H18,2[11C1%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [17;2H[1;23r[1;1H[2M[1;24r[22;1H[32mint[m main()
+{[24;63H[K[24;63H19,2[11C2%[17;2H[?25h[?25l[24;53Hj[17;2H[24;53H [18;2H[24;63H20[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9Hifstream inFile;[24;63H[K[24;63H21,2[11C3%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;1H[1;23r[23;1H
+[1;24r[23;9H[32mint[m size = [31m0[m;[24;63H[K[24;63H22,0-1[9C5%[18;1H[?25h[?25l[24;53Hj[18;1H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9H[32mchar[m items[ITEMS][MAXCHAR];[24;63H[K[24;63H23,2[11C6%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9H[32mint[m otherData[ITEMS][[31m2[m] = {[31m0[m};[24;63H[K[24;63H24,2[11C7%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;1H[1;23r[23;1H
+[1;24r[23;9H[33mif[m(!openFile(inFile))[24;63H[K[24;63H25,1[11C8%[18;1H[?25h[?25l[24;53Hj[18;1H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;9H{[24;63H[K[24;63H26,1-8[8C10%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17Hcout << [31m"File did not open! Program terminating!!"[m << endl;[24;63H[K[24;63H27,1-8[8C11%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17Hexit([31m0[m);[24;63H[K[24;63H28,1-8[8C12%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;9H}[24;63H[K[24;63H29,1-8[8C14%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;9Hsize = loadData(inFile, items, otherData);[24;63H[K[24;63H30,1-8[8C15%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;9HcalcCalories(items, otherData, size);[24;63H[K[24;63H31,1-8[8C16%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[24;63H[K[24;63H32,1-8[8C17%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;9H[33mreturn[m [31m0[m;[24;63H[K[24;63H33,1-8[8C19%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;1H}[24;63H[K[24;63H34,1-8[8C20%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[24;63H[K[24;63H35,1-8[8C21%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;1H[34m//Name:                 openFile[m[24;63H[K[24;63H36,1-8[8C23%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;1H[34m//Description:  opens the file and returns true or false[m[24;63H[K[24;63H37,1-8[8C24%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;1H[34m//input params: file stream variable[m[24;63H[K[24;63H38,1-8[8C25%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;1H[1;23r[23;1H
+[1;24r[4;1H[46m{[18;1H}[m[23;1H[34m//ouput:                none[m[24;63H[K[24;63H39,1[10C26%[18;1H[?25h[?25l[24;53Hj[18;1H[24;53H [18;1H[1;23r[23;1H
+[1;24r[3;1H{[17;1H}[23;1H[34m//return:               true or false[m[24;63H[K[24;63H40,0-1[8C28%[18;1H[?25h[?25l[24;53Hj[18;1H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;1H[34m//[m[24;63H[K[24;63H41,2[10C29%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;1H[32mbool[m openFile(ifstream &inFile)[24;63H[K[24;63H42,2[10C30%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;1H{[24;63H[K[24;63H43,2[10C32%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9HinFile.open([31m"items.txt"[m);[24;63H[K[24;63H44,2[10C33%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9H[33mif[m(!inFile)[24;63H[K[24;63H45,2[10C34%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9H{[24;63H[K[24;63H46,2[10C35%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;17H[33mreturn[m [31mfalse[m;[24;63H[K[24;63H47,2[10C37%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;1H[1;23r[23;1H
+[1;24r[23;9H}[24;63H[K[24;63H48,1[10C38%[18;1H[?25h[?25l[24;53Hj[18;1H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;9H[33mreturn[m [31mtrue[m;[24;63H[K[24;63H49,1-8[8C39%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;1H}[24;63H[K[24;63H50,1-8[8C41%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[24;63H[K[24;63H51,1-8[8C42%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;1H[34m//Name:                 loadData[m[24;63H[K[24;63H52,1-8[8C43%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;1H[34m//Description:  loads data from file[m[24;63H[K[24;63H53,1-8[8C44%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [17;8H[1;23r[1;1H[2M[1;24r[22;1H[34m//input params: char array for item names, and int array for other data ([m[31m2[m[34m dim aa[23;1Hrrays)[m[24;63H[K[24;63H54,1-8[8C46%[17;8H[?25h[?25l[24;53Hj[17;8H[24;53H [18;1H[11;1H[46m{[18;1H}[m[24;64H5,1  [18;1H[?25h[?25l[24;53Hj[18;1H[24;53H [18;1H[1;23r[23;1H
+[1;24r[10;1H{[17;1H}[23;1H[34m//output:               none[m[24;63H[K[24;63H56,0-1[8C48%[18;1H[?25h[?25l[24;53Hj[18;1H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;1H[34m//return:               size of the number of items.[m[24;63H[K[24;63H57,2[10C49%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;1H[34m//[m[24;63H[K[24;63H58,2[10C50%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [17;2H[1;23r[1;1H[2M[1;24r[22;1H[32mint[m loadData(ifstream &inFile, [32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m])
+{[24;63H[K[24;63H59,2[10C53%[17;2H[?25h[?25l[24;53Hj[17;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9H[32mint[m size = [31m0[m;[24;63H[K[24;63H60,2[10C54%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9H[34m//read the first item name outside to check if the file is empty[m[24;63H[K[24;63H61,2[10C55%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9HinFile.getline(items[size], MAXCHAR, [31m';'[m);[24;63H[K[24;63H62,2[10C56%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9H[33mwhile[m(!inFile.eof())[24;63H[K[24;63H63,2[10C58%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;1H[1;23r[23;1H
+[1;24r[23;9H{[24;63H[K[24;63H64,1[10C59%[18;1H[?25h[?25l[24;53Hj[18;1H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17H[34m//read the next [m[31m2[m[34m int data into the int [m[31m2[m[34m dim array[m[24;63H[K[24;63H65,1-8[8C60%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17HinFile >> otherData[size][[31m0[m];[24;63H[K[24;63H66,1-8[8C62%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17HinFile.ignore([31m5[m, [31m';'[m);[24;63H[K[24;63H67,1-8[8C63%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17HinFile >> otherData[size][[31m1[m];[24;63H[K[24;63H68,1-8[8C64%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17HinFile.ignore([31m5[m, [35m'\n'[m);[24;63H[K[24;63H69,1-8[8C65%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17H[34m//increment size for next item[m[24;63H[K[24;63H70,1-8[8C67%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17Hsize++;[24;63H[K[24;63H71,1-8[8C68%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17H[34m//read next item name from the next line in the text file[m[24;63H[K[24;63H72,1-8[8C69%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17HinFile.getline(items[size], MAXCHAR, [31m';'[m);[24;63H[K[24;63H73,1-8[8C70%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;9H}[24;63H[K[24;63H74,1-8[8C72%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;9H[33mreturn[m size;[24;63H[K[24;63H75,1-8[8C73%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [17;8H[1;23r[1;1H[2M[1;24r[22;1H}[24;63H[K[24;63H76,1-8[8C75%[17;8H[?25h[?25l[24;53Hj[17;8H[24;53H [18;8H[24;64H7[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;1H[34m//Name:                 calcCalories[m[24;63H[K[24;63H78,1-8[8C76%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [17;8H[1;23r[1;1H[2M[1;24r[22;1H[34m//Description:  calculates total calories from the [m[31m2[m[34m arrays and outputs to screee[23;1Hn[m[24;63H[K[24;63H79,1-8[8C78%[17;8H[?25h[?25l[24;53Hj[17;8H[24;53H [18;8H[24;63H80[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;1H[1;23r[23;1H
+[1;24r[1;1H[46m{[18;1H}[m[23;1H[34m//input params: size, the [m[31m2[m[34m arrays[m[24;63H[K[24;63H81,1[10C79%[18;1H[?25h[?25l[24;53Hj[18;1H[24;53H [18;8H[1;23r[23;1H
+[1;24r[17;1H}[23;1H[34m//output:               total calories for each item and other info[m[24;63H[K[24;63H82,1-8[8C81%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;1H[34m//return:               none[m[24;63H[K[24;63H83,2[10C82%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [17;2H[1;23r[1;1H[2M[1;24r[22;1H[34m//[m
+[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m size)[24;63H[K[24;63H84,2[10C84%[17;2H[?25h[?25l[24;53Hj[17;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;1H{[24;63H[K[24;63H85,2[10C86%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9H[34m//tempCalories to calc total calories for each line[m[24;63H[K[24;63H86,2[10C87%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9H[32mint[m tempCalories = [31m0[m;[24;63H[K[24;63H87,2[10C88%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9H[33mfor[m([32mint[m i = [31m0[m; i < size; i++)[24;63H[K[24;63H88,2[10C89%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;2H[1;23r[23;1H
+[1;24r[23;9H{[24;63H[K[24;63H89,2[10C91%[18;2H[?25h[?25l[24;53Hj[18;2H[24;53H [18;1H[1;23r[23;1H
+[1;24r[23;17H[34m//calculate total calories for each line[m[24;63H[K[24;63H90,1[10C92%[18;1H[?25h[?25l[24;53Hj[18;1H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17HtempCalories = otherData[i][[31m0[m] * otherData[i][[31m1[m];[24;63H[K[24;63H91,1-8[8C93%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17H[34m//output each line[m[24;63H[K[24;63H92,1-8[8C94%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;17Hcout << items[i] << [31m";"[m << tempCalories << endl;[24;63H[K[24;63H93,1-8[8C96%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;9H}[24;63H[K[24;63H94,1-8[8C97%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;9Hcout << [31m"Thank you!!"[m << endl;[24;63H[K[24;63H95,1-8[8C98%[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [18;8H[1;23r[23;1H
+[1;24r[23;1H}[24;63H[K[24;63H96,1-8[8CBot[18;8H[?25h[?25l[24;53Hj[18;8H[24;53H [19;8H[24;64H7[19;8H[?25h[?25l[24;53Hj[19;8H[24;53H [20;8H[24;64H8[20;8H[?25h[?25l[24;53Hj[20;8H[24;53H [21;8H[24;64H9[21;8H[?25h[?25l[24;53Hj[21;8H[24;53H [22;8H[24;63H100,1-8[22;8H[?25h[?25l[24;53Hj[22;8H[24;53H [23;1H[12;1H[46m{[23;1H}[m[24;65H1,1  [23;1H[?25h[?25l[24;53Hj[23;1H[24;53H [23;1H[?25h[?25l[24;53Hj[23;1H[24;53H [23;1H[?25h[?25l[24;53Hj[23;1H[24;53H [23;1H[?25h[?25l[24;53Hj[23;1H[24;53H [23;1H[?25h[?25l[24;53Hj[23;1H[24;53H [23;1H[?25h[?25l[24;53Hj[23;1H[24;53H [23;1H[?25h[?25l[24;53Hj[23;1H[24;53H [23;1H[?25h[?25l[24;53Hj[23;1H[24;53H [23;1H[?25h[?25l[24;53Hj[23;1H[24;53H [23;1H[?25h[?25l[24;53Hj[23;1H[24;53H [23;1H[?25h[?25l[24;53Hj[23;1H[24;53H [23;1H[?25h[?25l[24;53Hj[23;1H[24;53H [23;1H[?25h[?25l[24;53Hj[23;1H[24;53H [23;1H[?25h[?25l[24;53Hg[23;1H[?25h[?25l[24;53H [23;1H[24;53Hgg[23;1H[24;53H  [1;1H[27m[23m[29m[m[H[2J[1;1H[34m//This program reads from items.txt and prints the total calories of each item
+//items.txt has [m[31m3[m[34m columns of data - itemname that can have spaces, quantity - ann[3;1H int
+//and calories - an int
+//The program will read the data into a [m[31m2[m[34m dim char array and a [m[31m2[m[34m dim int array
+//It will calculate the total calories for each item and output to screen
+//[m
+[35m#include [m[31m<iostream>[m
+[35m#include [m[31m<fstream>[m
+[35m#include [m[31m<cstring>[m
+
+[33musing[m [32mnamespace[m std;
+
+[34m//constant for number of items[m
+[32mconst[m [32mint[m ITEMS = [31m10[m;
+[34m//constant for number of characters[m
+[32mconst[m [32mint[m MAXCHAR = [31m51[m;
+
+[34m//function prototypes[m
+[32mbool[m openFile(ifstream &inFile);
+[32mint[m loadData(ifstream &inFile, [32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m]);
+[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m size);[24;63H1,1[11CTop[1;1H[?25h[?25l[24;53H/[1;1H[24;53H[K[24;1H/[?2004h[?25hm[?25l[1;14H[7m[34mm[m[10C[30m[43mm[4Cm[47Cm[2;6Hm[16Cm[16Cm[2Cm[m[36C[34mnn[3;1H [m[5;13H[30m[43mm[31Cm[22Cm[6;52Hm[m[8;18H[30m[43mm[9;17Hm[m[12;9H[30m[43mm[m[14;18H[30m[43mm[10Cm[16;18Hm[m[20;22H[30m[43mm[21;21Hm[18Cm[22;27Hm[m[24;63H1,14[10CTop[24;63H[K[24;3H[?25ha[?25l[1;23r[1;1H[6M[1;24r[2;18H[31mm[3;17Hm[m[6;9H[32mm[m[8;18H[34mm[10Cm[10;18Hm[m[14;22Hm[15;21Hm[18Cm[16;27Hm
+
+[34m//[m[7m[34mma[m[34min function that will call openFile, loadData and calcCalories[m
+[32mint[m [30m[43mma[min()
+{[21;9Hifstream inFile;[22;9H[32mint[m size = [31m0[m;[23;9H[32mchar[m items[ITEMS][MAXCHAR];[24;1H[K[24;63H23,3[11C6%/ma[24;63H[K[24;4H[?25hi[?25l[18;5H[7m[34mi[m[19;7H[30m[43mi[m[24;63H23,3[11C6%[24;63H[K[24;5H[?25hn[?25l[18;6H[7m[34mn[m[19;8H[30m[43mn[m[24;63H23,3[11C6%[24;63H[K[24;6H[?25h[?25l[18;3H[30m[43mmain[m[24;63H23,3[11C6%[18;3H[?25h[?25l[24;53Hd[18;3H[?25h[?25l[24;54Hw[18;3H[24;53H  [18;3H[34mfunction that will call openFile, loadData and calcCalories[m[18;62H[K[18;3H[?25h[?25l[24;53Hu[18;3H[24;1H1 change; before #1  4 seconds ago[24;53H[K[18;3H[30m[43mmain[m[34m function that will call openFile, loadData and calcCalories[m[24;63H23,3[11C6%[18;3H[?25h[?25l[24;53H:[18;3H[24;1H[K[24;1H:[?2004h[?25h2[?25l[?25h1[?25l[?25h[?25l[16;1H[24;63H21,1[11C6%[16;1H[?25h[?25l[24;53H:[16;1H[24;1H[K[24;1H:[?2004h[?25hs[?25l[?25h/[?25l[?25hs[?25l[?25hi[?25l[?25hz[?25l[?25he[?25l[?25h/[?25l[?25hc[?25l[?25ho[?25l[?25hu[?25l[?25hn[?25l[?25ht[?25l[?25h/[?25l[?25hg[?25l[?25h[?25l[16;1H[65Ccount);[18;3H[34mmain[m[19;5Hmain[22;13H[30m[43msize[m[24;63H21,1[11C6%[16;1H[?25h[?25l[24;53H%[16;1H[24;53H [16;71H[16;18H[46m([52C)[m[24;66H71[16;71H[?25h[?25l[24;53H~@k[16;71H[24;53H   [16;70H[16;18H([52C)[24;67H0[16;70H[?25h[?25l[24;53H~@k[16;70H[24;53H   [16;69H[24;66H69[16;69H[?25h[?25l[24;53H:[16;69H[24;1H[K[24;1H:[?2004h[?25h%[?25l[?25hs[?25l[?25h/[?25l[?25hs[?25l[?25h[?25l[24;5H[K[24;5H[?25hs[?25l[?25hi[?25l[?25hz[?25l[?25he[?25l[?25h/[?25l[?25hc[?25l[?25ho[?25l[?25hu[?25l[?25hn[?25l[?25ht[?25l[?25h/[?25l[?25hg[?25l[?25h[?25l15 substitutions on 15 lines[15;9H[1;1H        [33mreturn[m count;
+}[2;2H[K[3;1H                [3;17H[K[4;1H[34m//Name:                 calcCalories
+//Description:  calculates total calories from the [m[31m2[m[34m arrays and outputs to screee[6;1Hn[m[6;2H[K[7;1H[34m//input params: count, the [m[31m2[m[34m arrays
+//output:               total calories for each item and other info
+//return:               none[m[10;3H[K[11;1H[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m count)
+{
+        [34m//tempCalories to calc total calories for each line[m
+        [32mint[m tempCalories = [31m0[m;[14;30H[K[15;1H        [33mfor[m([32mint[m i = [31m0[m; i < count; i++)[15;39H[K[16;1H        {[16;10H[K[17;17H[34m//calculate total calories for each line[m
+                tempCalories = otherData[i][[31m0[m] * otherData[i][[31m1[m];[18;66H[K[19;1H                [34m//output each line[m
+ [15Ccout << items[i] << [31m";"[m << tempCalories << endl;[21;9H}[21;10H[K[22;9Hcout << [31m"Thank you!!"[m << endl;
+}[23;9H[K[24;63H93,2-9[8CBot[24;63H[K[24;63H93,2-9[8CBot[15;9H[?25h[?25l[24;53H:[15;9H[24;1H[K[24;1H:[?2004h[?25h2[?25l[?25h1[?25l[?25h[?25l[12;1H[27m[23m[29m[m[H[2J[2;1H[33musing[m [32mnamespace[m std;
+
+[34m//constant for number of items[m
+[32mconst[m [32mint[m ITEMS = [31m10[m;
+[34m//constant for number of characters[m
+[32mconst[m [32mint[m MAXCHAR = [31m51[m;
+
+[34m//function prototypes[m
+[32mbool[m openFile(ifstream &inFile);
+[32mint[m loadData(ifstream &inFile, [32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m]);
+[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m count);
+
+[34m//main function that will call openFile, loadData and calcCalories[m
+[32mint[m main()
+{[17;9Hifstream inFile;[18;9H[32mint[m count = [31m0[m;[19;9H[32mchar[m items[ITEMS][MAXCHAR];[20;9H[32mint[m otherData[ITEMS][[31m2[m] = {[31m0[m};[21;9H[33mif[m(!openFile(inFile))[22;9H{[23;17Hcout << [31m"File did not open! Program terminating!!"[m << endl;[24;63H21,1[10C11%[12;1H[?25h[?25l[24;53Hy[12;1H[?25h[?25l[24;54Hy[12;1H[24;53H  [12;1H[?25h[?25l[24;53HG[12;1H[24;53H [23;1H[27m[23m[29m[m[H[2J[1;9H[33mreturn[m count;
+}
+
+[34m//Name:                 calcCalories
+//Description:  calculates total calories from the [m[31m2[m[34m arrays and outputs to screee[6;1Hn
+//input params: count, the [m[31m2[m[34m arrays
+//output:               total calories for each item and other info
+//return:               none
+//[m
+[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m count)
+[46m{[m[13;9H[34m//tempCalories to calc total calories for each line[m[14;9H[32mint[m tempCalories = [31m0[m;[15;9H[33mfor[m([32mint[m i = [31m0[m; i < count; i++)[16;9H{[17;17H[34m//calculate total calories for each line[m[18;17HtempCalories = otherData[i][[31m0[m] * otherData[i][[31m1[m];[19;17H[34m//output each line[m[20;17Hcout << items[i] << [31m";"[m << tempCalories << endl;[21;9H}[22;9Hcout << [31m"Thank you!!"[m << endl;
+[46m}[m[24;63H101,1[9CBot[23;1H[?25h[?25l[24;53HG[23;1H[24;53H [23;1H[?25h[?25l[24;53Hp[23;1H[24;53H [23;1H[1;23r[23;1H
+[1;24r[11;1H{[22;1H}
+[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m count);[24;63H[K[24;63H102,1[9CBot[23;1H[?25h[?25l[24;53H:[23;1H[24;53H[K[24;1H:[?2004h[?25h[?25l[24;1H[K[23;1H[24;63H102,1[9CBot[23;1H[?25h[?25l
+[1m-- INSERT --[m[24;63H[K[24;63H102,1[9CBot[1;23r[23;1H
+[1;24r[22;1Hx[22;2H[K[23;1H[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m count);[24;63H[K[24;63H102,2[9CBot[22;2H[?25h[24;1H[K[?25l[24;63H102,1[9CBot[22;1H[?25h[?25l
+
+[1m-- INSERT --[m[24;63H[K[24;63H102,1[9CBot[1;23r[23;1H
+[1;24r[21;1Hy
+x[22;2H[K[23;1H[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m count);[24;63H[K[24;63H102,2[9CBot[21;2H[?25h[?25lu[24;67H3[21;3H[?25h[?25lu[24;67H4[21;4H[?25h[24;1H[K[21;3H[?25l[24;53H^[[21;3H[24;53H  [21;4H[24;63H102,3[9CBot[21;3H[?25h[?25l[24;53Hu[21;3H
+
+
+1 line less; before #6  10 seconds ago[24;53H[K[21;1Hx[21;2H[K[22;1H[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m count);
+[1m[34m~                                                                               [m[24;63H102,1[9CBot[21;1H[?25h[?25l[24;53Hu[21;1H[24;22H5[24;53H[K[21;1H[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m count);
+[1m[34m~                                                                               [m[24;63H102,1[9CBot[21;1H[?25h[?25l[24;53Hu[21;1H[24;22H4  23[24;53H[K[20;1H[9;1H[46m{[20;1H}[m
+[1m[34m~                                                                               [m[24;63H101,1[9CBot[20;1H[?25h[?25l[24;53Hp[20;1H[24;53H [21;1H[9;1H{[20;1H}
+[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m count);[21;73H[K[24;65H2[21;1H[?25h[?25l[24;53H:[21;1H[24;1H[K[24;1H:[?2004h[?25h[?25l[24;1H[K[21;1H[24;63H102,1[9CBot[21;1H[?25h[?25l
+
+
+[1m-- INSERT --[m[24;63H[K[24;63H102,1[9CBot[21;1Hx[21;2H[K[22;1H[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m count);[22;73H[K[24;67H2[21;2H[?25h[24;1H[K[?25l[24;63H102,1[9CBot[21;1H[?25h[?25l
+
+
+[1m-- INSERT --[m[24;63H[K[24;63H102,1[9CBot[21;1Hy
+x[22;2H[K[23;1H[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m count);[23;73H[K[24;67H2[21;2H[?25h[?25lu[24;67H3[21;3H[?25h[24;1H[K[21;2H[?25l[24;53H^[[21;2H[24;53H  [21;3H[24;63H102,2[9CBot[21;2H[?25h[?25l[24;53Hu[21;2H
+
+
+1 line less; before #9  7 seconds ago[24;53H[K[21;1Hx[21;2H[K[22;1H[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m count);
+[1m[34m~                                                                               [m[24;63H102,1[9CBot[21;1H[?25h[?25l[24;53Hu[21;1H[24;22H8  8[24;53H[K[21;1H[32mvoid[m calcCalories([32mchar[m items[][MAXCHAR], [32mint[m otherData[][[31m2[m], [32mint[m count);
+[1m[34m~                                                                               [m[24;63H102,1[9CBot[21;1H[?25h[?25l[24;53H^[[21;1H[24;53H  [21;1H[24;53H^[[21;1H[24;53H  [21;1H[?25h[?25l[24;53H:[21;1H[24;1H[K[24;1H:[?2004h[?25h8[?25l[?25h9[?25l[?25h<F1>[?25l[?25h<F1>[?25l[?25h[?25l[1m[37m[41mE488: Trailing characters[21;1H[m[24;63H102,1[9CBot[21;1H[?25h[?25l[24;53H:[21;1H[24;1H[K[24;1H:[?2004h[?25h8[?25l[?25h9[?25l[?25h[?25l[8;1H[24;63H89,1[10CBot[8;1H[?25h[?25l[24;53H1[8;1H[?25h[?25l[24;54H3[8;1H[?25h[?25l[24;55Hy[8;1H[?25h[?25l[24;56Hy[8;1H[24;1H13 lines yanked[24;53H[K[8;1H[24;63H89,1[10CBot[8;1H[?25h[?25l[24;53HG[8;1H[24;53H [21;1H[24;63H102,1[21;1H[?25h[?25l[24;53HG[21;1H[24;53H [21;1H[?25h[?25l[24;53HP[21;1H[24;4Hmore lines[24;14H[K[18;1H[1;23r[1;1H[3M[1;24r[18;72H[K[19;1H{[19;2H[K[20;1H        [34m//tempCalories to calc total calories for each line[m[20;60H[K[21;9H[32mint[m tempCalories = [31m0[m;[22;9H[33mfor[m([32mint[m i = [31m0[m; i < count; i++)[23;9H{[24;1H[K[24;63H102,1[9C91%13 more lines[24;63H[K[24;63H102,1[9C91%[18;1H[?25h[?25l[24;53H:[18;1H[24;1H[K[24;1H:[?2004h[?25h1[?25l[?25h0[?25l[?25h2[?25l[?25h[?25l[18;1H[24;63H102,1[9C91%[18;1H[?25h[?25l[24;53H1[18;1H[?25h[?25l[24;54H5[18;1H[?25h[?25l[24;55HD[18;1H[24;53H   [18;1H[24;53H15d$[18;1H[24;1H14 fewer lines[24;53H[K[17;1H[6;1H[46m{[17;1H}[m
+[1m[34m~                                                                               [19;1H~                                                                               [20;1H~                                                                               [21;1H~                                                                               [22;1H~                                                                               [23;1H~                                                                               [m[24;63H101,1[9CBot[24;63H[K[24;63H101,1[9CBot[17;1H[?25h[?25l[24;53HD[17;1H[24;53H [17;1H[24;53Hd$[17;1H[24;53H  [17;1H[6;1H{[17;1H[K[24;67H0-1[17;1H[?25h[?25l[24;53H^[[17;1H[24;53H  [17;1H[24;53H^[[17;1H[24;53H  [17;1H[?25h[?25l[24;53HI[17;1H[24;53H [17;1H[24;1H[1m-- INSERT --[m[24;13H[K[24;63H101,1[9CBot[17;1H[?25h[?25l}[6;1H[46m{[17;1H}[m[24;67H2[17;2H[?25h[24;1H[K[17;1H[?25l[24;53H^[[17;1H[24;53H  [17;2H[24;63H101,1[9CBot[17;1H[?25h[?25l[24;53H:[17;1H[24;53H[K[24;1H:[?2004h[?25hW[?25l[?25hQ[?25l[?25h[?25l[24;3H[K[24;3H[?25h[?25l[24;2H[K[24;2H[?25hw[?25l[?25hq[?25l[?25h[?25l[?2004l"sample_a06.cpp" 101L, 2768C written
+[?2004l[?1l>[?25h[?1049l[23;0;0t]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3 $ g++ -Wall -g sample_a06.cpp - samp le_a06
+[01m[Kg++:[m[K [01;31m[Kerror: [m[Ksample_a06: No such file or directory
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3 $ g++ -Wall -g sample_a06.cpp - samplle_a06[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cg++ -Wall -g sample_a06.cpp - samplle_a06[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Co sample_a06[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3 $ ./sample_a06
+Whole milk;400
+Pasta;875
+Apple Sauce;1000
+Buttermilk;90
+Bananas;480
+Yogurt;1000
+Thank you!!
+]0;kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3kelvin.muturi@vmcslinuxprod01:~/CS161B/Lab3 $ exit
+exit
+
+Script done on 2025-03-09 22:02:30-07:00
