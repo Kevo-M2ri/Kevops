@@ -1,6 +1,6 @@
 /******************************************************************************
 # Author:           Kelvin Muturi
-# Lab:              Discussion 5
+# Lab:              Discussion #5
 # Date:             Februrary 24, 2025
 # Description:      This program reads data from a file and calculates the
 #                   percentages of male and female students in each major.
@@ -36,7 +36,7 @@ int main() {
   
     // get input file name
     cout << "Enter name of input file:";
-    cin >> fileName;
+    cin >> fileName;// get input file name
     
     if (!openFile(inFile, fileName)) {
         cout << "file did not open. Program terminating!!!";
@@ -95,8 +95,8 @@ void ratioCalc(ifstream& inFile, ofstream& outFile) {
 
     while (inFile >> majorCode >> major >> majorCategory >> total >> men >> women >> salary) {
         if (total > 0) {
-            menPercentage = (static_cast<double>(men) / total) * 100;
-            womenPercentage = (static_cast<double>(women) / total) * 100;
+            menPercentage = (static_cast<double>(men) / total) * 100; // calculate percentage of men
+            womenPercentage = (static_cast<double>(women) / total) * 100; // calculate percentage of women
 
             outFile << fixed << setprecision(2); // set precision to 2 decimal places
             outFile << left << setw(50) << major

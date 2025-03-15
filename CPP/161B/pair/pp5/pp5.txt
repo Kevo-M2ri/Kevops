@@ -1,0 +1,65 @@
+DEFINE a constant integer MAX = 25
+
+STRUCTURE Car
+    DECLARE a character[] make
+    DECLARE a character[] model
+    DECLARE a integer year
+    DECLARE a double price
+    DECLARE a double mileage
+END STRUCTURE
+
+//FUNCTION prototypes
+void welcome()
+void getCarDetails(Car &car)
+void printCarDetails(constant Car &car)
+void goodbye()
+
+FUNCTION main()
+    DECLARE Car car
+
+    CALL welcome()
+    CALL getCarDetails(car)
+
+    CALL printCarDetails(car)
+    CALL goodbye()
+
+    RETURN 0
+END main
+
+FUNCTION void getCarDetails(Car &car)
+    DISPLAY "Enter the make of the car: "
+    INPUT car.make[MAX]
+    DISPLAY "Enter the model of the car: "
+    INPUT car.model[MAX]
+
+    DISPLAY "Enter the year of the car: "
+    WHILE (NOT(INPUT car.year) OR car.year < 1986 OR car.year > 2026)
+        DISPLAY "Invalid input. Please enter a valid year(1986-2026)
+        CLEAR buffer
+    END WHILE
+
+    DISPLAY "Enter the price of the car: "
+    WHILE (NOT(INPUT car.price) OR car.price < 0.0)
+        DISPLAY "Invalid input. Please enter a valid price: "
+        CLEAR buffer
+    END WHILE
+
+    DISPLAY "Enter the mileage of the car: "
+    WHILE (NOT(INPUT car.mileage) OR car.mileage <0.0)
+        DISPLAY "Invalid input. Please enter valid mileage :"
+        CLEAR buffer
+    END WHILE
+    CLEAR buffer
+END FUNCTION
+
+FUNCTION void printCarDetails(constant Car &car)
+    DISPLAY "Make: " car.make
+    DISPLAY "Model: " car.model
+    DISPLAY "Year: " car.year
+    DISPLAY "Price: " car.price
+    DISPLAY "Mileage: " car.mileage
+END FUNCTION
+
+FUNCTION void goodbye()
+    DISPLAY "Thank you for using the car database!"
+END FUNCTION
