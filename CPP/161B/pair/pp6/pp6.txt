@@ -1,0 +1,222 @@
+//main.cpp
+FUNCTION integer main()
+    DEFINE an integer choice = 0
+
+    DISPLAY "=========================================================="
+    DISPLAY "Welcome to the Asterisk Operator Demonstration!"
+    DISPLAY "This program will help you understand the different ways"
+    DISPLAY << "the asterisk (*) operator is used in C++."
+    DISPLAY "=========================================================="
+
+    DO
+        CALL displayMenu()
+        DISPLAY "Enter your choice (1-6): "
+        INPUT choice
+
+        IF (input fails) THEN
+            DISPLAY "Invalid input. Please enter a number betwen 1 and 6."
+            CALL clearInputBuffer()
+            CONTINUE
+        END IF
+
+        SELECT choice
+            CASE 1:
+                CALL demonstrateMultiplication()
+            CASE 2:
+                CALL demonstratePointerDeclaration()
+            CASE 3:
+                CALL demonstratePointerDereference()
+            CASE 4:
+                CALL demonstrateStructPointers()
+            CASE 5:
+                DISPLAY "Thank you for learning about the asterisk operator in C++!"
+                DISPLAY "Goodbye!"
+            DEFAULT:
+                DISPLAY "Invalid choice. Please enter a number between 1 and 6.:
+        END SELECT
+
+        IF (choice != 6) THEN
+            DISPLAY "Press Enter to continue..."
+            CALL clearInputBuffer()
+            cin.get()
+        END IF
+    WHILE (choice != 6)
+
+    RETURN 0
+END main
+
+//pointer.cpp
+FUNCTION void displayMenu()
+    DISPLAY "=== MENU ==="
+    DISPLAY "1. Arithmetic Multiplication Operator"
+    DISPLAY "2. Pointer Declaration Operator"
+    DISPLAY "3. Pointer Dereference (Indirection) Operator"
+    DISPLAY "4. Pointers with User-Defined Structs"
+    DISPLAY "5. Additional Resources"
+    DISPLAY "6. Quit"
+END FUNCTION
+
+FUNCTION void demonstrateMultiplication()
+    DECLARE as doubles num1, num2, result
+    DISPLAY "=== Arithmetic Multiplication Operator ==="
+    DISPLAY "In C++, the asterisk (*) is used for multiplication between two numeric values."
+    DISPLAY "Syntax:  result = operand1 * operand2;"
+
+    DISPLAY "Enter two numbers to multiply:"
+    INPUT num1, num2
+    SET result = num1 * num2
+
+    DISPLAY "Example:"
+    DISPLAY "The result of " num1 " * " num2 " = " result
+END FUNCTION
+
+FUNCTION void demonstratePointerDeclaration()
+    DECLARE an integer userValue
+    DISPLAY "=== Pointer Declaration Operator ==="
+    DISPLAY "The asterisk (*)is used to declare a pointer variable that stores the address of another variable."
+    DISPLAY "Syntax: dataType *pointerName;"
+
+    DISPLAY "Enter an integer value: "
+    INPUT userValue
+
+    DEFINE int *ptr = &userValue
+    DISPLAY "Example with character array:"
+    
+    DISPLAY "Here, we have:"
+    DISPLAY "- userValue: " userValue " (the actual value)"
+    DISPLAY "- &userValue: " &userValue " (the memory address of userValue)"
+    DISPLAY "- ptr: " ptr " (the pointer stores the address of userValue)"
+    DISPLAY "- *ptr: " *ptr " (the value at the address stored in ptr)"
+
+    DECLARE a character[50]
+    CALL clearInputBuffer()
+    DISPLAY "Enter your name: "
+    INPUT name[]
+
+    DISPLAY "Here, we have:"
+    DISPLAY "- name: " << name << " (the array contents)" << endl;
+    DISPLAY "- name: " static_cast<void*>(name) " (the memory address of the array)"
+    DISPLAY "- namePtr: " static_cast<void*>(namePtr) " (points to the same address)"
+    DISPLAY "- *namePtr: '" *namePtr "' (the first character of the array)"
+
+    DISPLAY "Note that the & symbol is the address-of operator, which returns the memory address"
+    DISPLAY "of a variable. It's often used together with the pointer declaration."
+END FUNCTION
+
+FUNCTION void demonstratePointerDereference()
+    DISPLAY "=== Pointer Dereference (Indirection) Operator ==="
+    DISPLAY "Once a pointer is declared, the asterisk (*) is used to access the value stored"
+    DISPLAY "at the memory address contained in the pointer. This is called dereferencing."
+    DISPLAY "Syntax: value = *pointerName;"
+
+    DECLARE userValue
+    DISPLAY "Enter an integer value: "
+    INPUT userValue
+
+    DECLARE int *ptr = &userValue
+
+    DISPLAY "Modifying the value using the pointer."
+    DISPLAY "Enter a new value: "
+    INPUT *ptr
+
+    DISPLAY "After modifying: *ptr = " *ptr " userValue = " userValue
+
+    DECLARE character[50] text
+    CALL clearInputBuffer()
+    DISPLAY "Enter a short sentence: "
+    INPUT text[50]
+
+    DEFINE a character *textPtr = text
+    DISPLAY "Accessing each character using pointer dereferencing: "
+    DECLARE interger i
+    WHILE (*(textPtr + i) != '\0' AND i < 10)
+        DISPLAY "*(textPtr + " i ") = '" *(txtPtr + i) "'"
+        i++
+    END WHILE
+
+    IF (*(txtPtr + i) != '\0') THEN
+        DISPLAY "... (more characters follow)"
+    END IF
+
+    DISPLAY "The dereference operator (*) allows you to:"
+    DISPLAY "1. Access the value at the memory address stored in a pointer"
+    DISPLAY "2. Modify the value at that memory address"
+    DISPLAY "This is a powerful feature that enables indirect manipulation of variables."
+END FUNCTION
+
+FUNCTION void demonstrateStructPointers()
+    DISPLAY "=== Pointers with User-Defined Structs ==="
+    DISPLAY "The asterisk (*) operator is particularly useful with structs and can be used"
+    DISPLAY "to access struct members indirectly through pointers."
+    DISPLAY "Syntax: structPointer->memberName or (*structPointer).memberName"
+
+    DECLARE Person person
+
+    CALL clearInputBuffer
+    DISPLAY "Enter a name: "
+    INPUT person.name
+
+    DISPLAY "Enter age: "
+    INPUT person.age
+
+    DISPLAY "Enter height (in meters): "
+    INPUT person.height
+
+    Person *personPtr = &person
+    DISPLAY "Person person = {" person.name ", " person.age ", " person.height "}"
+
+    DISPLAY "Accessing struct members directly:" 
+    DISPLAY "person.name: " << person.name
+    DISPLAY "person.age: " << person.age
+    DISPLAY "person.height: " << person.height
+
+    DISPLAY "Accessing struct members through pointer using arrow operator (->):"
+    DISPLAY "personPtr->name: " << personPtr->name
+    DISPLAY "personPtr->age: " << personPtr->age
+    DISPLAY "personPtr->height: " << personPtr->height
+
+    DISPLAY "Accessing struct members through pointer using dereference and dot operators (*.): "
+    DISPLAY "(*personPtr).name: " << (*personPtr).name
+    DISPLAY "(*personPtr).age: " << (*personPtr).age
+    DISPLAY "(*personPtr).height: " << (*personPtr).height
+END FUNCTION
+
+FUNCTION void clearInputBuffer()
+    cin.clear()
+    cin.ignore(numeric_limits<streamsize>::max(), '\n')
+END FUNCTION
+
+FUNCTION void copyString(character *destination, constant character *source)
+    DECLARE integer i = 0
+    WHILE (source[i] != '\0')
+        destination[i] = source[i]
+        i++
+    END WHILE
+
+    destination[i] = '\0'
+END FUNCTION
+
+FUNCTION integer stringLength(constant character *str)
+    integer length = 0
+    WHILE (str[length] != '\0')
+        length++
+    END WHILE
+    RETURN length
+END FUNCTION
+
+//pointer.h
+STRUCTURE Person
+    DECLARE character[50] name
+    DECLARE integer age
+    DECLARE double height
+END STRUCTURE
+
+//functions declarations
+void displayMenu()
+void demonstrateMultiplication()
+void demonstratePointerDeclaration()
+void demonstratePointerDereference()
+void demonstrateStructPointers()
+void clearInputBuffer()
+void copyString(character *destination, constant character *source)
+integer stringLength(constant character * str)

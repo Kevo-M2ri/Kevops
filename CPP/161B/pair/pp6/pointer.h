@@ -3,6 +3,7 @@
 
 // Define a user-defined struct for demonstrating pointers with structs
 struct Person {
+    // Define the struct members
     char name[50];
     int age;
     double height;
@@ -14,10 +15,7 @@ void demonstrateMultiplication();
 void demonstratePointerDeclaration();
 void demonstratePointerDereference();
 void demonstrateStructPointers();
-void displayResources();
 void clearInputBuffer();
-
-// Helper functions for char arrays
 void copyString(char* destination, const char* source);
 int stringLength(const char* str);
 

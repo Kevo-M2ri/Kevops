@@ -5,107 +5,85 @@
 using namespace std;
 
 void displayMenu() {
-    cout << "\n=== MENU ===" << endl;
+    cout << "\n=== MENU ===" << endl; //menu banner
     cout << "1. Arithmetic Multiplication Operator" << endl;
     cout << "2. Pointer Declaration Operator" << endl;
     cout << "3. Pointer Dereference (Indirection) Operator" << endl;
     cout << "4. Pointers with User-Defined Structs" << endl;
     cout << "5. Additional Resources" << endl;
     cout << "6. Quit" << endl;
-}
+} // Display the menu function
 
 void demonstrateMultiplication() {
-    cout << "\n=== Arithmetic Multiplication Operator ===" << endl;
-    cout << "In C++, the asterisk (*) is used for multiplication between two values." << endl;
+    double num1, num2, result; // variables for multiplication
+    cout << "\n=== Arithmetic Multiplication Operator ===" << endl; //arithmetic multiplication operator banner
+    cout << "In C++, the asterisk (*) is used for multiplication between two numeric values." << endl;
     cout << "Syntax: result = operand1 * operand2;" << endl << endl;
     
-    double num1, num2;
     cout << "Enter two numbers to multiply:" << endl;
-    cout << "First number: ";
-    cin >> num1;
-    cout << "Second number: ";
-    cin >> num2;
+    cin >> num1 >> num2; // user inputs two numbers
+    result = num1 * num2; // Perform multiplication
     
-    double result = num1 * num2;
-    
+    // Display the result
     cout << "\nExample:" << endl;
-    cout << "double result = " << num1 << " * " << num2 << ";" << endl;
-    cout << "Result: " << result << endl;
-    
-    cout << "\nThe multiplication operator can be used with integers, floating-point numbers," << endl;
-    cout << "and any other numeric types in C++." << endl;
-}
+    cout << "The result of " << num1 << " * " << num2 << " = " << result << endl; // mathematical operation display
+}// demonstrate multiplication function
 
 void demonstratePointerDeclaration() {
-    cout << "\n=== Pointer Declaration Operator ===" << endl;
-    cout << "The asterisk (*) is used to declare a pointer variable that stores the address of another variable." << endl;
-    cout << "Syntax: dataType *pointerName;" << endl << endl;
-    
     int userValue;
+    cout << "\n=== Pointer Declaration Operator ===" << endl;// pointer declaration operator banner
+    cout << "The asterisk (*) is used to declare a pointer variable that stores the address of another variable." << endl;
+    cout << "Syntax: dataType *pointerName;" << endl << endl;// pointer declaration syntax
+    
     cout << "Enter an integer value: ";
-    cin >> userValue;
+    cin >> userValue;// user inputs an integer value
     
     // Create a pointer to the user's value
     int *ptr = &userValue;
     
-    cout << "\nExample:" << endl;
-    cout << "int userValue = " << userValue << ";" << endl;
-    cout << "int *ptr = &userValue;" << endl << endl;
-    
-    cout << "Here, we have:" << endl;
+    cout << "\nHere, we have:" << endl;
     cout << "- userValue: " << userValue << " (the actual value)" << endl;
     cout << "- &userValue: " << &userValue << " (the memory address of userValue)" << endl;
     cout << "- ptr: " << ptr << " (the pointer stores the address of userValue)" << endl;
     cout << "- *ptr: " << *ptr << " (the value at the address stored in ptr)" << endl << endl;
     
     // Demonstrate with char array
-    char name[50];
-    clearInputBuffer();
+    char name[50];// user input for char array
+    clearInputBuffer();// clear input buffer
     cout << "Enter your name: ";
-    cin.getline(name, 50);
+    cin.getline(name, 50);// user inputs a name
     
-    char *namePtr = name; // Points to the first element
-    
-    cout << "\nExample with character array:" << endl;
-    cout << "char name[50] = \"" << name << "\";" << endl;
-    cout << "char *namePtr = name;" << endl << endl;
-    
-    cout << "Here, we have:" << endl;
-    cout << "- name: " << name << " (the array contents)" << endl;
-    cout << "- name: " << static_cast<void*>(name) << " (the memory address of the array)" << endl;
-    cout << "- namePtr: " << static_cast<void*>(namePtr) << " (points to the same address)" << endl;
-    cout << "- *namePtr: '" << *namePtr << "' (the first character of the array)" << endl;
+    char *namePtr = name;// Points to the first element
+
+    cout << "\nHere, we have:" << endl;
+    cout << "- name: " << name << " (the array contents)" << endl;// contents of the array
+    cout << "- name: " << static_cast<void*>(name) << " (the memory address of the array)" << endl;// address of the array
+    cout << "- namePtr: " << static_cast<void*>(namePtr) << " (points to the same address)" << endl;// address of the pointer
+    cout << "- *namePtr: '" << *namePtr << "' (the first character of the array)" << endl;// first character of the array
     
     cout << "\nNote that the & symbol is the address-of operator, which returns the memory address" << endl;
     cout << "of a variable. It's often used together with the pointer declaration." << endl;
-}
+}// demonstrate pointer declaration function
 
 void demonstratePointerDereference() {
-    cout << "\n=== Pointer Dereference (Indirection) Operator ===" << endl;
+    cout << "\n=== Pointer Dereference (Indirection) Operator ===" << endl;// pointer dereference operator banner
     cout << "Once a pointer is declared, the asterisk (*) is used to access the value stored" << endl;
     cout << "at the memory address contained in the pointer. This is called dereferencing." << endl;
-    cout << "Syntax: value = *pointerName;" << endl << endl;
+    cout << "Syntax: value = *pointerName;" << endl << endl; // dereference syntax
     
-    int userValue;
+    int userValue; //variable for user input
     cout << "Enter an integer value: ";
-    cin >> userValue;
+    cin >> userValue; // user inputs an integer value
     
     // Create a pointer to the user's value
-    int *ptr = &userValue;
-    
-    cout << "\nExample:" << endl;
-    cout << "int userValue = " << userValue << ";" << endl;
-    cout << "int *ptr = &userValue;" << endl;
-    cout << "*ptr = " << *ptr << ";" << endl << endl;
+    int *ptr = &userValue;// pointer to the address of userValue
     
     // Modify the value through the pointer
-    cout << "Let's modify the value using the pointer." << endl;
+    cout << "Modifying the value using the pointer." << endl;
     cout << "Enter a new value: ";
-    cin >> *ptr;
+    cin >> *ptr;// user inputs a new value
     
-    cout << "\nAfter modifying:" << endl;
-    cout << "*ptr = " << *ptr << ";" << endl;
-    cout << "userValue = " << userValue << ";" << endl << endl;
+    cout << "\nAfter modifying: *ptr = " << *ptr << " userValue = " << userValue << endl << endl; // display modified values
     
     // Demonstrate with character array
     char text[50];
@@ -113,23 +91,19 @@ void demonstratePointerDereference() {
     cout << "Enter a short sentence: ";
     cin.getline(text, 50);
     
-    char *textPtr = text;
-    
-    cout << "\nExample with character array:" << endl;
-    cout << "char text[50] = \"" << text << "\";" << endl;
-    cout << "char *textPtr = text;" << endl << endl;
-    
+    char *textPtr = text;// pointer to the first character of the array
+
     // Display each character using pointer arithmetic
-    cout << "Let's access each character using pointer dereferencing:" << endl;
+    cout << "Accessing each character using pointer dereferencing: " << endl;
     int i = 0;
     while (*(textPtr + i) != '\0' && i < 10) { // Only show up to 10 chars
         cout << "*(textPtr + " << i << ") = '" << *(textPtr + i) << "'" << endl;
         i++;
-    }
+    }// display each character using pointer dereferencing
     
     if (*(textPtr + i) != '\0') {
         cout << "... (more characters follow)" << endl;
-    }
+    } // display if there are more characters
     
     cout << "\nThe dereference operator (*) allows you to:" << endl;
     cout << "1. Access the value at the memory address stored in a pointer" << endl;
@@ -159,54 +133,32 @@ void demonstrateStructPointers() {
     
     // Create a pointer to the struct
     Person *personPtr = &person;
+
+    cout << "Person person = {" << person.name << ", " << person.age << ", " << person.height << "}" << endl;// display struct values
     
-    cout << "\nExample:" << endl;
-    cout << "struct Person {" << endl;
-    cout << "    char name[50];" << endl;
-    cout << "    int age;" << endl;
-    cout << "    double height;" << endl;
-    cout << "};" << endl << endl;
-    
-    cout << "Person person = {\"" << person.name << "\", " << person.age << ", " << person.height << "};" << endl;
-    cout << "Person *personPtr = &person;" << endl << endl;
-    
+    // Accessing struct members directly
     cout << "Accessing struct members directly:" << endl;
     cout << "person.name: " << person.name << endl;
     cout << "person.age: " << person.age << endl;
     cout << "person.height: " << person.height << endl << endl;
     
+    // Accessing struct members through pointer using arrow operator (->)
     cout << "Accessing struct members through pointer using arrow operator (->):" << endl;
     cout << "personPtr->name: " << personPtr->name << endl;
     cout << "personPtr->age: " << personPtr->age << endl;
     cout << "personPtr->height: " << personPtr->height << endl << endl;
     
+    // Accessing struct members through pointer using dereference and dot operators
     cout << "Accessing struct members through pointer using dereference and dot operators (*.): " << endl;
     cout << "(*personPtr).name: " << (*personPtr).name << endl;
     cout << "(*personPtr).age: " << (*personPtr).age << endl;
     cout << "(*personPtr).height: " << (*personPtr).height << endl << endl;
-    
-    cout << "Note: personPtr->member is equivalent to (*personPtr).member" << endl;
-    cout << "The arrow operator (->) is simply a more convenient syntax for accessing" << endl;
-    cout << "struct members through a pointer." << endl;
-}
-
-void displayResources() {
-    cout << "\n=== Additional Resources ===" << endl;
-    cout << "Here are some resources to learn more about pointers and the asterisk operator in C++:" << endl;
-    cout << "1. C++ Reference: https://en.cppreference.com/w/cpp/language/pointer" << endl;
-    cout << "2. C++ Pointers Tutorial: https://www.learncpp.com/cpp-tutorial/pointers/" << endl;
-    cout << "3. Video Tutorial: https://www.youtube.com/watch?v=DTxHyVn0ODg" << endl;
-    cout << "4. Interactive C++ Course: https://www.learn-cpp.org/en/Pointers" << endl;
-    cout << "5. Book: 'C++ Primer' by Stanley B. Lippman" << endl;
-    
-    cout << "\nRemember that pointers are a powerful but complex feature of C++." << endl;
-    cout << "Practice is essential to master their use and avoid common pitfalls." << endl;
-}
+}// demonstrate struct pointers function
 
 void clearInputBuffer() {
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-}
+}// clear input buffer function
 
 void copyString(char* destination, const char* source) {
     int i = 0;
