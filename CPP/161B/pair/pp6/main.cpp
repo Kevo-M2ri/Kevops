@@ -2,9 +2,22 @@
 # Author:           Kelvin Muturi
 # Lab:              Discussion #7
 # Date:             March 15, 2025
-# Description:      This program  
-# Input:            
-# Output:           
+# Description:      This program shows the different uses of the asterisk (*)
+                    operator in C++. It includes multiplication, pointer
+                    declaration, pointer dereference, and struct pointers. It
+                    uses functions to demonstrate each use case and provides a
+                    menu for user interaction. The program also includes input
+                    validation.
+# Input:            User inputs a number between 1 and 6 to select the demonstration
+                    they want to see. For multiplication, the user inputs two
+                    numbers. For pointer declaration, the user inputs an integer
+                    value and a name. For pointer dereference, the user inputs an
+                    integer value. For struct pointers, the user inputs a name,
+                    age, and height.
+# Output:           various outputs depending on the user's choice. It includes the result
+                    of multiplication, the memory address of variables, and the
+                    contents of a struct. The program also handles invalid input
+                    gracefully and provides a menu for user interaction.
 # Sources:          
 #******************************************************************************/
 
@@ -26,11 +39,11 @@ int main() {
     
     do {
         displayMenu();// Display the menu function call
-        cout << "Enter your choice (1-6): "; // Prompt user for choice
+        cout << "Enter your choice (1-5): "; // Prompt user for choice
         cin >> choice; // Read user input
         
         if (cin.fail()) {
-            cout << "Invalid input. Please enter a number between 1 and 6." << endl;
+            cout << "Invalid input. Please enter a number between 1 and 5." << endl;
             clearInputBuffer();
             continue;
         } //check input validity and clear input buffer
@@ -61,13 +74,13 @@ int main() {
                 cout << "Invalid choice. Please enter a number between 1 and 6." << endl;
         }
         
-        if (choice != 6) {
+        if (choice != 5) {
             cout << "\nPress Enter to continue...";
             clearInputBuffer();//input buffer clear function call
             cin.get();
         }// check if choice is not 6 and clear input buffer
         
-    } while (choice != 6);// loop until user chooses to quit
+    } while (choice != 5);// loop until user chooses to quit
     
     return 0;
 }

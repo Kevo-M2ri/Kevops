@@ -9,9 +9,8 @@ void displayMenu() {
     cout << "1. Arithmetic Multiplication Operator" << endl;
     cout << "2. Pointer Declaration Operator" << endl;
     cout << "3. Pointer Dereference (Indirection) Operator" << endl;
-    cout << "4. Pointers with User-Defined Structs" << endl;
-    cout << "5. Additional Resources" << endl;
-    cout << "6. Quit" << endl;
+    cout << "4. Pointers with User-Defined Structs"<< endl;
+    cout << "5. Quit" << endl;
 } // Display the menu function
 
 void demonstrateMultiplication() {
