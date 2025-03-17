@@ -1,54 +1,4 @@
-//struct for PersonType
-#include <iostream>
-#include <cstring>
-#include <fstream>
-#include <cctype>
-#include <iomanip>
-using namespace std;
-
-const int MAX_CHAR = 101;
-
-struct PersonType {
-	char name[MAX_CHAR];
-	char citizenship[MAX_CHAR];
-	int age;
-};
-
-//function prototypes
-void populatePersons(PersonType list[], int& count, const char fileName[]);
-void printPersons(const PersonType list[], int count);
-
-//add your function prototype here.
-bool removePerson(PersonType list[], int& count);
-
-// Helper function for case-insensitive string comparison using character arrays
-int compareIgnoreCase(const char s1[], const char s2[]);
-
-const int CAPACITY = 20;
-
-int main() {
-    PersonType list[CAPACITY];
-    int count = 0;
-    char fileName[] = "persons.txt";
-
-    cout << "Welcome to the citizen database!" << endl;
-    cout << "Here is the list of citizens so far." << endl;
-
-    populatePersons(list, count, fileName); // Populate list from file
-    printPersons(list, count); // Print initial list
-
-    // Attempt to remove a person and print updated list if successful
-    if (removePerson(list, count) == true) {
-        cout << "Updated list after removal:" << endl;
-        printPersons(list, count);
-    } else {
-        cout << "Person not found!" << endl;
-    }
-
-    cout << "Thank you for using the citizen database!" << endl;
-
-    return 0;
-}
+#include "person.h"
 
 // Function to read from file and populate the list
 void populatePersons(PersonType list[], int& count, const char fileName[]) {
@@ -62,7 +12,7 @@ void populatePersons(PersonType list[], int& count, const char fileName[]) {
         cerr << "Failed to open " << fileName << " to populate inventory!" << endl;
         exit(1);
     }
-    
+
     inFile >> name;
     while (!inFile.eof()) {
         inFile >> citizen >> age;
@@ -76,7 +26,6 @@ void populatePersons(PersonType list[], int& count, const char fileName[]) {
     inFile.close();
 }
 
-// Function to print the list
 void printPersons(const PersonType list[], int count) {
     cout << left; // Align text to the left
 
@@ -96,21 +45,20 @@ void printPersons(const PersonType list[], int count) {
     }
 }
 
-// Helper function for case-insensitive string comparison using character arrays
 int compareIgnoreCase(const char s1[], const char s2[]) {
     int i = 0;
-    
+
     while (s1[i] != '\0' && s2[i] != '\0') {
         char c1 = tolower(static_cast<unsigned char>(s1[i]));
         char c2 = tolower(static_cast<unsigned char>(s2[i]));
-        
+
         if (c1 != c2) {
             return c1 - c2;
         }
-        
+
         i++;
     }
-    
+
     // Check if one string is longer than the other
     return tolower(static_cast<unsigned char>(s1[i])) - tolower(static_cast<unsigned char>(s2[i]));
 }
@@ -121,14 +69,12 @@ bool removePerson(PersonType list[], int &count) {
     int foundIndex = -1; // Index of the person to be removed
 
     cout << "Enter the name to remove: ";
-    // Don't use cin.ignore() here when expecting input right away
     cin.clear(); // Clear any error flags
     cin.ignore(cin.rdbuf()->in_avail()); // Clear the input buffer
     cin.getline(srchName, MAX_CHAR);
 
     // Search for the person's index (case-insensitive comparison)
     for (int i = 0; i < count; i++) {
-        // Use our custom case-insensitive comparison function
         if (compareIgnoreCase(list[i].name, srchName) == 0) {
             foundIndex = i;
             break; // Stop once we find the person

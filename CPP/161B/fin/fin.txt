@@ -1,0 +1,112 @@
+//main.cpp
+
+DEFINE a constant integer MAX_CHAR
+
+FUNCTION main()
+    DECLARE PersonType list[MAX_CHAR]
+    DECLARE an integer count = 0
+    DEFINE a character[] fileName = "persons.txt"
+
+    DISPLAY "Welcome to the citizen database!"
+    DISPLAY "Here is the list of citizens so far."
+
+    CALL populatePersons(list, count, fileName)
+    CALL printPersons(list, count)
+
+    IF (removePerson(list, count) == true)
+        DISPLAY "Updated list after removal:"
+        CALL printPersons(list, count)
+    ELSE
+        DISPLAY "Person not found!"
+    END IF
+
+    DISPLAY "Thank you for using the citizen database!"
+
+    RETURN 0
+END main
+
+//person.cpp
+FUNCTION void populatePersons(PersonType[] list, integer &count, constant character[] fileName)
+    stream inFile
+    DECLARE character name[MAX_CHAR]
+    DECLARE character citizen[MAX_CHAR]
+    DECLARE integer age
+
+    OPEN file(fileName)
+
+    IF (!inFile) THEN
+        DISPLAY ERROR "Failed to open " fileName " to populate inventory!"
+        EXIT(1)
+    END IF
+
+    READ name from inFile
+    WHILE(NOT end of inFile)
+        READ citizen and age from inFile
+        copy name to list[count].name
+        copy citizen to list[count].citizenship
+        SET list[count].age = age
+        count++
+
+        READ name from inFile
+    END WHILE
+
+    close inFile
+END FUNCTION
+
+FUNCTION void printPersons(const PersonType list[], int count)
+    align output to left
+    DISPLAY "Name", "citizenship", "Age"
+
+    DISPLAY separator line
+
+    FOR(integer index = 0; index < count; index++)
+        DISPLAY list[index].name, list[index].citizenship, list[age].age
+    END FOR
+END FUNCTION
+
+FUNCTION integer compareIgnoreCase(constant character[] s1, constant character[] s2)
+    DEFINE integer i = 0
+
+    WHILE (s1[i] != Null character AND s2[i] != Null character)
+        SET char c1 = tolower(s1[i])
+        SET char c2 = tolower(s2[i])
+
+        IF (c1 != c2) THEN
+            RETURN c1 - c2
+        END IF
+
+        i++
+    END WHILE
+
+    RETURN tolower(s1[i]) - tolower(s2[i])
+END FUNCTION
+
+FUNCTION bool removePerson(PersonType[] list, integer &count)
+    DECLARE character srchName[MAX_CHAR]
+    DEFINE integer foundIndex =-1
+
+    DISPLAY "Enter the name to remove: "
+    CLEAR any errors
+    CLEAR the input buffer
+    INPUT srchName
+
+    FOR (integer i = 0; i < count; i++)
+        IF (CALL compareIgnoreCase(list[i].name, srchName) == 0) THEN
+            SET foundIndex = i
+            BREAK
+        END IF
+    END FOR
+
+    IF (foundIndex != -1) THEN
+        FOR (integer i = foundIndex; i < count -1; i++)
+            copy list[i + 1].name to list[i].name
+            copy list[i + 1].citizenship to list[i].citizenship
+            SET list[i].age = list[i + 1].age
+        END FOR
+        count--
+        
+        RETURN true
+    END IF
+
+    RETURN false
+END FUNCTION
