@@ -1,63 +1,4 @@
-#include <iostream>
-#include <cstring>
-#include <iomanip>
-
-using namespace std;
-
-const int MAX_SIZE = 20;;
-
-struct Cart {
-    char name[50];
-    double price;
-    int quantity;
-};
-
-void displayMenu();
-void addItem(Cart cart[], int& itemCount);
-void removeItem(Cart cart[], int& itemCount);
-void updateItem(Cart cart[], int itemCount);
-void displayCart(const Cart cart[], int itemCount);
-void checkout(const Cart cart[], int itemCount);
-int getMenuChoice();
-double calculateItemTotal(const Cart& item);
-double calculateCartTotal(const Cart cart[], int itemCount);
-void showItemsList(const Cart cart[], int itemCount);
-bool validateItemNumber(int& itemNumber, int itemCount);
-
-int main() {
-    Cart cart[MAX_SIZE];
-    int itemCount = 0;
-    int choice;
-
-    cout << "Welcome to the shopping cart!" << endl;
-
-    do {
-        displayMenu();
-        choice = getMenuChoice();
-
-        switch (choice) {
-            case 1:
-                addItem(cart, itemCount);
-                break;
-            case 2:
-                removeItem(cart, itemCount);
-                break;
-            case 3:
-                updateItem(cart, itemCount);
-                break;
-            case 4:
-                showItemsList(cart, itemCount);
-                break;
-            case 5:
-                checkout(cart, itemCount);
-                break;
-            default:
-                cout << "Goodbye!" << endl;
-        }
-    } while (choice != 5);
-
-    return 0;
-}
+#include "cart.h"
 
 void displayMenu() {
     cout << "1. Add item to cart" << endl;
@@ -220,23 +161,16 @@ double calculateCartTotal(const Cart cart[], int itemCount) {
 }
 
 void showItemsList(const Cart cart[], int itemCount) {
-    if (itemCount == 0) {
-        cout << "Cart is empty." << endl;
-        return;
-    }
+    cout << left << setw(4) << "Item No." << setw(20) << "Name" << setw(10) << "Price($)" << setw(10) << "Quantity" << setw(10) << "Total Cost($)" << endl;
+    cout << string(55, '-') << endl;
 
-    else {
-        cout << left << setw(8) << "No." << setw(20) << "Name" << setw(10) << "Price($)" << setw(10) << "Quantity" << setw(10) << "Total Cost($)" << endl;
-        cout << string(55, '-') << endl;
-
-        for (int i = 0; i < itemCount; i++) {
-            double itemTotal = calculateItemTotal(cart[i]);
-            cout << left << setw(8) << i + 1;
-            cout << setw(20) << cart[i].name;
-            cout << fixed << setprecision(2) << setw(10) << cart[i].price;
-            cout << setw(10) << cart[i].quantity;
-            cout << fixed << setprecision(2) << setw(10) << calculateItemTotal(cart[i]) << endl;
-        }
+    for (int i = 0; i < itemCount; i++) {
+        double itemTotal = calculateItemTotal(cart[i]);
+        cout << left << setw(4) << i + 1 << ".";
+        cout << setw(20) << cart[i].name;
+        cout << fixed << setprecision(2) << setw(10) << cart[i].price;
+        cout << setw(10) << cart[i].quantity;
+        cout << fixed << setprecision(2) << setw(10) << calculateItemTotal(cart[i]) << endl;
     }
 
     cout << endl;
