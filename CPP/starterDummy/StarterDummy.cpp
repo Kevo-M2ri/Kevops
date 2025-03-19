@@ -1,11 +1,23 @@
+/**----------------------------------------------------------------------------
+   Author:      Kelvin Muturi
+   Date:        March 19, 2025
+   Assignment:  CS-161B Assignment a07
+   Description: This program simulates a shopping cart where the user can add,
+                remove, update, and display items in the cart. The user can also
+                checkout and see the total cost of the items in the cart. it uses
+                a struct to store the item details and functions to perform the
+                operations on the cart.
+   Inputs:      Item name as a character array, price as a double, quantity and
+                item number as integers.
+   Outputs:     Item details, cart details as character arrays, price of items,
+                and total cost of items in the cart as doubles.
+   -------------------------------------------------------------------------**/
+
 #include <iostream>
 #include <cstring>
 #include <iomanip>
 
 using namespace std;
-
-const int MAX_SIZE = 20;;
-
 struct Cart {
     char name[50];
     double price;
@@ -24,12 +36,14 @@ double calculateCartTotal(const Cart cart[], int itemCount);
 void showItemsList(const Cart cart[], int itemCount);
 bool validateItemNumber(int& itemNumber, int itemCount);
 
+const int MAX_SIZE = 20;// Maximum number of items in the cart
+
 int main() {
     Cart cart[MAX_SIZE];
     int itemCount = 0;
     int choice;
 
-    cout << "Welcome to the shopping cart!" << endl;
+    cout << "Welcome to the shopping cart!" << endl << endl;
 
     do {
         displayMenu();
@@ -60,12 +74,14 @@ int main() {
 }
 
 void displayMenu() {
+    cout <<"======MENU======" << endl;
+    cout << string(25, '-') << endl;
     cout << "1. Add item to cart" << endl;
     cout << "2. Remove item from cart" << endl;
     cout << "3. Update item in cart" << endl;
     cout << "4. Display cart" << endl;
     cout << "5. Checkout" << endl;
-    cout << "What would you like to do? ";
+    cout << "\nWhat would you like to do? ";
 }
 
 int getMenuChoice() {
@@ -170,13 +186,13 @@ void updateItem(Cart cart[], int itemCount) {
     cout << "Enter new item name: ";
     cin.getline(cart[itemNumber - 1].name, 50);
 
-    cout << "Enter new item price: ";
+    cout << "Enter new item price: $";
     cin >> cart[itemNumber - 1].price;
 
     while (cin.fail() || cart[itemNumber - 1].price < 0) {
         cin.clear();
         cin.ignore(1000, '\n');
-        cout << "Invalid price. Please enter a positive number: ";
+        cout << "Invalid price. Please enter a positive number: $";
         cin >> cart[itemNumber - 1].price;
     }
 
@@ -204,7 +220,7 @@ void checkout(const Cart cart[], int itemCount) {
 
     double total = calculateCartTotal(cart, itemCount);
     cout << "Total: $" << fixed << setprecision(2) << total << endl;
-    cout << "Thank you for shopping with us!" << endl;
+    cout << "\nThank you for shopping with us!" << endl;
 }
 
 double calculateItemTotal(const Cart& item) {
@@ -226,16 +242,16 @@ void showItemsList(const Cart cart[], int itemCount) {
     }
 
     else {
-        cout << left << setw(8) << "No." << setw(20) << "Name" << setw(10) << "Price($)" << setw(10) << "Quantity" << setw(10) << "Total Cost($)" << endl;
-        cout << string(55, '-') << endl;
+        cout << left << setw(6) << "No." << setw(19) << "Name" << setw(10) << "Price" << setw(12) << "Quantity" << setw(20) << "Total Cost" << endl;
+        cout << string(58, '-') << endl;
 
         for (int i = 0; i < itemCount; i++) {
             double itemTotal = calculateItemTotal(cart[i]);
-            cout << left << setw(8) << i + 1;
-            cout << setw(20) << cart[i].name;
-            cout << fixed << setprecision(2) << setw(10) << cart[i].price;
+            cout << left << setw(6) << i + 1;
+            cout << setw(19) << cart[i].name;
+            cout << "$" << fixed << setprecision(2) << setw(13) << cart[i].price;
             cout << setw(10) << cart[i].quantity;
-            cout << fixed << setprecision(2) << setw(10) << calculateItemTotal(cart[i]) << endl;
+            cout << "$" << fixed << setprecision(2) << setw(15) << calculateItemTotal(cart[i]) << endl;
         }
     }
 

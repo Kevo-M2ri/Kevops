@@ -2,16 +2,16 @@
 #include <iostream>
 #include <cstring>
 #include <iomanip>
+#include <fstream>
 
 using namespace std;
-
-const int MAX_SIZE = 20;;
-
 struct Cart {
     char name[50];
     double price;
     int quantity;
 };
+
+const int MAX_SIZE = 20;// Maximum number of items in the cart
 
 void displayMenu();
 void addItem(Cart cart[], int& itemCount);

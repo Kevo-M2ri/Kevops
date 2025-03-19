@@ -1,0 +1,243 @@
+// fp1.cpp
+
+FUNCTION integer main()
+    DECLARE Cart[] cart
+    DEFINE integer itemCount = 0
+    DECLARE integer choice
+
+    DISPLAY "Welcome to the shopping cart!"
+
+    DO
+        CALL displayMenu()
+        SET choice = CALL getMenuChoice()
+
+        SELECT choice
+            CASE 1:
+                CALL  addItem(cart, itemCount)
+                BREAK
+            CASE 2:
+                CALL removeItem(cart, itemCount)
+                BREAK
+            CASE 3:
+                CALL updateItem(cart, itemCount)
+                BREAK
+            CASE 4:
+                CALL showItemsList(cart, itemCount)
+                BREAK
+            CASE 5:
+                CALL checkout(cart, itemCount)
+                BREAK
+        END SELECT
+    WHILE(choice != 5)
+
+    RETURN 0
+END main
+
+//cart.cpp
+
+FUNCTION void displayMenu()
+    DISPLAY "======MENU======"
+    DISPLAY string(25, '-')
+    DISPLAY "1. Add item to cart"
+    DISPLAY "2. Remove item from cart"
+    DISPLAY "3. Update item in cart"
+    DISPLAY "4. Display cart"
+    DISPLAY "5. Checkout"
+    DISPLAY "What would you like to do? "
+END FUNCTION
+
+FUNCTION integer getMenuChoice()
+    DECLARE integer choice
+
+    INPUT choice
+    WHILE (INPUT fails OR choice < 1 OR choice >5)
+        CLEAR error flag
+        CLEAR input buffer
+        DISPLAY "Invalid choice. Please enter a number between 1 and 5: "
+        INPUT choice
+    END WHILE
+    CLEAR input buffer
+    
+    RETURN choice
+END FUNCTION
+
+FUNCTION void addItem(Cart[] cart, integer &itemCount)
+    IF (item >= MAX_SIZE) THEN
+        DISPLAY "Cart id full. Cannot add more items."
+        exit function
+    END IF
+
+    Cart newItem
+
+    DISPLAY "Enter item name: "
+    INPUT newItem.name
+
+    DISPLAY "Enter item price: "
+    INPUT newItem.price
+
+    WHILE (INPUT fails OR newItem.price < 1)
+        CLEAR error flag
+        CLEAR input buffer
+        DISPLAY "Invalid price. Please enter a positive number: "
+        INPUT newItem.price
+    END WHILE
+
+    DISPLAY "Enter item quantity: "
+    INPUT newItem.quantity
+
+    WHILE (INPUT fails OR newItem.quantity < 1)
+        CLEAR error flag
+        CLEAR input buffer
+        DISPLAY "Invalid quantiy. Please enter a positive number: "
+        INPUT newItem.quantity
+    END WHILE
+
+    SET cart[itemCount] = newItem
+    increment count
+
+    CLEAR input buffer
+END FUNCTION
+
+FUNCTION void removeItem(Cart[] cart, integer &itemCount)
+    IF (itemCount == 0) THEN
+        DISPLAY "Cart is empty. Cannot remove items." 
+        exit function
+    END IF
+
+    CALL showItemsList(cart, itemCount)
+
+    DECLARE integer itemNumber
+    DISPLAY "Enter the item number to remove: "
+    INPUT itemNumber
+
+    WHILE(NOT validateItemNumber(itemNumber, itemCount))
+        DISPLAY "Invalid item number. Please enter a number between 1 and " itemCount ": "
+        CLEAR error flag
+        CLEAR input buffer
+        INPUT itemNumber
+    END WHILE
+
+    FOR (integer i = itemNumber - 1; i < itemCount - 1; i++)
+        SET cart[i] = cart[i + 1]
+    END FOR
+
+    decrement itemCount
+    CLEAR input buffer
+END FUNCTION
+
+FUNCTION void updateItem(Cart[] cart, integer itemCount)
+    IF (itemCount == 0) THEN
+        DISPLAY "Cart is empty. Cannot update items."
+        exit function
+    END IF
+
+    CALL showItemsList(cart, itemCount)
+
+    DECLARE integer itemNumber
+    DISPLAY "Enter the item number to update: "
+    INPUT itemNumber
+
+    WHILE (NOT validateItemNumber(itemNumber, itemCount))
+        DISPLAY "Invalid item number. Please enter a number between 1 and " itemCount ": "
+        CLEAR error flag
+        CLEAR input buffer
+        INPUT itemNumber
+    END WHILE
+
+    CLEAR input buffer
+
+    DISPLAY "Enter new item name: "
+    INPUT cart[itemNumber - 1].name
+
+    DISPLAY "Enter new item price: "
+    INPUT cart[itemNumber - 1].price
+
+    WHILE (INPUT fails OR cart[itemNumber - 1].price < 0)
+        CLEAR error flag
+        CLEAR input buffer
+        DISPLAY "Invalid price. Please enter a positive number: $"
+        INPUT cart[itemNumber - 1].price
+    END WHILE
+
+    DISPLAY "Enter new item quantity: "
+    INPUT cart[itemNumber - 1].quantity
+
+    WHILE(INPUT fails OR cart[itemNumber - 1].quantity < 1)
+        CLEAR error flag
+        CLEAR input buffer
+        DISPLAY "Invalid quantity. Please enter a positive number: "
+        INPUT cart[itemNumber - 1].quantity
+    END WHILE
+
+    CLEAR input buffer
+END FUNCTION
+
+FUNCTION void checkout(constant Cart[] cart, integer itemCount)
+    IF (itemCount == 0) THEN
+        DISPLAY "Cart is empty. Cannot checkout."
+        exit function
+    END IF
+
+    DISPLAY "Itema in cart:"
+    CALL showItemsList(cart, itemCount)
+
+    DEFINE double total = calculateCartTotal(cart, itemCount)
+    DISPLAY "Total: $" total
+    DISPLAY "Thank you for shopping with us!"
+END FUNCTION
+
+FUNCTION double calculateItemTotal(constant Cart[] cart, integer itemCount)
+    RETURN item.price * item.quantity
+END FUNCTION
+
+FUNCTION double calculateCartTotal(constant Cart[] cart, integer itemCount)
+    DEFINE double total = 0.0
+    FOR (integer i = 0; i < itemCount; i++)
+        SET total += calculateItemTotal(cart[i])
+    END FOR
+
+    RETURN total
+END FUNCTION
+
+FUNCTION void showItemsList(constant Cart[] cart, integer itemCount)
+    IF (itemCount == 0) THEN
+        DISPLAY Cart is empty."
+        exit function
+    
+    ELSE
+        DISPLAY "No.", "Name", "Price", "Quantity", "Total Cost"
+        DISPLAY a line separator
+
+        FOR (integer i = 0; i < itemCount; i++)
+            DISPLAY i + 1, cart[i].name, "$" cart[i].price, cart[i].quantity, "$" CALL calculateItemTotal(cart[i])
+        END FOR
+    END IF
+
+    DISPLAY blank line
+END FUNCTION
+
+FUNCTION boolean validateItemNumber(integer &itemNumber, integer itemCount)
+    RETURN NOT input fails AND itemNumber >= 1 AND itemNumber <= itemCount
+END FUNCTION
+
+//cart.h
+STRUCTURE Cart
+    DECLARE character[50] name
+    DECLARE double price
+    DECLARE integer quantity
+END STRUCTURE
+
+DEFINE constant integer MAX_SIZE = 20
+
+//FUNCTION prototypes
+    void displayMenu()
+    void addItem(Cart[] cart, integer &itemCount)
+    void removeItem(Cart[] cart, integer &itemCount)
+    void updateItem(Cart[] cart, integer itemCount)
+    void displayCart(constant Cart[] cart, integer itemCount)
+    void checkout(constant Cart[] cart, integer itemCount)
+    integer getMenuChoice()
+    double calculateItemTotal(constant Cart &item)
+    double calculateCartTotal(constant Cart[], integer itemCount)
+    void showItemsList(constant Cart[] cart, integer itemCount)
+    bool validateItemNumber(integer &itemNumber, integer itemCount)
