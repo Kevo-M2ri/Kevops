@@ -9,7 +9,7 @@ void populatePersons(PersonType list[], int& count, const char fileName[]) {
 
     inFile.open(fileName);
     if (!inFile) {
-        cerr << "Failed to open " << fileName << " to populate inventory!" << endl;
+        cerr << "\nFailed to open " << fileName << " to populate inventory!" << endl;
         exit(1);
     }
 
@@ -68,7 +68,7 @@ bool removePerson(PersonType list[], int &count) {
     char srchName[MAX_CHAR];
     int foundIndex = -1; // Index of the person to be removed
 
-    cout << "Enter the name to remove: ";
+    cout << "\nEnter the name to remove: ";
     cin.clear(); // Clear any error flags
     cin.ignore(cin.rdbuf()->in_avail()); // Clear the input buffer
     cin.getline(srchName, MAX_CHAR);
@@ -94,4 +94,34 @@ bool removePerson(PersonType list[], int &count) {
     }
 
     return false; // Indicate that no person was found
+}
+
+void writeToFile(const PersonType list[], int count, const char fileName[]) {
+    ofstream outFile;
+    outFile.open(fileName);
+
+    if (!outFile) {
+        cerr << "\nFailed to open " << fileName << " to write to file!" << endl; // error message
+        return; // exit function
+    } // check if file did not open
+
+    outFile << "Citizen Database Output." << endl;// file info header
+    outFile << "========================" << endl;// header separator
+
+    outFile << left; // Align text to the left
+    outFile << setw(20) << "Name"
+            << setw(20) << "Citizenship"
+            << setw(5) << "Age" << endl;// header
+
+    outFile << string(45, '-') << endl;
+
+    for(int i = 0; i < count; i++) {
+        outFile << setw(20) << list[i].name
+                << setw(20) << list[i].citizenship
+                << setw(5) << list[i].age << endl;
+    }
+
+    outFile << "\nEnd of report." << endl;
+
+    outFile.close();
 }

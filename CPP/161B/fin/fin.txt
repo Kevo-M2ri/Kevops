@@ -12,15 +12,20 @@ FUNCTION main()
 
     CALL populatePersons(list, count, fileName)
     CALL printPersons(list, count)
+    CALL writeToFile(list, count, outputFileName)
 
     IF (removePerson(list, count) == true)
         DISPLAY "Updated list after removal:"
         CALL printPersons(list, count)
+        CALL writeToFile(list, count, outputFileName
+        DISPLAY "Person removed successfully! Check " outputFileName " for updated list."
+        )
     ELSE
         DISPLAY "Person not found!"
     END IF
 
     DISPLAY "Thank you for using the citizen database!"
+    DISPLAY "Output has been written to " outputFileName
 
     RETURN 0
 END main
@@ -110,3 +115,45 @@ FUNCTION bool removePerson(PersonType[] list, integer &count)
 
     RETURN false
 END FUNCTION
+
+FUNCTION void writeToFile(constant PersonType[] list, integer count, constant character[] fileName)
+    outFile stream
+    open outFile
+
+    IF (NOT outFile) THEN
+        DISPLAY "Failed to open " fileName " to write to file!"
+        exit function
+    END IF
+
+    WRITE to outFile "Citizen Database Output."
+    WRITE to outFile "========================"
+
+    WRITE to outFile "Name", "Citizenship", "Age"
+
+    WRITE to outFile string(45,  '-')
+
+    FOR (integer i = 0; i < coount; i++)
+        WRITE to outFile list[i].name, list[i].citizenship, list[i].age
+    END FOR
+
+    WRITE to outFile "End of report."
+
+    close outFile
+END FUNCTION
+
+//person.h
+
+DEFINE constant integer MAX_CHAR = 101
+
+STRUCTURE PersonType
+    DECLARE character[MAX_CHAR] name
+    DECLARE character[MAX_CHAR] citizenship
+    DECLARE integer age
+END STRUCTURE
+
+//FUNCTION prototypes
+    void populatePersons(PersonType[] list, integer& count, constant character[] fileName)
+    void printPersons(constant PersonType[] list, integer count)
+    void removePerson(PersonType[] list, integer &count)
+    integer compareIgnoreCase(constant character[] str1, constant character[] str2)
+    void writeToFile(constant PersonType[] list, integer count, constant character[] fileName)
