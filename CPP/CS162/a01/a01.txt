@@ -1,1 +1,25 @@
-// headerFile
+1. Initial Aprroach:
+    I planned out the structures using the given templates. I then declared functions
+    while defining them right afterwards. I then wrote the code after planning out the
+    functions on a rough draft piece of paper. After writing it I ran and debugged it
+    correcting errors.
+
+2. Challenges & Problem-Solving:
+    The most challenging section of the code was outlining what a function was to do
+    on the rough draft before writing the actual code. I kept writing and rewriting
+    loops and conditions to avoid endless loops and redundancy. Upon writing and
+    rewriting, I ended up having a pseudocode. 
+
+3. Testing and Debugging:
+    I ran the code everytime I wrote a function to test the functionality of the code.
+    I corrected the functions everytime step by step until I had written the whole code.
+
+4. Design and Structure Improvements
+    After completing the code I ran it a number of times correcting errors and improving
+    functionality as well as calling functions where they are to be called. //Fixme
+    statements were handy.
+
+5. Conceptual Understanding
+    My weakest topic was functions and loops and had to review them a number of times. I
+    also had a slight problem in with arrays but got the hang of it real quick. Everything
+    was review and it helped me know where to look most.

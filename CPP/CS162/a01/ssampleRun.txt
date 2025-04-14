@@ -1,0 +1,92 @@
+Sample run:
+
+--- Main Menu ---
+1) Fight
+2) Check Inventory
+3) Run
+Choose an option: 2
+
+--- Your Inventory ---
+It's empty! No items yet.
+
+--- Main Menu ---
+1) Fight
+2) Check Inventory
+3) Run
+Choose an option: 1
+
+A wild Goblin appears! It has 20 HP.
+[Your HP: 50] [Goblin HP: 20]
+Choose your attack:
+1) Quick Strike (70% chance, 4 damage)
+2) Heavy Blow (50% chance, 7 damage)
+Enter choice: 1
+You struck the Goblin for 4 damage!
+The goblin swings a spiked club at you!
+The Goblin hit you for 5 damage!
+[Your HP: 45] [Goblin HP: 16]
+Choose your attack:
+1) Quick Strike (70% chance, 4 damage)
+2) Heavy Blow (50% chance, 7 damage)
+Enter choice: 1
+You struck the Goblin for 4 damage!
+The goblin swings a spiked club at you!
+The Goblin missed!
+[Your HP: 45] [Goblin HP: 12]
+Choose your attack:
+1) Quick Strike (70% chance, 4 damage)
+2) Heavy Blow (50% chance, 7 damage)
+Enter choice: 1
+Your attack missed!
+The goblin swings a spiked club at you!
+The Goblin hit you for 5 damage!
+[Your HP: 40] [Goblin HP: 12]
+Choose your attack:
+1) Quick Strike (70% chance, 4 damage)
+2) Heavy Blow (50% chance, 7 damage)
+Enter choice: 1
+You struck the Goblin for 4 damage!
+The goblin swings a spiked club at you!
+The Goblin hit you for 5 damage!
+[Your HP: 35] [Goblin HP: 8]
+Choose your attack:
+1) Quick Strike (70% chance, 4 damage)
+2) Heavy Blow (50% chance, 7 damage)
+Enter choice: 2
+Your attack missed!
+The goblin swings a spiked club at you!
+The Goblin missed!
+[Your HP: 35] [Goblin HP: 8]
+Choose your attack:
+1) Quick Strike (70% chance, 4 damage)
+2) Heavy Blow (50% chance, 7 damage)
+Enter choice: 2
+You struck the Goblin for 7 damage!
+The goblin swings a spiked club at you!
+The Goblin missed!
+[Your HP: 35] [Goblin HP: 1]
+Choose your attack:
+1) Quick Strike (70% chance, 4 damage)
+2) Heavy Blow (50% chance, 7 damage)
+Enter choice: 2
+You struck the Goblin for 7 damage!
+You defeated the Goblin!
+
+--- Main Menu ---
+1) Fight
+2) Check Inventory
+3) Run
+Choose an option: 2
+
+--- Your Inventory ---
+1) Gold Coin (Value: 10 gil)
+2) Gold Coin (Value: 10 gil)
+Total worth: 20 gil
+
+--- Main Menu ---
+1) Fight
+2) Check Inventory
+3) Run
+Choose an option: 3
+You chose to run away.
+You collected a total of 20 gil.
