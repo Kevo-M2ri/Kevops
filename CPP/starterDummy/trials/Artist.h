@@ -1,6 +1,8 @@
 #ifndef ARTISTH
 #define ARTISTH
 
+#include <iostream>
+#include <cstring>
 #include <cstring>
 using namespace std;
 
@@ -17,10 +19,11 @@ class Artist{
       int GetDeathYear() const;
 
       void PrintInfo() const;
-   
-   private:
-      // TODO: Declare private data members - artistName, birthYear, deathYear
 
+   private:
+      char artistName[101];
+      int birthYear;
+      int deathYear;
 };
 
 #endif

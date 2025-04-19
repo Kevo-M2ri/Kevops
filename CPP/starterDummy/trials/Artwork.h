@@ -1,14 +1,23 @@
+#ifndef ARTWORKH
+#define ARTWORKH
+
 #include "Artist.h"
-#include <iostream>
-#include <cstring>
-using namespace std;
 
-// TODO: Define default constructor
+class Artwork{
+   public:
+      Artwork();
 
-// TODO: Define second constructor to initialize
-//       private fields (artistName, birthYear, deathYear)
+      Artwork(char *newTitle, int newYearCreated, Artist newArtist);
+      void GetTitle(char *returnTitle);
 
-// TODO: Define get functions: GetName(), GetBirthYear(), GetDeathYear()
+      int GetYearCreated();
 
-// TODO: Define PrintInfo() function
-//      If deathYear is entered as -1, only print birthYear
+      void PrintInfo();
+
+   private:
+      char title[101];
+      int yearCreated;
+      Artist artist;
+};
+
+#endif
