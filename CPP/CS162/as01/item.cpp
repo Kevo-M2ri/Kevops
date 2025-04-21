@@ -6,11 +6,6 @@ InventoryItem::InventoryItem()
         itemPrice = 0;
 }
 
-InventoryItem::InventoryItem(const char name[], float price) {
-        strcpy(itemName, name);
-        itemPrice = price;
-} // added constructor
-
 void InventoryItem::setItemName(const char name[])
 {
         strcpy(itemName, name);

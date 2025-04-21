@@ -1,4 +1,4 @@
-xCC = g++
+CC = g++
 CPPFLAGS = -std=c++11 -g -Wall
 
 main: main.o item.o itemList.o

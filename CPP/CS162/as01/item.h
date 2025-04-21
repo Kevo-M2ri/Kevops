@@ -13,7 +13,6 @@ private:
 
 public:
         InventoryItem();
-        InventoryItem(const char name[], float price); //added constructor
 
         void setItemName(const char name[]);
         const char* getItemName() const;
@@ -23,3 +22,4 @@ public:
 
         void print() const;
 };
+

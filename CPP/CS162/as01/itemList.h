@@ -16,7 +16,4 @@ public:
 
         void printList() const;
         void readList(istream& in);
-        int length() const; // added length function
-        void changePrice(int index, float newPrice); // added changePrice function
-        void addNewItems(ItemList& inventory); // added addNewItems function
 };

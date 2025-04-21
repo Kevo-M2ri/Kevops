@@ -14,25 +14,11 @@ int main(int argc, char ** argv)
                 return 1;
         }
         inventory.readList(in);
-        in.close();
 
         //invoke your functions here to do what is required
-        InventoryItem newItem("new item", 10.0);
-        inventory.append(newItem);
 
-        //length function implemented
-        cout << "Number of items in inventory: " << inventory.length() << endl;
 
         cout << endl << "Current Inventory: " << endl;
         inventory.printList();
-
-        // changePrice function implemented
-        cout << endl << "Changing price of item 0 to 15.0" << endl;
-        inventory.changePrice(0, 15.0);
-
-        // print updated inventory4
-        cout << endl << "Updated Inventory: " << endl;
-        inventory.printList();
-
         return 0;
 }
