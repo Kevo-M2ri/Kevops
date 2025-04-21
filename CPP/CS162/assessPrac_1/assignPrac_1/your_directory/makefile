@@ -9,5 +9,5 @@ itemList.o: item.h itemList.h
 
 item.o: item.h
 
-clean:
-        rm *.o main
+clean: 
+	rm *.o main
