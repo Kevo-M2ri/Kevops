@@ -158,7 +158,7 @@ bool parseOggMetadata(string filePath, Song& song) {
 
     // Get comments (title, artist, album, track number)
     stb_vorbis_comment comment = stb_vorbis_get_comment(vorbis);
-    for (int i = 0; i < comment.comments; i++) {
+    for (int i = 0; i < comment.comment_list_length; i++) {
         string commentStr = comment.comment_list[i];
         string commentUpper = toUpper(commentStr);
 
@@ -174,7 +174,7 @@ bool parseOggMetadata(string filePath, Song& song) {
         else if (commentUpper.find("TRACKNUMBER=") == 0) {
             string trackStr = commentStr.substr(12); // Text after "TRACKNUMBER="
             try {
-                int track = stoi(trackStr);
+                int track = std::stoi(trackStr);
                 song.setTrackNumber(track);
             } catch (...) {
                 // Keep default (0) if not a number
