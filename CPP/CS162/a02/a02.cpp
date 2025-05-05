@@ -8,10 +8,8 @@
 #include <iomanip>
 
 // Include the stb_vorbis library
-// In a real implementation, you would download the complete stb_vorbis.c from:
-// https://github.com/nothings/stb/blob/master/stb_vorbis.c
 #define STB_VORBIS_IMPLEMENTATION
-#include "stb_vorbis.h"
+#include "stb_vorbis.c"
 
 // Song class to store metadata for each track
 class Song {
