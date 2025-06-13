@@ -1,4 +1,5 @@
 #include "List.h"
+#include "Tree.h"  // MISSING INCLUDE - This was causing compilation errors
 
 // Function to read one line from the CSV file and turn it into a Pokemon
 Pokemon parseOneLine(const string& line) {
@@ -202,4 +203,43 @@ int main() {
         searchDescription = "Pokemon with " + tree.getSortDescription() + " <= " + to_string(searchValue);
     } else if (userChoice == 2) {
         results = tree.findGreaterOrEqual(searchValue);
-        searchDescription = "Pokemon with " + tree.getS
+        searchDescription = "Pokemon with " + tree.getSortDescription() + " >= " + to_string(searchValue);
+    } else if (userChoice == 3) {
+        results = tree.findEqual(searchValue);
+        searchDescription = "Pokemon with " + tree.getSortDescription() + " == " + to_string(searchValue);
+    }
+
+    // Step 5: Show the results
+    cout << "\n=========================================" << endl;
+    cout << "SEARCH RESULTS: " << searchDescription << endl;
+    cout << "=========================================" << endl;
+
+    if (results.isEmpty()) {
+        cout << "No Pokemon found matching your criteria." << endl;
+    } else {
+        results.printAll();
+        
+        // Step 6: Let the user delete Pokemon from the results
+        letUserDeletePokemon(results);
+        
+        // Step 7: Ask if they want to save the results to a file
+        if (!results.isEmpty()) {
+            string saveChoice;
+            cout << "\nDo you want to save these results to a file? (yes/no): ";
+            cin >> saveChoice;
+            
+            if (saveChoice == "yes" || saveChoice == "y" || saveChoice == "Yes" || saveChoice == "Y") {
+                string filename;
+                cout << "Enter filename (without .csv extension): ";
+                cin >> filename;
+                filename += ".csv";
+                
+                vector<Pokemon> pokemonVector = results.getAllPokemon();
+                savePokemonToFile(pokemonVector, filename);
+            }
+        }
+    }
+
+    cout << "\nThank you for using the Pokemon Statistics Analyzer!" << endl;
+    return 0;
+}
