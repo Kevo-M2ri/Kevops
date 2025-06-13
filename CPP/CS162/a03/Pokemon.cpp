@@ -1,7 +1,4 @@
 #include "Pokemon.h"
-using namespace std;
-
-
 
 bool isWeak(string attacking, string defending){
 

@@ -1,13 +1,6 @@
 #include "List.h"
 #include "Tree.h"
 #include "Pokemon.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <string>
-
-using namespace std;
 
 // Function to read one line from the CSV file and turn it into a Pokemon
 Pokemon parseOneLine(const string& line) {
@@ -230,21 +223,21 @@ int main() {
     cout << "=========================================" << endl;
 
     results.printList();
-    
+
     // Step 6: Let the user delete Pokemon from the results
     letUserDeletePokemon(results);
-    
+
     // Step 7: Ask if they want to save the results to a file
     string saveChoice;
     cout << "\nDo you want to save these results to a file? (yes/no): ";
     cin >> saveChoice;
-    
+
     if (saveChoice == "yes" || saveChoice == "y" || saveChoice == "Yes" || saveChoice == "Y") {
         string filename;
         cout << "Enter filename (without .csv extension): ";
         cin >> filename;
         filename += ".csv";
-        
+
         vector<Pokemon> pokemonVector = listToVector(results);
         savePokemonToFile(pokemonVector, filename);
     }

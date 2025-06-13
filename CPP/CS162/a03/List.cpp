@@ -2,7 +2,6 @@
 
 #include "List.h"
 #include <iostream>
-using namespace std;
 
 // Constructor
 List::List() {
@@ -20,7 +19,7 @@ List::List(const List& other) {
     if (other.n == nullptr) {
         return;
     }
-    
+
     // We need to copy the list in the same order
     // Since this is a singly linked list, we'll copy recursively
     n = copyHelper(other.n);
@@ -32,7 +31,7 @@ List& List::operator=(const List& other) {
         // Clean up existing nodes
         cleanup(n);
         n = nullptr;
-        
+
         // Copy from other
         if (other.n != nullptr) {
             n = copyHelper(other.n);
@@ -55,7 +54,7 @@ List::Node* List::copyHelper(Node* other) {
     if (other == nullptr) {
         return nullptr;
     }
-    
+
     Node* newNode = new Node;
     newNode->head = other->head;  // Copy the Pokemon data
     newNode->tail = copyHelper(other->tail);  // Recursively copy the rest
@@ -75,20 +74,20 @@ void List::remove(int pos) {
     if (pos < 0 || n == nullptr) {
         return;
     }
-    
+
     if (pos == 0) {
         Node* temp = n;
         n = n->tail;
         delete temp;
         return;
     }
-    
+
     // Find the node before the one we want to remove
     Node* current = n;
     for (int i = 0; i < pos - 1 && current->tail != nullptr; i++) {
         current = current->tail;
     }
-    
+
     if (current->tail != nullptr) {
         Node* nodeToDelete = current->tail;
         current->tail = nodeToDelete->tail;
@@ -101,7 +100,7 @@ void List::remove(string name) {
     if (n == nullptr) {
         return;
     }
-    
+
     // If first node matches
     if (n->head.name == name) {
         Node* temp = n;
@@ -109,13 +108,13 @@ void List::remove(string name) {
         delete temp;
         return;
     }
-    
+
     // Search for the node to remove
     Node* current = n;
     while (current->tail != nullptr && current->tail->head.name != name) {
         current = current->tail;
     }
-    
+
     if (current->tail != nullptr) {
         Node* nodeToDelete = current->tail;
         current->tail = nodeToDelete->tail;
@@ -128,12 +127,12 @@ Pokemon List::get(int pos) {
     if (pos < 0 || n == nullptr) {
         return Pokemon(); // Return default Pokemon if invalid
     }
-    
+
     Node* current = n;
     for (int i = 0; i < pos && current != nullptr; i++) {
         current = current->tail;
     }
-    
+
     if (current != nullptr) {
         return current->head;
     }
@@ -158,7 +157,7 @@ void List::printList() {
         cout << "List is empty." << endl;
         return;
     }
-    
+
     Node* current = n;
     int count = 1;
     while (current != nullptr) {
@@ -184,7 +183,7 @@ void List::filterWeakHelper(Node*& node, string aType) {
     if (node == nullptr) {
         return;
     }
-    
+
     if (node->head.isWeakTo(aType)) {
         Node* temp = node;
         node = node->tail;
@@ -205,7 +204,7 @@ void List::filterStrongHelper(Node*& node, string aType) {
     if (node == nullptr) {
         return;
     }
-    
+
     if (node->head.isStrongTo(aType)) {
         Node* temp = node;
         node = node->tail;

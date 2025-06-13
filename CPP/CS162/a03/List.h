@@ -3,7 +3,6 @@
 
 #include "Pokemon.h"
 
-
 class List {
  private:
   struct Node {

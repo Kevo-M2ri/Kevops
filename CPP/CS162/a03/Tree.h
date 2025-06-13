@@ -3,7 +3,6 @@
 
 #include "List.h"
 #include "Pokemon.h"
-#include <string>
 
 class Tree{
  private:
@@ -21,14 +20,14 @@ class Tree{
   bool compareInt(Pokemon v1, int v2);      // v1's key < v2
   bool equal(Pokemon v1, Pokemon v2);       // v1 == v2
   bool equalInt(Pokemon v1, int v2);        // v1's key == v2
-  
+
   void cleanup(TNode* n);
   TNode* insertNode(TNode* t, Pokemon p);
   void filterLessNode(TNode* tn, int t, List &l);
   void filterMoreNode(TNode* tn, int t, List &l);
   void filterEqualNode(TNode* tn, int t, List &l);
   void printNode(TNode* t);
-  
+
  public:
   Tree();
   ~Tree();
