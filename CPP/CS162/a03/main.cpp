@@ -1,5 +1,13 @@
 #include "List.h"
-#include "Tree.h"  // MISSING INCLUDE - This was causing compilation errors
+#include "Tree.h"
+#include "Pokemon.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <string>
+
+using namespace std;
 
 // Function to read one line from the CSV file and turn it into a Pokemon
 Pokemon parseOneLine(const string& line) {
@@ -67,6 +75,23 @@ void savePokemonToFile(const vector<Pokemon>& pokemonList, const string& filenam
     cout << "SUCCESS: Saved " << pokemonList.size() << " Pokemon to " << filename << endl;
 }
 
+// Function to convert List to vector for saving
+vector<Pokemon> listToVector(List& list) {
+    vector<Pokemon> result;
+    // Since we don't have a size() method or iterator, we'll need to get Pokemon one by one
+    // until we get an empty Pokemon (indicating end of list)
+    int index = 0;
+    while (true) {
+        Pokemon p = list.get(index);
+        if (p.name.empty()) {  // Assuming empty name means end of list
+            break;
+        }
+        result.push_back(p);
+        index++;
+    }
+    return result;
+}
+
 // Function to get user's choice for search type
 int getUserChoice() {
     int choice;
@@ -101,12 +126,7 @@ int getNumberFromUser(const string& description) {
 }
 
 // Function to let the user delete Pokemon from the list
-void letUserDeletePokemon(PokemonList& list) {
-    if (list.isEmpty()) {
-        cout << "The list is empty - nothing to delete!" << endl;
-        return;
-    }
-
+void letUserDeletePokemon(List& list) {
     string answer;
     cout << "\nDo you want to delete any Pokemon from this list? (yes/no): ";
     cin >> answer;
@@ -122,7 +142,7 @@ void letUserDeletePokemon(PokemonList& list) {
     string pokemonName;
     while (true) {
         cout << "\n--- Current Pokemon List ---" << endl;
-        list.printAll();
+        list.printList();
 
         cout << "\nEnter the name of a Pokemon to delete (or type 'done' to stop): ";
         getline(cin, pokemonName);
@@ -132,14 +152,11 @@ void letUserDeletePokemon(PokemonList& list) {
             break;
         }
 
-        bool wasDeleted = list.deleteByName(pokemonName);
-        if (wasDeleted) {
+        // Check if Pokemon exists before attempting to delete
+        Pokemon found = list.get(pokemonName);
+        if (!found.name.empty()) {
+            list.remove(pokemonName);
             cout << "SUCCESS: Deleted " << pokemonName << " from the list." << endl;
-
-            if (list.isEmpty()) {
-                cout << "The list is now empty!" << endl;
-                break;
-            }
         } else {
             cout << "ERROR: Could not find '" << pokemonName << "' in the list." << endl;
             cout << "Make sure you type the name exactly as shown above." << endl;
@@ -159,13 +176,11 @@ int main() {
     if (!file.is_open()) {
         cout << "ERROR: Could not find the file 'pokemon_stats.csv'" << endl;
         cout << "Make sure the file is in the same folder as this program." << endl;
-        cout << "You can download it from:" << endl;
-        cout << "https://tildegit.org/left_adjoint/cs162/raw/branch/main/assignment3/pokemon_stats.csv" << endl;
         return 1;  // Exit the program with an error code
     }
 
     // Step 2: Read all Pokemon from the file and put them in our tree
-    PokemonTree tree;
+    Tree tree;
     string line;
     int pokemonCount = 0;
 
@@ -195,17 +210,17 @@ int main() {
     int searchValue = getNumberFromUser(tree.getSortDescription());
 
     // Step 4: Do the search and create a list of results
-    PokemonList results;
+    List results;
     string searchDescription;
 
     if (userChoice == 1) {
-        results = tree.findLessOrEqual(searchValue);
+        results = tree.filterLessEq(searchValue);
         searchDescription = "Pokemon with " + tree.getSortDescription() + " <= " + to_string(searchValue);
     } else if (userChoice == 2) {
-        results = tree.findGreaterOrEqual(searchValue);
+        results = tree.filterMoreEq(searchValue);
         searchDescription = "Pokemon with " + tree.getSortDescription() + " >= " + to_string(searchValue);
     } else if (userChoice == 3) {
-        results = tree.findEqual(searchValue);
+        results = tree.filterEqual(searchValue);
         searchDescription = "Pokemon with " + tree.getSortDescription() + " == " + to_string(searchValue);
     }
 
@@ -214,30 +229,24 @@ int main() {
     cout << "SEARCH RESULTS: " << searchDescription << endl;
     cout << "=========================================" << endl;
 
-    if (results.isEmpty()) {
-        cout << "No Pokemon found matching your criteria." << endl;
-    } else {
-        results.printAll();
+    results.printList();
+    
+    // Step 6: Let the user delete Pokemon from the results
+    letUserDeletePokemon(results);
+    
+    // Step 7: Ask if they want to save the results to a file
+    string saveChoice;
+    cout << "\nDo you want to save these results to a file? (yes/no): ";
+    cin >> saveChoice;
+    
+    if (saveChoice == "yes" || saveChoice == "y" || saveChoice == "Yes" || saveChoice == "Y") {
+        string filename;
+        cout << "Enter filename (without .csv extension): ";
+        cin >> filename;
+        filename += ".csv";
         
-        // Step 6: Let the user delete Pokemon from the results
-        letUserDeletePokemon(results);
-        
-        // Step 7: Ask if they want to save the results to a file
-        if (!results.isEmpty()) {
-            string saveChoice;
-            cout << "\nDo you want to save these results to a file? (yes/no): ";
-            cin >> saveChoice;
-            
-            if (saveChoice == "yes" || saveChoice == "y" || saveChoice == "Yes" || saveChoice == "Y") {
-                string filename;
-                cout << "Enter filename (without .csv extension): ";
-                cin >> filename;
-                filename += ".csv";
-                
-                vector<Pokemon> pokemonVector = results.getAllPokemon();
-                savePokemonToFile(pokemonVector, filename);
-            }
-        }
+        vector<Pokemon> pokemonVector = listToVector(results);
+        savePokemonToFile(pokemonVector, filename);
     }
 
     cout << "\nThank you for using the Pokemon Statistics Analyzer!" << endl;

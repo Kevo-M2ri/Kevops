@@ -3,6 +3,7 @@
 
 #include "Pokemon.h"
 
+
 class List {
  private:
   struct Node {
@@ -13,10 +14,12 @@ class List {
   Node* n;
 
   /*
-    If you choose to do a recursive implementations you can add helper functions here!
+    Helper functions for recursive implementations
    */
   Node* copyHelper(Node* other);  // Helper for deep copy
-  void cleanup(Node* other);
+  void cleanup(Node* other);      // Cleanup all nodes recursively
+  void filterWeakHelper(Node*& node, string aType);   // Helper for filtering weak Pokemon
+  void filterStrongHelper(Node*& node, string aType); // Helper for filtering strong Pokemon
   
  public:
   List();
@@ -32,7 +35,5 @@ class List {
   void printList();
   void filterByWeak(string aType);
   void filterByStrong(string aType);
-  
-  
 };
 #endif
