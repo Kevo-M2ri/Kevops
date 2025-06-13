@@ -6,67 +6,79 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <limits>
 
 using namespace std;
 
-// Pokemon struct
+// Simple Pokemon struct to hold all the data
 struct Pokemon {
     string name;
-    string type1, type2;   // type2 is "" if mono-type
-    int hp, attack, defense,
-        special_attack, special_defense, speed,
-        total;                  // convenience field
-    
-    // Constructors
+    string type1, type2;   // type2 is empty "" if Pokemon has only one type
+    int hp, attack, defense, special_attack, special_defense, speed, total;
+
+    // Simple constructor - sets everything to default values
     Pokemon();
+
+    // Constructor with all values
     Pokemon(string n, string t1, string t2, int h, int att, int def,
             int sp_att, int sp_def, int spd, int tot);
 };
 
-// Node for linked list
-struct ListNode {
-    Pokemon data;
-    ListNode* next;
-    
-    ListNode(Pokemon p);
+// A node in our linked list - each node holds one Pokemon
+struct Node {
+    Pokemon pokemon;    // The Pokemon data
+    Node* next;         // Pointer to the next node (or nullptr if this is the last)
+
+    // Constructor - creates a new node with the given Pokemon
+    Node(Pokemon p);
 };
 
-// Linked List class for Pokemon
+// Our linked list class that stores Pokemon
 class PokemonList {
 private:
-    ListNode* head;
-    
-    // Helper functions for recursive type-based deletion
-    ListNode* deleteStrongToTypeHelper(ListNode* node, const string& type);
-    ListNode* deleteWeakToTypeHelper(ListNode* node, const string& type);
-    
-    // Helper function to check type effectiveness
-    bool isStrongAgainst(const Pokemon& pokemon, const string& type);
-    bool isWeakAgainst(const Pokemon& pokemon, const string& type);
+    Node* head;  // Points to the first node in the list (or nullptr if empty)
+
+    // Helper functions for recursion (these are private - only used inside the class)
+    Node* deleteStrongHelper(Node* current, const string& type);
+    Node* deleteWeakHelper(Node* current, const string& type);
+
+    // Helper functions to check type effectiveness
+    bool pokemonStrongAgainst(const Pokemon& p, const string& type);
+    bool pokemonWeakAgainst(const Pokemon& p, const string& type);
 
 public:
-    // Constructor and Destructor
+    // Constructor - creates an empty list
     PokemonList();
+
+    // Destructor - cleans up all memory when the list is destroyed
     ~PokemonList();
-    
-    // Core list operations
-    void addToFront(Pokemon pokemon);
-    bool deleteByName(const string& name);
+
+    // Add a Pokemon to the front of the list
+    void addToFront(Pokemon p);
+
+    // Find a Pokemon by name - returns a pointer to it (or nullptr if not found)
     Pokemon* findByName(const string& name);
-    
-    // Display functions
-    void printAll();
+
+    // Delete a Pokemon by name - returns true if found and deleted
+    bool deleteByName(const string& name);
+
+    // Print information about a specific Pokemon
     void printByName(const string& name);
-    
-    // Recursive type-based deletion functions
-    void deleteAllStrongToType(const string& type);
-    void deleteAllWeakToType(const string& type);
-    
-    // Utility functions
+
+    // Print all Pokemon in the list
+    void printAll();
+
+    // Recursive functions to delete Pokemon based on type effectiveness
+    void deleteAllStrongTo(const string& type);
+    void deleteAllWeakTo(const string& type);
+
+    // Check if the list is empty
     bool isEmpty();
+
+    // Get the number of Pokemon in the list
+    int getSize();
+
+    // Get all Pokemon as a vector (for saving to file)
     vector<Pokemon> getAllPokemon();
-    int size();
 };
 
 #endif
