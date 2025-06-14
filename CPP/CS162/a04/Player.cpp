@@ -24,7 +24,7 @@ void Player::addMove(const Attack& attack) { moves.push_back(attack); }
 vector<Attack> Player::getMoves() const { return moves; }
 
 Attack Player::getMove(int index) const {
-    if (index >= 0 && index < moves.size()) {
+    if (index >= 0 && index < static_cast<int>(moves.size())) {
         return moves[index];
     }
     return Attack();
@@ -49,7 +49,7 @@ void Player::printStats() const {
 
 void Player::printMoves() const {
     cout << "Available Moves:" << endl;
-    for (int i = 0; i < moves.size(); i++) {
+    for (size_t i = 0; i < moves.size(); i++) {
         cout << i+1 << ". " << moves[i].name 
              << " (Damage: " << moves[i].damage 
              << ", Hit%: " << moves[i].hitPercentage << "%)" << endl;

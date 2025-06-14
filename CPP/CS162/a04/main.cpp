@@ -47,7 +47,7 @@ void initMap(Map &m) {
     m.addEast("A lounge with an ominous aura");
     m.moveEast();
     m.addCreature(makeAngryCompiler());
-    m.addLoot(Treasure("A silky chicken", 1000000)); // Reduced from original value
+    m.addLoot(Treasure("A silky chicken", 1000000));
     m.addNorth("The watercooler of the damned");
     m.moveNorth();
     m.addCreature(makeDragon());
@@ -82,7 +82,7 @@ void combat(Player& player, Creature& enemy) {
         player.printMoves();
 
         int choice;
-        while (!(cin >> choice) || choice < 1 || choice > player.getMoves().size()) {
+        while (!(cin >> choice) || choice < 1 || choice > static_cast<int>(player.getMoves().size())) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Invalid input! Please enter a number between 1 and " 
@@ -140,7 +140,7 @@ void showCommands() {
 }
 
 int main() {
-    srand(time(0)); // Seed random number generator
+    srand(static_cast<unsigned int>(time(0))); // Seed random number generator
 
     // Initialize game world
     Map m("The dark entryway of the dungeon stretches out before you");
