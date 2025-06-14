@@ -2,11 +2,11 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 using namespace std;
 
 Creature::Creature(string n, int health) : name(n), hp(health) {}
 
-// Basic getters
 string Creature::getName() const {
     return name;
 }
@@ -19,7 +19,6 @@ bool Creature::isAlive() const {
     return hp > 0;
 }
 
-// Combat functions
 void Creature::takeDamage(int damage) {
     hp -= damage;
     if (hp < 0) hp = 0;
@@ -35,13 +34,12 @@ vector<Attack> Creature::getMoves() const {
 
 Attack Creature::getRandomMove() const {
     if (moves.empty()) {
-        return Attack(); // return empty attack if no moves
+        return Attack();
     }
     int randomIndex = rand() % moves.size();
     return moves[randomIndex];
 }
 
-// Display functions
 void Creature::printStats() const {
     cout << name << " HP: " << hp << endl;
 }

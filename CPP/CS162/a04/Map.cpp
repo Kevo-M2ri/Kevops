@@ -17,32 +17,24 @@ Map::~Map() {
     deleteRoom(here, visited);
 }
 
-// okay here's the neat trick!
-// you can potentially have "circular references" in the map
-// which means that you need to keep track of pointers you've already
-// deleted!
-// this means we keep a vector of pointer and stick find in the
-// function to make sure that we don't accidentally double clear something
 void Map::deleteRoom(room* r, vector<room*>& visited) {
-  if (r == nullptr) {
-    return;
-  } 
-  if (find(visited.begin(), visited.end(), r) != visited.end()) {
-    return;
-  }
-  // if we got here we're good to go 
+    if (r == nullptr) {
+        return;
+    } 
+    if (find(visited.begin(), visited.end(), r) != visited.end()) {
+        return;
+    }
 
-  visited.push_back(r);
+    visited.push_back(r);
 
-  deleteRoom(r->eastExit, visited);
-  deleteRoom(r->westExit, visited);
-  deleteRoom(r->northExit, visited);
-  deleteRoom(r->southExit, visited);
+    deleteRoom(r->eastExit, visited);
+    deleteRoom(r->westExit, visited);
+    deleteRoom(r->northExit, visited);
+    deleteRoom(r->southExit, visited);
 
-  delete r;
+    delete r;
 }
 
-// Movement functions
 void Map::moveEast() {
     if (here->eastExit == nullptr) {
         cout << "You can't go that way!" << endl;
@@ -79,12 +71,11 @@ void Map::moveSouth() {
     }
 }
 
-// Room creation functions
 void Map::addEast(string description) {
     room* newRoom = new room;
     newRoom->desc = description;
     newRoom->eastExit = nullptr;
-    newRoom->westExit = here;  // back link
+    newRoom->westExit = here;
     newRoom->northExit = nullptr;
     newRoom->southExit = nullptr;
 
@@ -94,7 +85,7 @@ void Map::addEast(string description) {
 void Map::addWest(string description) {
     room* newRoom = new room;
     newRoom->desc = description;
-    newRoom->eastExit = here;  // back link
+    newRoom->eastExit = here;
     newRoom->westExit = nullptr;
     newRoom->northExit = nullptr;
     newRoom->southExit = nullptr;
@@ -108,7 +99,7 @@ void Map::addNorth(string description) {
     newRoom->eastExit = nullptr;
     newRoom->westExit = nullptr;
     newRoom->northExit = nullptr;
-    newRoom->southExit = here;  // back link
+    newRoom->southExit = here;
 
     here->northExit = newRoom;
 }
@@ -118,17 +109,20 @@ void Map::addSouth(string description) {
     newRoom->desc = description;
     newRoom->eastExit = nullptr;
     newRoom->westExit = nullptr;
-    newRoom->northExit = here;  // back link
+    newRoom->northExit = here;
     newRoom->southExit = nullptr;
 
     here->southExit = newRoom;
 }
 
-// Room display
 void Map::printRoom() {
+    if (here == nullptr) {
+        cout << "Error: Current room is null!" << endl;
+        return;
+    }
+
     cout << "\n" << here->desc << endl;
 
-    // Print exits
     cout << "Exits: ";
     bool hasExits = false;
     if (here->northExit != nullptr) {
@@ -152,7 +146,6 @@ void Map::printRoom() {
     }
     cout << endl;
 
-    // Print creatures
     if (!here->mobs.empty()) {
         cout << "Enemies in this room: ";
         for (const auto& creature : here->mobs) {
@@ -161,7 +154,6 @@ void Map::printRoom() {
         cout << endl;
     }
 
-    // Print loot (only if room is cleared)
     if (!here->loot.empty()) {
         if (roomCleared()) {
             cout << "Treasure: ";
@@ -175,7 +167,6 @@ void Map::printRoom() {
     }
 }
 
-// Creature management
 void Map::addCreature(Creature c) {
     here->mobs.push_back(c);
 }
@@ -186,20 +177,19 @@ Creature Map::getCreatureForFight() {
         here->mobs.pop_back();
         return fighter;
     }
-    return Creature("No Enemy", 0); // return empty creature if none available
+    return Creature("No Enemy", 0);
 }
 
 bool Map::roomCleared() {
     return here->mobs.empty();
 }
 
-// Loot management
 void Map::addLoot(Treasure t) {
     here->loot.push_back(t);
 }
 
 vector<Treasure> Map::getLoot() {
     vector<Treasure> roomLoot = here->loot;
-    here->loot.clear(); // remove loot from room
+    here->loot.clear();
     return roomLoot;
 }

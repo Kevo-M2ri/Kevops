@@ -5,10 +5,11 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <limits>
 
 using namespace std;
 
-// Functions to create different types of monsters
+// Monster creation functions
 Creature makeGoblin() {
     Creature goblin("Goblin", 30);
     goblin.addMove(Attack("Slash", 8, 80));
@@ -39,33 +40,30 @@ Creature makeDragon() {
     return dragon;
 }
 
-void initMap(Map &m){
-  // this is an example of how to handle adding things to the dungeon before you start
-  // it won't compile until you add all the necessary bits
-  m.addCreature(makeGoblin());
-  m.addLoot(Treasure("A golden pencil", 10000));
-  m.addEast("A lounge with an ominous aura");
-  m.moveEast();
-  m.addCreature(makeAngryCompiler());
-  m.addLoot(Treasure("A silky chicken", 100000000000));
-  m.addNorth("The watercooler of the damned");
-  m.moveNorth();
-  m.addCreature(makeDragon());
-  m.addLoot(Treasure("Dragon's Hoard", 500000));
-  m.moveWest(); // need to go back to the start
+// Initialize the game map
+void initMap(Map &m) {
+    m.addCreature(makeGoblin());
+    m.addLoot(Treasure("A golden pencil", 10000));
+    m.addEast("A lounge with an ominous aura");
+    m.moveEast();
+    m.addCreature(makeAngryCompiler());
+    m.addLoot(Treasure("A silky chicken", 1000000)); // Reduced from original value
+    m.addNorth("The watercooler of the damned");
+    m.moveNorth();
+    m.addCreature(makeDragon());
+    m.addLoot(Treasure("Dragon's Hoard", 500000));
+    m.moveSouth(); // Back to lounge
+    m.moveWest();  // Back to start
 
-  // Add more rooms and creatures
-  m.addWest("A musty armory");
-  m.moveWest();
-  m.addCreature(makeOrc());
-  m.addLoot(Treasure("Rusty Sword", 500));
-
-  // Go back to start
-  m.moveEast();
-  m.moveWest(); // back to start
+    // Add west wing
+    m.addWest("A musty armory");
+    m.moveWest();
+    m.addCreature(makeOrc());
+    m.addLoot(Treasure("Rusty Sword", 500));
+    m.moveEast(); // Back to start
 }
 
-// Combat system
+// Combat mechanics
 bool attemptHit(int hitPercentage) {
     return (rand() % 100) < hitPercentage;
 }
@@ -75,6 +73,7 @@ void combat(Player& player, Creature& enemy) {
     cout << "You encounter a " << enemy.getName() << "!" << endl;
 
     while (player.isAlive() && enemy.isAlive()) {
+        // Player's turn
         cout << "\n--- Your Turn ---" << endl;
         player.printStats();
         enemy.printStats();
@@ -83,21 +82,22 @@ void combat(Player& player, Creature& enemy) {
         player.printMoves();
 
         int choice;
-        cin >> choice;
-        choice--; // convert to 0-based index
+        while (!(cin >> choice) || choice < 1 || choice > player.getMoves().size()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input! Please enter a number between 1 and " 
+                 << player.getMoves().size() << ": ";
+        }
+        choice--; // Convert to 0-based index
 
-        if (choice >= 0 && choice < player.getMoves().size()) {
-            Attack playerAttack = player.getMove(choice);
-            cout << "\nYou use " << playerAttack.name << "!" << endl;
+        Attack playerAttack = player.getMove(choice);
+        cout << "\nYou use " << playerAttack.name << "!" << endl;
 
-            if (attemptHit(playerAttack.hitPercentage)) {
-                cout << "Hit! You deal " << playerAttack.damage << " damage!" << endl;
-                enemy.takeDamage(playerAttack.damage);
-            } else {
-                cout << "Miss! Your attack failed!" << endl;
-            }
+        if (attemptHit(playerAttack.hitPercentage)) {
+            cout << "Hit! You deal " << playerAttack.damage << " damage!" << endl;
+            enemy.takeDamage(playerAttack.damage);
         } else {
-            cout << "Invalid choice! You lose your turn!" << endl;
+            cout << "Miss! Your attack failed!" << endl;
         }
 
         if (!enemy.isAlive()) {
@@ -124,6 +124,7 @@ void combat(Player& player, Creature& enemy) {
     }
 }
 
+// Command help
 void showCommands() {
     cout << "\nCommands:" << endl;
     cout << "n/north - Move north" << endl;
@@ -138,10 +139,12 @@ void showCommands() {
     cout << "quit - Exit the game" << endl;
 }
 
-int main(){
-    srand(time(0)); // seed random number generator
+int main() {
+    srand(time(0)); // Seed random number generator
 
-    Map m = Map("The dark entryway of the dungeon stretches out before you");
+    // Initialize game world
+    Map m("The dark entryway of the dungeon stretches out before you");
+    initMap(m);
 
     // Create player
     Player player(100);
@@ -149,15 +152,16 @@ int main(){
     player.addMove(Attack("Shield Bash", 6, 95));
     player.addMove(Attack("Power Attack", 18, 65));
 
-    initMap(m);
-
     cout << "Welcome to the Dungeon Explorer!" << endl;
     cout << "Type 'help' for a list of commands." << endl;
-
     m.printRoom();
 
+    // Game loop
     string command;
-    while (player.isAlive() && cin >> command) {
+    while (player.isAlive()) {
+        cout << "\n> ";
+        cin >> command;
+
         if (command == "quit" || command == "q") {
             break;
         } else if (command == "help" || command == "h") {
@@ -199,13 +203,9 @@ int main(){
         } else {
             cout << "Unknown command. Type 'help' for available commands." << endl;
         }
-
-        if (!player.isAlive()) {
-            cout << "\nGAME OVER - You have died!" << endl;
-            break;
-        }
     }
 
+    // Game over
     cout << "\nThanks for playing!" << endl;
     cout << "Final Stats:" << endl;
     player.printStats();

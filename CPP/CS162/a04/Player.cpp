@@ -5,14 +5,8 @@ using namespace std;
 
 Player::Player(int hp) : maxHp(hp), currentHp(hp) {}
 
-// Health management
-int Player::getMaxHp() const {
-    return maxHp;
-}
-
-int Player::getCurrentHp() const {
-    return currentHp;
-}
+int Player::getMaxHp() const { return maxHp; }
+int Player::getCurrentHp() const { return currentHp; }
 
 void Player::takeDamage(int damage) {
     currentHp -= damage;
@@ -24,34 +18,20 @@ void Player::heal(int amount) {
     if (currentHp > maxHp) currentHp = maxHp;
 }
 
-bool Player::isAlive() const {
-    return currentHp > 0;
-}
+bool Player::isAlive() const { return currentHp > 0; }
 
-// Move management
-void Player::addMove(const Attack& attack) {
-    moves.push_back(attack);
-}
-
-vector<Attack> Player::getMoves() const {
-    return moves;
-}
+void Player::addMove(const Attack& attack) { moves.push_back(attack); }
+vector<Attack> Player::getMoves() const { return moves; }
 
 Attack Player::getMove(int index) const {
     if (index >= 0 && index < moves.size()) {
         return moves[index];
     }
-    return Attack(); // return empty attack if invalid index
+    return Attack();
 }
 
-// Loot management
-void Player::addLoot(const Treasure& treasure) {
-    loot.push_back(treasure);
-}
-
-vector<Treasure> Player::getLoot() const {
-    return loot;
-}
+void Player::addLoot(const Treasure& treasure) { loot.push_back(treasure); }
+vector<Treasure> Player::getLoot() const { return loot; }
 
 int Player::getTotalWorth() const {
     int total = 0;
@@ -61,7 +41,6 @@ int Player::getTotalWorth() const {
     return total;
 }
 
-// Display functions
 void Player::printStats() const {
     cout << "Player Stats:" << endl;
     cout << "HP: " << currentHp << "/" << maxHp << endl;
@@ -71,7 +50,7 @@ void Player::printStats() const {
 void Player::printMoves() const {
     cout << "Available Moves:" << endl;
     for (int i = 0; i < moves.size(); i++) {
-        cout << i + 1 << ". " << moves[i].name 
+        cout << i+1 << ". " << moves[i].name 
              << " (Damage: " << moves[i].damage 
              << ", Hit%: " << moves[i].hitPercentage << "%)" << endl;
     }
@@ -82,7 +61,6 @@ void Player::printLoot() const {
         cout << "No loot collected yet." << endl;
         return;
     }
-
     cout << "Collected Loot:" << endl;
     for (const auto& treasure : loot) {
         cout << "- " << treasure.name << " (Worth: " << treasure.worth << " gold)" << endl;
