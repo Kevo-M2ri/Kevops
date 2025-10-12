@@ -50,8 +50,8 @@ public: // Member functions
 
     void setFirstName(const char* first); // Setter for first name
     void setLastName(const char* last); // Setter for last name
-    void setTitleLevel(int title); // Setter for title level
-    void setAssessment(AssessmentLevel assess); // Setter for assessment level
+    bool setTitleLevel(int title); // Setter for title level
+    bool setAssessment(AssessmentLevel assess); // Setter for assessment level
 
     bool operator==(const Engineer& other) const; // Equality operator
     bool operator<(const Engineer& other) const; // Inequality operator

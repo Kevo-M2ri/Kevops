@@ -7,10 +7,10 @@ using namespace std;
 
 // Node structure for linked list
 struct Node {
-    Engineer data;
+    Engineer* data;
     Node* next;
 
-    Node (Engineer eng) : data(eng), next(nullptr) {} // Constructor
+    Node (Engineer* eng) : data(eng), next(nullptr) {} // Constructor
     ~Node() { delete data; }// Destructor
 };
 
@@ -18,7 +18,6 @@ struct Node {
 class EngineerList {
 private:
     Node* head; // Pointer to the head of the list
-    Node* tail; // Pointer to the tail of the list
     int size; // Number of engineers in the list
 
     void clearList(); // Helper function to clear the list
@@ -42,4 +41,5 @@ public:
     const Engineer* getEngineerAt(int index) const; // Get engineer at index
 
     bool loadFromFile(const char* filename); // Load engineers from file
+    bool saveToFile(const char* filename); // Save engineers to file
 };

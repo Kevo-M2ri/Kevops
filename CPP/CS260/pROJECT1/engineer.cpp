@@ -2,14 +2,15 @@
 
 // Helper function to allocate and copy strings
 void Engineer::copyString(char*& destination, const char* source) {
-    if (destination) {
-        delete[] destination;
-    }
-    if (source) {
+    delete[] destination; // Safe to delete nullptr
+
+    if (source && source[0] != '\0') {
         destination = new char[strlen(source) + 1];
         strcpy(destination, source);
-    } else {
-        destination = nullptr;
+    }
+    else {
+        destination = new char[1];
+        destination[0] = '\0';
     }
 }
 // Constructor
@@ -70,19 +71,25 @@ void Engineer::setLastName(const char* last) {
     copyString(lName, last);
 }
 
-void Engineer::setTitleLevel(int level) {
+bool Engineer::setTitleLevel(int level) {
     if (level >= MIN_TITLE_LENGTH && level <= MAX_TITLE_LENGTH) {
         titleLevel = level;
-    } else {
+        return true;
+    }
+    else {
         cerr << "Title level must be between " << MIN_TITLE_LENGTH << " and " << MAX_TITLE_LENGTH << "." << endl;
+        return false;
     }
 }
 
-void Engineer::setAssessment(AssessmentLevel assess) {
+bool Engineer::setAssessment(AssessmentLevel assess) {
     if(assess >= UNACCEPTABLE && assess <= OUTSTANDING) {
         assessment = assess;
-    } else {
+        return true;
+    }
+    else {
         cerr << "Invalid assessment level." << endl;
+        return false;
     }
 }
 

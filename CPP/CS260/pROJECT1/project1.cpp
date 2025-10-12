@@ -1,7 +1,7 @@
 #include "engineerlist.h"
 
 void displayMenu();
-void getIntegerInput(const char* prompt, int min, int max);
+int getIntegerInput(const char* prompt, int min, int max);
 AssessmentLevel getAssessmentInput();
 // Main function
 int main() {
@@ -28,6 +28,7 @@ int main() {
                 char firstName[50], lastName[50];
                 int titleLevel;
 
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
                 cout << "Enter first name: ";
                 cin.getline(firstName, 50);
                 cout << "Enter last name: ";
@@ -98,6 +99,13 @@ int main() {
                 cout << "Total number of engineers in list: " << engineers.getSize() << endl;
                 break;
             case 8: // Exit
+                cout << "Saving engineers to file: " << filename << "..." << endl;
+                if (engineers.saveToFile(filename)) {
+                    cout << "Data saved successfully." << endl;
+                }
+                else {
+                    cout << "Failed to save data to file: " << filename << endl;
+                }
                 cout << "Exiting program." << endl;
                 break;
             default:
@@ -133,16 +141,14 @@ int getIntegerInput(const char* prompt, int min, int max) {
     int value;
     while (true) {
         cout << prompt << " (" << min << "-" << max << "): ";
-        cin >> value;
-
-        if (cin.fail() || value < min || value > max) {
+        if (cin >> value && value >= min && value <= max) {
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
+            return value;
+        }
+        else {
             cin.clear(); // Clear error flag
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
             cout << "Invalid input. Please enter a number between " << min << " and " << max << "." << endl;
-        }
-        else {
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard any extra input
-            return value;
         }
     }
 }

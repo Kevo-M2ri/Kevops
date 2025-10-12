@@ -7,7 +7,7 @@ EngineerList::EngineerList() : head(nullptr), size(0) {}
 EngineerList::EngineerList(const EngineerList& other) : head(nullptr), size(0) {
     Node* current = other.head;
     while (current) {
-        addEngineer(new Engineer(current->data));
+        addEngineer(new Engineer(*(current->data)));
         current = current->next;
     }
 }
@@ -59,16 +59,30 @@ bool EngineerList::addEngineer(Engineer* eng) {
 
     Node* newNode = new Node(eng);
 
-    // Empty list case or insert at the beginning
-    if (!head || *eng < *(head->data)) {
-        newNode->next = head;
+    // Empty list case
+    if (!head) {
         head = newNode;
-    } else {
-        Node* prev = findInsertionPoint(*eng);
-        newNode->next = prev->next;
-        prev->next = newNode;
+        size++;
+        return true;
     }
 
+    // Insert at the beginning
+    if (*eng < *(head->data)) {
+        newNode->next = head;
+        head = newNode;
+        size++;
+        return true;
+    }
+
+    // Find insertion point
+    Node* current = head;
+    while (current->next && *(current->next->data) < *eng) {
+        current = current->next;
+    }
+
+    // insert after current
+    newNode->next = current->next;
+    current->next = newNode;
     size++;
     return true;
 }
@@ -85,8 +99,7 @@ bool EngineerList::promoteEngineer(int index) {
     if (current && current->data) {
         int currentLevel = current->data->getTitleLevel();
         if (currentLevel < MAX_TITLE_LENGTH) {
-            current->data->setTitleLevel(currentLevel + 1);
-            return true;
+            return current->data->setTitleLevel(currentLevel + 1);
         }
     }
     return false; // Cannot promote
@@ -102,8 +115,7 @@ bool EngineerList::editAssessment(int index, AssessmentLevel newLevel) {
     }
 
     if (current && current->data) {
-        current->data->setAssessment(newLevel);
-        return true;
+        return current->data->setAssessment(newLevel);
     }
     return false; // Invalid index
 }
@@ -169,13 +181,23 @@ void EngineerList::displayByLevel(int level) const {
 void EngineerList::removeByAssessmentRecursive(Node*& current, AssessmentLevel targetLevel) {
     if (!current) return;
 
-    removeByAssessmentRecursive(current->next, targetLevel);
+    //store next node before potentially deleting current
+    Node* nextNode = current->next;
 
     if (current->data->getAssessment() == targetLevel) {
-        Node* temp = current;
-        current = current->next;
-        delete temp;
-        size--;
+        if (current == head) {
+            head = nextNode; // Update head if needed
+        }
+        else {
+            // Find previous node to update its next pointer
+            delete current;
+            current = nextNode;
+            size--;
+            removeByAssessmentRecursive(current, targetLevel);
+        }
+    }
+    else {
+        removeByAssessmentRecursive(current->next, targetLevel);
     }
 }
 
@@ -188,6 +210,17 @@ int EngineerList::removeByAssessment(AssessmentLevel targetLevel) {
 
 // Get engineer at index
 const Engineer* EngineerList::getEngineerAt(int index) const {
+    if (index < 0 || index >= size) return nullptr; // Index out of bounds
+
+    Node* current = head;
+    for (int i = 0; i < index && current; i++) {
+        current = current->next;
+    }
+
+    return current ? current->data : nullptr; // Return engineer or nullptr
+}
+
+bool EngineerList::loadFromFile(const char* filename) {
     ifstream file(filename);
     if (!file.is_open()) {
         return false; // File could not be opened
@@ -205,4 +238,23 @@ const Engineer* EngineerList::getEngineerAt(int index) const {
 
     file.close();
     return true; // Successfully loaded
+}
+
+bool EngineerList::saveToFile(const char* filename) {
+    ofstream file(filename);
+    if (!file.is_open()) {
+        return false; // File could not be opened
+    }
+
+    Node* current = head;
+    while (current) {
+        file << current->data->getFirstName() << " "
+             << current->data->getLastName() << " "
+             << current->data->getTitleLevel() << " "
+             << current->data->getAssessment() << endl;
+        current = current->next;
+    }
+
+    file.close();
+    return true; // Successfully saved
 }
