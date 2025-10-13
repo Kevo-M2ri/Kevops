@@ -138,8 +138,6 @@ void EngineerList::displayAll() const {
     }
 }
 
-
-
 // Helper function for recursive display by level
 void EngineerList::displayLevelRecursive(Node* current, int targetLevel) const {
     if (!current) return;
