@@ -3,32 +3,32 @@
 void displayMenu();
 int getIntegerInput(const char* prompt, int min, int max);
 AssessmentLevel getAssessmentInput();
-// Main function
+
 int main() {
     EngineerList engineers;
     const char* filename = "engineers.txt";
 
-    // Load engineers from file
     cout << "Loading engineers from file: " << filename << "..." << endl;
     if (!engineers.loadFromFile(filename)) {
-        cout << "Failed to load engineers from file: " << filename << endl;
-        cout <<" Starting with an empty list." << endl;
+        cout << "Note: Could not open file '" << filename << "'." << endl;
+        cout << "This is normal on first run - starting with an empty list." << endl;
+        cout << "The file will be created when you exit the program." << endl << endl;
     }
     else {
-        cout << "Data loaded successfully." << endl;
+        cout << "Successfully loaded " << engineers.getSize() << " engineers from file." << endl << endl;
     }
 
     int choice;
     do {
         displayMenu();
-        choice = getIntegerInput("Enter your choice: ", 1, 8);
+        choice = getIntegerInput("Enter your choice", 1, 8);
 
         switch (choice) {
             case 1: { // Add Engineer
                 char firstName[50], lastName[50];
                 int titleLevel;
 
-                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cout << "Enter first name: ";
                 cin.getline(firstName, 50);
                 cout << "Enter last name: ";
@@ -42,7 +42,7 @@ int main() {
                     cout << "Engineer added successfully." << endl;
                 } else {
                     cout << "Failed to add engineer." << endl;
-                    delete newEng; // Clean up if not added
+                    delete newEng;
                 }
                 break;
             }
@@ -51,6 +51,7 @@ int main() {
                     cout << "No engineers to promote." << endl;
                     break;
                 }
+                engineers.displayAll();
                 int index = getIntegerInput("Enter engineer index to promote", 0, engineers.getSize() - 1);
                 if (engineers.promoteEngineer(index)) {
                     cout << "Engineer promoted successfully." << endl;
@@ -81,7 +82,7 @@ int main() {
                 break;
             }
             case 4: // Display All Engineers
-                cout <<"All Engineers (sorted by name):" << endl;
+                cout << "All Engineers (sorted by name):" << endl;
                 engineers.displayAll();
                 break;
 
@@ -99,14 +100,14 @@ int main() {
                 cout << "Total number of engineers in list: " << engineers.getSize() << endl;
                 break;
             case 8: // Exit
-                cout << "Saving engineers to file: " << filename << "..." << endl;
+                cout << "\nSaving engineers to file: " << filename << "..." << endl;
                 if (engineers.saveToFile(filename)) {
-                    cout << "Data saved successfully." << endl;
+                    cout << "Successfully saved " << engineers.getSize() << " engineers to file." << endl;
                 }
                 else {
-                    cout << "Failed to save data to file: " << filename << endl;
+                    cout << "Warning: Failed to save data to file: " << filename << endl;
                 }
-                cout << "Exiting program." << endl;
+                cout << "Exiting program. Goodbye!" << endl;
                 break;
             default:
                 cout << "Invalid choice. Please try again." << endl;
@@ -117,14 +118,13 @@ int main() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cin.get();
         }
-    }while (choice != 8);
+    } while (choice != 8);
 
     return 0;
 }
 
-// Display menu options
 void displayMenu() {
-    cout << "Engineer Management System Menu:" << endl;
+    cout << "\n=== Engineer Management System Menu ===" << endl;
     cout << "1. Add Engineer" << endl;
     cout << "2. Promote Engineer" << endl;
     cout << "3. Edit Engineer Assessment" << endl;
@@ -133,29 +133,26 @@ void displayMenu() {
     cout << "6. Remove underPerforming Engineers" << endl;
     cout << "7. Show Total Engineers Number" << endl;
     cout << "8. Exit" << endl;
-    cout << "Enter your choice: ";
 }
 
-// Get integer input with validation
 int getIntegerInput(const char* prompt, int min, int max) {
     int value;
     while (true) {
         cout << prompt << " (" << min << "-" << max << "): ";
         if (cin >> value && value >= min && value <= max) {
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             return value;
         }
         else {
-            cin.clear(); // Clear error flag
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Invalid input. Please enter a number between " << min << " and " << max << "." << endl;
         }
     }
 }
 
-// Get assessment level from user
 AssessmentLevel getAssessmentInput() {
-    cout << "Enter assessment Level:" << endl;
+    cout << "\nEnter assessment Level:" << endl;
     cout << "1. Unacceptable" << endl;
     cout << "2. Needs Improvement" << endl;
     cout << "3. Meets Expectations" << endl;
