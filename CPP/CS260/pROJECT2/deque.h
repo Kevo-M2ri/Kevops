@@ -27,13 +27,13 @@ public:
     // Core deque operations
     
     // Adds a new command to the end (rear) of the deque
-    void addToEnd(int sequence_number, const char* description);
+    void addToEnd(int sequenceNumber, const char* description);
     
     // Removes and returns the command from the end (rear) of the deque
     Command* removeFromEnd();
     
     // Adds a new command to the front of the deque
-    void addToFront(int sequence_number, const char* description);
+    void addToFront(int sequenceNumber, const char* description);
     
     // Removes and returns the command from the front of the deque
     Command* removeFromFront();

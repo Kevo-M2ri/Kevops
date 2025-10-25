@@ -6,7 +6,7 @@
 #include "command.h"
 
 // Constructor: Allocates memory and copies the description string
-Command::Command(int seq, const char* desc) : sequence_number(seq), next(nullptr), prev(nullptr) {
+Command::Command(int seq, const char* desc) : sequenceNumber(seq), next(nullptr), prev(nullptr) {
     // Allocate memory for description (strlen + 1 for null terminator)
     description = new char[strlen(desc) + 1];
     strcpy(description, desc);
@@ -18,7 +18,7 @@ Command::~Command() {
 }
 
 // Copy constructor: Creates a deep copy of the command
-Command::Command(const Command& other) : sequence_number(other.sequence_number), next(nullptr), prev(nullptr) {
+Command::Command(const Command& other) : sequenceNumber(other.sequenceNumber), next(nullptr), prev(nullptr) {
     // Allocate new memory and copy the description
     description = new char[strlen(other.description) + 1];
     strcpy(description, other.description);
@@ -31,7 +31,7 @@ Command& Command::operator=(const Command& other) {
         delete[] description;
         
         // Copy sequence number
-        sequence_number = other.sequence_number;
+        sequenceNumber = other.sequenceNumber;
         
         // Allocate new memory and copy description
         description = new char[strlen(other.description) + 1];
@@ -42,5 +42,5 @@ Command& Command::operator=(const Command& other) {
 
 // Display: Outputs the command in a readable format
 void Command::display() const {
-    std::cout << sequence_number << ". " << description << std::endl;
+    std::cout << sequenceNumber << ". " << description << std::endl;
 }

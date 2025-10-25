@@ -8,7 +8,7 @@
 const int MAX_LINE_LENGTH = 256;  // Maximum length for command descriptions
 
 // Constructor: Initializes sequence number counter
-UndoRedoManager::UndoRedoManager() : next_sequence_number(1) {}
+UndoRedoManager::UndoRedoManager() : nextSequenceNumber(1) {}
 
 // Loads commands from a text file
 void UndoRedoManager::loadCommandsFromFile(const char* filename) {
@@ -24,20 +24,20 @@ void UndoRedoManager::loadCommandsFromFile(const char* filename) {
     }
     
     char line[MAX_LINE_LENGTH];
-    int loaded_count = 0;
+    int loadedCount = 0;
     
     // Read each line from the file
     while (file.getline(line, MAX_LINE_LENGTH)) {
         if (strlen(line) > 0) { // Skip empty lines
             // Add command to history with incrementing sequence number
-            command_history.addToEnd(next_sequence_number, line);
-            next_sequence_number++;
-            loaded_count++;
+            commandHistory.addToEnd(nextSequenceNumber, line);
+            nextSequenceNumber++;
+            loadedCount++;
         }
     }
     
     file.close();
-    std::cout << "Loaded " << loaded_count << " commands from " << filename << std::endl;
+    std::cout << "Loaded " << loadedCount << " commands from " << filename << std::endl;
 }
 
 // Displays the current command history
@@ -45,8 +45,8 @@ void UndoRedoManager::showCommandHistory() const {
     std::cout << "\n--- Command History ---" << std::endl;
     
     // Display undone commands (available for redo) at the top with indentation
-    if (!undo_stack.isEmpty()) {
-        Command* current = undo_stack.peekFront();
+    if (!undoStack.isEmpty()) {
+        Command* current = undoStack.peekFront();
         while (current != nullptr) {
             std::cout << "     ";  // Indent undone commands
             current->display();
@@ -55,26 +55,26 @@ void UndoRedoManager::showCommandHistory() const {
     }
     
     // Display active command history
-    command_history.display();
+    commandHistory.display();
 }
 
 // Undoes the specified number of commands
-void UndoRedoManager::undo(int num_commands) {
-    if (command_history.isEmpty()) {
+void UndoRedoManager::undo(int numCommands) {
+    if (commandHistory.isEmpty()) {
         std::cout << "No commands to undo" << std::endl;
         return;
     }
     
     // Undo at most the number of commands available
-    int actual_undo = std::min(num_commands, command_history.getSize());
-    std::cout << "Undoing " << actual_undo << " command(s)..." << std::endl;
+    int actualUndo = std::min(numCommands, commandHistory.getSize());
+    std::cout << "Undoing " << actualUndo << " command(s)..." << std::endl;
     
     // Move commands from history to undo stack
-    for (int i = 0; i < actual_undo; i++) {
-        if (!command_history.isEmpty()) {
-            Command* command = command_history.removeFromEnd();
+    for (int i = 0; i < actualUndo; i++) {
+        if (!commandHistory.isEmpty()) {
+            Command* command = commandHistory.removeFromEnd();
             // Add to front of undo stack (LIFO for redo)
-            undo_stack.addToFront(command->sequence_number, command->description);
+            undoStack.addToFront(command->sequenceNumber, command->description);
             delete command; // Clean up the removed command
         }
     }
@@ -83,22 +83,22 @@ void UndoRedoManager::undo(int num_commands) {
 }
 
 // Redoes the specified number of commands
-void UndoRedoManager::redo(int num_commands) {
-    if (undo_stack.isEmpty()) {
+void UndoRedoManager::redo(int numCommands) {
+    if (undoStack.isEmpty()) {
         std::cout << "No commands to redo" << std::endl;
         return;
     }
     
     // Redo at most the number of commands available
-    int actual_redo = std::min(num_commands, undo_stack.getSize());
-    std::cout << "Redoing " << actual_redo << " command(s)..." << std::endl;
+    int actualRedo = std::min(numCommands, undoStack.getSize());
+    std::cout << "Redoing " << actualRedo << " command(s)..." << std::endl;
     
     // Move commands from undo stack back to history
-    for (int i = 0; i < actual_redo; i++) {
-        if (!undo_stack.isEmpty()) {
-            Command* command = undo_stack.removeFromFront();
+    for (int i = 0; i < actualRedo; i++) {
+        if (!undoStack.isEmpty()) {
+            Command* command = undoStack.removeFromFront();
             // Add back to end of command history
-            command_history.addToEnd(command->sequence_number, command->description);
+            commandHistory.addToEnd(command->sequenceNumber, command->description);
             delete command; // Clean up the removed command
         }
     }
@@ -109,9 +109,9 @@ void UndoRedoManager::redo(int num_commands) {
 // Displays statistics about the command history
 void UndoRedoManager::getStatistics() const {
     std::cout << "\n--- Statistics ---" << std::endl;
-    std::cout << "Active commands: " << command_history.getSize() << std::endl;
-    std::cout << "Undone commands available for redo: " << undo_stack.getSize() << std::endl;
-    std::cout << "Next sequence number: " << next_sequence_number << std::endl;
+    std::cout << "Active commands: " << commandHistory.getSize() << std::endl;
+    std::cout << "Undone commands available for redo: " << undoStack.getSize() << std::endl;
+    std::cout << "Next sequence number: " << nextSequenceNumber << std::endl;
 }
 
 // Creates a sample commands file for testing
@@ -123,7 +123,7 @@ bool UndoRedoManager::createSampleFile(const char* filename) {
     }
     
     // Array of sample commands
-    const char* sample_commands[] = {
+    const char* sampleCommands[] = {
         "copy line 3-6",
         "paste line 3-6 after line 10",
         "remove line 20-30",
@@ -138,8 +138,8 @@ bool UndoRedoManager::createSampleFile(const char* filename) {
     };
     
     // Write each command to the file
-    for (int i = 0; sample_commands[i] != nullptr; i++) {
-        file << sample_commands[i] << std::endl;
+    for (int i = 0; sampleCommands[i] != nullptr; i++) {
+        file << sampleCommands[i] << std::endl;
     }
     
     file.close();

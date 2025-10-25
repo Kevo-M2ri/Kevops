@@ -7,16 +7,21 @@
 
 #include <iostream>
 #include <cstring>
+#include <fstream>
+#include <algorithm>
+#include <limits>
 
 class Command {
 public:
-    int sequence_number;        // Unique identifier for the command
+    int sequenceNumber;         // Unique identifier for the command
     char* description;          // Dynamic string describing the command
     Command* next;              // Pointer to next command in the list
     Command* prev;              // Pointer to previous command in the list
     
     // Constructor: Creates a new command with sequence number and description
     Command(int seq, const char* desc);
+    
+    // Destructor: Frees dynamically allocated memory
     ~Command();
     
     // Copy constructor: Creates a deep copy of another command

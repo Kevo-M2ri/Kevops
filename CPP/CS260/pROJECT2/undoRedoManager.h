@@ -6,14 +6,12 @@
 #pragma once
 
 #include "deque.h"
-#include <fstream>
-#include <algorithm>
 
 class UndoRedoManager {
 private:
-    Deque command_history;      // Main command history (rear = most recent)
-    Deque undo_stack;           // Commands that have been undone (available for redo)
-    int next_sequence_number;   // Counter for assigning sequence numbers
+    Deque commandHistory;       // Main command history (rear = most recent)
+    Deque undoStack;            // Commands that have been undone (available for redo)
+    int nextSequenceNumber;     // Counter for assigning sequence numbers
 
 public:
     // Constructor: Initializes the manager
@@ -30,10 +28,10 @@ public:
     void showCommandHistory() const;
     
     // Undoes the specified number of commands
-    void undo(int num_commands);
+    void undo(int numCommands);
     
     // Redoes the specified number of commands
-    void redo(int num_commands);
+    void redo(int numCommands);
     
     // Displays statistics about the command history
     void getStatistics() const;

@@ -14,17 +14,17 @@ Deque::~Deque() {
 }
 
 // Adds a command to the end (rear) of the deque
-void Deque::addToEnd(int sequence_number, const char* description) {
-    Command* new_command = new Command(sequence_number, description);
+void Deque::addToEnd(int sequenceNumber, const char* description) {
+    Command* newCommand = new Command(sequenceNumber, description);
     
     if (rear == nullptr) { 
         // Empty deque: new command is both front and rear
-        front = rear = new_command;
+        front = rear = newCommand;
     } else {
         // Link new command to the current rear
-        new_command->prev = rear;
-        rear->next = new_command;
-        rear = new_command;
+        newCommand->prev = rear;
+        rear->next = newCommand;
+        rear = newCommand;
     }
     
     size++;
@@ -36,7 +36,7 @@ Command* Deque::removeFromEnd() {
         return nullptr;  // Empty deque
     }
     
-    Command* removed_command = rear;
+    Command* removedCommand = rear;
     
     if (rear == front) { 
         // Only one element: deque becomes empty
@@ -48,22 +48,22 @@ Command* Deque::removeFromEnd() {
     }
     
     size--;
-    removed_command->prev = nullptr;  // Disconnect from list
-    return removed_command;
+    removedCommand->prev = nullptr;  // Disconnect from list
+    return removedCommand;
 }
 
 // Adds a command to the front of the deque
-void Deque::addToFront(int sequence_number, const char* description) {
-    Command* new_command = new Command(sequence_number, description);
+void Deque::addToFront(int sequenceNumber, const char* description) {
+    Command* newCommand = new Command(sequenceNumber, description);
     
     if (front == nullptr) { 
         // Empty deque: new command is both front and rear
-        front = rear = new_command;
+        front = rear = newCommand;
     } else {
         // Link new command before the current front
-        new_command->next = front;
-        front->prev = new_command;
-        front = new_command;
+        newCommand->next = front;
+        front->prev = newCommand;
+        front = newCommand;
     }
     
     size++;
@@ -75,7 +75,7 @@ Command* Deque::removeFromFront() {
         return nullptr;  // Empty deque
     }
     
-    Command* removed_command = front;
+    Command* removedCommand = front;
     
     if (front == rear) { 
         // Only one element: deque becomes empty
@@ -87,8 +87,8 @@ Command* Deque::removeFromFront() {
     }
     
     size--;
-    removed_command->next = nullptr;  // Disconnect from list
-    return removed_command;
+    removedCommand->next = nullptr;  // Disconnect from list
+    return removedCommand;
 }
 
 // Returns pointer to the rear command without removing it

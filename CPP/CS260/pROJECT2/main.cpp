@@ -1,5 +1,4 @@
 #include "undoRedoManager.h"
-#include <limits>
 
 // Displays the main menu options
 void displayMenu() {
