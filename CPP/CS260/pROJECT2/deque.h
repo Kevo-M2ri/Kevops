@@ -11,7 +11,7 @@ class Deque {
 private:
     Command* front;             // Pointer to the front of the deque (for redo)
     Command* rear;              // Pointer to the rear of the deque (most recent)
-    int size;                   // Number of elements in the deque
+    int count;                   // Number of elements in the deque
 
 public:
     // Constructor: Initializes an empty deque

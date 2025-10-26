@@ -6,7 +6,7 @@
 #include "deque.h"
 
 // Constructor: Initializes an empty deque
-Deque::Deque() : front(nullptr), rear(nullptr), size(0) {}
+Deque::Deque() : front(nullptr), rear(nullptr), count(0) {}
 
 // Destructor: Calls clear to deallocate all nodes
 Deque::~Deque() {
@@ -27,7 +27,7 @@ void Deque::addToEnd(int sequenceNumber, const char* description) {
         rear = newCommand;
     }
     
-    size++;
+    count++;
 }
 
 // Removes and returns the command from the end (rear)
@@ -47,7 +47,7 @@ Command* Deque::removeFromEnd() {
         rear->next = nullptr;
     }
     
-    size--;
+    count--;
     removedCommand->prev = nullptr;  // Disconnect from list
     return removedCommand;
 }
@@ -66,7 +66,7 @@ void Deque::addToFront(int sequenceNumber, const char* description) {
         front = newCommand;
     }
     
-    size++;
+    count++;
 }
 
 // Removes and returns the command from the front
@@ -86,7 +86,7 @@ Command* Deque::removeFromFront() {
         front->prev = nullptr;
     }
     
-    size--;
+    count--;
     removedCommand->next = nullptr;  // Disconnect from list
     return removedCommand;
 }
@@ -123,7 +123,7 @@ bool Deque::isEmpty() const {
 
 // Returns the current size of the deque
 int Deque::getSize() const {
-    return size;
+    return count;
 }
 
 // Removes all elements from the deque
