@@ -1,135 +1,131 @@
-/*  Name: Kelvin Muturi
-    class: CS260
-    Project: project2
+/*      Name: Kelvin Muturi
+ *      Class: CS260
+ *      Project: project2
 */
 
 #include "deque.h"
 
-// Constructor: Initializes an empty deque
+// Constructor(empty deque)
 Deque::Deque() : front(nullptr), rear(nullptr), count(0) {}
 
-// Destructor: Calls clear to deallocate all nodes
+// Destructor(all nodes deallocation)
 Deque::~Deque() {
-    clear();
+	clear();
 }
 
-// Adds a command to the end (rear) of the deque
+// add command to the end of deque constructor
 void Deque::addToEnd(int sequenceNumber, const char* description) {
-    Command* newCommand = new Command(sequenceNumber, description);
-    
-    if (rear == nullptr) { 
-        // Empty deque: new command is both front and rear
-        front = rear = newCommand;
-    } else {
-        // Link new command to the current rear
-        newCommand->prev = rear;
-        rear->next = newCommand;
-        rear = newCommand;
-    }
-    
-    count++;
+	Command* newCommand =  new Command(sequenceNumber, description);
+
+	if (rear == nullptr) {
+		front = rear = newCommand;
+	}
+	else {
+		// link new command to the current rear
+		newCommand->prev = rear;
+		rear->next = newCommand;
+		rear = newCommand;
+	}
+
+	count++;
 }
 
-// Removes and returns the command from the end (rear)
+// method to remove and return command from the end
 Command* Deque::removeFromEnd() {
-    if (rear == nullptr) {
-        return nullptr;  // Empty deque
-    }
-    
-    Command* removedCommand = rear;
-    
-    if (rear == front) { 
-        // Only one element: deque becomes empty
-        front = rear = nullptr;
-    } else {
-        // Move rear pointer back and disconnect the removed node
-        rear = rear->prev;
-        rear->next = nullptr;
-    }
-    
-    count--;
-    removedCommand->prev = nullptr;  // Disconnect from list
-    return removedCommand;
+	if (rear ==nullptr) {
+		return nullptr; // empty deque
+	}
+
+	Command* removedCommand = rear;
+
+	if (rear == front) {
+		front = rear = nullptr;
+	}
+	else {
+		rear = rear->prev;// move rear pointer back
+		rear->next = nullptr;//disconnect removed node
+	}
+
+	count--;
+	removedCommand->prev = nullptr;//disconnect from list
+	return removedCommand;
 }
 
-// Adds a command to the front of the deque
-void Deque::addToFront(int sequenceNumber, const char* description) {
-    Command* newCommand = new Command(sequenceNumber, description);
-    
-    if (front == nullptr) { 
-        // Empty deque: new command is both front and rear
-        front = rear = newCommand;
-    } else {
-        // Link new command before the current front
-        newCommand->next = front;
-        front->prev = newCommand;
-        front = newCommand;
-    }
-    
-    count++;
+//method to add command to the front of the deque
+void Deque:addToFront(int sequenceNumber, const char* description) {
+	Command* newCommand = new Command(sequenceNumber, description);
+
+	if (front == nullptr) {
+		front = rear =newCommand;
+	}
+	else {
+		newCommand->next = front;
+		front->prev = newCommand;
+		front = newCommand;
+	}
+
+	count++;
 }
 
-// Removes and returns the command from the front
+//method to remove and return command from the front
 Command* Deque::removeFromFront() {
-    if (front == nullptr) {
-        return nullptr;  // Empty deque
-    }
-    
-    Command* removedCommand = front;
-    
-    if (front == rear) { 
-        // Only one element: deque becomes empty
-        front = rear = nullptr;
-    } else {
-        // Move front pointer forward and disconnect the removed node
-        front = front->next;
-        front->prev = nullptr;
-    }
-    
-    count--;
-    removedCommand->next = nullptr;  // Disconnect from list
-    return removedCommand;
+	if (front == nullptr) {
+		return nullptr;//empty deque
+	}
+
+	Command* removedCommand = front;
+
+	if (front == rear) {
+		front = rear = nullptr;
+	}
+	else {
+		front = front->next;// move front pointer forward
+		front->prev = nullptr;// disconnect the removed node
+	}
+
+	count--;
+	removedCommand->next = nullptr;// disconnect from list
+	return removedCommand;
 }
 
-// Returns pointer to the rear command without removing it
+// method to return pointer to the rear command without removing it
 Command* Deque::peekEnd() const {
-    return rear;
+	return rear;
 }
 
-// Returns pointer to the front command without removing it
+// method to return pointer to the front command without removing it
 Command* Deque::peekFront() const {
-    return front;
+	return front;
 }
 
-// Displays all commands from front to rear
+// method to display all commands from front to rear
 void Deque::display() const {
-    if (front == nullptr) {
-        std::cout << "Command history is empty" << std::endl;
-        return;
-    }
-    
-    // Traverse from front to rear
-    Command* current = front;
-    while (current != nullptr) {
-        current->display();
-        current = current->next;
-    }
+	if (front == nullptr) {
+		cout << "Command history is empty" << endl;
+		return;
+	}
+	// traverse from front to rear
+	Command* current = front;
+	while(current != nullptr) {
+		current->display();
+		current = current->next;
+	}
 }
 
-// Checks if the deque is empty
+// method to check if deque is empty
 bool Deque::isEmpty() const {
-    return front == nullptr;
+	return front == nullptr;
 }
 
-// Returns the current size of the deque
+// method to return current size of the deque
 int Deque::getSize() const {
-    return count;
+	return count;
 }
 
-// Removes all elements from the deque
+// method to remove all elements from the deque
 void Deque::clear() {
-    while (!isEmpty()) {
-        Command* temp = removeFromFront();
-        delete temp;  // Free the memory
-    }
+	while(!isEmpty()) {
+		Command* temp = removeFromFront();
+		delete temp; //free the memory
+	}
 }

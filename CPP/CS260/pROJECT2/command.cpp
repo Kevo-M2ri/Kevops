@@ -1,46 +1,42 @@
-/*  Name: Kelvin Muturi
-    class: CS260
-    Project: project2
+/*      Name: Kelvin Muturi
+ *      Class: CS260
+ *      Project: project2
 */
 
 #include "command.h"
 
-// Constructor: Allocates memory and copies the description string
+// Constructor method
 Command::Command(int seq, const char* desc) : sequenceNumber(seq), next(nullptr), prev(nullptr) {
-    // Allocate memory for description (strlen + 1 for null terminator)
-    description = new char[strlen(desc) + 1];
-    strcpy(description, desc);
+	description = new char[strlen(desc) + 1];// Allocation memory for description
+	strcpy(description, desc);
 }
 
-// Destructor: Deallocates the dynamically allocated description
+// Destructor method
 Command::~Command() {
-    delete[] description;
+	delete[] description;
 }
 
-// Copy constructor: Creates a deep copy of the command
+// copy Constructor
 Command::Command(const Command& other) : sequenceNumber(other.sequenceNumber), next(nullptr), prev(nullptr) {
-    // Allocate new memory and copy the description
-    description = new char[strlen(other.description) + 1];
-    strcpy(description, other.description);
+	description = new char[strlen(other.description) + 1];// allocate new memory
+	strcpy(description, other.description);// copy the description
 }
 
-// Assignment operator: Performs deep copy with self-assignment check
+// Assignment operator
 Command& Command::operator=(const Command& other) {
-    if (this != &other) {
-        // Free existing memory
-        delete[] description;
-        
-        // Copy sequence number
-        sequenceNumber = other.sequenceNumber;
-        
-        // Allocate new memory and copy description
-        description = new char[strlen(other.description) + 1];
-        strcpy(description, other.description);
-    }
-    return *this;
+	if (this != &other) {
+		delete[] description;// free existing memory
+
+		sequenceNumber = other.sequenceNumber;// copy sequence number
+
+		description = new char[strlen(other.description) + 1];// allocate new memory
+		strcpy(description, other.description);// copy description
+	}
+	return* this;
 }
 
-// Display: Outputs the command in a readable format
+// Display command in readable format
 void Command::display() const {
-    std::cout << sequenceNumber << ". " << description << std::endl;
+	cout << sequenceNumber << ". " << description << endl;
 }
+
