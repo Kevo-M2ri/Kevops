@@ -32,18 +32,12 @@ void Student::copy(const Student& source) {
 
 // Clear student data
 void Student::clear() {
-    if (program) {
-        delete[] program;
-        program = nullptr;
-    }
-    if (g_number) {
-        delete[] g_number;
-        g_number = nullptr;
-    }
-    if (name) {
-        delete[] name;
-        name = nullptr;
-    }
+    delete[] program;
+    delete[] g_number;
+    delete[] name;
+    program = nullptr;
+    g_number = nullptr;
+    name = nullptr;
     standing = 0;
 }
 
@@ -173,7 +167,6 @@ bool Table::edit(const char* program, const char* g_number, int new_standing) {
         }
         current = current->next;
     }
-    
     return false;
 }
 

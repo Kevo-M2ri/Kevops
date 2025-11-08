@@ -1,4 +1,9 @@
 #pragma once
+#include <cstring>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
 
 // Student structure to hold student information
 struct Student {

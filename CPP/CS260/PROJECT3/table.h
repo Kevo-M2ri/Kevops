@@ -1,11 +1,6 @@
-# pragma once
+#pragma once
 
 #include "student.h"
-#include <iostream>
-#include <cstring>
-#include <fstream>
-
-using namespace std;
 
 class Table {
 public:

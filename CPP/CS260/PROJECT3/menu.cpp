@@ -1,9 +1,6 @@
 // menu.cpp
 #include "menu.h"
-#include <iostream>
-#include <fstream>
-#include <cstring>
-using namespace std;
+#include "table.h"
 
 const int MAX_STUDENTS = 100;
 
