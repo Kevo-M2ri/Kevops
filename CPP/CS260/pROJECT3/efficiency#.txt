@@ -1,0 +1,78 @@
+Time Complexity Summary
+Operation           AverageCase	    WorstCase	Notes
+Insert Student          O(1)	       O(n)	    Hash computation + head insertion
+Retrieve by Program     O(1)	       O(n)	    Depends on chain length
+Edit Standing           O(1)	       O(n)	    Linear search within bucket
+Remove Unacceptable     O(n)	       O(n)	    Must scan entire table
+File Loading            O(m)	       O(m)	    m = number of records
+
+Space Complexity
+Overall: O(n + t) where n = students, t = table size
+Per Student: O(p + g + n) for program, G-number, and name strings
+Hash Table: O(t) for bucket array + O(n) for nodes
+
+Memory Efficiency
+Strengths
+Dynamic Allocation: Strings sized exactly to content length
+No Fixed Buffers: Avoids wasted space from oversized buffers
+RAII Compliance: Automatic cleanup prevents memory leaks
+
+Optimizations
+In-Place Updates: Edit operations modify existing nodes
+Head Insertion: O(1) insertion without traversal
+Minimal Overhead: Node structure adds only one pointer overhead
+
+Hash Table Performance
+Load Characteristics
+Ideal Load Factor: < 0.7 for O(1) operations
+Collision Handling: Separate chaining maintains performance under collisions
+Distribution: Simple hash function provides reasonable distribution
+
+Performance Metrics Tracked
+Load factor (items/table size)
+Chain length distribution
+Slot utilization percentage
+Longest chain length
+
+I/O Efficiency
+File Operations
+Sequential Reading: O(m) for m records
+Batch Processing: Single pass through file
+Buffer Management: Fixed buffers prevent overflow
+
+Data Validation
+Early termination on invalid data
+Continue processing after bad records
+Minimal re-reading of file content
+
+Algorithmic Efficiency
+Optimal Operations
+Hash Computation: Simple O(k) for k-length key
+Chain Traversal: Only within collision groups
+Bulk Operations: Process multiple students per retrieval
+
+Suboptimal Areas
+Full Table Scan: Required for standing-based removal
+Linear Search: Within buckets for specific students
+No Resizing: Fixed table size can degrade performance
+
+Real-World Performance
+Expected Performance
+Small Datasets (≤100 students): Near-instant operations
+Medium Datasets (100-1,000): Fast retrieval, noticeable save/load
+Large Datasets (>1,000): Hash table remains efficient, file I/O dominates
+
+Bottlenecks
+File I/O: Largest performance factor for big datasets
+Full Table Scans: Remove unacceptable students operation
+Memory Allocation: String copying during insert/retrieve
+
+Immediate Improvements
+Pre-allocate student arrays to avoid repeated new/delete
+Add batch operations for multiple inserts/deletes
+Implement LRU cache for frequently accessed programs
+
+Architectural Enhancements
+Dynamic table resizing based on load factor
+Improved hash function (polynomial rolling hash)
+Binary file format for faster I/O

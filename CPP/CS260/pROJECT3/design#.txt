@@ -1,0 +1,63 @@
+Core Purpose
+A C++ application for managing student academic records using hash table data structure for efficient storage and retrieval of student data organized by academic programs.
+
+System Architecture
+Main Program → Menu System → Table Manager → Data Structures
+                                  ↓
+                           Hash Table with Linked List Chaining
+
+Key Components
+1. Menu System (menu.h/cpp)
+User interface layer handling all I/O operations
+Functions for adding, retrieving, editing, and removing students
+File loading with data validation
+
+2. Table Manager (table.h/cpp)
+Core hash table implementation
+Handles insert, retrieve, edit, and delete operations
+Performance monitoring capabilities
+
+3. Data Structures (student.h)
+Student: Stores program, G-number, name, and academic standing
+Node: Linked list nodes for collision resolution
+Dynamic memory management with proper cleanup
+
+Technical Implementation
+Hash Table Design
+Size: Default 10 buckets (configurable)
+Hash Function: Simple ASCII sum modulo table size
+Collision Resolution: Separate chaining with linked lists
+Operations: O(1) average case for insert/retrieve/edit
+
+Key Features
+Academic standing tracking (1-5 scale: unacceptable to outstanding)
+File-based data persistence (CSV format)
+Performance monitoring (load factor, chain lengths)
+Input validation and error handling
+
+Data Flow
+Startup: Auto-load from students.txt
+Operations: Menu-driven user interactions
+Storage: In-memory hash table with file backup
+Memory: Dynamic allocation with RAII principles
+
+Performance Characteristics
+Fast Access: Hash table provides O(1) average operations
+Efficient Storage: Dynamic allocation minimizes memory waste
+Scalable: Handles multiple students per program via chaining
+
+Design Strengths
+Clear separation of concerns
+Efficient data access patterns
+Robust memory management
+Modular, maintainable code structure
+
+Potential Enhancements
+Dynamic table resizing
+Improved hash function
+Additional search criteria
+Binary file format for faster I/O
+
+This design provides an efficient, maintainable solution for 
+student data management with optimal performance for the core
+operations of adding, retrieving, and updating student records.
