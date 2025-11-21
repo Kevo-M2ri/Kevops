@@ -1,0 +1,56 @@
+int countRHelper(node* current, node* head);
+
+// Recursively counting nodes
+int countR(node* head) {
+        if (head == nullptr) {
+                return 0;
+        }
+
+        return countRHelper(head, head);
+}
+
+// Recursive helper function for counting
+int countRHelper(node* current, node* head) {
+        if (current->next == head) {
+                return 1;
+        }
+        else {
+                return 1 + countRHelper(current->next, head);
+        }
+}
+
+
+int sumRHelper(node* current, node* head);
+
+// Recursively compute sum of data
+int sumR(node* head) {
+        if (head == nullptr) {
+                return 0;
+        }
+
+        return sumRHelper(head, head);
+}
+
+int sumRHelper(node* current, node* head) {
+        if (current->next == head) {
+                return current->data;
+        }
+        else {
+                current->data + sumRHelper(current->next, head);
+        }
+}
+
+Here is the original list: 2 -> 18 -> 31 -> 26 -> 2 -> 0 -> 28 -> 84 -> 38 -> 53 -> 48 -> 77 -> 78 -> 15 -> 74 -> 2
+
+This list contains 16 number of items 
+iterative number of nodes count: 16
+recursive number of nodes count: 16
+iterative sum: 576
+recursive sum: 2
+
+
+The resulting list is... 2 -> 18 -> 31 -> 26 -> 2 -> 0 -> 28 -> 84 -> 38 -> 53 -> 48 -> 77 -> 78 -> 15 -> 74 -> 2
+
+This list contains 16 number of items 
+The sum of all data is: 576
+# nodes freed: 16
