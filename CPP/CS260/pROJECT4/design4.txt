@@ -1,0 +1,37 @@
+Design Analysis – BST Student Tracker (Project 4)
+
+1. Overall Architecture
+Excellent separation:
+- Student: pure data container with deep copy/clear.
+- BSTNode: simple node.
+- BST: encapsulates all tree logic with private recursive helpers.
+- Menu layer: UI + file I/O, independent of tree internals.
+Good use of const-correctness, RAII, and header guards.
+
+2. Major Strengths
+- Deep copying prevents dangling pointers during two-child deletion.
+- nodeCount maintained incrementally → O(1) getCount().
+- monitor() provides meaningful diagnostics.
+- File loading robust: validates fields, skips bad lines, clear warnings.
+- User-friendly menu with confirmation on destructive actions.
+
+3. Critical Design & Correctness Issues
+a. removeByProgram() is fundamentally broken:
+   After deleting current node, the node reference becomes invalid → subsequent recursion accesses freed memory → crash or corruption.
+b. Two-child deletion bug:
+   node->data.clear() deletes strings still owned by successor → double-delete when successor is later removed.
+c. editStudent() uses delete + re-insert → works but risky (data loss possible if re-insert fails).
+d. No copy constructor / assignment operator for BST → default versions would cause double-delete if tree copied.
+e. Raw char* + manual allocation throughout → high bug risk and code noise.
+f. Height not cached → monitor() always O(n).
+
+4. Recommended Improvements
+1. Replace all char* with std::string (eliminates 90% of memory issues).
+2. Fix removeByProgram(): collect G-numbers first, then delete one-by-one.
+3. Modify standing in-place instead of delete+reinsert.
+4. Add proper rule-of-three/five or delete copy operations.
+5. Convert to simple AVL tree (adds ~30 lines, guarantees O(log n)).
+6. Add save-to-file functionality.
+
+Conclusion
+The project shows strong grasp of BST concepts, recursion, and clean separation of concerns. Core functionality works well for basic operations. However, two serious correctness bugs (removeByProgram() dangling pointer + double-delete risk) prevent full reliability. Switching to std::string and applying standard BST best practices would make the design robust, maintainable, and production-ready while keeping code readable.

@@ -1,0 +1,31 @@
+Efficiency Analysis – BST Student Tracker (Project 4)
+
+1. Time Complexity Summary
+- insert(): O(h) where h = tree height. Best case O(log n) when balanced, worst case O(n) when degenerate.
+- retrieve(): O(h) → same as insert.
+- removeByGNumber(): O(h) for search + O(h) to find successor → still O(h).
+- removeByProgram(): Most expensive operation. Full post-order traversal (O(n)) + potentially calling removeByGNumber() on every matching node → O(n × h). Becomes O(n²) in degenerate tree.
+- displayAll(): In-order traversal → O(n).
+- monitor() / getHeight(): O(n) (height recomputed from scratch each time).
+
+2. Space Complexity
+- O(n) nodes + O(total string length across all students).
+- Recursion stack: O(h) = O(n) worst case.
+
+3. Real-World Performance Issue
+With students.txt (10 records), G-numbers are in ascending order → creates a completely right-skewed tree (height = n).
+Result: every search/insert/delete becomes O(n). removeByProgram() degrades to ~n²/2 operations and is extremely slow even on small data.
+
+4. Critical Efficiency Bugs
+a. removeByProgram() traverses and deletes simultaneously → after deletion, the node pointer becomes dangling. Subsequent traversal accesses freed memory → undefined behavior (crash/corruption).
+b. No rebalancing → sorted or nearly-sorted input (very common with G-numbers) destroys performance.
+c. Height recalculated every monitor() call → O(n) instead of O(1).
+
+5. Recommendations
+- Collect all matching G-numbers first (one O(n) pass), then delete safely.
+- Implement simple AVL balancing or at least randomize input order.
+- Cache height in nodes.
+- Replace char* with std::string to eliminate memory bugs and improve clarity.
+
+Conclusion
+Single-key operations achieve correct O(log n) when balanced. Current implementation becomes O(n) or O(n²) on realistic data and contains a severe bug in removeByProgram(). With safe deletion strategy and minimal balancing, all operations can reliably run in O(n log n) or better.
