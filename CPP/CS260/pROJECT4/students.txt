@@ -1,0 +1,10 @@
+Computer Science,G12345678,James Smith,3
+Electrical Engineering,G23456789,Mary Johnson,4
+Mechanical Engineering,G34567890,John Williams,2
+Computer Science,G45678901,Patricia Brown,5
+Biology,G56789012,Robert Jones,3
+Chemistry,G67890123,Jennifer Garcia,4
+Physics,G78901234,Michael Miller,3
+Mathematics,G89012345,Linda Davis,2
+Business Administration,G90123456,William Rodriguez,4
+Economics,G11223344,Elizabeth Martinez,3
