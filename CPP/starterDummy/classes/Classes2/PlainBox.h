@@ -3,7 +3,8 @@
 
 template<class Itemtype>
 
-class PlainBox
+class PlainBox : public BoxInterface<Itemtype>
+
 {
 private:
     Itemtype item;
