@@ -1,4 +1,4 @@
-/*
+ /*
  * Glowing Spider Robot  –  C++ / OpenGL + GLUT
  *
  * Compile (Linux / macOS):
