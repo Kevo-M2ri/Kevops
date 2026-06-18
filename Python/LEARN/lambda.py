@@ -14,5 +14,5 @@ print("Squared numbers:", squares)
 
 # Try creating your own lambda function!
 # Uncomment and modify the line below:
-# your_result = list(map(lambda x: # Your lambda function here, numbers))
-# print("Your result:", your_result)
+your_result = list(map(lambda x: x + 5, numbers))
+print("Your result:", your_result)
