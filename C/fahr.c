@@ -1,6 +1,8 @@
 #include <stdio.h>
 
 int main() {
+
+    printf("Fahrenheit to Celsius conversion table\n");
     double fahr, celsius;
     double lower, upper, step;
 
@@ -9,9 +11,10 @@ int main() {
     step = 20; //step size
 
     fahr = lower;
+    printf("%s\t %s\n", "fahr", "celsius");
     while (fahr <= upper) {
         celsius = 5 * (fahr - 32) / 9;
-        printf("%3.0f\t6.1%f\n", fahr, celsius);
+        printf("%3.0f\t %6.1f\n", fahr, celsius);
         fahr = fahr + step;
     }
 }

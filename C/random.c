@@ -1,10 +1,7 @@
 # include <stdio.h> //includes info about  std library
-# include <string.h>
-#include <stdlib.h>
-#include <time.h>
 
 int main() { //no argument values
-	printf("hello, world\n"); //character string(string constant)
+	printf("hello, world!\n"); //character string(string constant)
 
 	return 0;
 }
