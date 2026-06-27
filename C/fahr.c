@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-main() {
-    int fahr, celsius;
-    int lower, upper, step;
+int main() {
+    double fahr, celsius;
+    double lower, upper, step;
 
     lower = 0; //lower limit of temperature table
     upper = 300; //upper limit
