@@ -2,70 +2,64 @@
 #define _DEFAULT_SOURCE
 
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 #include <sys/time.h>
 
+int main(int argc, char* argv[]) {
+        //variables definition
+        const char* words[] = {
+                "The", "quick" , "brown", "fox", "jumps", "over","the", "lazy", "dog"}; //default words
+        int numWords = sizeof(words) / sizeof(words[0]); //count of words calculation
+        const char* shuffledWords[numWords]; //empty array with 9 string pointers
+        char input[260]; // buffer to hold user input
 
-int main(int argc, char *argv[]) {
-    // Array of words to be used in the program
+        //struct for time
+        struct timeval tv_seed1; //current time declaration
+        gettimeofday(&tv_seed1, NULL); //current time
+        srand(tv_seed1.tv_usec); //microseconds seed generator
 
-    printf("This is a game that tests typing speed\n\n");
-    const char* words[] = {"The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"};
-    int numWords = sizeof(words) / sizeof(words[0]);
-    //printf("Number of words: %d\n", num_words);
+        struct timeval start, end, difference; //start,end and difference declaration
 
-    const char* shuffledWords[numWords];
-
-    for (int i = 0; i < numWords; i++) {
-        shuffledWords[i] = words[i];
-        //printf("shuffledWords: %s\n", shuffledWords[i]);
-    }
-    
-    //generating a random seed using usec field
-    struct timeval tv_seed1;
-    gettimeofday(&tv_seed1, NULL);
-    srand(tv_seed1.tv_usec);
-
-    //Generating a random permutation to shuffle the words
-    for (int i = numWords - 1; i > 0; i--) {
-        int j = rand() % (i + 1);
-        const char* temp = shuffledWords[i];
-        shuffledWords[i] = shuffledWords[j];
-        shuffledWords[j] = temp;
-    }
-
-    printf("Type the following words as fast as you can:\n");
-
-    struct timeval start, end, difference;
-    gettimeofday(&start, NULL);
-
-    char input[260]; // Buffer to hold user input
-    for (int i = 0; i < numWords; i++) {
-        while(1) {
-            printf("   word #%d is %s: ", i + 1, shuffledWords[i]);
-
-            if (scanf("%259s", input)!= 1) {
-                printf("Error reading input. Please try again.\n");
-                // Clear the input buffer
-                return 1;
-                
-            }
-
-            if (strcmp(input, shuffledWords[i]) == 0) {
-                break;
-            }
-            else {
-                printf("Incorrect! Try again.\n");
-            }
+        printf("This is a game that tests typing speed\n\n");
+        for (int i = 0; i < numWords; i++) {
+                shuffledWords[i] = words[i];
         }
-    }
+        // shuffle (had to google this one Fisher-Yates Algorithm)
+        for (int i = numWords - 1; i > 0; i--) {
+                int j = rand() % (i + 1); //random position
+                const char* temp = shuffledWords[i];
+                shuffledWords[i] = shuffledWords[j];
+                shuffledWords[j] = temp;
+        }
 
-    gettimeofday(&end, NULL);
+        printf("Type the following words as fast as you can:\n");
 
-    timersub(&end, &start, &difference);
+        gettimeofday(&start, NULL); //start of timer
 
-    printf("You completed the typing test in %ld sec %ld usec.\n", (long)difference.tv_sec, (long)difference.tv_usec);
+        for (int i = 0; i < numWords; i++) {
+                while(1) {
+                        printf("  word #%d is %s: ", i + 1, shuffledWords[i]);
 
-    return 0;
+                        if(scanf("%259s", input) != 1) {
+                                printf("Error reading input.Try again.\n");
+                                return 1;
+                        }
+
+                    if(strcmp(input, shuffledWords[i]) == 0) {
+                                break;
+                        }
+                        else{
+                                printf("Incorrect! Try again.\n");
+                        }
+                }
+        }
+
+        gettimeofday(&end, NULL);
+
+        timersub(&end, &start, &difference);
+
+        printf("You completed the typing test in %ld seconds %ld usec.\n", (long)difference.tv_sec, (long)difference.tv_usec);
+
 }
+                                                
