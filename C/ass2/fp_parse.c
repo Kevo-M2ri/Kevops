@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
 
     sscanf(argv[1], "%d", &frac_bits);
     sscanf(argv[2], "%d", &exp_bits);
-    sscanf(argv[3], "%d", &hex_value);
+    sscanf(argv[3], "%x", &hex_value);
 
     if (frac_bits < 2 || frac_bits > 10) {
         printf("Illegal number of fraction bits (%d) .  Should be between 2 and 10", frac_bits);
