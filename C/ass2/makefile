@@ -8,7 +8,7 @@ SRCS = fp_parse.c
 all: $(TARGET)
 
 $(TARGET) :$(SRCS)
-        $(CC) $(CFLAGS) $(LDFLAGS) -o $(TARGET) $(SRCS) $(LDFLAGS)
+    $(CC) $(CFLAGS) $(LDFLAGS) -o $(TARGET) $(SRCS) $(LDFLAGS)
 
 clean:
-        rm -f $(TARGET)
+    rm -f $(TARGET)
