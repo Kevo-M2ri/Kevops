@@ -15,21 +15,23 @@ bool vector_fma(struct doubleVector * a,
     return false;
   }
 
-  __asm__ volatile (
-    "1:\n"
-      "movsd (%0), %%xmm0\n"
-      "movsd (%1), %%xmm1\n"
-      "movsd (%2), %%xmm2\n"
-      "vfmadd231sd %%xmm1, %%xmm2,  %%xmm0\n"
-      "movsd %%xmm0,  (%0)\n"
-      "addq  $8, %0\n"
-      "addq  $8, %1\n"
-      "addq  $8, %2\n"
-      "loop 1b\n"
-    : "+r" (a_data), "+r" (b_data), "+r" (c_data), "+c" (length)
-    :
-    : "memory"
-  );
+  int limit = length - (length % 16);
+  for (int i = 0; i < limit; i += 16) {
+      __asm__ volatile (
+        "movsd (%0), %%ymm0\n"
+        "movsd (%1), %%ymm1\n"
+        "movsd (%2), %%ymm2\n"
+        "vfmadd231sd %%ymm1, %%ymm2,  %%ymm0\n"
+        "movsd %%ymm0,  (%0)\n"
+        "addq  $32, %0\n"
+        "addq  $32, %1\n"
+        "addq  $32, %2\n"
+        "loop 1b\n"
+      : "+r" (a_data), "+r" (b_data), "+r" (c_data), "+c" (length)
+      :
+      : "memory"
+    );
+  }
 
   return true;
 }
