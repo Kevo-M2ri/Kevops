@@ -37,11 +37,11 @@ bool vector_fma(struct doubleVector * a,
   //any remaining elements 1 by 1 processing (tail loop)
   for (; i < length; ++i) {
     __asm__ volatile (
-      "movsd 0(%0), %%xmm0\n\t"
-      "movsd 0(%1), %%xmm1\n\t"
-      "movsd 0(%2), %%xmm2\n\t"
-      "vfmadd231sd %%xmm0, %%xmm1, %%xmm2\n\t"
-      "movsd %%xmm2, 0(%0)\n\t"
+      "movsd 0(%0), %%xmm0\n"
+      "movsd 0(%1), %%xmm1\n"
+      "movsd 0(%2), %%xmm2\n"
+      "vfmadd231sd %%xmm0, %%xmm1, %%xmm2\n"
+      "movsd %%xmm2, 0(%0)\n"
       :
       : "r" (a_data), "r" (b_data), "r" (c_data)
       : "xmm0", "xmm1", "xmm2", "memory"
