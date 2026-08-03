@@ -2,10 +2,7 @@
 
 #include "vectors.h"
 
-
-bool vector_fma(struct doubleVector * a,
-                const struct doubleVector * b,
-                const struct doubleVector * c) {
+bool vector_fma(struct doubleVector * a, const struct doubleVector * b, const struct doubleVector * c) {
   int length = a->length;
   double * a_data = a->data;
   double * b_data = b->data;
@@ -15,39 +12,40 @@ bool vector_fma(struct doubleVector * a,
     return false;
   }
 
-  int i = 0; // define i to avoid redefining
-  int limit = length - (length % 4);
-  for (; i < limit; i += 4) {
-      __asm__ volatile (
-        "movsd (%0), %%ymm0\n"
-        "movsd (%1), %%ymm1\n"
-        "movsd (%2), %%ymm2\n"
-        "vfmadd231sd %%ymm0, %%ymm1,  %%ymm2\n"
-        "vmovupd %%ymm2, 0(%0)\n"
+  int i = 0;
+  int limit4 = length - (length % 4);
+
+  // Process 4 elements at a time
+  for (; i < limit4; i += 4) {
+    __asm__ volatile (
+      "vmovupd (%0), %%ymm0\n\t"
+      "vmovupd (%1), %%ymm1\n\t"
+      "vmovupd (%2), %%ymm2\n\t"
+      "vfmadd231pd %%ymm1, %%ymm2, %%ymm0\n\t"
+      "vmovupd %%ymm0, (%0)\n\t"
       :
       : "r" (a_data), "r" (b_data), "r" (c_data)
       : "ymm0", "ymm1", "ymm2", "memory"
     );
-    // pointer advancement by 32 bits
-    a_data +=4;
-    b_data +=4;
-    c_data +=4;
+    
+    a_data += 4;
+    b_data += 4;
+    c_data += 4;
   }
 
-  //any remaining elements 1 by 1 processing (tail loop)
+  // Tail Loop: Handle remaining elements 1 by 1
   for (; i < length; ++i) {
     __asm__ volatile (
-      "movsd 0(%0), %%xmm0\n"
-      "movsd 0(%1), %%xmm1\n"
-      "movsd 0(%2), %%xmm2\n"
-      "vfmadd231sd %%xmm0, %%xmm1, %%xmm2\n"
-      "movsd %%xmm2, 0(%0)\n"
+      "vmovsd (%0), %%xmm0\n\t"
+      "vmovsd (%1), %%xmm1\n\t"
+      "vmovsd (%2), %%xmm2\n\t"
+      "vfmadd231sd %%xmm1, %%xmm2, %%xmm0\n\t"
+      "vmovsd %%xmm0, (%0)\n\t"
       :
       : "r" (a_data), "r" (b_data), "r" (c_data)
       : "xmm0", "xmm1", "xmm2", "memory"
     );
     
-    // Advance pointers by 8 bytes
     a_data += 1;
     b_data += 1;
     c_data += 1;
