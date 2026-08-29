@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Council - live demo</title>
+<style>
+  :root {
+    --ink: #14142B; --panel: #1C1C3C; --panel2: #242452;
+    --border: rgba(155,153,194,0.18); --gold: #E8B94A;
+    --sage: #7FB88F; --rose: #D97A86; --paper: #F3F1E8; --muted: #9B99C2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--ink); color: var(--paper); font-family: 'Segoe UI', sans-serif;
+    margin: 0; padding: 24px;
+  }
+  h1 { font-size: 1.6rem; margin: 0; }
+  .muted { color: var(--muted); }
+  .card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
+    padding: 18px; margin-bottom: 16px;
+  }
+  input, textarea, select, button {
+    font: inherit; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--panel2); color: var(--paper); padding: 8px 10px;
+  }
+  button { cursor: pointer; }
+  button.primary { background: var(--gold); color: var(--ink); border: none; font-weight: 600; }
+  button.primary:disabled { background: var(--panel2); color: var(--muted); cursor: default; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .track { height: 6px; border-radius: 999px; background: linear-gradient(90deg, var(--rose), var(--muted), var(--sage)); position: relative; margin-top: 30px; }
+  .marker { position: absolute; top: -9px; width: 3px; height: 24px; background: var(--gold); border-radius: 2px; transition: left 0.3s ease; }
+  .dot { position: absolute; width: 6px; height: 6px; border-radius: 999px; transform: translateX(-50%); }
+  .response-line { display: flex; gap: 10px; padding: 6px 0; font-size: 0.9rem; align-items: flex-start; }
+  .sw { width: 8px; height: 8px; border-radius: 999px; margin-top: 5px; flex-shrink: 0; }
+  .banner { background: rgba(232,185,74,0.12); border: 1px solid var(--gold); border-radius: 12px; padding: 12px; margin-bottom: 16px; }
+  .synthesis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .pill { background: var(--panel2); border-radius: 10px; padding: 10px; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+  <h1>COUNCIL</h1>
+  <p class="muted">Live demo - talks to the real backend, not a simulation.</p>
+
+  <div class="card">
+    <div class="row">
+      <input id="qtext" placeholder="Ask a pressing question..." style="flex:1; min-width:260px;" />
+      <select id="qcategory">
+        <option value="career">Career</option>
+        <option value="relationship">Relationship</option>
+        <option value="money">Money</option>
+        <option value="ethics">Ethics</option>
+        <option value="other">Other</option>
+      </select>
+      <button class="primary" onclick="askQuestion()">Ask the Council</button>
+    </div>
+    <p id="qstatus" class="muted" style="margin-top:8px;"></p>
+  </div>
+
+  <div id="notification"></div>
+
+  <div class="card" id="question-card" style="display:none;">
+    <p class="muted">Question</p>
+    <p id="question-text" style="font-size:1.1rem;"></p>
+    <p class="muted"><span id="response-count">0</span> / <span id="threshold">100</span> responses</p>
+
+    <div class="row" style="margin-top:10px;">
+      <input id="rtext" placeholder="Add your honest response..." style="flex:1; min-width:260px;" />
+      <button class="primary" onclick="submitResponse()">Respond</button>
+    </div>
+
+    <div style="position:relative; height:40px; margin-top:16px;" id="dotfield"></div>
+    <div class="track" id="track">
+      <div class="marker" id="marker" style="left:50%;"></div>
+    </div>
+    <div class="row muted" style="justify-content:space-between; font-size:0.75rem; margin-top:6px;">
+      <span>Against</span><span>Mixed</span><span>For</span>
+    </div>
+  </div>
+
+  <div class="card" id="synthesis-card" style="display:none;">
+    <p class="muted">AI synthesis</p>
+    <p id="synthesis-text"></p>
+    <div class="synthesis-grid">
+      <div class="pill"><b style="color:var(--sage)">Strongest case for</b><p id="best-for"></p></div>
+      <div class="pill"><b style="color:var(--rose)">Strongest case against</b><p id="best-against"></p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="muted">Recent responses</p>
+    <div id="responses"></div>
+  </div>
+
+<script>
+let userId = null;
+let questionId = null;
+let ws = null;
+let dotCount = 0;
+
+async function api(path, opts) {
+  const res = await fetch(path, {
+    headers: { "Content-Type": "application/json" },
+    ...opts,
+  });
+  return res.json();
+}
+
+async function ensureUser() {
+  if (userId) return userId;
+  const { id } = await api("/api/users", { method: "POST", body: JSON.stringify({ region: "US" }) });
+  userId = id;
+  return id;
+}
+
+async function askQuestion() {
+  await ensureUser();
+  const text = document.getElementById("qtext").value.trim();
+  const category = document.getElementById("qcategory").value;
+  if (!text) return;
+
+  const result = await api("/api/questions", {
+    method: "POST",
+    body: JSON.stringify({ author_id: userId, text, category }),
+  });
+
+  const statusEl = document.getElementById("qstatus");
+  if (result.status === "held_for_review") {
+    statusEl.textContent = result.crisis_message || result.message || "Your question is being reviewed.";
+    return;
+  }
+
+  questionId = result.id;
+  document.getElementById("question-text").textContent = text;
+  document.getElementById("question-card").style.display = "block";
+  statusEl.textContent = "";
+  connectWebSocket(questionId);
+
+  const threshold = await api("/api/feature-flags");
+  const t = threshold.flags.find((f) => f.key === "notification_threshold");
+  document.getElementById("threshold").textContent = t ? t.value : "100";
+}
+
+async function submitResponse() {
+  if (!questionId) return;
+  await ensureUser();
+  const text = document.getElementById("rtext").value.trim();
+  if (!text) return;
+  document.getElementById("rtext").value = "";
+
+  const result = await api(`/api/questions/${questionId}/responses`, {
+    method: "POST",
+    body: JSON.stringify({ responder_id: userId, text }),
+  });
+
+  if (result.status === "held_for_review") {
+    alert(result.crisis_message || "That response is being reviewed before it's shown.");
+  }
+}
+
+function connectWebSocket(qid) {
+  const proto = location.protocol === "https:" ? "wss:" : "ws:";
+  ws = new WebSocket(`${proto}//${location.host}`);
+  ws.onopen = () => ws.send(JSON.stringify({ type: "subscribe", questionId: qid }));
+  ws.onmessage = (event) => {
+    const msg = JSON.parse(event.data);
+    if (msg.type === "response") handleNewResponse(msg.response, msg.response_count);
+    if (msg.type === "notification") showNotification(msg.message);
+    if (msg.type === "synthesis") showSynthesis(msg.synthesis);
+  };
+}
+
+function handleNewResponse(response, count) {
+  document.getElementById("response-count").textContent = count;
+
+  const color = response.sentiment_score > 0.15 ? "var(--sage)" : response.sentiment_score < -0.15 ? "var(--rose)" : "var(--muted)";
+
+  const dot = document.createElement("div");
+  dot.className = "dot";
+  dot.style.background = color;
+  dot.style.left = `${((response.sentiment_score + 1) / 2) * 100}%`;
+  dot.style.top = `${(dotCount++ % 5) * 8}px`;
+  document.getElementById("dotfield").appendChild(dot);
+
+  const list = document.getElementById("responses");
+  const line = document.createElement("div");
+  line.className = "response-line";
+  line.innerHTML = `<span class="sw" style="background:${color}"></span><span>${escapeHtml(response.text)}</span>`;
+  list.prepend(line);
+  while (list.children.length > 12) list.removeChild(list.lastChild);
+
+  // recompute marker as running average from visible dots
+  const dots = [...document.getElementById("dotfield").children];
+  const avg = dots.reduce((sum, d) => sum + (parseFloat(d.style.left) / 100) * 2 - 1, 0) / dots.length;
+  document.getElementById("marker").style.left = `${((avg + 1) / 2) * 100}%`;
+}
+
+function showNotification(message) {
+  document.getElementById("notification").innerHTML = `<div class="banner">🔔 ${escapeHtml(message)}</div>`;
+}
+
+function showSynthesis(synthesis) {
+  document.getElementById("synthesis-card").style.display = "block";
+  const leadText =
+    synthesis.lean === "split"
+      ? "The crowd is evenly split - this is a genuine judgment call."
+      : `The crowd leans ${synthesis.lean === "for" ? "toward yes" : "toward no"}: ${synthesis.forPct}% for, ${synthesis.againstPct}% against, ${synthesis.mixedPct}% mixed.`;
+  document.getElementById("synthesis-text").textContent = leadText;
+  document.getElementById("best-for").textContent = synthesis.highlightForId ? "(see highlighted response above)" : "No strong 'for' response yet.";
+  document.getElementById("best-against").textContent = synthesis.highlightAgainstId ? "(see highlighted response above)" : "No strong 'against' response yet.";
+}
+
+function escapeHtml(str) {
+  const div = document.createElement("div");
+  div.textContent = str;
+  return div.innerHTML;
+}
+</script>
+</body>
+</html>
