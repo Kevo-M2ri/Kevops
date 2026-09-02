@@ -1,0 +1,5 @@
+node_modules/
+council.db
+council.db-shm
+council.db-wal
+*.log
