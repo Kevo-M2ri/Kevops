@@ -14,17 +14,11 @@
     --border: rgba(154,150,196,0.2);
     --accent: #E4B15A;
     --accent-soft: rgba(228,177,90,0.15);
-    /* --sage and --rose are fixed regardless of theme: they mean "for" and
-       "against" in the chamber and stream, so they must stay readable and
-       consistent no matter which thumbnail's palette is active. */
-    --sage: #8FBB92;
-    --rose: #C97B84;
     --text: #F1EFE6;
     --muted: #9A96C4;
   }
 
   * { box-sizing: border-box; }
-
   html { -webkit-text-size-adjust: 100%; }
 
   body {
@@ -33,348 +27,208 @@
     color: var(--text);
     font-family: 'Work Sans', sans-serif;
     line-height: 1.5;
+    min-height: 100vh;
   }
 
   ::selection { background: var(--accent-soft); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-  :focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+  /* ---------- full-page background art ---------- */
+  #bg-layer {
+    position: fixed; inset: 0; z-index: -2;
+    width: 100vw; height: 100vh;
+    overflow: hidden;
+    transition: opacity 0.6s ease;
   }
+  #bg-layer svg { width: 100%; height: 100%; display: block; }
+  #bg-scrim { position: fixed; inset: 0; z-index: -1; transition: background 0.6s ease; }
 
-  .app {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 32px 24px 40px;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .app { animation: rise 0.6s ease both; }
-  }
   @keyframes rise {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
-  /* ---------- header ---------- */
-  .top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 28px;
+  @keyframes rowFade {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
   }
-  .brand-mark {
-    font-family: 'Fraunces', serif;
-    font-size: 1.7rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    display: block;
+  @keyframes ringBreathe {
+    0%, 100% { opacity: 0.35; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.04); }
   }
-  .tagline {
-    color: var(--muted);
-    font-size: 0.92rem;
-    margin: 4px 0 0;
-    max-width: 46ch;
-  }
-  .ghost-btn {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    border-radius: 999px;
-    padding: 8px 16px;
-    font: inherit;
-    font-size: 0.85rem;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  .ghost-btn:hover { color: var(--text); border-color: var(--muted); }
-
-  /* ---------- layout ---------- */
-  .layout {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 28px;
-    align-items: start;
+  @media (prefers-reduced-motion: reduce) {
+    .response-row, .banner, .app, .confession-card { animation: none !important; }
+    #bg-layer, #bg-scrim { transition: none; }
   }
 
-  .composer {
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 20px;
-  }
-  .field-label {
-    display: block;
-    font-family: 'Fraunces', serif;
-    font-size: 1.15rem;
-    font-weight: 500;
-    margin-bottom: 10px;
-  }
-  input[type="text"], select {
-    width: 100%;
-    font: inherit;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    color: var(--text);
-    border-radius: 10px;
-    padding: 11px 13px;
-  }
-  input[type="text"]::placeholder { color: var(--muted); }
-  .composer-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
-    flex-wrap: wrap;
-  }
-  select { flex: 1; min-width: 120px; }
-  .primary-btn {
-    background: var(--accent);
-    color: var(--ink);
-    border: none;
-    border-radius: 999px;
-    padding: 11px 18px;
-    font: inherit;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  .primary-btn:hover { filter: brightness(1.06); }
-  .primary-btn.small { padding: 10px 16px; }
-  .status-text {
-    color: var(--muted);
-    font-size: 0.88rem;
-    margin: 12px 0 0;
-    min-height: 1.2em;
-  }
+  .app { max-width: 900px; margin: 0 auto; padding: 32px 24px 40px; animation: rise 0.5s ease both; }
 
-  /* ---------- thumbnails ---------- */
-  .thumb-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 14px;
-  }
-  .thumb-preview {
-    width: 72px;
-    height: 45px;
-    border-radius: 10px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    flex-shrink: 0;
-  }
-  .thumb-preview svg, .thumb-banner svg { display: block; width: 100%; height: 100%; }
-  .thumb-caption { color: var(--muted); font-size: 0.78rem; line-height: 1.4; }
-  .thumb-row .ghost-btn { padding: 6px 12px; font-size: 0.78rem; }
-  .thumb-banner {
-    width: 100%;
-    aspect-ratio: 16 / 5;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    margin-bottom: 18px;
-  }
-  @media (max-width: 760px) { .thumb-banner { aspect-ratio: 16 / 7; } }
-
-  /* ---------- chamber ---------- */
-  .chamber-wrap[hidden] { display: none; }
-  .question-live {
-    font-family: 'Fraunces', serif;
-    font-size: 1.35rem;
-    font-weight: 500;
-    margin: 0 0 18px;
-  }
-  .chamber {
-    position: relative;
-    width: 100%;
-    max-width: 440px;
-    aspect-ratio: 2 / 1;
-    margin: 0 auto;
-  }
-  .arc-track { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .needle {
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 3px;
-    height: 34%;
-    background: var(--accent);
-    border-radius: 2px;
-    transform-origin: bottom center;
-    transform: translateX(-50%) rotate(0deg);
-    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), background 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 0 10px var(--accent-soft);
-  }
-  @media (prefers-reduced-motion: reduce) { .needle { transition: none; } }
-  .dots { position: absolute; inset: 0; }
-  .dot {
-    position: absolute;
-    width: 7px;
-    height: 7px;
-    border-radius: 999px;
-    transform: translate(-50%, -50%);
-  }
-  .tally-line {
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.92rem;
-    margin: 18px 0 0;
-  }
-  .tally-line strong { color: var(--text); font-weight: 600; }
-
-  /* ---------- stream ---------- */
-  .section-heading {
-    font-family: 'Fraunces', serif;
-    font-size: 1.15rem;
-    font-weight: 500;
-    margin: 0 0 12px;
-  }
-  .stream[hidden], .synthesis[hidden] { display: none; }
-  .stream { margin-top: 32px; }
-  .responses-list { display: flex; flex-direction: column; gap: 2px; }
-  .response-row {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 0.94rem;
-  }
-  .response-row:last-child { border-bottom: none; }
-  .sw {
-    width: 8px; height: 8px; border-radius: 999px;
-    margin-top: 6px; flex-shrink: 0;
-  }
-
-  /* ---------- synthesis ---------- */
-  .synthesis {
-    margin-top: 28px;
-    border-top: 1px solid var(--accent);
-    padding-top: 18px;
-  }
-  .synthesis-pair {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-top: 12px;
-  }
-  .synthesis-side { background: var(--panel); border-radius: 14px; padding: 12px 14px; }
-  .side-label { font-size: 0.8rem; margin: 0 0 4px; }
-  .synthesis-side.for .side-label { color: var(--sage); }
-  .synthesis-side.against .side-label { color: var(--rose); }
-  .synthesis-side p:last-child { margin: 0; font-size: 0.92rem; }
-
-  .banner {
-    background: var(--accent-soft);
-    border: 1px solid var(--accent);
-    border-radius: 14px;
-    padding: 12px 16px;
-    margin: 0 0 20px;
-    font-size: 0.95rem;
-  }
-
-  .ad-strip {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    border: 1px dashed var(--border);
-    border-radius: 12px;
-    padding: 10px 14px;
-    color: var(--muted);
-    font-size: 0.78rem;
-    margin-top: 32px;
-  }
-  .link-btn {
-    background: none;
-    border: none;
-    color: var(--accent);
-    font: inherit;
-    font-size: 0.78rem;
-    cursor: pointer;
-    padding: 0;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  /* ---------- responder bar ---------- */
-  .responder-bar[hidden] { display: none; }
-  .responder-bar {
-    display: flex;
-    gap: 10px;
-    margin: 24px 0 0;
-  }
-  .responder-bar input { flex: 1; }
-  .shortcut-hint {
-    color: var(--muted);
-    font-size: 0.75rem;
-    margin-top: 6px;
-  }
-  kbd {
-    background: var(--panel-2);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    padding: 1px 6px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78em;
-  }
-
-  /* ---------- shortcuts modal ---------- */
-  .shortcuts-modal[hidden] { display: none; }
-  .shortcuts-modal {
-    position: fixed; inset: 0;
-    background: rgba(10,9,20,0.6);
-    display: flex; align-items: center; justify-content: center;
-    padding: 20px;
-    z-index: 20;
-  }
-  .modal-card {
+  .glass {
     background: var(--panel);
     border: 1px solid var(--border);
     border-radius: 18px;
-    padding: 22px 24px;
-    max-width: 340px;
-    width: 100%;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
-  .modal-card h3 { font-family: 'Fraunces', serif; font-weight: 500; margin: 0 0 14px; }
+
+  /* ---------- header ---------- */
+  .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+  .brand-mark { font-family: 'Fraunces', serif; font-size: 1.7rem; font-weight: 600; letter-spacing: 0.01em; display: block; }
+  .tagline { color: var(--muted); font-size: 0.9rem; margin: 4px 0 0; max-width: 46ch; }
+  .top-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+  .ghost-btn {
+    background: transparent; border: 1px solid var(--border); color: var(--muted);
+    border-radius: 999px; padding: 8px 16px; font: inherit; font-size: 0.85rem;
+    cursor: pointer; white-space: nowrap;
+  }
+  .ghost-btn:hover { color: var(--text); border-color: var(--muted); }
+  .primary-btn {
+    background: var(--accent); color: var(--ink); border: none; border-radius: 999px;
+    padding: 11px 18px; font: inherit; font-weight: 600; cursor: pointer; white-space: nowrap;
+  }
+  .primary-btn:hover { filter: brightness(1.06); }
+  .primary-btn.small { padding: 9px 15px; font-size: 0.9rem; }
+  .link-btn {
+    background: none; border: none; color: var(--accent); font: inherit; font-size: 0.82rem;
+    cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 2px;
+  }
+  .account-chip { color: var(--muted); font-size: 0.82rem; display: flex; align-items: center; gap: 10px; }
+
+  /* ---------- tabs ---------- */
+  .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+  .tab-btn {
+    flex: 1; padding: 12px; border-radius: 12px; border: 1px solid var(--border);
+    background: transparent; color: var(--muted); font: inherit; font-weight: 500; cursor: pointer;
+  }
+  .tab-btn.active { background: var(--accent-soft); border-color: var(--accent); color: var(--text); }
+  .tab-panel[hidden] { display: none; }
+
+  /* ---------- composer ---------- */
+  .composer { padding: 20px; margin-bottom: 20px; }
+  .field-label { display: block; font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 500; margin-bottom: 10px; }
+  input[type="text"], input[type="email"], input[type="password"], textarea, select {
+    width: 100%; font: inherit; background: var(--panel-2); border: 1px solid var(--border);
+    color: var(--text); border-radius: 10px; padding: 11px 13px;
+  }
+  textarea { resize: vertical; min-height: 70px; }
+  input::placeholder, textarea::placeholder { color: var(--muted); }
+  .composer-row { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  select { flex: 1; min-width: 120px; }
+  .status-text { color: var(--muted); font-size: 0.88rem; margin: 12px 0 0; min-height: 1.2em; }
+
+  /* ---------- idle state ---------- */
+  .idle-hint[hidden] { display: none; }
+  .idle-hint {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; min-height: 200px; color: var(--muted); text-align: center; font-size: 0.92rem;
+  }
+  .idle-ring { width: 100px; height: 50px; border-radius: 100px 100px 0 0; border: 1.5px dashed var(--border); animation: ringBreathe 3.5s ease-in-out infinite; }
+
+  /* ---------- thread ---------- */
+  .thread-wrap[hidden] { display: none; }
+  .thread-wrap { padding: 22px; margin-bottom: 20px; }
+  .question-live { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 500; margin: 0 0 6px; }
+  .thread-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; color: var(--muted); font-size: 0.85rem; margin-bottom: 16px; }
+  .owner-controls { display: flex; align-items: center; gap: 8px; }
+  .responses-list { display: flex; flex-direction: column; gap: 2px; }
+  .response-row {
+    padding: 9px 0; border-bottom: 1px solid var(--border);
+    font-size: 0.94rem; animation: rowFade 0.3s ease both;
+  }
+  .response-row:last-child { border-bottom: none; }
+  .response-text { margin: 0 0 4px; }
+  .response-actions { display: flex; gap: 12px; }
+  .reply-link { color: var(--muted); font-size: 0.78rem; background: none; border: none; cursor: pointer; padding: 0; text-decoration: underline; text-underline-offset: 2px; }
+  .reply-link:hover { color: var(--text); }
+  .response-children { margin-left: 22px; border-left: 1px solid var(--border); padding-left: 14px; margin-top: 6px; }
+
+  .banner {
+    background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 14px;
+    padding: 12px 16px; margin: 0 0 20px; font-size: 0.95rem; animation: rise 0.4s ease both;
+  }
+
+  /* ---------- confessions ---------- */
+  .confession-card {
+    padding: 16px 18px; margin-bottom: 12px; animation: rowFade 0.3s ease both;
+  }
+  .confession-text { margin: 0 0 6px; font-size: 0.96rem; }
+  .confession-time { color: var(--muted); font-size: 0.76rem; }
+  .confession-note { color: var(--muted); font-size: 0.8rem; margin: 10px 0 20px; }
+
+  /* ---------- reply chip ---------- */
+  .reply-chip[hidden] { display: none; }
+  .reply-chip {
+    display: flex; align-items: center; gap: 8px; background: var(--panel-2);
+    border: 1px solid var(--border); border-radius: 10px; padding: 6px 10px;
+    font-size: 0.8rem; color: var(--muted); margin-bottom: 8px;
+  }
+  .reply-chip button { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1rem; line-height: 1; padding: 0; }
+
+  /* ---------- responder bar ---------- */
+  .responder-bar[hidden] { display: none; }
+  .responder-bar { padding: 14px; }
+  .responder-bar form { display: flex; gap: 10px; }
+  .responder-bar input { flex: 1; }
+
+  kbd { background: var(--panel-2); border: 1px solid var(--border); border-radius: 5px; padding: 1px 6px; font-family: 'IBM Plex Mono', monospace; font-size: 0.78em; }
+
+  /* ---------- modals ---------- */
+  .modal-overlay[hidden] { display: none; }
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(10,9,20,0.6);
+    display: flex; align-items: center; justify-content: center; padding: 20px; z-index: 30;
+  }
+  .modal-card { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; padding: 22px 24px; max-width: 360px; width: 100%; backdrop-filter: blur(14px); }
+  .modal-card h3 { font-family: 'Fraunces', serif; font-weight: 500; margin: 0 0 6px; }
+  .modal-card p.hint { color: var(--muted); font-size: 0.85rem; margin: 0 0 16px; }
+  .modal-card label { display: block; font-size: 0.82rem; color: var(--muted); margin: 12px 0 4px; }
+  .modal-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; gap: 10px; flex-wrap: wrap; }
   .modal-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
   .modal-card li { display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; gap: 12px; }
 
-  /* ---------- responsive: mobile ---------- */
+  .ad-strip {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+    border: 1px dashed var(--border); border-radius: 12px; padding: 10px 14px; color: var(--muted);
+    font-size: 0.78rem; margin-top: 24px;
+  }
+
   @media (max-width: 760px) {
     .app { padding: 20px 16px 100px; }
-    .layout { grid-template-columns: 1fr; gap: 20px; }
     .top { flex-direction: column; }
-    .ghost-btn { display: none; } /* keyboard shortcuts don't apply on a touch keyboard */
-    .chamber { max-width: 320px; }
-
+    #shortcuts-toggle { display: none; }
     .responder-bar {
-      position: fixed;
-      left: 0; right: 0; bottom: 0;
-      margin: 0;
-      background: var(--ink);
-      border-top: 1px solid var(--border);
-      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-      z-index: 10;
+      position: fixed; left: 0; right: 0; bottom: 0; margin: 0; border-radius: 0;
+      padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); z-index: 10;
     }
-    .shortcut-hint { display: none; }
   }
 </style>
 </head>
 <body>
+
+<div id="bg-layer"></div>
+<div id="bg-scrim"></div>
+
 <div class="app">
 
   <header class="top">
     <div>
       <span class="brand-mark">Council</span>
-      <p class="tagline">A hundred honest voices before you decide.</p>
+      <p class="tagline">A hundred honest voices before you decide &mdash; and a place to say what you can't say elsewhere.</p>
     </div>
-    <button class="ghost-btn" id="shortcuts-toggle" aria-haspopup="dialog">Shortcuts</button>
+    <div class="top-actions">
+      <div class="account-chip" id="account-chip"></div>
+      <button class="ghost-btn" id="shortcuts-toggle" aria-haspopup="dialog">Shortcuts</button>
+    </div>
   </header>
 
-  <div class="layout">
-    <form class="composer" id="composer-form">
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-btn-questions">Ask &amp; answer</button>
+    <button class="tab-btn" id="tab-btn-confessions">Confessions</button>
+  </div>
+
+  <!-- ============ QUESTIONS TAB ============ -->
+  <div class="tab-panel" id="tab-questions">
+    <form class="composer glass" id="composer-form">
       <label class="field-label" for="qtext">What's the decision you're sitting with?</label>
       <input id="qtext" type="text" placeholder="Should I move cities for this job?" autocomplete="off" />
       <div class="composer-row">
@@ -387,67 +241,85 @@
         </select>
         <button type="submit" class="primary-btn">Convene the council</button>
       </div>
-      <div class="thumb-row">
-        <div class="thumb-preview" id="thumb-preview" aria-hidden="true"></div>
-        <p class="thumb-caption">This picture and the page's colors are picked for your topic, at random.</p>
-      </div>
-      <div class="thumb-row">
-        <button type="button" class="ghost-btn" id="thumb-shuffle">Shuffle image</button>
-      </div>
       <p id="qstatus" class="status-text" role="status"></p>
     </form>
 
-    <div>
-      <div id="notification"></div>
+    <div id="notification"></div>
 
-      <section class="chamber-wrap" id="chamber-wrap" hidden>
-        <div class="thumb-banner" id="thumb-banner" aria-hidden="true"></div>
-        <p class="question-live" id="question-text"></p>
-        <div class="chamber" id="chamber">
-          <svg class="arc-track" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true">
-            <defs>
-              <linearGradient id="arcgrad" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stop-color="#C97B84" />
-                <stop offset="50%" stop-color="#9A96C4" />
-                <stop offset="100%" stop-color="#8FBB92" />
-              </linearGradient>
-            </defs>
-            <path d="M4,48 A46,46 0 0 1 96,48" stroke="url(#arcgrad)" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.7" />
-          </svg>
-          <div class="dots" id="dots"></div>
-          <div class="needle" id="needle"></div>
+    <div class="idle-hint glass" id="idle-hint">
+      <div class="idle-ring" aria-hidden="true"></div>
+      <p>Ask a question and the thread opens here &mdash; live, as people answer.</p>
+    </div>
+
+    <section class="thread-wrap glass" id="thread-wrap" hidden>
+      <p class="question-live" id="question-text"></p>
+      <div class="thread-meta">
+        <span id="response-count-line">No one has responded yet.</span>
+        <div class="owner-controls" id="owner-controls" hidden>
+          <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+            <input type="checkbox" id="retain-toggle" /> Keep this past the usual deletion window
+          </label>
         </div>
-        <p class="tally-line" id="tally-line">No one has spoken yet.</p>
-      </section>
+      </div>
+      <div class="responses-list" id="responses"></div>
+    </section>
 
-      <section class="stream" id="stream" hidden>
-        <h2 class="section-heading">What people are saying</h2>
-        <div id="responses" class="responses-list"></div>
-      </section>
+    <div class="responder-bar glass" id="responder-bar" hidden>
+      <div class="reply-chip" id="reply-chip" hidden>
+        Replying to a response <button type="button" id="cancel-reply" aria-label="Cancel reply">&times;</button>
+      </div>
+      <form id="response-form">
+        <input id="rtext" type="text" placeholder="Add your honest take" autocomplete="off" />
+        <button type="submit" class="primary-btn small">Speak</button>
+      </form>
+    </div>
 
-      <section class="synthesis" id="synthesis" hidden>
-        <h2 class="section-heading">Where this landed</h2>
-        <p id="synthesis-text"></p>
-        <div class="synthesis-pair">
-          <div class="synthesis-side for"><p class="side-label">Strongest case for</p><p id="best-for"></p></div>
-          <div class="synthesis-side against"><p class="side-label">Strongest case against</p><p id="best-against"></p></div>
-        </div>
-      </section>
+    <div class="ad-strip">
+      <span>Ad slot &mdash; one per session, no autoplay</span>
+      <button class="link-btn" id="share-btn" hidden>Copy link to this question</button>
     </div>
   </div>
 
-  <div class="ad-strip">
-    <span>Ad slot &mdash; one per session, no autoplay</span>
-    <button class="link-btn" id="share-btn" hidden>Copy link to this question</button>
+  <!-- ============ CONFESSIONS TAB ============ -->
+  <div class="tab-panel" id="tab-confessions" hidden>
+    <form class="composer glass" id="confession-form">
+      <label class="field-label" for="ctext">Say the thing you haven't told anyone.</label>
+      <textarea id="ctext" placeholder="Nobody will ever see this was you."></textarea>
+      <div class="composer-row">
+        <button type="submit" class="primary-btn">Post anonymously</button>
+      </div>
+      <p id="cstatus" class="status-text" role="status"></p>
+    </form>
+    <p class="confession-note">Confessions are never linked to your account &mdash; not to other users, and not to us. Once posted, there's no way for anyone, including the people who run this site, to trace it back to you.</p>
+    <div id="confessions-list"></div>
+  </div>
+
+</div>
+
+<!-- ============ AUTH MODAL ============ -->
+<div class="modal-overlay" id="auth-modal" hidden role="dialog" aria-label="Sign in">
+  <div class="modal-card">
+    <h3 id="auth-title">Sign in</h3>
+    <p class="hint" id="auth-hint">You need an account to ask a question or post a confession. Answering and reading never require one.</p>
+    <form id="auth-form">
+      <label for="auth-email">Email</label>
+      <input id="auth-email" type="email" autocomplete="email" required />
+      <label for="auth-password">Password</label>
+      <input id="auth-password" type="password" autocomplete="current-password" minlength="8" required />
+      <p class="status-text" id="auth-status"></p>
+      <div class="modal-actions">
+        <button type="button" class="link-btn" id="auth-toggle-mode">I don't have an account yet</button>
+        <button type="submit" class="primary-btn small" id="auth-submit">Sign in</button>
+      </div>
+    </form>
+    <div class="modal-actions">
+      <button class="ghost-btn" id="auth-close">Close</button>
+    </div>
   </div>
 </div>
 
-<form class="responder-bar" id="responder-bar" hidden>
-  <input id="rtext" type="text" placeholder="Add your honest take" autocomplete="off" />
-  <button type="submit" class="primary-btn small">Speak</button>
-</form>
-
-<div class="shortcuts-modal" id="shortcuts-modal" hidden role="dialog" aria-label="Keyboard shortcuts">
+<!-- ============ SHORTCUTS MODAL ============ -->
+<div class="modal-overlay" id="shortcuts-modal" hidden role="dialog" aria-label="Keyboard shortcuts">
   <div class="modal-card">
     <h3>Shortcuts</h3>
     <ul>
@@ -458,367 +330,436 @@
       <li>Close this, or leave a field <kbd>Esc</kbd></li>
       <li>Toggle this panel <kbd>?</kbd></li>
     </ul>
-    <button class="ghost-btn" id="shortcuts-close" style="margin-top:16px; display:inline-block;">Close</button>
+    <button class="ghost-btn" id="shortcuts-close" style="margin-top:16px;">Close</button>
   </div>
 </div>
 
 <script>
-let userId = null;
+/* ================= state ================= */
+let authToken = localStorage.getItem("council_token") || null;
+let authEmail = localStorage.getItem("council_email") || null;
+let guestId = localStorage.getItem("council_guest_id") || null;
+let myQuestionIds = new Set(JSON.parse(localStorage.getItem("council_my_questions") || "[]"));
+
 let questionId = null;
 let ws = null;
-const bucketCounts = {};
+let responsesFlat = [];
+let replyTargetId = null;
+let authMode = "login"; // 'login' | 'signup'
 
-async function api(path, opts) {
-  const res = await fetch(path, { headers: { "Content-Type": "application/json" }, ...opts });
-  return res.json();
+/* ================= api helpers ================= */
+async function api(path, opts = {}) {
+  const headers = { "Content-Type": "application/json", ...(opts.headers || {}) };
+  if (authToken) headers["Authorization"] = `Bearer ${authToken}`;
+  const res = await fetch(path, { ...opts, headers });
+  const data = await res.json().catch(() => ({}));
+  return { ok: res.ok, status: res.status, data };
 }
 
-async function ensureUser() {
-  if (userId) return userId;
-  const { id } = await api("/api/users", { method: "POST", body: JSON.stringify({ region: "US" }) });
-  userId = id;
-  return id;
+async function ensureGuestId() {
+  if (guestId) return guestId;
+  const { data } = await api("/api/users", { method: "POST", body: JSON.stringify({}) });
+  guestId = data.id;
+  localStorage.setItem("council_guest_id", guestId);
+  return guestId;
 }
 
-/* ---------- thumbnails + color theming ---------- */
-/* Each category has a set of accent colors and a shared "motif" (a small
-   piece of SVG art standing in for a topic photo - cityscape for career,
-   two figures for relationship, etc). A thumbnail is picked at random from
-   the category, and its accent color becomes the page's theme color.
-   --sage and --rose (the "for"/"against" meaning) never change - only the
-   decorative accent (buttons, needle, banner, artwork) does. */
+function rememberMyQuestion(id) {
+  myQuestionIds.add(id);
+  localStorage.setItem("council_my_questions", JSON.stringify([...myQuestionIds]));
+}
 
+/* ================= account header ================= */
+function renderAccountChip() {
+  const el = document.getElementById("account-chip");
+  if (authToken && authEmail) {
+    el.innerHTML = `<span>${escapeHtml(authEmail)}</span>
+      <button class="link-btn" id="sign-out-btn">Sign out</button>
+      <button class="link-btn" id="delete-data-btn">Delete my data</button>`;
+    document.getElementById("sign-out-btn").addEventListener("click", signOut);
+    document.getElementById("delete-data-btn").addEventListener("click", deleteMyData);
+  } else {
+    el.innerHTML = `<button class="ghost-btn" id="sign-in-btn">Sign in</button>`;
+    document.getElementById("sign-in-btn").addEventListener("click", () => openAuthModal());
+  }
+}
+
+function signOut() {
+  authToken = null; authEmail = null;
+  localStorage.removeItem("council_token");
+  localStorage.removeItem("council_email");
+  renderAccountChip();
+}
+
+async function deleteMyData() {
+  if (!confirm("This permanently deletes every question and response tied to your account. Only anonymous, aggregate stats (no text, no identity) are kept. This can't be undone. Continue?")) return;
+  const { ok, data } = await api("/api/users/me/data", { method: "DELETE" });
+  if (ok) {
+    alert(`Done. ${data.questions_removed} question(s) and everything under them were deleted.`);
+    signOut();
+    location.href = location.pathname; // drop back to a clean idle state
+  } else {
+    alert(data.error || "Something went wrong deleting your data.");
+  }
+}
+
+/* ================= auth modal ================= */
+const authModal = document.getElementById("auth-modal");
+function openAuthModal(reason) {
+  authMode = "login";
+  updateAuthModalMode();
+  document.getElementById("auth-status").textContent = reason || "";
+  authModal.hidden = false;
+  document.getElementById("auth-email").focus();
+}
+function closeAuthModal() { authModal.hidden = true; }
+function updateAuthModalMode() {
+  const isSignup = authMode === "signup";
+  document.getElementById("auth-title").textContent = isSignup ? "Create an account" : "Sign in";
+  document.getElementById("auth-submit").textContent = isSignup ? "Create account" : "Sign in";
+  document.getElementById("auth-toggle-mode").textContent = isSignup ? "I already have an account" : "I don't have an account yet";
+}
+document.getElementById("auth-toggle-mode").addEventListener("click", () => {
+  authMode = authMode === "signup" ? "login" : "signup";
+  updateAuthModalMode();
+});
+document.getElementById("auth-close").addEventListener("click", closeAuthModal);
+authModal.addEventListener("click", (e) => { if (e.target === authModal) closeAuthModal(); });
+
+document.getElementById("auth-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("auth-email").value.trim();
+  const password = document.getElementById("auth-password").value;
+  const statusEl = document.getElementById("auth-status");
+  statusEl.textContent = "";
+
+  const path = authMode === "signup" ? "/api/auth/signup" : "/api/auth/login";
+  const { ok, data } = await api(path, { method: "POST", body: JSON.stringify({ email, password }) });
+  if (!ok) { statusEl.textContent = data.error || "Something went wrong."; return; }
+
+  authToken = data.token; authEmail = email;
+  localStorage.setItem("council_token", authToken);
+  localStorage.setItem("council_email", authEmail);
+  renderAccountChip();
+  closeAuthModal();
+  document.getElementById("auth-form").reset();
+});
+
+/* ================= tabs ================= */
+function showTab(name) {
+  document.getElementById("tab-questions").hidden = name !== "questions";
+  document.getElementById("tab-confessions").hidden = name !== "confessions";
+  document.getElementById("tab-btn-questions").classList.toggle("active", name === "questions");
+  document.getElementById("tab-btn-confessions").classList.toggle("active", name === "confessions");
+  if (name === "confessions") { loadConfessions(); applyNeutralTheme(); }
+  else if (!questionId) { applyPreviewTheme(); }
+}
+document.getElementById("tab-btn-questions").addEventListener("click", () => showTab("questions"));
+document.getElementById("tab-btn-confessions").addEventListener("click", () => showTab("confessions"));
+
+/* ================= theming + full-page art ================= */
 function clampByte(n) { return Math.max(0, Math.min(255, Math.round(n))); }
-function hexToRgb(hex) {
-  const n = parseInt(hex.replace("#", ""), 16);
-  return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
-}
-function rgbToHex({ r, g, b }) {
-  return "#" + [r, g, b].map((v) => clampByte(v).toString(16).padStart(2, "0")).join("");
-}
-function mix(hexA, hexB, t) {
-  const a = hexToRgb(hexA), b = hexToRgb(hexB);
-  return rgbToHex({ r: a.r + (b.r - a.r) * t, g: a.g + (b.g - a.g) * t, b: a.b + (b.b - a.b) * t });
-}
+function hexToRgb(hex) { const n = parseInt(hex.replace("#", ""), 16); return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 }; }
+function rgbToHex({ r, g, b }) { return "#" + [r, g, b].map((v) => clampByte(v).toString(16).padStart(2, "0")).join(""); }
+function mix(hexA, hexB, t) { const a = hexToRgb(hexA), b = hexToRgb(hexB); return rgbToHex({ r: a.r + (b.r - a.r) * t, g: a.g + (b.g - a.g) * t, b: a.b + (b.b - a.b) * t }); }
 function lighten(hex, amt) { return mix(hex, "#ffffff", amt); }
 function darken(hex, amt) { return mix(hex, "#000000", amt); }
 
-const INK = "#15132A";
-
-function buildPalette(accent) {
-  return {
-    accent,
-    accentSoft: (() => { const c = hexToRgb(accent); return `rgba(${c.r},${c.g},${c.b},0.15)`; })(),
-    bg1: mix(INK, accent, 0.14),
-    bg2: darken(INK, 0.12),
-    shape: darken(INK, 0.4),
-    glow: lighten(accent, 0.25),
+function mulberry32(seed) {
+  let a = seed;
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
 }
+function hashString(str) { let h = 5381; for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0; return Math.abs(h); }
 
-function skylineSvg(p) {
-  const bars = [22, 40, 30, 55, 34, 46, 26];
-  let x = 6;
-  const rects = bars.map((h) => {
-    const w = 12;
-    const r = `<rect x="${x}" y="${80 - h}" width="${w}" height="${h}" fill="${p.shape}" />
-      <rect x="${x + 3}" y="${80 - h + 8}" width="3" height="3" fill="${p.glow}" opacity="0.8" />
-      <rect x="${x + 8}" y="${80 - h + 16}" width="3" height="3" fill="${p.glow}" opacity="0.6" />`;
-    x += w + 4;
-    return r;
-  }).join("");
-  return `<svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
-    <rect width="320" height="160" fill="${p.bg1}" />
-    <rect width="320" height="160" fill="${p.bg2}" opacity="0.5" />
-    <g transform="translate(0,80) scale(2.6)">${rects}</g>
-  </svg>`;
+const BASE_INK = "#15132A", BASE_PANEL = "#1E1B3A", BASE_PANEL2 = "#272350", BASE_MUTED = "#9A96C4";
+
+function buildFullPalette(accent) {
+  const ink = mix(BASE_INK, accent, 0.12);
+  const panel = mix(BASE_PANEL, accent, 0.1);
+  const panel2 = mix(BASE_PANEL2, accent, 0.12);
+  const muted = mix(BASE_MUTED, accent, 0.2);
+  const shape = darken(ink, 0.35);
+  const glow = lighten(accent, 0.25);
+  return { accent, ink, panel, panel2, muted, shape, glow, bg1: mix(ink, accent, 0.16), bg2: darken(ink, 0.1) };
 }
 
-function twoCirclesSvg(p) {
-  return `<svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
-    <rect width="320" height="160" fill="${p.bg1}" />
-    <circle cx="130" cy="82" r="46" fill="${p.shape}" opacity="0.85" />
-    <circle cx="185" cy="82" r="46" fill="${p.accent}" opacity="0.55" />
-    <circle cx="157" cy="82" r="6" fill="${p.glow}" />
-  </svg>`;
+function skylineSvg(p, rand) {
+  const bars = Array.from({ length: 9 }, () => 20 + rand() * 45);
+  let x = 0; const w = 320 / bars.length;
+  const rects = bars.map((h) => { const r = `<rect x="${x}" y="${160 - h * 2}" width="${w - 2}" height="${h * 2}" fill="${p.shape}" /><rect x="${x + 4}" y="${160 - h * 2 + 10}" width="4" height="4" fill="${p.glow}" opacity="0.8"/>`; x += w; return r; }).join("");
+  return `<svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="160" fill="${p.bg1}"/><rect width="320" height="160" fill="${p.bg2}" opacity="0.4"/>${rects}</svg>`;
 }
-
-function barsSvg(p) {
-  const heights = [26, 40, 34, 52, 64];
-  let x = 40;
-  const bars = heights.map((h, i) => {
-    const w = 30;
-    const bar = `<rect x="${x}" y="${140 - h}" width="${w}" height="${h}" rx="4" fill="${i === heights.length - 1 ? p.accent : p.shape}" />`;
-    x += w + 14;
-    return bar;
-  }).join("");
-  return `<svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
-    <rect width="320" height="160" fill="${p.bg1}" />
-    ${bars}
-    <circle cx="${x - 44}" cy="${140 - heights[heights.length - 1] - 14}" r="5" fill="${p.glow}" />
-  </svg>`;
+function twoCirclesSvg(p, rand) {
+  const overlap = 40 + rand() * 40, radius = 60 + rand() * 20, cx1 = 160 - overlap / 2, cx2 = 160 + overlap / 2;
+  return `<svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="160" fill="${p.bg1}"/><circle cx="${cx1}" cy="80" r="${radius}" fill="${p.shape}" opacity="0.85"/><circle cx="${cx2}" cy="80" r="${radius}" fill="${p.accent}" opacity="0.5"/></svg>`;
 }
-
-function scaleSvg(p) {
-  return `<svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
-    <rect width="320" height="160" fill="${p.bg1}" />
-    <rect x="158" y="30" width="4" height="86" fill="${p.shape}" />
-    <rect x="90" y="46" width="140" height="3" fill="${p.shape}" />
-    <line x1="92" y1="47" x2="70" y2="90" stroke="${p.shape}" stroke-width="2" />
-    <line x1="228" y1="47" x2="250" y2="90" stroke="${p.shape}" stroke-width="2" />
-    <circle cx="70" cy="98" r="16" fill="${p.accent}" opacity="0.8" />
-    <circle cx="250" cy="98" r="16" fill="${p.glow}" opacity="0.8" />
-    <rect x="140" y="116" width="40" height="8" rx="3" fill="${p.shape}" />
-  </svg>`;
+function barsSvg(p, rand) {
+  const heights = Array.from({ length: 6 }, () => 30 + rand() * 90);
+  let x = 10; const w = 300 / heights.length;
+  const bars = heights.map((h, i) => { const b = `<rect x="${x}" y="${160 - h}" width="${w - 8}" height="${h}" rx="3" fill="${i === heights.length - 1 ? p.accent : p.shape}"/>`; x += w; return b; }).join("");
+  return `<svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="160" fill="${p.bg1}"/>${bars}</svg>`;
 }
-
-function compassSvg(p) {
-  const stars = [[40,30],[80,20],[260,36],[290,60],[60,110],[250,120],[300,20]];
-  const dots = stars.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2" fill="${p.glow}" opacity="0.85" />`).join("");
-  return `<svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
-    <rect width="320" height="160" fill="${p.bg1}" />
-    ${dots}
-    <circle cx="170" cy="82" r="42" fill="none" stroke="${p.accent}" stroke-width="2" opacity="0.6" />
-    <line x1="170" y1="82" x2="170" y2="46" stroke="${p.glow}" stroke-width="3" stroke-linecap="round" />
-    <line x1="170" y1="82" x2="192" y2="96" stroke="${p.shape}" stroke-width="3" stroke-linecap="round" />
-    <circle cx="170" cy="82" r="4" fill="${p.glow}" />
-  </svg>`;
+function scaleSvg(p, rand) {
+  const tilt = (rand() - 0.5) * 10;
+  return `<svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="160" fill="${p.bg1}"/><rect x="158" y="20" width="4" height="100" fill="${p.shape}"/><g transform="rotate(${tilt} 160 40)"><rect x="80" y="38" width="160" height="4" fill="${p.shape}"/><circle cx="80" cy="90" r="20" fill="${p.accent}" opacity="0.8"/><circle cx="240" cy="90" r="20" fill="${p.glow}" opacity="0.8"/></g></svg>`;
+}
+function compassSvg(p, rand) {
+  const stars = Array.from({ length: 12 }, () => [rand() * 320, rand() * 160]);
+  const dots = stars.map(([x, y]) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.2" fill="${p.glow}" opacity="0.85"/>`).join("");
+  return `<svg viewBox="0 0 320 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="160" fill="${p.bg1}"/>${dots}<circle cx="160" cy="80" r="50" fill="none" stroke="${p.accent}" stroke-width="2" opacity="0.6"/></svg>`;
 }
 
 const THUMBNAILS = {
-  career: { motif: skylineSvg, accents: ["#E4B15A", "#6FA8DC", "#8C8FE0"] },
-  relationship: { motif: twoCirclesSvg, accents: ["#D98E5B", "#B48CE0", "#E3A97A"] },
-  money: { motif: barsSvg, accents: ["#E0C24A", "#5EC7C0", "#D9BE86"] },
-  ethics: { motif: scaleSvg, accents: ["#7B90D9", "#C9A0E0", "#63C9E0"] },
-  other: { motif: compassSvg, accents: ["#9FA8E8", "#8FC1E8", "#A87BC9"] },
+  career: { motif: skylineSvg, accents: ["#E4B15A", "#6FA8DC", "#8C8FE0", "#D98E5B", "#63C9E0"] },
+  relationship: { motif: twoCirclesSvg, accents: ["#D98E5B", "#B48CE0", "#E3A97A", "#C9A0E0", "#E0C24A"] },
+  money: { motif: barsSvg, accents: ["#E0C24A", "#5EC7C0", "#D9BE86", "#8C8FE0", "#E4B15A"] },
+  ethics: { motif: scaleSvg, accents: ["#7B90D9", "#C9A0E0", "#63C9E0", "#9FA8E8", "#6FA8DC"] },
+  other: { motif: compassSvg, accents: ["#9FA8E8", "#8FC1E8", "#A87BC9", "#B48CE0", "#5EC7C0"] },
 };
-
-function hashString(str) {
-  let h = 5381;
-  for (let i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0;
-  return Math.abs(h);
-}
 
 function pickThumbnail(category, seedStr) {
   const set = THUMBNAILS[category] || THUMBNAILS.other;
-  const idx = seedStr
-    ? hashString(seedStr) % set.accents.length
-    : Math.floor(Math.random() * set.accents.length);
-  const palette = buildPalette(set.accents[idx]);
-  return { svg: set.motif(palette), palette };
+  const seed = seedStr ? hashString(seedStr) : Math.floor(Math.random() * 2 ** 31);
+  const rand = seedStr ? mulberry32(seed) : Math.random;
+  const idx = Math.floor(rand() * set.accents.length);
+  const palette = buildFullPalette(set.accents[idx]);
+  return { svg: set.motif(palette, rand), palette };
 }
 
 function applyPalette(palette) {
   const root = document.documentElement.style;
   root.setProperty("--accent", palette.accent);
-  root.setProperty("--accent-soft", palette.accentSoft);
+  const c = hexToRgb(palette.accent);
+  root.setProperty("--accent-soft", `rgba(${c.r},${c.g},${c.b},0.16)`);
+  root.setProperty("--ink", palette.ink);
+  root.setProperty("--panel", hexToTranslucent(palette.panel, 0.72));
+  root.setProperty("--panel-2", hexToTranslucent(palette.panel2, 0.75));
+  root.setProperty("--muted", palette.muted);
+  const m = hexToRgb(palette.muted);
+  root.setProperty("--border", `rgba(${m.r},${m.g},${m.b},0.28)`);
+
+  const ink = hexToRgb(palette.ink);
+  document.getElementById("bg-scrim").style.background =
+    `linear-gradient(180deg, rgba(${ink.r},${ink.g},${ink.b},0.55), rgba(${ink.r},${ink.g},${ink.b},0.88))`;
+  document.body.style.background = palette.ink;
+}
+function hexToTranslucent(hex, alpha) { const c = hexToRgb(hex); return `rgba(${c.r},${c.g},${c.b},${alpha})`; }
+
+function renderBackground(svg) {
+  document.getElementById("bg-layer").innerHTML = svg;
 }
 
-function renderPreviewThumb() {
+function applyPreviewTheme() {
   const category = document.getElementById("qcategory").value;
   const thumb = pickThumbnail(category);
-  document.getElementById("thumb-preview").innerHTML = thumb.svg;
+  renderBackground(thumb.svg);
+  applyPalette(thumb.palette);
 }
+function applyNeutralTheme() {
+  const thumb = pickThumbnail("other");
+  renderBackground(thumb.svg);
+  applyPalette(thumb.palette);
+}
+document.getElementById("qcategory").addEventListener("change", () => { if (!questionId) applyPreviewTheme(); });
+applyPreviewTheme();
 
-document.getElementById("qcategory").addEventListener("change", renderPreviewThumb);
-document.getElementById("thumb-shuffle").addEventListener("click", renderPreviewThumb);
-renderPreviewThumb();
-
-document.getElementById("composer-form").addEventListener("submit", (e) => {
+/* ================= questions: ask / open / thread ================= */
+document.getElementById("composer-form").addEventListener("submit", async (e) => {
   e.preventDefault();
-  askQuestion();
-});
-
-document.getElementById("responder-bar").addEventListener("submit", (e) => {
-  e.preventDefault();
-  submitResponse();
-});
-
-async function askQuestion() {
-  await ensureUser();
+  if (!authToken) { openAuthModal("Sign in to ask a question."); return; }
   const text = document.getElementById("qtext").value.trim();
   const category = document.getElementById("qcategory").value;
   if (!text) return;
-
-  const result = await api("/api/questions", {
-    method: "POST",
-    body: JSON.stringify({ author_id: userId, text, category }),
-  });
-
   const statusEl = document.getElementById("qstatus");
-  if (result.status === "held_for_review") {
-    statusEl.textContent = result.crisis_message || result.message || "Your question is being reviewed.";
-    return;
-  }
-
   statusEl.textContent = "";
-  openQuestion(result.id, text);
-  history.pushState({}, "", `?q=${result.id}`);
-}
 
-async function openQuestion(id, knownText) {
+  const { ok, status, data } = await api("/api/questions", { method: "POST", body: JSON.stringify({ text, category, kind: "question" }) });
+  if (status === 402) { statusEl.textContent = data.error; return; }
+  if (!ok) { statusEl.textContent = data.error || "Something went wrong."; return; }
+  if (data.status === "held_for_review") { statusEl.textContent = data.crisis_message || data.message; return; }
+
+  rememberMyQuestion(data.id);
+  openQuestion(data.id, text, category);
+  history.pushState({}, "", `?q=${data.id}`);
+});
+
+async function openQuestion(id, knownText, knownCategory) {
   questionId = id;
-  document.getElementById("chamber-wrap").hidden = false;
-  document.getElementById("stream").hidden = false;
+  document.getElementById("idle-hint").hidden = true;
+  document.getElementById("thread-wrap").hidden = false;
   document.getElementById("responder-bar").hidden = false;
   document.getElementById("share-btn").hidden = false;
 
-  const data = knownText ? null : await api(`/api/questions/${id}`);
-  document.getElementById("question-text").textContent = knownText || (data && data.question.text) || "";
+  const data = knownText ? null : (await api(`/api/questions/${id}`)).data;
+  const questionText = knownText || (data && data.question.text) || "";
+  const category = knownCategory || (data && data.question.category) || "other";
+  document.getElementById("question-text").textContent = questionText;
 
-  // Deterministic thumbnail from category + question id, so every window or
-  // device that opens this question - including via a shared link - sees the
-  // same picture and the same colors, not a different random one each time.
-  const category = data ? data.question.category : document.getElementById("qcategory").value;
   const thumb = pickThumbnail(category, `${category}:${id}`);
-  document.getElementById("thumb-banner").innerHTML = thumb.svg;
+  renderBackground(thumb.svg);
   applyPalette(thumb.palette);
 
-  const flagsRes = await api("/api/feature-flags");
-  const t = flagsRes.flags.find((f) => f.key === "notification_threshold");
-  const threshold = t ? Number(t.value) : 100;
-
-  let count = 0;
-  if (data) {
-    count = data.question.response_count;
-    for (const r of [...data.recent_responses].reverse()) {
-      addDot(r.sentiment_score);
-      addStreamRow(r);
-    }
-    updateNeedle();
-    if (data.synthesis) showSynthesis(data.synthesis);
+  const ownerControls = document.getElementById("owner-controls");
+  if (myQuestionIds.has(id)) {
+    ownerControls.hidden = false;
+    const retainToggle = document.getElementById("retain-toggle");
+    retainToggle.checked = data ? !!data.question.retain : false;
+    retainToggle.onchange = async () => {
+      await api(`/api/questions/${id}/retain`, { method: "PATCH", body: JSON.stringify({ retain: retainToggle.checked }) });
+    };
+  } else {
+    ownerControls.hidden = true;
   }
-  updateTallyLine(count, threshold);
+
+  responsesFlat = data ? data.responses : [];
+  renderThread();
+  updateResponseCountLine(data ? data.question.response_count : 0);
 
   connectWebSocket(id);
 }
 
-async function submitResponse() {
+function updateResponseCountLine(count) {
+  const el = document.getElementById("response-count-line");
+  el.textContent = count === 0 ? "No one has responded yet." : `${count} response${count === 1 ? "" : "s"} so far.`;
+}
+
+function renderThread() {
+  const container = document.getElementById("responses");
+  container.innerHTML = "";
+  const byParent = new Map();
+  for (const r of responsesFlat) {
+    const key = r.parent_response_id || "root";
+    if (!byParent.has(key)) byParent.set(key, []);
+    byParent.get(key).push(r);
+  }
+  function renderLevel(parentKey, targetEl) {
+    const items = byParent.get(parentKey) || [];
+    for (const r of items) {
+      const row = document.createElement("div");
+      row.className = "response-row";
+      const p = document.createElement("p");
+      p.className = "response-text";
+      p.textContent = r.text;
+      const actions = document.createElement("div");
+      actions.className = "response-actions";
+      const replyBtn = document.createElement("button");
+      replyBtn.type = "button";
+      replyBtn.className = "reply-link";
+      replyBtn.textContent = "Reply";
+      replyBtn.addEventListener("click", () => setReplyTarget(r.id, r.text));
+      actions.appendChild(replyBtn);
+      row.appendChild(p);
+      row.appendChild(actions);
+
+      const childWrap = document.createElement("div");
+      childWrap.className = "response-children";
+      renderLevel(r.id, childWrap);
+      if (childWrap.children.length > 0) row.appendChild(childWrap);
+
+      targetEl.appendChild(row);
+    }
+  }
+  renderLevel("root", container);
+}
+
+function setReplyTarget(id, text) {
+  replyTargetId = id;
+  const chip = document.getElementById("reply-chip");
+  chip.hidden = false;
+  chip.firstChild.textContent = `Replying to: "${text.slice(0, 60)}${text.length > 60 ? "..." : ""}" `;
+  document.getElementById("rtext").focus();
+}
+document.getElementById("cancel-reply").addEventListener("click", () => {
+  replyTargetId = null;
+  document.getElementById("reply-chip").hidden = true;
+});
+
+document.getElementById("response-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
   if (!questionId) return;
-  await ensureUser();
   const input = document.getElementById("rtext");
   const text = input.value.trim();
   if (!text) return;
   input.value = "";
 
-  const result = await api(`/api/questions/${questionId}/responses`, {
-    method: "POST",
-    body: JSON.stringify({ responder_id: userId, text }),
-  });
+  const body = { text };
+  if (replyTargetId) body.parent_id = replyTargetId;
+  if (!authToken) body.responder_id = await ensureGuestId();
 
-  if (result.status === "held_for_review") {
-    alert(result.crisis_message || "That response is being reviewed before it's shown.");
-  }
-}
+  const { ok, data } = await api(`/api/questions/${questionId}/responses`, { method: "POST", body: JSON.stringify(body) });
+  replyTargetId = null;
+  document.getElementById("reply-chip").hidden = true;
+  if (!ok) { alert(data.error || "Something went wrong."); return; }
+  if (data.status === "held_for_review") alert(data.crisis_message || "That response is being reviewed before it's shown.");
+});
 
 function connectWebSocket(qid) {
+  if (ws) ws.close();
   const proto = location.protocol === "https:" ? "wss:" : "ws:";
   ws = new WebSocket(`${proto}//${location.host}`);
   ws.onopen = () => ws.send(JSON.stringify({ type: "subscribe", questionId: qid }));
-  ws.onmessage = async (event) => {
+  ws.onmessage = (event) => {
     const msg = JSON.parse(event.data);
     if (msg.type === "response") {
-      addDot(msg.response.sentiment_score);
-      addStreamRow(msg.response);
-      updateNeedle();
-      const flagsRes = await api("/api/feature-flags");
-      const t = flagsRes.flags.find((f) => f.key === "notification_threshold");
-      updateTallyLine(msg.response_count, t ? Number(t.value) : 100);
+      responsesFlat.push(msg.response);
+      renderThread();
+      updateResponseCountLine(msg.response_count);
     }
     if (msg.type === "notification") showNotification(msg.message);
-    if (msg.type === "synthesis") showSynthesis(msg.synthesis);
   };
 }
-
-/* ---------- chamber visualization ---------- */
-
-function sentimentColor(score) {
-  if (score > 0.15) return "var(--sage)";
-  if (score < -0.15) return "var(--rose)";
-  return "var(--muted)";
-}
-
-function polarPercent(r, angleDeg) {
-  const theta = (90 - angleDeg) * (Math.PI / 180);
-  return { x: 50 + r * Math.cos(theta), y: 100 - 2 * r * Math.sin(theta) };
-}
-
-let currentScores = [];
-
-function addDot(score) {
-  currentScores.push(score);
-  const angleDeg = score * 80;
-  const bucketKey = Math.round(angleDeg / 8) * 8;
-  const row = Math.min(bucketCounts[bucketKey] || 0, 6);
-  bucketCounts[bucketKey] = (bucketCounts[bucketKey] || 0) + 1;
-
-  const r = 10 + row * 5.5;
-  const { x, y } = polarPercent(r, angleDeg);
-
-  const dot = document.createElement("div");
-  dot.className = "dot";
-  dot.style.left = `${x}%`;
-  dot.style.top = `${y}%`;
-  dot.style.background = sentimentColor(score);
-  document.getElementById("dots").appendChild(dot);
-}
-
-function updateNeedle() {
-  if (currentScores.length === 0) return;
-  const avg = currentScores.reduce((s, v) => s + v, 0) / currentScores.length;
-  const angleDeg = avg * 80;
-  document.getElementById("needle").style.transform = `translateX(-50%) rotate(${angleDeg}deg)`;
-}
-
-function updateTallyLine(count, threshold) {
-  const el = document.getElementById("tally-line");
-  if (count === 0) {
-    el.textContent = "No one has spoken yet.";
-    return;
-  }
-  const forCount = currentScores.filter((s) => s > 0.15).length;
-  const againstCount = currentScores.filter((s) => s < -0.15).length;
-  let lean = "evenly split so far";
-  if (forCount > againstCount) lean = `leaning yes (${forCount} for, ${againstCount} against)`;
-  else if (againstCount > forCount) lean = `leaning no (${againstCount} against, ${forCount} for)`;
-  el.innerHTML = `<strong>${count}</strong> of ${threshold} have spoken &mdash; ${lean}`;
-}
-
-/* ---------- stream + synthesis ---------- */
-
-function addStreamRow(response) {
-  const list = document.getElementById("responses");
-  const row = document.createElement("div");
-  row.className = "response-row";
-  const color = sentimentColor(response.sentiment_score);
-  row.innerHTML = `<span class="sw" style="background:${color}"></span><span>${escapeHtml(response.text)}</span>`;
-  list.prepend(row);
-  while (list.children.length > 12) list.removeChild(list.lastChild);
-}
-
 function showNotification(message) {
   document.getElementById("notification").innerHTML = `<div class="banner">${escapeHtml(message)}</div>`;
 }
 
-function showSynthesis(synthesis) {
-  document.getElementById("synthesis").hidden = false;
-  const leadText =
-    synthesis.lean === "split"
-      ? "The council is evenly split - this is a genuine judgment call."
-      : `The council leans ${synthesis.lean === "for" ? "toward yes" : "toward no"}: ${synthesis.forPct}% for, ${synthesis.againstPct}% against, ${synthesis.mixedPct}% mixed.`;
-  document.getElementById("synthesis-text").textContent = leadText;
-  document.getElementById("best-for").textContent = synthesis.highlightForId ? "See the highlighted response in the stream above." : "No strong case for yet.";
-  document.getElementById("best-against").textContent = synthesis.highlightAgainstId ? "See the highlighted response in the stream above." : "No strong case against yet.";
+/* ================= confessions ================= */
+document.getElementById("confession-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (!authToken) { openAuthModal("Sign in to post a confession. Once it's posted, it's never linked back to you."); return; }
+  const textEl = document.getElementById("ctext");
+  const text = textEl.value.trim();
+  if (!text) return;
+  const statusEl = document.getElementById("cstatus");
+  statusEl.textContent = "";
+
+  const { ok, data } = await api("/api/questions", { method: "POST", body: JSON.stringify({ text, kind: "confession" }) });
+  if (!ok) { statusEl.textContent = data.error || "Something went wrong."; return; }
+  if (data.status === "held_for_review") { statusEl.textContent = data.crisis_message || data.message; return; }
+
+  textEl.value = "";
+  statusEl.textContent = "Posted. No one, including us, can trace this back to you.";
+  loadConfessions();
+});
+
+async function loadConfessions() {
+  const { ok, data } = await api("/api/questions?kind=confession");
+  if (!ok) return;
+  const list = document.getElementById("confessions-list");
+  list.innerHTML = "";
+  for (const c of data.confessions) {
+    const card = document.createElement("div");
+    card.className = "confession-card glass";
+    const p = document.createElement("p");
+    p.className = "confession-text";
+    p.textContent = c.text;
+    const time = document.createElement("p");
+    time.className = "confession-time";
+    time.textContent = new Date(c.created_at).toLocaleString();
+    card.appendChild(p);
+    card.appendChild(time);
+    list.appendChild(card);
+  }
+  if (data.confessions.length === 0) {
+    list.innerHTML = `<p class="status-text">No confessions yet. Be the first.</p>`;
+  }
 }
 
-function escapeHtml(str) {
-  const div = document.createElement("div");
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-/* ---------- share link ---------- */
-
+/* ================= share link ================= */
 document.getElementById("share-btn").addEventListener("click", async () => {
   const btn = document.getElementById("share-btn");
   try {
@@ -826,17 +767,13 @@ document.getElementById("share-btn").addEventListener("click", async () => {
     const original = btn.textContent;
     btn.textContent = "Copied";
     setTimeout(() => (btn.textContent = original), 1400);
-  } catch {
-    prompt("Copy this link:", location.href);
-  }
+  } catch { prompt("Copy this link:", location.href); }
 });
 
-/* ---------- shortcuts ---------- */
-
+/* ================= shortcuts ================= */
 const shortcutsModal = document.getElementById("shortcuts-modal");
 function toggleShortcuts() { shortcutsModal.hidden = !shortcutsModal.hidden; }
 function closeShortcuts() { shortcutsModal.hidden = true; }
-
 document.getElementById("shortcuts-toggle").addEventListener("click", toggleShortcuts);
 document.getElementById("shortcuts-close").addEventListener("click", closeShortcuts);
 shortcutsModal.addEventListener("click", (e) => { if (e.target === shortcutsModal) closeShortcuts(); });
@@ -844,29 +781,19 @@ shortcutsModal.addEventListener("click", (e) => { if (e.target === shortcutsModa
 document.addEventListener("keydown", (e) => {
   const tag = document.activeElement.tagName;
   const isEditable = tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT";
-
-  if (e.key === "Escape") {
-    closeShortcuts();
-    document.activeElement.blur();
-    return;
-  }
+  if (e.key === "Escape") { closeShortcuts(); closeAuthModal(); document.activeElement.blur(); return; }
   if (isEditable) return;
-
-  if (e.key === "/") {
-    e.preventDefault();
-    document.getElementById("qtext").focus();
-  } else if (e.key.toLowerCase() === "a") {
-    const r = document.getElementById("rtext");
-    if (r && !document.getElementById("responder-bar").hidden) { e.preventDefault(); r.focus(); }
-  } else if (e.key.toLowerCase() === "c") {
-    if (questionId) document.getElementById("share-btn").click();
-  } else if (e.key === "?") {
-    toggleShortcuts();
-  }
+  if (e.key === "/") { e.preventDefault(); document.getElementById("qtext").focus(); }
+  else if (e.key.toLowerCase() === "a") { const r = document.getElementById("rtext"); if (r && !document.getElementById("responder-bar").hidden) { e.preventDefault(); r.focus(); } }
+  else if (e.key.toLowerCase() === "c") { if (questionId) document.getElementById("share-btn").click(); }
+  else if (e.key === "?") { toggleShortcuts(); }
 });
 
-/* ---------- load from a shared link ---------- */
+/* ================= helpers ================= */
+function escapeHtml(str) { const div = document.createElement("div"); div.textContent = str; return div.innerHTML; }
 
+/* ================= init ================= */
+renderAccountChip();
 window.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(location.search);
   const qid = params.get("q");

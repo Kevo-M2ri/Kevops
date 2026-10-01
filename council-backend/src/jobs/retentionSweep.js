@@ -15,7 +15,7 @@ function runRetentionSweep({ now = Date.now() } = {}) {
   const cutoff = now - retentionDays * 24 * 60 * 60 * 1000;
 
   const expired = db
-    .prepare(`SELECT id FROM questions WHERE last_activity_at < ? AND status != 'deleted'`)
+    .prepare(`SELECT id FROM questions WHERE last_activity_at < ? AND status != 'deleted' AND retain = 0`)
     .all(cutoff);
 
   const deleteResponses = db.prepare(`DELETE FROM responses WHERE question_id = ?`);
